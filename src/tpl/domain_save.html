@@ -1,0 +1,131 @@
+<form name="modalForm" novalidate>
+    <div class="form-group clearfix">
+        <label class="col-sm-3 control-label">企业名称：</label>
+        <div class="col-sm-9">
+            <input type="text" name="name" required class="form-control" ng-model="data.name" />
+            <div class="help-block" ng-messages="modalForm.name.$error" ng-if="isShowMessage">
+                <p ng-message="required">请输入企业名称</p>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="!data.id" class="form-group clearfix">
+        <label class="col-sm-3 control-label">企业代码：</label>
+        <div class="col-sm-9">
+            <input type="text" required class="form-control" name="key" ng-model="data.key" />
+            <div class="help-block" ng-messages="modalForm.key.$error" ng-if="isShowMessage">
+                <p ng-message="required">请输入企业代码</p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group clearfix">
+        <label class="col-sm-3 control-label">关联邮箱：</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" required ng-pattern="/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/" name="email"
+                ng-model="data.email" />
+            <div class="help-block" ng-messages="modalForm.email.$error" ng-if="isShowMessage">
+                <p ng-message="pattern">请输入正确邮箱</p>
+                <p ng-message="required">请输入邮箱</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group clearfix">
+        <label class="col-sm-3 control-label">联系人：</label>
+        <div class="col-sm-9">
+            <input type="text" required class="form-control" name="contact" ng-model="data.contact" />
+            <div class="help-block" ng-messages="modalForm.contact.$error" ng-if="isShowMessage">
+                <p ng-message="required">请输入联系人姓名</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group clearfix">
+        <label class="col-sm-3 control-label">联系电话：</label>
+        <div class="col-sm-9">
+            <input type="text" required ng-pattern="/^1[34578]\d{9}$/" class="form-control" name="phone" ng-model="data.phone" />
+            <div class="help-block" ng-messages="modalForm.phone.$error" ng-if="isShowMessage">
+                <p ng-message="pattern">请输入正确手机号</p>
+                <p ng-message="required">请输入联系电话</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group clearfix">
+        <label class="col-sm-3 control-label">合同时间：</label>
+        <div class="col-sm-9 pdr0 row">
+            <div class="form-group col-sm-5 pdr0">
+                <input type="text" class="form-control" data-date-format="yyyy-MM-dd" ng-model="fromDate" data-max-date="{{untilDate}}" placeholder="起始日期"
+                    bs-datepicker>
+            </div>
+            <div class="form-group col-sm-2 lh34 text-center">
+                至
+            </div>
+            <div class="form-group col-sm-5 p0">
+                <input type="text" class="form-control" data-date-format="yyyy-MM-dd" ng-model="untilDate" data-min-date="{{fromDate}}" placeholder="截止日期"
+                    bs-datepicker>
+            </div>
+        </div>
+    </div>
+    <div ng-if="!data.id" class="form-group clearfix">
+        <label class="col-sm-3 control-label">收费方式：</label>
+        <div class="col-sm-9">
+            <select class="form-control" required name="chargeType" ng-model="data.chargeType">
+                <option ng-selected="data.chargeType == ''" value="">请选择收费方式</option>
+                <option ng-selected="data.chargeType == '0'" value="0">按月收费</option>
+                <option ng-selected="data.chargeType == '1'" value="1">按季度收费</option>
+                <option ng-selected="data.chargeType == '2'" value="2">按年收费</option>
+            </select>
+            <div class="help-block" ng-messages="modalForm.chargeType.$error" ng-if="isShowMessage">
+                <p ng-message="required">请收费方式</p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group clearfix">
+        <label class="col-sm-3 control-label">单屏价格：</label>
+        <div ng-if="!data.id" class="col-sm-9 row">
+            <div class="col-sm-10 pdr0">
+                <input type="text" ng-pattern="/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/" class="form-control" name="price" ng-model="data.price"
+                />
+            </div>
+            <div class="col-sm-2 pdr0 lh34">元/月</div>
+            <div class="help-block" ng-messages="modalForm.price.$error" required>
+                <p ng-message="required">请输入单屏价格</p>
+                <p ng-message="pattern">请输入正确单屏价格</p>
+            </div>
+        </div>
+        <div ng-if="data.id" class="col-sm-9 lh34">
+            {{data.price}} 元/月
+        </div>
+    </div>
+    <div class="form-group clearfix">
+        <label class="col-sm-3 control-label">素材审核：</label>
+        <div class="col-sm-9 lh34">
+            <input name="materialCheck" ng-click="updateSelection($event,'1','materialCheck',0)" ng-checked="data.materialCheck.indexOf('1') != -1"
+                type="checkbox">内部审核
+            <input name="materialCheck" ng-click="updateSelection($event,'0','materialCheck',1)" ng-checked="data.materialCheck.indexOf('0') != -1"
+                type="checkbox">平台审核
+        </div>
+    </div>
+
+    <div class="form-group clearfix">
+        <label class="col-sm-3 control-label">节目审核：</label>
+        <div class="col-sm-9 lh34">
+            <input name="programCheck" ng-click="updateSelection($event,'1','programCheck',0)" ng-checked="data.programCheck.indexOf('1') != -1"
+                type="checkbox">内部初审
+            <input name="programCheck" ng-click="updateSelection($event,'2','programCheck',1)" ng-checked="data.programCheck.indexOf('2') != -1"
+                type="checkbox">内部终审
+            <input name="programCheck" ng-click="updateSelection($event,'0','programCheck',2)" ng-checked="data.programCheck.indexOf('0') != -1"
+                type="checkbox">平台审核
+
+        </div>
+    </div>
+
+    <div class="form-group clearfix">
+        <label class="col-sm-3 control-label">文字屏管理：</label>
+        <div class="col-sm-9 lh34">
+            <input name="ledShow" ng-click="updateSelection($event,'1','ledShow')" ng-checked="data.ledShow == 1" type="checkbox">开启
+
+        </div>
+    </div>
+</form>

@@ -1,0 +1,29 @@
+<div class="row border-bottom" id="headerBar">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <span class="navbar-minimalize minimalize-styl-2 btn">
+                <i class="fa fa-chevron-left"></i>
+            </span>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle count-info user" data-toggle="dropdown">
+                    <i class="iconfont icon-touxiang"></i>
+                    <span>{{userData.admin.name}}</span>
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    <li>
+                        <a href="" ng-click="updatePwd()">
+                            <i class="fa fa-user fa-fw"></i> 修改密码</a>
+                    </li>
+                    <li>
+                        <a href="" ng-click="logout()">
+                            <i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </nav>
+</div>

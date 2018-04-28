@@ -1,0 +1,11 @@
+<div class="selectWrap">
+  <button type="button" class="btnSelect" data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false">
+    {{selectedItem?selectedItem[labelName]:options[0][labelName]}}
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu select" role="menu">
+    <li ng-repeat="op in options" ng-click="select(op)">
+      <a>{{op[labelName]}}</a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,51 @@
+<div class="page-wrap">
+	<div class="level2">
+		<div>
+			<button type="button" ng-click="save()" class="btn btn-primary addRole">
+				<i class="iconfont icon-tianjia-"></i>
+				添加版本文件
+			</button>
+		</div>
+	</div>
+	<div class="content-wrap">
+		<div>
+			<div class="selectWrap clearfix">
+				<km-select options="opOptions" selected="sp.os" val="val" name="name" change="initPage"></km-select>
+			</div>
+		</div>
+		<div class="table-wrapper">
+			<table class="table table-striped table-hover dataTable" st-pipe="callServer" st-table="displayed">
+				<thead>
+					<tr>
+						<th>版本名称</th>
+						<th>系统类型</th>
+						<th>大小</th>
+						<th>备注</th>
+						<th>创建时间</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+
+				<tbody ng-show="!isLoading">
+					<tr ng-repeat="row in displayed">
+						<td class="ellipsisTd">{{row.name}}</td>
+						<td>{{row.os == 1? "android":"windows"}}</td>
+						<td>
+							{{row.size | dmbdResourceSizeFilter}}
+						</td>
+						<td>{{row.remark}}</td>
+						<td>{{row.createTime | formateTime}}</td>
+						<td>
+							<div>
+								<button class="btn btn-primary tableBtn btnRed" ng-click="del(row)">删除</button>
+								<a class="btn btn-primary tableBtn" ng-href="{{row.path}}">下载</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+				<tbody me-include html="{{tbodyTpl}}"></tbody>
+				<tfoot ng-show="!isLoading" me-include html="{{tfooterTpl}}"></tfoot>
+			</table>
+		</div>
+	</div>
+</div>
