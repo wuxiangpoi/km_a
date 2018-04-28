@@ -1,45 +1,27 @@
-<div class="content-wrap" style="min-width:1110px;">
-
-		<div class="row mb10 pdl15 pdr15">
-			<div class="fl">
-				<city-picker></city-picker>
+<div class="page-wrap">
+	<ul class="nav nav-tabs contentTabs">
+		<li ui-sref="dashboard.terminalreport" ui-sref-active="active">
+			<a>按企业查看</a>
+		</li>
+		<li ui-sref="dashboard.terminal" ui-sref-active="active">
+			<a>按终端查看</a>
+		</li>
+	</ul>
+	<div class="content-wrap">
+		<div class="clearfix">
+			<div class="selectWrap fl">
+				<km-select options="domainStatusOptions" selected="sp.status" val="val" name="name" change="initPage"></km-select>
 			</div>
-			<div class="selectWrap clearfix  fl">
-				<km-select options="sels.opArr" placeholder="系统类型"></km-select>
-			</div>
-			<div ng-if="stateParamsId" class="selectWrap clearfix  fl">
-				<select class="middle-select" ng-model="sp.resolution" ng-change="callServer(tableState)">
-					<option value="">屏幕分辨率</option>
-					<option ng-repeat="t in root_terminalReslotions" value="{{t}}">{{t}}</option>
-				</select>
-				<i class="fa fa-caret-down"></i>
-			</div>
-			
-			<div class="selectWrap clearfix  fl">
-				<select class="middle-select" ng-model="sp.status" ng-change="callServer(tableState)">
-					<option value="">网络状态</option>
-					<option ng-selected="init_status==1" value="1">正常</option>
-					<option ng-selected="init_status==2" value="2">离线</option>
-					<option ng-selected="init_status==3" value="3">异常</option>
-				</select>
-				<i class="fa fa-caret-down"></i>
-			</div>
-			
-			<div class="selectWrap clearfix  fl">
-				<select class="middle-select" ng-model="sp.hasProgram" ng-change="callServer(tableState)">
-					<option value="">节目状态</option>
-					<option value="1">有节目</option>
-					<option value="0">无节目</option>
-				</select>
-				<i class="fa fa-caret-down"></i>
-			</div>
-			<div class="searchInputWrap fr">
-					<input style="width:156px;" type="text" class="middle-input" ng-model="sp.search" placeholder="终端编号/终端名称" />
-					<i type="button" ng-click="callServer(tableState)" class="fa fa-search">
-				</i>
-			</div>
-			<div class="searchInputWrap fr" style="margin-right:4px;">
-					<input style="width:156px;padding-right:4px;" type="text" class="middle-input" ng-model="sp.domain" placeholder="企业代码" />
+			<div class="fr">
+				<div class="input-group serchWrap">
+					<input type="text" class="form-control" ng-model="sp.search" placeholder="企业代码/企业名称">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-primary">
+							<i type="button" ng-click="initPage" class="fa fa-search">
+							</i>
+						</button>
+					</span>
+				</div>
 			</div>
 		</div>
 		<div class="table-wrapper">
@@ -47,6 +29,7 @@
 				<thead>
 					<tr>
 						<th>
+							<input ng-checked="ids.length == displayed.length && displayed.length != 0" ng-click="checkAll($event)" type="checkbox">
 						</th>
 						<th>终端编号</th>
 						<th class="ellipsisTd">终端名称</th>
@@ -56,10 +39,9 @@
 						<th>屏幕分辨率</th>
 						<th>所属城市</th>
 						<th>节目数量</th>
-						<!-- <th st-sort="">操作</th> -->
 					</tr>
 				</thead>
-	
+
 				<tbody ng-show="!isLoading">
 					<tr ng-repeat="row in displayed">
 						<td>
@@ -75,11 +57,11 @@
 						<td>
 							<span class="tdClick dibk" ng-click="showPrograms(row)">{{row.programCounts}}</span>
 						</td>
-	
 					</tr>
 				</tbody>
-				<tbody ng-include="'tpl/table.html'"></tbody>
-				<tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+				<tbody me-include html="{{tbodyTpl}}"></tbody>
+				<tfoot ng-show="!isLoading" me-include html="{{tfooterTpl}}"></tfoot>
 			</table>
 		</div>
 	</div>
+</div>

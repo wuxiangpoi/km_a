@@ -7,11 +7,16 @@ import dictionary from './modules/dictionary/route.js'
 import versionfile from './modules/versionfile/route.js'
 import checkModel from './modules/checkModel/route.js'
 import terminal from './modules/terminal/route.js'
+import user from './modules/user/route.js'
+import role from './modules/role/route.js'
+import material from './modules/material/route.js'
 import terminalreport from './modules/terminalreport/route.js'
+import income from './modules/income/route.js'
+import incomedetail from './modules/incomedetail/route.js'
 import terminalcommand from './modules/terminalcommand/route.js'
 import terminalmigrate from './modules/terminalmigrate/route.js'
 
-const states = [dashboard, home,domain,dictionary,versionfile,checkModel, terminal, terminalreport,terminalcommand, login,errPage,terminalmigrate]
+const states = [dashboard, home,domain,dictionary,versionfile,checkModel, terminal,user, role,material,terminalreport,income,incomedetail,terminalcommand, login,errPage,terminalmigrate]
 
 export default app => {
     states.forEach(state => {

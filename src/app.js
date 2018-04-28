@@ -116,13 +116,8 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
             return true;
         }
     }
-    $rootScope.sels = {
-        opArr: [{
-            name: 'Android',
-            val: 1
-        },{
-            name: 'Windows',
-            val: 2
-        }]
+    $rootScope.dmbdOSSImageUrlResizeFilter = function (imgUrl, size) {
+        var joinChar = imgUrl.indexOf('?') >= 0 ? '&' : '?';
+        return imgUrl + joinChar + 'x-oss-process=image/resize,m_lfit,' + size + ',w_' + size;
     }
 }])

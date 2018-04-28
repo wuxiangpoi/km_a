@@ -1,4 +1,12 @@
 <div class="page-wrap">
+	<ul class="nav nav-tabs contentTabs">
+		<li ui-sref="dashboard.terminalreport" ui-sref-active="active">
+			<a>按企业查看</a>
+		</li>
+		<li ui-sref="dashboard.terminal" ui-sref-active="active">
+			<a>按终端查看</a>
+		</li>
+	</ul>
 	<div class="content-wrap">
 		<div class="clearfix">
 			<div class="selectWrap fl">
@@ -6,7 +14,7 @@
 			</div>
 			<div class="fr">
 				<div class="input-group serchWrap">
-					<input type="text" class="form-control" ng-model="sp.search" placeholder="企业代码/企业名称" >
+					<input type="text" class="form-control" ng-model="sp.search" placeholder="企业代码/企业名称">
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-primary">
 							<i type="button" ng-click="initPage" class="fa fa-search">
@@ -31,16 +39,16 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-						<tr ng-repeat="row in displayed">
-							<td class="tdClick" ng-click="toDetails(row.domainCode)">{{row.domainCode}}</td>
-							<td class="ellipsisTd">{{row.domainName}}</td>
-							<td>{{row.domainStatus == 1?'可用':'停用'}}</td>
-							<td>{{row.terminalTotal}}</td>
-							<td>{{row.terminalOnline}}</td>
-							<td>{{row.terminalOffline}}</td>
-							<td>{{row.terminalAbnormal}}</td>
-						</tr>
-					</tbody>
+					<tr ng-repeat="row in displayed">
+						<td class="tdClick" ng-click="toDetails(row.domainCode)">{{row.domainCode}}</td>
+						<td class="ellipsisTd">{{row.domainName}}</td>
+						<td>{{row.domainStatus == 1?'可用':'停用'}}</td>
+						<td>{{row.terminalTotal}}</td>
+						<td>{{row.terminalOnline}}</td>
+						<td>{{row.terminalOffline}}</td>
+						<td>{{row.terminalAbnormal}}</td>
+					</tr>
+				</tbody>
 				<tbody me-include html="{{tbodyTpl}}"></tbody>
 				<tfoot ng-show="!isLoading" me-include html="{{tfooterTpl}}"></tfoot>
 			</table>

@@ -237,6 +237,26 @@ a.btn {
   }
 }
 
+.contentTabs {
+  border: 0!important;
+    li {
+      cursor: pointer;
+      &.active {
+        background: #fff!important;
+        color: @main-color!important;
+        a:hover {
+          color: #000!important;
+        }        
+      }
+      a {
+        font-weight: 400!important;
+        border: 0!important;
+        &:hover {
+          background: none!important;
+        }
+      }
+    }
+}
 
 .content-wrap {
     background: #fff;

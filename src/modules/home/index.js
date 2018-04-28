@@ -1,6 +1,6 @@
 import style from './style.less';
 
-const homeController = ($scope,$rootScope,baseService) => {
+const homeController = ($scope,$rootScope,baseService,chartService) => {
     $scope.sp = {};
 		var now = new Date();
 		$scope.sp.year = now.getFullYear();
@@ -697,7 +697,7 @@ const homeController = ($scope,$rootScope,baseService) => {
     
 }
 
-homeController.$inject = ['$scope','$rootScope', 'baseService'];
+homeController.$inject = ['$scope','$rootScope', 'baseService','chartService'];
 
 export default angular => {
     return angular.module('homeModule', []).controller('homeController', homeController);

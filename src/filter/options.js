@@ -1,3 +1,21 @@
+export let materialsTypeOptions = [
+    {
+        val: '',
+        name: '素材类型'
+    },
+    {
+        val: 0,
+        name: '图片'
+    },
+    {
+        val: 1,
+        name: '视频'
+    },
+    {
+        val: 2,
+        name: '音乐'
+    }
+]
 export let domainStatusOptions = [
     {
         val: '',
