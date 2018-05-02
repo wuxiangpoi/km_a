@@ -25,7 +25,7 @@ export default app => {
                 admin: apiUrl + '/api/admin/',
                 versionFile: apiUrl + '/api/versionFile/',
                 checkModel: apiUrl + '/api/checkModel/',
-                chargeStat: apiUrl + '/api/chargeStat/'
+                report: apiUrl + '/api/report/'
             },
             md5_pwd(pwd) {
                 var hexDigits = ['0', '1', '2', '3', '4', '5', '6', '7',
@@ -284,6 +284,10 @@ export default app => {
                 } else {
                     return day.toString();
                 }
+            },
+            formateDate: function (date) {
+                let dateStr = date.toString();
+                return dateStr.substring(0, 4) + '-' + dateStr.substring(4, 6) + '-' + dateStr.substring(6, 8);
             },
             formateDayTime: function (date) {
                 return Date.parse(date.substring(0, 4) + '/' + date.substring(4, 6) + '/' + date.substring(6, 8));

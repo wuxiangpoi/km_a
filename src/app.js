@@ -15,6 +15,7 @@ import './app.less';
 import '../bower_components/jquery.cookie/jquery.cookie.js'
 import '../bower_components/bootstrap/dist/js/bootstrap.min.js'
 
+
 let loadBasicModules = () => {
     let ngDepModules = [];
     require('../bower_components/angular-animate/angular-animate.min.js');
@@ -22,6 +23,9 @@ let loadBasicModules = () => {
 
     require('../bower_components/angular-sanitize/angular-sanitize.min.js');
     ngDepModules.push('ngSanitize');
+
+    require('./libs/localService.js');
+    ngDepModules.push('ngLocale');
 
     require('angular-ui-router');
     ngDepModules.push('ui.router');

@@ -55,19 +55,27 @@
         <label class="col-sm-3 control-label">合同时间：</label>
         <div class="col-sm-9 pdr0 row">
             <div class="form-group col-sm-5 pdr0">
-                <input type="text" class="form-control" data-date-format="yyyy-MM-dd" ng-model="fromDate" data-max-date="{{untilDate}}" placeholder="起始日期"
-                data-autoclose="1"   bs-datepicker>
+                <div class="dateTimeWrap">
+                    <input type="text" class="form-control" data-date-type="string"  data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd" ng-model="data.contractStart" placeholder="起始日期"
+                        data-autoclose="1" bs-datepicker>
+                    <i class="fa fa-calendar"></i>
+                </div>
+
             </div>
             <div class="form-group col-sm-2 lh34 text-center">
                 至
             </div>
             <div class="form-group col-sm-5 p0">
-                <input type="text" class="form-control" data-date-format="yyyy-MM-dd" ng-model="untilDate" data-min-date="{{fromDate}}" placeholder="截止日期"
-                data-autoclose="1"  bs-datepicker>
+                <div class="dateTimeWrap">
+                    <input type="text" class="form-control"  data-date-type="string"  data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd" ng-model="data.contractEnd" placeholder="截止日期"
+                        data-autoclose="1" bs-datepicker>
+                    <i class="fa fa-calendar"></i>
+                </div>
+
             </div>
         </div>
     </div>
-    <div ng-if="!data.id" class="form-group clearfix">
+    <!-- <div ng-if="!data.id" class="form-group clearfix">
         <label class="col-sm-3 control-label">收费方式：</label>
         <div class="col-sm-9">
             <select class="form-control" required name="chargeType" ng-model="data.chargeType">
@@ -80,19 +88,20 @@
                 <p ng-message="required">请收费方式</p>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="form-group clearfix">
         <label class="col-sm-3 control-label">单屏价格：</label>
         <div ng-if="!data.id" class="col-sm-9 row">
             <div class="col-sm-10 pdr0">
-                <input type="text" ng-pattern="/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/" class="form-control" name="price" ng-model="data.price"
+                <input type="text" required ng-pattern="/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/" class="form-control" name="price" ng-model="data.price"
                 />
+                <div class="help-block" ng-messages="modalForm.price.$error"  ng-if="isShowMessage">
+                        <p ng-message="required">请输入单屏价格</p>
+                        <p ng-message="pattern">请输入正确单屏价格</p>
+                    </div>
             </div>
             <div class="col-sm-2 pdr0 lh34">元/月</div>
-            <div class="help-block" ng-messages="modalForm.price.$error" required>
-                <p ng-message="required">请输入单屏价格</p>
-                <p ng-message="pattern">请输入正确单屏价格</p>
-            </div>
+            
         </div>
         <div ng-if="data.id" class="col-sm-9 lh34">
             {{data.price}} 元/月
