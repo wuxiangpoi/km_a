@@ -121,3 +121,10 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
         return imgUrl + joinChar + 'x-oss-process=image/resize,m_lfit,' + size + ',w_' + size;
     }
 }])
+
+app.config(($datepickerProvider) => {
+  angular.extend($datepickerProvider.defaults, {
+    iconLeft: 'fa fa-angle-left',
+    iconRight: 'fa fa-angle-right'
+  });
+})

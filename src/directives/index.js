@@ -5,9 +5,10 @@ import eCharts from './eCharts'
 import eChartMeter from './eChartMeter'
 import meInclude from './meInclude'
 import meLazyload from './me-lazyload.js'
+import zTree from './zTree.js'
 // import sentencesService from './sentencesService'
 // import zTree from './zTree'
 
-const directives = [headerBar,siderBar,kmSelect,eCharts,eChartMeter,meInclude,meLazyload]
+const directives = [headerBar,siderBar,kmSelect,eCharts,eChartMeter,meInclude,meLazyload,zTree]
     
 export default directives

@@ -1,4 +1,5 @@
 import './style.less';
+import userSaveTpl from '../../tpl/user_save.html';
 
 const userController = ($scope, baseService) => {
 		$scope.displayed = [];
@@ -12,7 +13,7 @@ const userController = ($scope, baseService) => {
             baseService.initTable($scope, tableState, baseService.api.admin + 'getAdminPageList');
 		}
 		$scope.save = (item) => {
-			baseService.confirmDialog(item ? '编辑企业' : '添加企业', item, domainSaveTpl, (vm) => {
+			baseService.confirmDialog(item ? '编辑帐号' : '添加帐号', item, userSaveTpl, (vm) => {
 				if (vm.modalForm.$valid) {
 					postData.key = postData.key.toLowerCase();
 					// domainService.savedomain(item ? 'modifyDomain' : 'addDomain', postData, function () {
@@ -25,7 +26,10 @@ const userController = ($scope, baseService) => {
 				}
 	
 			}, function (vm) {
-				
+				vm.roles = [];
+                baseService.getJson(baseService.api.admin + 'getAdminRoleInfoList ', {}, function (data) {
+                    vm.roles = data;
+                })
 			})
 		}
 		

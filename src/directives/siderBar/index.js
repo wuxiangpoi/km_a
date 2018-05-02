@@ -108,7 +108,7 @@ let controller = ($scope,$state,baseService) => {
         collapseVar: 8,
         state: '',
         states: ['dashboard.material','dashboard.temp'],
-        icon: 'fa fa-tasks fa-fw',
+        icon: 'icon iconfont icon-mobanguanli',
         children: [
             {
                 name: '素材管理',
@@ -131,7 +131,7 @@ let controller = ($scope,$state,baseService) => {
         collapseVar: 7,
         state: '',
         states: ['dashboard.terminalcommand','dashboard.terminalmigrate'],
-        icon: 'fa fa-tasks fa-fw',
+        icon: 'icon iconfont icon-rizhiguanli',
         children: [
             {
                 name: '操作日志',

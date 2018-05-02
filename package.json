@@ -10,10 +10,6 @@
     "pretest": "eslint src --ext .js",
     "test": "echo \"Error: no test specified\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/why520crazy/angular1.x-webpack-seed.git"
-  },
   "keywords": [
     "webpack",
     "ES6",
@@ -21,10 +17,9 @@
     "Angular1.x",
     "Seed"
   ],
-  "author": "why520crazy",
   "license": "ISC",
   "dependencies": {
-    "angular": "^1.5.7",
+    "angular": "^1.5.5",
     "jquery": "^3.1.0",
     "md5": "^2.1.0"
   },
