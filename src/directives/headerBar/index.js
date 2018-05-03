@@ -4,12 +4,16 @@ import './style.less';
 import updatePasswordTpl from '../../tpl/update_password.html';
 
 let controller = ($scope,baseService,userService) => {
+    $scope.navInfo = '';
     let postData = {
         password: '',
         newPassword: '',
         reNewPassword: ''
     }
-    
+    $scope.$on('$stateChangeSuccess',(event, toState) => {
+        $scope.navInfo = toState.info;
+        console.log(toState)
+    })
     $scope.updatePwd = function () {
         baseService.confirmDialog('修改密码', postData, updatePasswordTpl, function (vm) {
             if (vm.modalForm.$valid && postData.newPassword == postData.reNewPassword) {

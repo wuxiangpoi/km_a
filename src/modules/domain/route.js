@@ -8,6 +8,7 @@ export default app => {
             url: '/domain',
             template: require('./template.html'),
             controller: 'domainController',
+            info: '企业管理',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {
                     return $q(resolve => {

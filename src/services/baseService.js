@@ -25,7 +25,8 @@ export default app => {
                 admin: apiUrl + '/api/admin/',
                 versionFile: apiUrl + '/api/versionFile/',
                 checkModel: apiUrl + '/api/checkModel/',
-                report: apiUrl + '/api/report/'
+                report: apiUrl + '/api/report/',
+                chargeStat: apiUrl + '/api/chargeStat/'
             },
             md5_pwd(pwd) {
                 var hexDigits = ['0', '1', '2', '3', '4', '5', '6', '7',

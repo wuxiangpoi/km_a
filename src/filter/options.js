@@ -23,11 +23,11 @@ export let domainStatusOptions = [
     },
     {
         val: 0,
-        name: '可用'
+        name: '正常'
     },
     {
         val: 1,
-        name: '禁用'
+        name: '冻结'
     }
 ]
 export let cmdCodeOptions = [{
