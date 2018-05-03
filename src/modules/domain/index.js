@@ -1,7 +1,6 @@
 import './style.less';
 import {
-	cmdCodeOptions,
-	sendStatusOptions
+	domainStatusOptions
 } from '../../filter/options.js'
 import domainSaveTpl from '../../tpl/domain_save.html';
 
@@ -10,8 +9,7 @@ const domainController = ($scope, baseService, FileUploader) => {
 		$scope.displayed = [];
 		$scope.sp = {};
 		$scope.tableState = {};
-		$scope.cmdCodeOptions = cmdCodeOptions;
-		$scope.sendStatusOptions = sendStatusOptions;
+		$scope.domainStatusOptions = domainStatusOptions;
 		var uploader = $scope.uploader = new FileUploader({
 			url: 'http://dmbd4.oss-cn-hangzhou.aliyuncs.com',
 			autoUpload: false

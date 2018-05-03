@@ -8,9 +8,20 @@
 		</div>
 	</div>
 	<div class="content-wrap">
-		<div>
+		<div class="clearfix">
 			<div class="selectWrap clearfix">
 				<km-select options="opOptions" selected="sp.os" val="val" name="name" change="initPage"></km-select>
+			</div>
+			<div class="fr">
+				<div class="input-group serchWrap">
+					<input type="text" class="form-control" ng-model="sp.search" placeholder="关键字搜索">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-primary">
+							<i type="button" ng-click="initPage" class="fa fa-search">
+							</i>
+						</button>
+					</span>
+				</div>
 			</div>
 		</div>
 		<div class="table-wrapper">

@@ -10,8 +10,7 @@
 	<div class="content-wrap">
 			<div class="clearfix">
 					<div class="selectWrap fl">
-						<km-select options="cmdCodeOptions" selected="sp.type" val="val" name="name" change="initPage"></km-select>
-						<km-select options="sendStatusOptions" selected="sp.status" val="val" name="name" change="initPage"></km-select>
+						<km-select options="domainStatusOptions" selected="sp.type" val="val" name="name" change="initPage"></km-select>
 					</div>
 					<div class="fr">
 						<div class="input-group serchWrap">
@@ -68,7 +67,7 @@
 					</tr>
 				</tbody>
 				<tbody me-include html="{{tbodyTpl}}"></tbody>
-			<tfoot ng-show="!isLoading"  me-include html="{{tfooterTpl}}"></tfoot>
+				<tfoot ng-show="!isLoading" me-include html="{{tfooterTpl}}"></tfoot>
 			</table>
 		</div>
 	</div>

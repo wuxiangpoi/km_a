@@ -193,6 +193,22 @@ a.btn {
   
 }
 
+body.mini-navbar {
+  #siderBar {
+      .brand {
+          width: 70px;
+          margin: 0 auto;
+          padding: 26px 5px;
+          border-bottom: 1px solid #dcdcdc;
+      }
+  }
+  .navbar-static-top {
+    padding-left: 80px!important;
+}
+}
+
+
+
 //搜索样式
 .serchWrap {
   width: 220px;
@@ -205,6 +221,18 @@ a.btn {
     position: absolute;
     right: 10px;
     top: 10px;
+  }
+}
+
+//下拉框样式
+.dropdown-menu {
+  padding: 0!important;
+  li {
+    a {
+      padding: 5px!important;
+      margin: 0!important;
+      font-size: 14px;
+    }
   }
 }
 
@@ -328,4 +356,10 @@ a.btn {
         background-color: @main-color;
       }
     }
+}
+//小屏样式
+@media (max-width: 768px){
+  .navbar-static-top {
+    padding-left: 20px!important;
+  }
 }
