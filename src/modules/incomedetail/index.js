@@ -29,6 +29,17 @@ const incomedetailController = ($scope, baseService, $stateParams) => {
                 item.id);
         })
     }
+    $scope.confirmCharge = function (item) {
+        baseService.confirm('确认收费', '确认收费?',true, (vm) => {
+            baseService.postData(baseService.api.chargeStat + 'confirmChargeById', {
+                id: item.id
+            }, () => {
+                vm.$hide();
+                baseService.alert("操作成功", 'success');
+                $scope.callServer($scope.tableState);
+            })
+        })
+    }
 }
 
 incomedetailController.$inject = ['$scope', 'baseService', '$stateParams'];
