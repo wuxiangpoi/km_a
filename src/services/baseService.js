@@ -1,6 +1,8 @@
 import hex_md5 from '../libs/md5.js'
 import confirmTpl from '../tpl/confirm.tpl.html'
 import confirmDialogTpl from '../tpl/confirm_dialog.tpl.html'
+import materialDetailTpl from '../tpl/material_detail.html'
+import modalFooterCheckTpl from '../tpl/modal_footerCheck.html'
 
 export default app => {
     app.factory('baseService', ['$rootScope', '$http', '$state', 'ngDialog', '$modal', '$alert', ($rootScope, $http, $state, ngDialog, $modal, $alert) => {
@@ -86,7 +88,7 @@ export default app => {
                     }
                 });
             },
-            confirmDialog: function (title, data, html, cb, beforeOpen) {
+            confirmDialog: function (title, data, html, cb, beforeOpen,replaceFooterHtml) {
                 this.beforeOpen = beforeOpen || 0
                 $modal({
                     template: confirmDialogTpl,
@@ -98,6 +100,9 @@ export default app => {
                         $scope.title = title;
                         $scope.data = data;
                         $scope.html = html;
+                        if(replaceFooterHtml){
+                            $scope.replaceFooterHtml = replaceFooterHtml;
+                        }
                         if(beforeOpen){
                             beforeOpen($scope);
                         }
@@ -356,6 +361,20 @@ export default app => {
                         vm.eoption = chartService.initChartSchedule(vm.playList, minLen);
                     });
                 })
+            },
+            showMaterial: function (item, detailType, cb) {
+                item.detailType = detailType;
+                item.nUrl = this.dmbdOSSImageUrlResizeFilter(item.path, 400);
+                this.confirmDialog(detailType == 2?'素材详情':'素材审核', item, materialDetailTpl,  (type, vm) => {
+                    if (cb) {
+                        cb(type);
+                    }
+                },(vm) => {
+                    // vm.imgPreview = function (item) {
+                    //     $rootScope.$broadcast('callImg', item, 1);
+                    // }
+                },modalFooterCheckTpl);
+    
             },
             citiesNo: {
                 "370100": {

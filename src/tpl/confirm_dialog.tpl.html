@@ -1,5 +1,5 @@
 <div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" >
         <div class="modal-content">
             <div class="modal-header" ng-show="title">
                 <button type="button" class="close" aria-label="Close" ng-click="$hide()">
@@ -10,7 +10,9 @@
             <div class="modal-body clearfix" me-include html="{{html}}">
                
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" ng-if="replaceFooterHtml" me-include html="{{replaceFooterHtml}}">
+            </div>
+            <div class="modal-footer" ng-if="!replaceFooterHtml">
                 <button type="button" class="btn btn-primary btn-lg" ng-class="{'disabled':isPosting}" ng-click="confirm()">
                     确定
                     <i class="fa fa-spinner"></i>

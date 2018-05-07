@@ -12,7 +12,6 @@ let controller = ($scope,baseService,userService) => {
     }
     $scope.$on('$stateChangeSuccess',(event, toState) => {
         $scope.navInfo = toState.info;
-        console.log(toState)
     })
     $scope.updatePwd = function () {
         baseService.confirmDialog('修改密码', postData, updatePasswordTpl, function (vm) {

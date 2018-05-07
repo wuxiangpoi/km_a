@@ -31,7 +31,9 @@ const materialController = ($scope, baseService) => {
 	$scope.initPage = function () {
 		$scope.callServer($scope.tableState, 0)
 	}
-    
+    $scope.showMaterial = function (item) {
+        baseService.showMaterial(item, 1);
+    }
 }
 
 materialController.$inject = ['$scope', 'baseService'];
