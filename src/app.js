@@ -29,7 +29,7 @@ let loadBasicModules = () => {
 
     require('angular-ui-router');
     ngDepModules.push('ui.router');
-    
+
     require('../bower_components/oclazyload/dist/ocLazyLoad');
     ngDepModules.push('oc.lazyLoad');
 
@@ -38,8 +38,9 @@ let loadBasicModules = () => {
     require('../bower_components/angular-strap/dist/angular-strap.tpl.min.js');
     ngDepModules.push('mgcrea.ngStrap');
 
-    require('../bower_components/ng-dialog/css/ngDialog.min.css');
-    require('../bower_components/ng-dialog/js/ngDialog.min.js');
+    require('../bower_components/ng-dialog/css/ngDialog.css');
+    require('../bower_components/ng-dialog/css/ngDialog-theme-default.css');
+    require('../bower_components/ng-dialog/js/ngDialog.js');
     ngDepModules.push('ngDialog');
 
     require('../bower_components/angular-file-upload/dist/angular-file-upload.min.js');
@@ -125,10 +126,14 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
         return imgUrl + joinChar + 'x-oss-process=image/resize,m_lfit,' + size + ',w_' + size;
     }
 }])
-
-app.config(($datepickerProvider) => {
-  angular.extend($datepickerProvider.defaults, {
-    iconLeft: 'fa fa-angle-left',
-    iconRight: 'fa fa-angle-right'
-  });
+.config(($datepickerProvider) => {
+    angular.extend($datepickerProvider.defaults, {
+        iconLeft: 'fa fa-angle-left',
+        iconRight: 'fa fa-angle-right'
+    });
 })
+.config(['ngDialogProvider', function (ngDialogProvider) {
+    ngDialogProvider.setDefaults({
+        closeByDocument: true
+    });
+}])

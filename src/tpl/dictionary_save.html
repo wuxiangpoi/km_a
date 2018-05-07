@@ -9,7 +9,7 @@
         <div class="form-group clearfix">
             <label class="col-sm-3 control-label">主键(Key)：</label>
             <div class="col-sm-9 lh34">
-                <input ng-model="data.key" ng-if="type==0" required type="text" class="form-control" name="key" />
+                <input ng-model="data.key" autofocus ng-if="type==0" required type="text" class="form-control" name="key" />
                 <div class="help-block" ng-messages="dictionaryForm.key.$error" ng-if="isShowMessage">
                     <p ng-message="required">请输入主键值</p>
                 </div>
@@ -19,7 +19,7 @@
         <div ng-if="type==1" class="form-group clearfix">
             <label class="col-sm-3 control-label">键值：</label>
             <div class="col-sm-9">
-                <input ng-model="data.value" required type="text" class="form-control" name="value" />
+                <input ng-model="data.value" autofocus required type="text" class="form-control" name="value" />
                 <div class="help-block" ng-messages="dictionaryForm.value.$error" ng-if="isShowMessage">
                     <p ng-message="required">请输入键值</p>
                 </div>

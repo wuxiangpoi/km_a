@@ -21,7 +21,7 @@ const dictionaryController = ($scope, baseService) => {
 		$scope.callServer($scope.tableState, 0)
 	}
 	$scope.save = function () {
-		baseService.confirmDialog('添加字典', {}, dictionarySaveTpl, function (vm) {
+		baseService.confirmDialog(540,'添加字典', {}, dictionarySaveTpl, function (vm) {
 			let postData = {
 				key: vm.data.key,
 				name: vm.name,

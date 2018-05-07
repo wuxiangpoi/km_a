@@ -17,7 +17,7 @@ module.exports = function () {
     const config = {
         context: helpers.root("./src"),
         entry  : {
-            'vendor'   : ['angular', 'angular-route'],
+            'vendor'   : ['angular', 'angular-ui-router'],
             'app'      : './app.js'
         },
         output : {

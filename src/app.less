@@ -64,6 +64,33 @@ a {
   cursor: pointer;
 }
 
+.btn.disabled-sham {
+    cursor: default;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
+    color: #a4a4a4!important;
+    background: #e2e3e6!important;
+    border: 1px solid #e2e3e6!important;
+    &:hover,&:focus {
+      color: #a4a4a4!important;
+    background: #e2e3e6!important;
+    border: 1px solid #e2e3e6!important;
+    }
+}
+
+.btn.warning {
+  &+.tooltip{
+    .tooltip-arrow {
+      border-bottom-color: @red;
+    }
+    .tooltip-inner {
+      background: @red;
+    }
+  }
+}
+
 .btn.fileLoad input {
   position: absolute;
   font-size: 100px;
@@ -256,10 +283,28 @@ body.mini-navbar {
   background-color: rgba(0,0,0,.5);
   z-index: 2052!important;
 }
-.modal {
-  .modal-dialog {
-    max-width: 800px!important;
-    width: auto!important;
+.ngdialog {
+  padding-bottom: 50px!important;
+  padding-top: 50px!important;
+  .ngdialog-content {
+    background: #fff!important;
+    button {
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .modalDetail {
+    font-size: 12px;
+    .control-label {
+      line-height: 24px;
+      &+div {
+        line-height: 24px;
+      }
+    }
+  }
+  .modal-header {
+    padding: 0 0 15px 0!important;
   }
   .modal-body {
     padding: 10px 20px!important;
@@ -283,7 +328,6 @@ body.mini-navbar {
     }
     text-align: center;
     border-top: 0;
-    margin-bottom: 20px;
   }
 }
 
@@ -374,4 +418,227 @@ body.mini-navbar {
   .navbar-static-top {
     padding-left: 20px!important;
   }
+}
+//自定义ztree样式
+//ztree自定义
+.modalZtree {
+  min-height: 300px;
+  overflow: auto; 
+}
+
+.groupTreeWrap .ztree li a {
+  line-height: 36px;
+}
+
+.groupTreeWrap .ztree li span.button {
+  background: url(./img/zTreeStandard_big.png);
+}
+
+.groupTreeWrap .ztree li ul.line {
+  background: url(./img/line_conn_big.png) 16px 0 repeat-y;
+}
+
+.groupTreeWrap .ztree li span.button.switch {
+  width: 36px;
+  height: 36px
+}
+
+.groupTreeWrap .ztree li span.button.root_open {
+  background-position: -184px -108px
+}
+
+.groupTreeWrap .ztree li span.button.root_close {
+  background-position: -148px -108px
+}
+
+.groupTreeWrap .ztree li span.button.roots_open {
+  background-position: -184px 0
+}
+
+.groupTreeWrap .ztree li span.button.roots_close {
+  background-position: -148px 0
+}
+
+.groupTreeWrap .ztree li span.button.center_open {
+  background-position: -184px -36px
+}
+
+.groupTreeWrap .ztree li span.button.center_close {
+  background-position: -148px -36px
+}
+
+.groupTreeWrap .ztree li span.button.bottom_open {
+  background-position: -184px -72px
+}
+
+.groupTreeWrap .ztree li span.button.bottom_close {
+  background-position: -148px -72px
+}
+
+.groupTreeWrap .ztree li span.button.noline_open {
+  background-position: -184px -148px
+}
+
+.groupTreeWrap .ztree li span.button.noline_close {
+  background-position: -148px -148px
+}
+
+.groupTreeWrap .ztree li span.button.root_docu {
+  background: none;
+}
+
+.groupTreeWrap .ztree li span.button.roots_docu {
+  background-position: -112px 0
+}
+
+.groupTreeWrap .ztree li span.button.center_docu {
+  background-position: -112px -36px
+}
+
+.groupTreeWrap .ztree li span.button.bottom_docu {
+  background-position: -112px -72px
+}
+
+.groupTreeWrap .ztree li span.button.noline_docu {
+  background: none;
+}
+
+.groupTreeWrap .ztree li span.button.chk {
+  width: 26px;
+  height: 26px;
+  margin: 0 6px 0 0;
+  cursor: auto
+}
+
+.groupTreeWrap .ztree li span.button.chk.checkbox_false_full {
+  background-position: 0 0
+}
+
+.groupTreeWrap .ztree li span.button.chk.checkbox_false_full_focus {
+  background-position: 0 -28px
+}
+
+.groupTreeWrap .ztree li span.button.chk.checkbox_false_part {
+  background-position: 0 -56px
+}
+
+.groupTreeWrap .ztree li span.button.chk.checkbox_false_part_focus {
+  background-position: 0 -84px
+}
+
+.groupTreeWrap .ztree li span.button.chk.checkbox_false_disable {
+  background-position: 0 -112px
+}
+
+.groupTreeWrap .ztree li span.button.chk.checkbox_true_full {
+  background-position: -28px 0
+}
+
+.groupTreeWrap .ztree li span.button.chk.checkbox_true_full_focus {
+  background-position: -28px -28px
+}
+
+.groupTreeWrap .ztree li span.button.chk.checkbox_true_part {
+  background-position: -28px -56px
+}
+
+.groupTreeWrap .ztree li span.button.chk.checkbox_true_part_focus {
+  background-position: -28px -84px
+}
+
+.groupTreeWrap .ztree li span.button.chk.checkbox_true_disable {
+  background-position: -28px -112px
+}
+
+.groupTreeWrap .ztree li span.button.chk.radio_false_full {
+  background-position: -56px 0
+}
+
+.groupTreeWrap .ztree li span.button.chk.radio_false_full_focus {
+  background-position: -56px -28px
+}
+
+.groupTreeWrap .ztree li span.button.chk.radio_false_part {
+  background-position: -56px -56px
+}
+
+.groupTreeWrap .ztree li span.button.chk.radio_false_part_focus {
+  background-position: -56px -84px
+}
+
+.groupTreeWrap .ztree li span.button.chk.radio_false_disable {
+  background-position: -56px -112px
+}
+
+.groupTreeWrap .ztree li span.button.chk.radio_true_full {
+  background-position: -84px 0
+}
+
+.groupTreeWrap .ztree li span.button.chk.radio_true_full_focus {
+  background-position: -84px -28px
+}
+
+.groupTreeWrap .ztree li span.button.chk.radio_true_part {
+  background-position: -84px -56px
+}
+
+.groupTreeWrap .ztree li span.button.chk.radio_true_part_focus {
+  background-position: -84px -84px
+}
+
+.groupTreeWrap .ztree li span.button.chk.radio_true_disable {
+  background-position: -84px -112px
+}
+
+.groupTreeWrap .ztreeBtn {
+  margin-left: 5px;
+  font-size: 18px;
+  color: #00a0e9;
+}
+
+.groupTreeWrap li a span {
+  font-size: 14px;
+}
+
+.groupTreeWrap .ztree li .checkbox_true_full+a,
+.groupTreeWrap .ztree li a.curSelectedNode,
+.ztree li a.curSelectedNode {
+  border: 0;
+  background: none;
+  color: #00a0e9;
+  padding: 1px 3px 0 0;
+}
+
+.groupTreeWrap .ztree li a:hover,
+.ztree li a:hover {
+  color: #00a0e9;
+  text-decoration: none;
+}
+
+.ztree li span.button.edit {
+  background: none;
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  vertical-align: baseline;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ztree li span.button.edit:before {
+  content: "\e6ee";
+}
+
+.ztree li span.button.remove {
+  background: none;
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  vertical-align: baseline;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ztree li span.button.remove:before {
+  content: "\e6f4";
 }

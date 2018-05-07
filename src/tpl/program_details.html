@@ -23,7 +23,7 @@
 			</div>
 			<div class="col-sm-12 form-horizontal " ng-if="data.status">
 				<label class="col-sm-3 form_right">当前状态</label>
-				<div class="col-sm-9 form_input">{{data.nstatus}}</div>
+				<div class="col-sm-9 form_input">{{data.status | programStatusTxt}}</div>
 			</div>
 		</div>
 

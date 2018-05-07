@@ -76,7 +76,7 @@ const roleController = ($scope, baseService) => {
 			fids: item ? item.fids : '',
 			remark: item ? item.remark : '',
 		}
-		baseService.confirmDialog(item ? '编辑角色' : '添加角色', postData, roleSaveTpl, (vm) => {
+		baseService.confirmDialog(540,item ? '编辑角色' : '添加角色', postData, roleSaveTpl, (vm) => {
 			if (vm.modalForm.$valid) {
 				if (vm.fids && vm.fids.length) {
 					vm.data.fids = [];

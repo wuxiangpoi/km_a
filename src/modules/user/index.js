@@ -13,7 +13,7 @@ const userController = ($scope, baseService) => {
 		baseService.initTable($scope, tableState, baseService.api.admin + 'getAdminPageList');
 	}
 	$scope.save = (item) => {
-		baseService.confirmDialog(item ? '编辑帐号' : '添加帐号', item, userSaveTpl, (vm) => {
+		baseService.confirmDialog(540,item ? '编辑帐号' : '添加帐号', item, userSaveTpl, (vm) => {
 			if (vm.modalForm.$valid) {
 				postData.key = postData.key.toLowerCase();
 				// domainService.savedomain(item ? 'modifyDomain' : 'addDomain', postData, function () {

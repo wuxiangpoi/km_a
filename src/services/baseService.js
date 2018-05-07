@@ -5,7 +5,7 @@ import materialDetailTpl from '../tpl/material_detail.html'
 import modalFooterCheckTpl from '../tpl/modal_footerCheck.html'
 
 export default app => {
-    app.factory('baseService', ['$rootScope', '$http', '$state', 'ngDialog', '$modal', '$alert', ($rootScope, $http, $state, ngDialog, $modal, $alert) => {
+    app.factory('baseService', ['$rootScope', '$http', '$state', 'ngDialog', '$alert', ($rootScope, $http, $state, ngDialog, $alert) => {
         let apiUrl = 'http://47.92.116.16:7070';
         let verson = '?_v1.51';
         let baseService = {
@@ -47,8 +47,8 @@ export default app => {
                 return str;
 
             },
-            goToState(state,params) {
-                $state.go(state,params)
+            goToState(state, params) {
+                $state.go(state, params)
             },
             isRealNum: function (val) {
                 // isNaN()函数 把空串 空格 以及NUll 按照0来处理 所以先去除
@@ -71,46 +71,53 @@ export default app => {
                 });
             },
             confirm: function (title, info, posting, cb) {
-                $modal({
+                ngDialog.openConfirm({
                     template: confirmTpl,
-                    animation: 'am-fade-and-scale',
-                    placement: 'center',
-                    backdrop: true,
-                    show: true,
-                    controller($scope) {
-                        $scope.title = title;
-                        $scope.info = info;
+                    cache: false,
+                    plain: true,
+                    className: 'ngdialog-theme-default',
+                    controller: ['$scope', function ($scope) {
+                        $scope.info = info
+                        $scope.title = title
                         $scope.isPosting = !posting;
                         $scope.confirm = () => {
                             $scope.isPosting = posting;
                             cb($scope);
                         }
-                    }
-                });
+
+                    }],
+                    width: 540
+                })
+
             },
-            confirmDialog: function (title, data, html, cb, beforeOpen,replaceFooterHtml) {
+            confirmDialog(width,title, data, html, cb, beforeOpen, replaceFooterHtml) {
                 this.beforeOpen = beforeOpen || 0
-                $modal({
+                ngDialog.openConfirm({
                     template: confirmDialogTpl,
-                    animation: 'am-fade-and-scale',
-                    placement: 'center',
-                    show: true,
-                    backdrop: true,
-                    controller($scope,$window, $compile) {
-                        $scope.title = title;
-                        $scope.data = data;
-                        $scope.html = html;
-                        if(replaceFooterHtml){
+                    plain: true,
+                    cache: false,
+                    className: 'ngdialog-theme-default',
+                    width: width,
+                    controller: ['$scope', function ($scope) {
+                        $scope.data = data
+                        $scope.title = title
+                        $scope.html = html
+                        if (replaceFooterHtml) {
                             $scope.replaceFooterHtml = replaceFooterHtml;
                         }
-                        if(beforeOpen){
-                            beforeOpen($scope);
+                        if (beforeOpen) {
+                            beforeOpen($scope)
                         }
-                        $scope.confirm = () => {
+
+                        $scope.confirm = function () {
                             cb($scope);
                         }
-                    }
-                });
+                        $scope.cancel = function () {
+                            $scope.closeThisDialog()
+                        }
+
+                    }]
+                })
             },
             getJson: function (url, params, cb) {
                 var me = this;
@@ -212,11 +219,11 @@ export default app => {
             goToUrl: function (path) {
                 $location.path = '/dashboard';
             },
-            initTable: function ($scope, tableState, url,cb) {
+            initTable: function ($scope, tableState, url, cb) {
                 $scope.isLoading = true;
                 $scope.tableState = tableState;
                 var pagination = tableState.pagination;
-                
+
                 var start = pagination.start || 0;
                 var num = $scope.sp.length;
                 $scope.sp.start = start;
@@ -365,16 +372,34 @@ export default app => {
             showMaterial: function (item, detailType, cb) {
                 item.detailType = detailType;
                 item.nUrl = this.dmbdOSSImageUrlResizeFilter(item.path, 400);
-                this.confirmDialog(detailType == 2?'素材详情':'素材审核', item, materialDetailTpl,  (type, vm) => {
+                this.confirmDialog(720,detailType == 2 ? '素材详情' : '素材审核', item, materialDetailTpl, (type, vm) => {
                     if (cb) {
                         cb(type);
                     }
-                },(vm) => {
+                }, (vm) => {
                     // vm.imgPreview = function (item) {
                     //     $rootScope.$broadcast('callImg', item, 1);
                     // }
-                },modalFooterCheckTpl);
-    
+                }, modalFooterCheckTpl);
+
+            },
+            showProgram: function (item, detailType, cb) {
+                var me = this;
+                programService.getProgramById(item.pid, item.domain, function (program) {
+                    program.status = item.pStatus ? item.pStatus : item.status;
+                    program.detailType = detailType;
+                    me.confirmDialog('节目预览', program, "tpl/program_details.html", function (type, ngDialog, vm) {
+                        if (cb) {
+                            cb(type);
+                        }
+                    }, function (vm) {
+                        vm.program = program;
+                        vm.programPreview = function (program) {
+                            $rootScope.$broadcast('callImg', program, 2);
+                        }
+                    });
+                });
+
             },
             citiesNo: {
                 "370100": {

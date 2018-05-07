@@ -1,9 +1,12 @@
 <div class="page-wrap animated fadeInRight">
 		<div class="level2">
 				<div>
-					<button type="button" ng-click="save()" class="btn btn-primary addRole">
+					<button type="button" ng-click="save()" class="btn btn-primary">
 						<i class="iconfont icon-tianjia-"></i>
 						添加素材
+					</button>
+					<button type="button" ng-click="idsNoSubmitCheck.length != 0?submitCheck():''" ng-class="{'disabled-sham': idsNoSubmitCheck.length == 0}" data-trigger="hover" bs-enabled="idsNoSubmitCheck.length == 0" data-placement="bottom" data-type="success" data-title="{{'请先选择待提交审核的素材'}}" bs-tooltip class="btn btn-primary warning">
+						提交素材
 					</button>
 				</div>
 			</div>
@@ -83,7 +86,7 @@
 									</button>
 									<button ng-if="[0,1,2,3,7].indexOf(row.status) != -1" class="btn btn-primary tableBtn" ng-click="saveName(row)">修改名称
 									</button>
-									<button ng-if="[0,4,5,6].indexOf(row.status) != -1" class="btn btn-primary tableBtn btbRed" ng-click="del(row)">删除
+									<button ng-if="[0,4,5,6].indexOf(row.status) != -1" class="btn btn-primary tableBtn btnRed" ng-click="del(row)">删除
 									</button>
 								</td>
 					</tr>
