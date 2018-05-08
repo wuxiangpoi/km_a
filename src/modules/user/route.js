@@ -7,6 +7,7 @@ export default app => {
             name: 'dashboard.user',
             url: '/user',
             template: require('./template.html'),
+            info: '账户管理|帐号管理',
             controller: 'userController',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {

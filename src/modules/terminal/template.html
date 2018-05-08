@@ -10,7 +10,9 @@
 	<div class="content-wrap">
 		<div class="clearfix">
 			<div class="selectWrap fl">
-				<km-select options="domainStatusOptions" selected="sp.status" val="val" name="name" change="initPage"></km-select>
+				<km-select options="opOptions" selected="sp.op" val="val" name="name" change="initPage"></km-select>
+				<km-select options="terminalStatusOptions" selected="sp.status" val="val" name="name" change="initPage"></km-select>
+				<km-select options="hasProgramOptions" selected="sp.hasProgram" val="val" name="name" change="initPage"></km-select>
 			</div>
 			<div class="fr">
 				<div class="input-group serchWrap">
@@ -35,7 +37,6 @@
 						<th class="ellipsisTd">终端名称</th>
 						<th ng-if="!stateParamsId">所属企业</th>
 						<th>网络状态</th>
-						<!-- <th>使用状态</th> -->
 						<th>屏幕分辨率</th>
 						<th>所属城市</th>
 						<th>节目数量</th>
@@ -50,12 +51,15 @@
 						<td class="tdClick" ng-click="details(row)">{{row.no}}</td>
 						<td>{{row.name}}</td>
 						<td ng-if="!stateParamsId">{{row.domain + '('+ row.domainName +')'}}</td>
-						<td>{{getDeviceNetStatus(row.status)}}</td>
-						<!-- <td>{{row.enabled == 1? '启用':'停用'}}</td> -->
-						<td>{{row.resolution}}</td>
-						<td>{{getCityName(row.city_no)}}</td>
 						<td>
-							<span class="tdClick dibk" ng-click="showPrograms(row)">{{row.programCounts}}</span>
+								<font ng-if="row.status == 2" class="txtGrey">离线</font>
+								<font ng-if="row.status == 1" class="txtGreen">在线</font>
+								<font ng-if="row.status == 3" class="txtRed">异常</font>
+						</td>
+						<td>{{row.resolution}}</td>
+						<td>{{row.city_no | getCityName}}</td>
+						<td class="tdClick" ng-click="showPrograms(row)">
+							{{row.programCounts}}
 						</td>
 					</tr>
 				</tbody>

@@ -8,6 +8,7 @@ export default app => {
             url: '/checkModel',
             template: require('./template.html'),
             controller: 'checkModelController',
+            info: '审核管理',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {
                     return $q(resolve => {

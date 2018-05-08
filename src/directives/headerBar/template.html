@@ -4,7 +4,7 @@
             <span ng-click="toggleFullwidth()" class="navbar-minimalize minimalize-styl-2 btn">
                 <i class="fa fa-navicon"></i>
             </span>
-            <span>{{navInfo}}</span>
+            <span class="navInfo">{{navInfo.split('|')[0]}} <span style="color: #0cf5c0;" ng-if="navInfo.split('|')[1]"> > {{navInfo.split('|')[1]}}</span></span>
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">

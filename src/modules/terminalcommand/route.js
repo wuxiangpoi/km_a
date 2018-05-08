@@ -7,6 +7,7 @@ export default app => {
             name: 'dashboard.terminalcommand',
             url: '/terminalcommand',
             template: require('./template.html'),
+            info: '操作日志',
             controller: 'terminalcommandController',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {

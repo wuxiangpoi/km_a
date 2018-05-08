@@ -5,7 +5,8 @@ export default app => {
         
         $stateProvider.state({
             name: 'dashboard.terminal',
-            url: '/terminal',
+            url: '/terminal/{domain}',
+            info: '终端管理',
             template: require('./template.html'),
             controller: 'terminalController',
             resolve: {

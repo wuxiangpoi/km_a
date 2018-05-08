@@ -1,5 +1,3 @@
-import './style.less';
-
 const materialchartController = ($scope, baseService) => {
     $scope.sp = {};
     var now = new Date();

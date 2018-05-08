@@ -1,3 +1,5 @@
+import {terminalStatusOptions,scheduleStatusOptions} from './options';
+
 export default app => {
     app.filter('to_trusted', ['$sce', function ($sce) {
         return function (text) {
@@ -26,6 +28,17 @@ export default app => {
             } else {
                 return ''
             }
+        }
+    });
+    app.filter('getCityName', function (baseService) {
+        return function (cno) {
+            let cName = '';
+            for (let i in baseService.citiesNo) {
+                if (i == cno) {
+                    cName = baseService.citiesNo[i].n;
+                }
+            }
+            return cName;
         }
     });
     //OSS图片裁减
@@ -68,29 +81,11 @@ export default app => {
         }
     });
     app.filter('scheduleStatusTxt', function () {
-        var scheduleStatus = [{
-                name: '待提交审核',
-                val: 0
-            },
-            {
-                name: '审核通过',
-                val: 1
-            },
-            {
-                name: '审核中',
-                val: 2
-            },
-            {
-                name: '审核不通过',
-                val: 4
-            }
-
-        ];
         return function (status) {
             var statusTxt = '';
-            for (var i = 0; i < scheduleStatus.length; i++) {
-                if (scheduleStatus[i].val == status) {
-                    statusTxt = scheduleStatus[i].name;
+            for (var i = 0; i < scheduleStatusOptions.length; i++) {
+                if (scheduleStatusOptions[i].val == status) {
+                    statusTxt = scheduleStatusOptions[i].name;
                 }
             }
             return statusTxt;
@@ -231,6 +226,17 @@ export default app => {
             return statusTxt;
         };
     });
+    app.filter('terminalStatusTxt', () => {
+        return function (status) {
+            var statusTxt = '';
+            for (var i = 0; i < terminalStatusOptions.length; i++) {
+                if (terminalStatusOptions[i].val == status) {
+                    statusTxt = terminalStatusOptions[i].name;
+                }
+            }
+            return statusTxt;
+        };
+    }),
     //尺寸过滤器(文件体积，显示GB、MB、KB等)
     app.filter('dmbdResourceSizeFilter', function () {
         return function (size) {

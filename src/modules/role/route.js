@@ -7,6 +7,7 @@ export default app => {
             name: 'dashboard.role',
             url: '/role',
             template: require('./template.html'),
+            info: '账户管理|角色管理',
             controller: 'roleController',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {

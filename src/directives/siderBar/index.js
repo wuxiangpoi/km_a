@@ -149,8 +149,14 @@ let controller = ($scope,$state,baseService) => {
             }
         ]
     }]
+    
     $scope.$on('$stateChangeSuccess',(event, toState, toParams, fromState, fromParams)=>{
         $scope.state = toState.name;
+        for(let i = 0; i < $scope.menuList.length; i ++){
+            if($scope.menuList[i].states.indexOf($scope.state) != -1){
+                $scope.collapseVar = $scope.menuList[i].collapseVar;
+            }
+        }
     })
     $scope.toggleMenu = (menu) => {
         if(menu.state != ''){

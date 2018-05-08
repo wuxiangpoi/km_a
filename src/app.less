@@ -15,6 +15,30 @@ html, body {
     color: #333;
 }
 
+//滚动条样式
+::-webkit-scrollbar  
+{  
+    width: 10px;  
+    height: 10px;  
+    background-color: #F5F5F5;  
+}  
+  
+/*定义滚动条轨道 内阴影+圆角*/  
+::-webkit-scrollbar-track  
+{  
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  
+    border-radius: 10px;  
+    background-color: #F5F5F5;  
+}  
+  
+/*定义滑块 内阴影+圆角*/  
+::-webkit-scrollbar-thumb  
+{  
+    border-radius: 10px;  
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);  
+    background-color: #ccc;  
+}  
+
 .lh34 {
   line-height: 34px;
 }
@@ -351,13 +375,20 @@ body.mini-navbar {
       }
     }
 }
-
+.tdClick {
+  color:#2c2c4c;
+  cursor: pointer;
+  &:hover {
+    color: @main-color;
+  }
+}
 .content-wrap {
     background: #fff;
     padding: 20px;
     min-height: 400px;
     .table-wrapper {
       overflow-x: auto;
+      
       .table {
         .pagination {
           margin: 0;

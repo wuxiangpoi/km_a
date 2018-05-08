@@ -1,36 +1,31 @@
-<div class="modal-header">
-	<h4 class="modal-title">{{title}}</h4>
-</div>
-<div class="modal-body managePlay" style="padding-top:0;padding-bottom:0;">
+<div class="table-wrapper">
+	<table class="table" st-pipe="callServer" st-table="displayed">
+		<thead>
+			<tr>
+				<th>类型</th>
+				<th>名称</th>
+				<th>发布时间</th>
+			</tr>
+		</thead>
+		<tbody ng-show="!isLoading">
+			<tr ng-repeat="row in displayed">
+				<td style="width:174px;">
+					<div ng-if="!row.stype && row.stype != 1">
+						节目
+					</div>
+					<div ng-if="row.stype == 1">
+						排期
+					</div>
+				</td>
+				<td class="tdClick ellipsisTd" title="{{row.name || row.programName}}" ng-click="showProgramOrSchedule(row)">{{row.name || row.programName}}
+					<font color="red" ng-if="row.expired">[已过期]</font>
+					</span>
+				</td>
 
-	<div class="table-wrapper">
-		<table class="table" st-pipe="callServer" st-table="displayed">
-			<thead>
-				<tr>
-					<th>节目/排期名称</th>
-					<th>播放日期</th>
-					<th>播放时段</th>
-					<th>发布时间</th>
-				</tr>
-			</thead>
-			<tbody ng-show="!isLoading">
-				<tr ng-repeat="row in displayed">
-					<td class="tdClick" ng-click="showProgramOrSchedule(row)">{{row.name}}</td>
-					<td style="width:174px;">
-						<div ng-if="row.stype != 1">
-							{{formateDate(row.startDate) + '至'+formateDate(row.endDate)}}
-						</div>
-					</td>
-					<td>
-						<div ng-if="row.stype != 1">
-							{{row.startTime.substr(0,5) + '至'+row.endTime.substr(0,5)}}
-						</div>
-					</td>
-					<td>{{row.createTime ? $filter('date')(row.createTime, 'yyyy-MM-dd HH:mm:ss') : ''}}</td>
-				</tr>
-			</tbody>
-			<tbody ng-include="'tpl/table.html'"></tbody>
-			<tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
-		</table>
-	</div>
+				<td>{{row.createTime | formateTime}}</td>
+			</tr>
+		</tbody>
+		<tbody me-include html="{{tbodyTpl}}"></tbody>
+		<tfoot ng-show="!isLoading" me-include html="{{tfooterTpl}}"></tfoot>
+	</table>
 </div>

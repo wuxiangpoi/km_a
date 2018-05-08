@@ -7,6 +7,7 @@ export default app => {
             name: 'dashboard.home',
             url: '/home',
             template: require('./template.html'),
+            info: '首页',
             controller: 'homeController',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {

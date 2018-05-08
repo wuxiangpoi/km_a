@@ -7,6 +7,7 @@ export default app => {
             name: 'dashboard.terminalreport',
             url: '/terminalreport',
             template: require('./template.html'),
+            info: '终端管理',
             controller: 'terminalreportController',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {

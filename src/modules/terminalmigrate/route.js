@@ -7,6 +7,7 @@ export default app => {
             name: 'dashboard.terminalmigrate',
             url: '/terminalmigrate',
             template: require('./template.html'),
+            info: '操作日志|终端迁移记录',
             controller: 'terminalmigrateController',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {

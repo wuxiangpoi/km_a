@@ -1,5 +1,47 @@
-export let materialsTypeOptions = [
+export let hasProgramOptions = [{
+        val: '',
+        name: '节目状态'
+    },
     {
+        val: 1,
+        name: '有节目'
+    },
+    {
+        val: 0,
+        name: '无节目'
+    }
+]
+export let terminalStatusOptions = [{
+        val: '',
+        name: '网络状态'
+    },
+    {
+        val: 1,
+        name: '在线'
+    },
+    {
+        val: 2,
+        name: '离线'
+    },
+    {
+        val: 3,
+        name: '异常'
+    }
+]
+export let opOptions = [{
+        val: '',
+        name: '系统类型'
+    },
+    {
+        val: 1,
+        name: 'android'
+    },
+    {
+        val: 2,
+        name: 'windows'
+    },
+]
+export let materialsTypeOptions = [{
         val: '',
         name: '素材类型'
     },
@@ -16,8 +58,7 @@ export let materialsTypeOptions = [
         name: '音乐'
     }
 ]
-export let domainStatusOptions = [
-    {
+export let domainStatusOptions = [{
         val: '',
         name: '企业状态'
     },
@@ -100,5 +141,26 @@ export let materialStatusOptions = [{
     {
         val: 5,
         name: '审核不通过'
+    }
+]
+export let scheduleStatusOptions = [{
+        val: '',
+        name: '审核状态'
+    },
+    {
+        name: '待提交审核',
+        val: 0
+    },
+    {
+        name: '审核通过',
+        val: 1
+    },
+    {
+        name: '审核中',
+        val: 2
+    },
+    {
+        name: '审核不通过',
+        val: 4
     }
 ]

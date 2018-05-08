@@ -14,8 +14,8 @@
                         <span ng-if="menu.children" class="fa arrow"></span>
                     </a>
                     <ul ng-if="menu.children" class="nav nav-second-level collapse" ng-class="{'in':menu.collapseVar==collapseVar}">
-                        <li ng-repeat="sMenu in menu.children">
-                            <a ui-sref="{{sMenu.state}}">{{sMenu.name}}</a>
+                        <li ui-sref-active="active" ng-repeat="sMenu in menu.children">
+                            <a ui-sref="{{sMenu.state}}" >{{sMenu.name}}</a>
                         </li>
                     </ul>
                 </li>

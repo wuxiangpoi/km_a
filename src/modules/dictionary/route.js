@@ -8,6 +8,7 @@ export default app => {
             url: '/dictionary',
             template: require('./template.html'),
             controller: 'dictionaryController',
+            info: '系统管理|数据字典',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {
                     return $q(resolve => {

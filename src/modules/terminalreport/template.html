@@ -40,7 +40,7 @@
 
 				<tbody ng-show="!isLoading">
 					<tr ng-repeat="row in displayed">
-						<td class="tdClick" ng-click="toDetails(row.domainCode)">{{row.domainCode}}</td>
+						<td class="tdClick" ui-sref="dashboard.terminal({domain:row.domainCode})">{{row.domainCode}}</td>
 						<td class="ellipsisTd">{{row.domainName}}</td>
 						<td>{{row.domainStatus == 1?'可用':'停用'}}</td>
 						<td>{{row.terminalTotal}}</td>

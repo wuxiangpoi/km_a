@@ -8,6 +8,7 @@ export default app => {
             url: '/versionfile',
             template: require('./template.html'),
             controller: 'versionfileController',
+            info: '系统管理|版本文件管理',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {
                     return $q(resolve => {

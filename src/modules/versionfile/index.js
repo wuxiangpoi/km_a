@@ -1,4 +1,4 @@
-// import dictionarySaveTpl from '../../tpl/dictionary_save.html';
+import {opOptions} from '../../filter/options';
 
 const versionfileController = ($scope, baseService) => {
 	$scope.displayed = [];
@@ -14,11 +14,7 @@ const versionfileController = ($scope, baseService) => {
 	$scope.initPage = function(){
 		$scope.callServer($scope.tableState, 0)
 	}
-	$scope.opOptions = [
-		{val: '',name: '系统类型'},
-		{val: 1,name: 'android'},
-		{val: 2,name: 'windows'},
-	]
+	$scope.opOptions = opOptions;
 	$scope.save = function () {
 		baseService.confirmDialog('添加字典', {}, dictionarySaveTpl, function (vm) {
 			let postData = {

@@ -53,7 +53,7 @@ const roleController = ($scope, baseService) => {
 	}
 	$scope.checkPerms = function (item) {
 		getPerms(function () {
-			baseService.confirmDialog('查看权限', {
+			baseService.confirmDialog(540,'查看权限', {
 				set: 1
 			}, permsSetTpl, function (ngDialog, vm) {
 
@@ -65,7 +65,7 @@ const roleController = ($scope, baseService) => {
 					isCheck: false,
 					selectedNodes: []
 				}
-			})
+			},true)
 		})
 
 	};
@@ -104,7 +104,7 @@ const roleController = ($scope, baseService) => {
 			}
 			vm.checkPerms = function () {
 				getPerms(function () {
-					baseService.confirmDialog('权限设置', {
+					baseService.confirmDialog(540,'权限设置', {
 						set: 2
 					}, permsSetTpl, function (vm1) {
 						var zTree = $.fn.zTree.getZTreeObj('modalZtree');

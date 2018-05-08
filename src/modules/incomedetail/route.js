@@ -7,6 +7,7 @@ export default app => {
             name: 'dashboard.incomedetail',
             url: '/incomedetail/:id',
             template: require('./template.html'),
+            info: '数据统计|账目详情',
             controller: 'incomedetailController',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {
