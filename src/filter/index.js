@@ -1,4 +1,4 @@
-import kmFilter from './km_filter'
+import kmFilter from './kmFilter'
 
 const filters = [kmFilter]
     
