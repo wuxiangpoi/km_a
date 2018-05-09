@@ -7,14 +7,14 @@
                 </a>
             </div>
             <ul class="nav" id="side-menu">
-                <li ng-repeat="menu in menuList" ng-class="{'active':menu.collapseVar==collapseVar}">
+                <li ng-repeat="menu in menuList" ng-if="menu.auth" ng-class="{'active':menu.collapseVar==collapseVar}">
                     <a ng-click="toggleMenu(menu)" ng-class="{'current':menu.states.indexOf(state) != -1}">
                         <i class="{{menu.icon}}"></i>
                         <span>{{menu.name}}</span>
                         <span ng-if="menu.children" class="fa arrow"></span>
                     </a>
                     <ul ng-if="menu.children" class="nav nav-second-level collapse" ng-class="{'in':menu.collapseVar==collapseVar}">
-                        <li ui-sref-active="active" ng-repeat="sMenu in menu.children">
+                        <li ui-sref-active="active" ng-repeat="sMenu in menu.children" ng-if="sMenu.auth">
                             <a ui-sref="{{sMenu.state}}" >{{sMenu.name}}</a>
                         </li>
                     </ul>

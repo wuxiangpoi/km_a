@@ -1,6 +1,6 @@
 <div class="page-wrap animated fadeInRight">
 	<div class="level2">
-		<div>
+		<div  ng-if="perms(22)">
 			<button type="button" ng-click="save()" class="btn btn-primary addRole">
 				<i class="iconfont icon-tianjia-"></i>
 				添加企业
@@ -10,14 +10,14 @@
 	<div class="content-wrap">
 			<div class="clearfix">
 					<div class="selectWrap fl">
-						<km-select options="domainStatusOptions" selected="sp.type" val="val" name="name" change="initPage"></km-select>
+						<km-select options="domainStatusOptions" selected="sp.status" val="val" name="name" change="initPage"></km-select>
 					</div>
 					<div class="fr">
 						<div class="input-group serchWrap">
 							<input type="text" class="form-control" ng-model="sp.search" placeholder="企业代码/企业名称">
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-primary">
-									<i type="button" ng-click="initPage" class="fa fa-search">
+									<i type="button" ng-click="initPage()" class="fa fa-search">
 									</i>
 								</button>
 							</span>
@@ -34,7 +34,7 @@
 						<th>企业状态</th>
 						<th>关联邮箱</th>
 						<th>联系人</th>
-						<th>联系方式</th>
+						<!-- <th>联系方式</th> -->
 						<!-- <th>收费方式</th> -->
 						<th>操作</th>
 					</tr>
@@ -43,7 +43,7 @@
 				<tbody ng-show="!isLoading">
 					<tr ng-repeat="row in displayed">
 						<td>
-							<img ng-src="{{row.logo?row.logo:'img/no_pic.jpg'}}" alt="" height="50px" width="80" style="border: 0px; margin:13px 0;display:inline-block;">
+							<img src="../../img/loading.gif" lazy-src="{{row.logo?row.logo:'img/no_pic.jpg'}}" alt="" height="50px" width="80" style="border: 0px; margin:13px 0;display:inline-block;">
 						</td>
 						<td class="ellipsisTd">{{row.name}}</td>
 						<td>{{row.key}}</td>
@@ -53,16 +53,19 @@
 						</td>
 						<td>{{row.email}}</td>
 						<td>{{row.contact}}</td>
-						<td>{{row.phone}}</td>
+						<!-- <td>{{row.phone}}</td> -->
 						<!-- <td>{{switchCharge(row.chargeType)}}</td> -->
-						<td style="max-width:230px;">
-							<button class="btn btn-primary tableBtn btnGreen" ng-click="save(row)">编辑</button>
-							<button class="btn btn-primary fileLoad tableBtn" href="javascript:;">
+						<td>
+							<button ng-if="perms(23)" class="btn btn-primary tableBtn btnGreen" ng-click="save(row)">编辑</button>
+							<button ng-if="perms(24)" class="btn btn-primary fileLoad tableBtn" href="javascript:;">
 								编辑Logo
 								<input ng-click="saveLogo(row)" type="file" nv-file-select="" name="file" uploader="uploader" multiple />
 							</button>
-							<button ng-if="row.status == 1" class="btn btn-primary tableBtn btnRed" ng-click="changeEnabled(row,$index)">冻结</button>
-							<button ng-if="row.status != 1" class="btn btn-primary tableBtn" ng-click="changeEnabled(row,$index)">启用</button>
+							<button ng-if="row.status == 1 && perms(26)" class="btn btn-primary tableBtn btnRed" ng-click="changeEnabled(row,$index)">冻结</button>
+							<button ng-if="row.status != 1 && perms(26)" class="btn btn-primary tableBtn" ng-click="changeEnabled(row,$index)">启用</button>
+							<button ng-if="perms(25)" ng-class="{'disabled': row.isPosting}" class="btn btn-primary tableBtn" ng-click="resetEmail(row,$index)">
+								{{row.isPosting?'正在发送':'重发注册邮件'}}<i class="fa fa-spinner"></i>
+							</button>
 						</td>
 					</tr>
 				</tbody>

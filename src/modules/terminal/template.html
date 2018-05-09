@@ -1,4 +1,29 @@
 <div class="page-wrap animated fadeInRight">
+	<div class="level2">
+		<div>
+			<button ng-if="perms(31)" type="button" ng-click="ids.length != 0?submitCheck():''" ng-class="{'disabled-sham': idsNormal.length == 0 || idsNormal.length != ids.length}"
+			    data-trigger="hover" bs-enabled="idsNormal.length == 0 || idsNormal.length != ids.length" data-placement="bottom" data-type="success" data-title="{{'请选择在线终端'}}"
+			    bs-tooltip class="btn btn-primary warning">
+				下发命令
+				<i class="fa fa-caret-down"></i>
+			</button>
+			<button ng-if="perms(32)" type="button" ng-click="ids.length != 0?submitCheck():''" ng-class="{'disabled-sham': ids.length == 0}"
+			    data-trigger="hover" bs-enabled="ids.length == 0" data-placement="bottom" data-type="success" data-title="{{'请先选择终端'}}"
+			    bs-tooltip class="btn btn-primary warning">
+				发布紧急通知
+			</button>
+			<button ng-if="perms(31)" type="button" ng-click="ids.length != 0?submitCheck():''" ng-class="{'disabled-sham': ids.length == 0}"
+			    data-trigger="hover" bs-enabled="ids.length == 0" data-placement="bottom" data-type="success" data-title="{{'请先选择终端'}}"
+			    bs-tooltip class="btn btn-primary warning">
+				终端升级
+			</button>
+			<button ng-if="perms(34)" type="button" ng-click="ids.length != 0?submitCheck():''" ng-class="{'disabled-sham': ids.length == 0}"
+			    data-trigger="hover" bs-enabled="ids.length == 0" data-placement="bottom" data-type="success" data-title="{{'请先选择终端'}}"
+			    bs-tooltip class="btn btn-primary warning">
+				终端迁移
+			</button>
+		</div>
+	</div>
 	<ul class="nav nav-tabs contentTabs">
 		<li ui-sref="dashboard.terminalreport" ui-sref-active="active">
 			<a>按企业查看</a>
@@ -10,6 +35,7 @@
 	<div class="content-wrap">
 		<div class="clearfix">
 			<div class="selectWrap fl">
+				<city-picker province="sp.provinceCode" city="sp.city_no" district="sp.districtCode" change="initPage"></city-picker>
 				<km-select options="opOptions" selected="sp.op" val="val" name="name" change="initPage"></km-select>
 				<km-select options="terminalStatusOptions" selected="sp.status" val="val" name="name" change="initPage"></km-select>
 				<km-select options="hasProgramOptions" selected="sp.hasProgram" val="val" name="name" change="initPage"></km-select>
@@ -52,9 +78,9 @@
 						<td>{{row.name}}</td>
 						<td ng-if="!stateParamsId">{{row.domain + '('+ row.domainName +')'}}</td>
 						<td>
-								<font ng-if="row.status == 2" class="txtGrey">离线</font>
-								<font ng-if="row.status == 1" class="txtGreen">在线</font>
-								<font ng-if="row.status == 3" class="txtRed">异常</font>
+							<font ng-if="row.status == 2" class="txtGrey">离线</font>
+							<font ng-if="row.status == 1" class="txtGreen">在线</font>
+							<font ng-if="row.status == 3" class="txtRed">异常</font>
 						</td>
 						<td>{{row.resolution}}</td>
 						<td>{{row.city_no | getCityName}}</td>

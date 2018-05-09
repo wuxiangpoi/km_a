@@ -21,7 +21,7 @@
     <div class="form-group clearfix">
         <label class="col-sm-3 control-label">关联邮箱：</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" required ng-pattern="/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/" name="email"
+            <input type="text" class="form-control" required ng-pattern="/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/" name="email"
                 ng-model="data.email" />
             <div class="help-block" ng-messages="modalForm.email.$error" ng-if="isShowMessage">
                 <p ng-message="pattern">请输入正确邮箱</p>
@@ -75,22 +75,19 @@
             </div>
         </div>
     </div>
-    <!-- <div ng-if="!data.id" class="form-group clearfix">
-        <label class="col-sm-3 control-label">收费方式：</label>
+    <div class="form-group clearfix">
+        <label class="col-sm-3 control-label">收费单位：</label>
         <div class="col-sm-9">
-            <select class="form-control" required name="chargeType" ng-model="data.chargeType">
-                <option ng-selected="data.chargeType == ''" value="">请选择收费方式</option>
-                <option ng-selected="data.chargeType == '0'" value="0">按月收费</option>
-                <option ng-selected="data.chargeType == '1'" value="1">按季度收费</option>
-                <option ng-selected="data.chargeType == '2'" value="2">按年收费</option>
+            <select class="form-control" required name="payType" ng-model="data.payType">
+                <option ng-selected="paytype.val == data.payType" ng-repeat="paytype in payTypeOptions" value="{{paytype.val}}">{{paytype.name}}</option>
             </select>
-            <div class="help-block" ng-messages="modalForm.chargeType.$error" ng-if="isShowMessage">
-                <p ng-message="required">请收费方式</p>
+            <div class="help-block" ng-messages="modalForm.payType.$error" ng-if="isShowMessage">
+                <p ng-message="required">请选择收费方式</p>
             </div>
         </div>
-    </div> -->
+    </div>
     <div class="form-group clearfix">
-        <label class="col-sm-3 control-label">单屏价格：</label>
+        <label class="col-sm-3 control-label">单价：</label>
         <div ng-if="!data.id" class="col-sm-9 row">
             <div class="col-sm-10 pdr0">
                 <input type="text" required ng-pattern="/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/" class="form-control" name="price" ng-model="data.price"
@@ -100,11 +97,11 @@
                         <p ng-message="pattern">请输入正确单屏价格</p>
                     </div>
             </div>
-            <div class="col-sm-2 pdr0 lh34">元/月</div>
+            <div class="col-sm-2 pdr0 lh34">元/年</div>
             
         </div>
         <div ng-if="data.id" class="col-sm-9 lh34">
-            {{data.price}} 元/月
+            {{data.price}} 元/年
         </div>
     </div>
     <div class="form-group clearfix">

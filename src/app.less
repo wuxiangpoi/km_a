@@ -79,6 +79,20 @@ a {
 //字体图标
 .fa {
   vertical-align: middle;
+  &.fa-close {
+    cursor: pointer;
+    &::before {
+      display: block;
+    padding: 3px;
+    background: transparent;
+    color: #bbb;
+    content: '\D7';
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 26px;
+    text-align: center;
+    }
+  }
 }
 
 //按钮样式
@@ -86,6 +100,9 @@ a {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  input {
+    cursor: pointer;
+  }
 }
 
 .btn.disabled-sham {
@@ -143,10 +160,6 @@ a.btn {
     border: 1px solid #20b8fe!important;
   }
   .fa-spinner {
-    position: absolute;
-    top: 50%;
-    margin-top: -8px;
-    right: 20px;
     display: none;
   }
   &.disabled {
@@ -305,7 +318,7 @@ body.mini-navbar {
 //弹窗样式
 .alert-backdrop,.modal-backdrop {
   background-color: rgba(0,0,0,.5);
-  z-index: 2052!important;
+  z-index: 10001!important;
 }
 .ngdialog {
   padding-bottom: 50px!important;
@@ -331,7 +344,7 @@ body.mini-navbar {
     padding: 0 0 15px 0!important;
   }
   .modal-body {
-    padding: 10px 20px!important;
+    padding: 10px!important;
     .txt-confirm {
       font-size:20px;
       line-height:40px;
@@ -382,6 +395,19 @@ body.mini-navbar {
     color: @main-color;
   }
 }
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 0;
+  vertical-align: middle;
+}
+.ellipsisTd {
+  max-width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
 .content-wrap {
     background: #fff;
     padding: 20px;
@@ -393,13 +419,7 @@ body.mini-navbar {
         .pagination {
           margin: 0;
         }
-        .ellipsisTd {
-          max-width: 160px;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          -o-text-overflow: ellipsis;
-        }
+        
         th,td {
           font-size: 14px;
           vertical-align: middle!important;
@@ -672,4 +692,94 @@ body.mini-navbar {
 
 .ztree li span.button.remove:before {
   content: "\e6f4";
+}
+
+/* 上传窗口 */
+
+.dialog-upload {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 530px;
+  background: #fff;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 0 5px #ccc;
+  -webkit-box-shadow: 0 0 5px #ccc;
+  z-index: 10;
+}
+
+.dialog-upload.dhide {
+  bottom: -270px;
+  display: block;
+}
+
+.dialog-upload-header {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 44px;
+  padding-left: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-right: 10px;
+}
+
+.dialog-upload-header .btnHead {
+  font-size: 20px;
+  color: #bbb;
+  vertical-align: -3px;
+  cursor: pointer;
+}
+
+
+.dialog-upload-header i.fa-minus {
+  border-top: 2px solid #ddd;
+  display: inline-block;
+  vertical-align: middle;
+  width: 12px;
+}
+
+.dialog-upload-header i.fa-minus::before,
+.dialog-upload-header i.fa-window-maximize::before {
+  display: none;
+}
+
+.dialog-upload-header .btnHead .fa-window-maximize {
+  width: 12px;
+  display: inline-block;
+  height: 12px;
+  border: 1px solid #bbb;
+  border-top: 2px solid #bbb;
+  vertical-align: middle;
+}
+
+.dialog-upload-content {
+  padding: 0 10px;
+  min-height: 270px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.dialog-upload-content .table>tbody>tr>td {
+  vertical-align: middle;
+}
+
+.dialog-upload-content .btn:focus {
+  box-shadow: none;
+}
+
+.dialog-upload-header .right span {
+  cursor: pointer;
+}
+
+.dialog-upload-content .pause {
+  display: inline-block;
+  font-size: 20px;
+  width: 10px;
+  height: 14px;
+  border-left: 2px solid #666;
+  border-right: 2px solid #666;
+}
+.progress-bar {
+  background-color: @main-color!important;
 }

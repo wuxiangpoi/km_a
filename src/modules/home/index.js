@@ -1,4 +1,5 @@
 import style from './style.less';
+import {citiesNo} from '../../services/cityService'
 
 const homeController = ($scope,$rootScope, baseService, chartService) => {
 	$scope.sp = {};
@@ -120,18 +121,18 @@ const homeController = ($scope,$rootScope, baseService, chartService) => {
 			//*****************/
 	
 			var geoCoordMap = {};
-			for (var i in baseService.citiesNo) {
-				geoCoordMap[baseService.citiesNo[i].n] = baseService.citiesNo[i].p.split('|')[0].split(',');
+			for (var i in citiesNo) {
+				geoCoordMap[citiesNo[i].n] = citiesNo[i].p.split('|')[0].split(',');
 			}
 			var data = [];
 	
 			for (var i = 0; i < res.length; i++) {
 				data.push({
-					name: baseService.citiesNo[res[i].cityCode].n,
+					name: citiesNo[res[i].cityCode].n,
 					value: res[i].count
 				})
 				$scope.mapInfo.push({
-					name: baseService.citiesNo[res[i].cityCode].n,
+					name: citiesNo[res[i].cityCode].n,
 					value: res[i].count
 				})
 			}

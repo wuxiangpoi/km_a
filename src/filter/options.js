@@ -1,3 +1,15 @@
+export let payTypeOptions = [{
+    val: '',
+    name: '请选择收费方式'
+},
+{
+    val: 0,
+    name: '终端'
+},
+{
+    val: 1,
+    name: '门店'
+}]
 export let hasProgramOptions = [{
         val: '',
         name: '节目状态'
@@ -63,15 +75,15 @@ export let domainStatusOptions = [{
         name: '企业状态'
     },
     {
-        val: 0,
+        val: 1,
         name: '正常'
     },
     {
-        val: 1,
+        val: 0,
         name: '冻结'
     }
 ]
-export let cmdCodeOptions = [{
+export let sendStatusOptions = [{
         val: '',
         name: '下发状态'
     },
@@ -88,7 +100,7 @@ export let cmdCodeOptions = [{
         name: '下发失败'
     }
 ]
-export let sendStatusOptions = [{
+export let cmdCodeOptions = [{
         val: '',
         name: '下发命令'
     },

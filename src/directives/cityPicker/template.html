@@ -1,0 +1,48 @@
+<div class="citySelectWrap" id="cityPicker">
+  <button type="button" class="btnSelect" ng-click="showSelect($event)">
+    {{selectedCity}}
+    <span class="caret"></span>
+  </button>
+  <ul class="city-picker-dropdown am-flip-x" ng-show="showDistricts">
+    <li>
+      <ul class="nav nav-tabs">
+        <li ng-click="choose(1)" ng-class="{'current': currentType == 1}">
+          <a>省份</a>
+        </li>
+        <li ng-click="choose(2)" ng-class="{'current': currentType == 2}">
+          <a>城市</a>
+        </li>
+        <li ng-click="choose(3)" ng-class="{'current': currentType == 3}">
+          <a>区县</a>
+        </li>
+        <li class="emitDataBtn">
+          <button ng-click="emitData()" class="btn btn-primary btn-sm">确定</button>
+        </li>
+      </ul>
+    </li>
+    <li class="districtsWrap">
+      <ul ng-show="currentType == 1">
+        <li ng-repeat="(p,v) in provinces">
+          <span class="provincesLabel">{{p}}</span>
+          <div class="cityWrap">
+            <a ng-class="{'active':cityData.province == c.code}" ng-click="chooseDistricts(c)" ng-repeat="c in v" class="cityItem">{{c.address}}</a>
+          </div>
+        </li>
+      </ul>
+      <ul ng-show="currentType == 2">
+        <li>
+          <div class="cityWrap">
+            <a ng-class="{'active':cityData.city == c}" ng-repeat="(c,v) in currentCities" ng-click="chooseDistricts(c,v)" class="cityItem">{{v}}</a>
+          </div>
+        </li>
+      </ul>
+      <ul ng-show="currentType == 3">
+          <li>
+            <div class="cityWrap">
+              <a ng-repeat="(c,v) in currentDistricts" ng-click="chooseDistricts(c,v)" class="cityItem">{{v}}</a>
+            </div>
+          </li>
+        </ul>
+    </li>
+  </ul>
+</div>

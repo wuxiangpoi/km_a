@@ -9,7 +9,7 @@
 					<input type="text" class="form-control" ng-model="sp.search" placeholder="企业代码/企业名称"  >
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-primary">
-							<i type="button" ng-click="initPage" class="fa fa-search">
+							<i type="button" ng-click="initPage()" class="fa fa-search">
 							</i>
 						</button>
 					</span>
@@ -32,7 +32,10 @@
 					<tr ng-repeat="row in displayed">
 							<td>{{row.domain}}</td>
                     <td class="ellipsisTd">{{row.domainName}}</td>
-                    <td>{{row.status == 1?'已收费':'待收费'}}</td>
+                    <td>
+							<font ng-if="row.status == 1">已收费</font>
+							<font ng-if="row.status == 0" class="txtRed">待收费</font>
+					</td>
                     <td>{{row.terminals}}</td>
                     <td>
                         <button class="btn btn-primary tableBtn" ng-click="toDetails(row.domain)">详情

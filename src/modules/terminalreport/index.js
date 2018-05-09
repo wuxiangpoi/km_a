@@ -14,7 +14,14 @@ const terminalreportController = ($scope, $rootScope, $stateParams, baseService)
 	}
 	$scope.initPage = function () {
 		$scope.callServer($scope.tableState, 0)
-	}
+    }
+    $scope.exportExcel = function (item) {
+        baseService.confirm('导出表格', '确定将当前企业的所有的终端信息导出excel表格?', function (ngDialog) {
+            ngDialog.close()
+            window.open(baseService.api.terminal + 'exportTerminal?domain=' +
+                item.domainCode);
+        })
+    }
 }
 
 terminalreportController.$inject = ['$scope', '$rootScope', '$stateParams', 'baseService'];

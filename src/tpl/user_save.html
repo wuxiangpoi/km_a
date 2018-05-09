@@ -32,7 +32,7 @@
         <div class="form-group clearfix">
             <label class="col-sm-3 control-label">账户角色</label>
             <div class="col-sm-9">
-                <select style="padding-left:0;" class="form-control" name="role" required ng-model="data.role">
+                <select class="form-control" name="role" required ng-model="data.role">
                     <option value="">请选择角色</option>
                     <option ng-repeat="r in roles" ng-selected="data.role==r.id" value="{{r.id}}">{{r.name}}</option>
                 </select>

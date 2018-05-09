@@ -23,6 +23,7 @@ const roleController = ($scope, baseService) => {
 			})
 		}
 	}
+
 	function getpermList(fids) {
 		var zNodes = [];
 		if (fids && fids.length > 0) {
@@ -65,7 +66,7 @@ const roleController = ($scope, baseService) => {
 					isCheck: false,
 					selectedNodes: []
 				}
-			},true)
+			},'<div><div>')
 		})
 
 	};
@@ -79,15 +80,11 @@ const roleController = ($scope, baseService) => {
 		baseService.confirmDialog(540,item ? '编辑角色' : '添加角色', postData, roleSaveTpl, (vm) => {
 			if (vm.modalForm.$valid) {
 				if (vm.fids && vm.fids.length) {
-					vm.data.fids = [];
-					for (var i = 0; i < vm.fids.length; i++) {
-						vm.data.fids.push(vm.fids[i].id);
-					}
-					vm.data.fids = vm.data.fids.join(',');
+					vm.data.fids = vm.fids.join(',');
 					vm.isPosting = false;
 					baseService.postData(baseService.api.admin + 'saveAdminRoleInfo', vm.data, function () {
 						vm.isPosting = false;
-						vm.$hide();
+						vm.closeThisDialog();
 						baseService.alert(item ? '修改成功' : '添加成功', 'success');
 						$scope.callServer($scope.tableState,0);
 					})
@@ -133,18 +130,15 @@ const roleController = ($scope, baseService) => {
 		})
 	}
 
-	$scope.changeEnabled = function (item, index) {
-		baseService.confirm(item.status == 0 ? '启用企业' : '冻结企业', '您确定' + (item.status == 0 ? '启用' : '冻结') +
-			'企业：' + item.name + '?', true,
-			(vm) => {
-				let me = this;
-				baseService.postData(baseService.api.domain + 'setDomainStatus', {
-					did: item.id,
-					status: item.status == 1 ? 0 : 1
-				}, (res) => {
-					baseService.alert('操作成功', 'success');
-					vm.$hide();
-					$scope.callServer($scope.tableState, 0);
+	$scope.del = function (item) {
+		baseService.confirm('删除', '您确定删除角色：' + item.name + '?',true,
+			function (vm) {
+				baseService.postData(baseService.api.admin + 'deleteAdminRoleInfo', {
+					id: item.id
+				}, function () {
+					vm.closeThisDialog();
+					baseService.alert("删除成功", 'success');
+					$scope.callServer($scope.tableState);
 				})
 			})
 	}

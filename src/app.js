@@ -140,3 +140,7 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
         closeByDocument: true
     });
 }])
+.run(['fileUploaderOptions', function (fileUploaderOptions) {
+    fileUploaderOptions.autoUpload = false;
+    fileUploaderOptions.url = "http://dmbd4.oss-cn-hangzhou.aliyuncs.com"
+}]);

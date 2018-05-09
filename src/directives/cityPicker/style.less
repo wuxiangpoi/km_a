@@ -1,0 +1,73 @@
+.citySelectWrap {
+    position: relative;
+    display: inline-block;
+}
+
+.districtsWrap {
+    min-height: 20px;
+    ul {
+        padding: 0;
+        li {
+            padding: 0 10px;
+            list-style: none;
+            line-height: 24px;
+            font-size: 12px;
+            .provincesLabel {
+
+            }
+            a.active {
+                color: #00a0e9 !important;
+            }
+                .cityItem {
+                    display: inline-block;
+                    padding: 0 10px;
+                    outline: 0;
+                    white-space: nowrap;
+                    margin-right: 2px;
+                    text-decoration: none;
+                    color: #333;
+                    cursor: pointer;
+                }
+        }
+    }
+}
+.city-picker-dropdown {
+    background: #fff;
+    border: medium none;
+    border-radius: 3px;
+    box-shadow: 0 0 3px rgba(86, 96, 117, 0.7);
+    float: left;
+    font-size: 12px;
+    left: 0;
+    list-style: none outside none;
+    padding: 0;
+    position: absolute;
+    text-shadow: none;
+    top: 100%;
+    z-index: 1000;
+    width: 360px;
+    .nav.nav-tabs {
+        border-bottom: 0;
+        background: #f0f0f0;
+        li {
+            margin-bottom: 0;
+            &.current {
+                background: #fff;
+                a {
+                    color: #337ab7;
+                }
+                a:hover {
+                    border-color: #fff;
+                    background: #fff;
+                }
+            }
+            a {
+                border-bottom: 0;
+            }
+        }
+        .emitDataBtn {
+            line-height: 36px;
+            float: right;
+        }
+    }
+}

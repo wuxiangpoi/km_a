@@ -1,4 +1,5 @@
 import {terminalStatusOptions,scheduleStatusOptions} from './options';
+import {citiesNo} from '../services/cityService'
 
 export default app => {
     app.filter('to_trusted', ['$sce', function ($sce) {
@@ -30,12 +31,12 @@ export default app => {
             }
         }
     });
-    app.filter('getCityName', function (baseService) {
+    app.filter('getCityName', function () {
         return function (cno) {
             let cName = '';
-            for (let i in baseService.citiesNo) {
+            for (let i in citiesNo) {
                 if (i == cno) {
-                    cName = baseService.citiesNo[i].n;
+                    cName = citiesNo[i].n;
                 }
             }
             return cName;
