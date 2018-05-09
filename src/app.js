@@ -60,9 +60,10 @@ let loadBasicModules = () => {
 const app = angular.module('sbAdminApp', loadBasicModules());
 
 //引入过滤器
-import filter from './filter/filter.js'
-filter(app);
-
+import filters from './filter'
+filters.forEach(filter => {
+    filter(app);
+})
 //引入全局services
 import services from './services'
 services.forEach(service => {
