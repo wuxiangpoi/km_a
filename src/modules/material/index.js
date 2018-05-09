@@ -123,7 +123,7 @@ const materialController = ($scope, baseService) => {
             }, () => {
                 vm.isPosting = false;
                 baseService.alert('删除成功', 'success');
-                vm.$hide();
+                vm.closeThisDialog();
                 $scope.callServer($scope.tableState, 0);
             })
         })

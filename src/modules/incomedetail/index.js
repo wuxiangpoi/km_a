@@ -1,4 +1,3 @@
-import './style.less';
 
 const incomedetailController = ($scope, baseService, $stateParams) => {
     $scope.displayed = [];
@@ -24,7 +23,7 @@ const incomedetailController = ($scope, baseService, $stateParams) => {
     }
     $scope.exportExcel = function (item) {
         baseService.confirm('导出表格', '确定将当前查询的所有的设备信息导出excel表格?', (vm) => {
-            vm.$hide();
+            vm.$closeThisDialog();
             window.open(baseService.api.chargeStat + 'exportExcelChageStatItems?id=' +
                 item.id);
         })
@@ -34,7 +33,7 @@ const incomedetailController = ($scope, baseService, $stateParams) => {
             baseService.postData(baseService.api.chargeStat + 'confirmChargeById', {
                 id: item.id
             }, () => {
-                vm.$hide();
+                vm.$closeThisDialog();
                 baseService.alert("操作成功", 'success');
                 $scope.callServer($scope.tableState);
             })

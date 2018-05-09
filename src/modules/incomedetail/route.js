@@ -1,4 +1,5 @@
 import angular from 'angular';
+import style from './style.less';
 
 export default app => {
     app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider',($stateProvider, $urlRouterProvider, $controllerProvider) => {
