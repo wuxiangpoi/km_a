@@ -14,10 +14,11 @@ import terminalreport from './modules/terminalreport/route.js'
 import income from './modules/income/route.js'
 import incomedetail from './modules/incomedetail/route.js'
 import terminalcommand from './modules/terminalcommand/route.js'
+import temp from './modules/temp/route.js'
 import terminalmigrate from './modules/terminalmigrate/route.js'
 import materialchart from './modules/materialchart/route.js'
 
-const states = [dashboard, home,domain,dictionary,versionfile,checkModel, terminal,user, role,material,terminalreport,income,incomedetail,terminalcommand, login,errPage,terminalmigrate,materialchart]
+const states = [dashboard, home,domain,dictionary,versionfile,checkModel, terminal,user, role,material,terminalreport,income,incomedetail,terminalcommand,temp, login,errPage,terminalmigrate,materialchart]
 
 export default app => {
     states.forEach(state => {

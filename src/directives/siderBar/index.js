@@ -121,7 +121,7 @@ let controller = ($rootScope,$scope,$state,baseService) => {
                 name: '模版管理',
                 auth: $rootScope.perms(82),
                 collapseVar: 8,
-                state: 'dashboard.income',
+                state: 'dashboard.temp',
                 icon: ''
             }
         ]
