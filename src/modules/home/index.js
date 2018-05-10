@@ -1,4 +1,3 @@
-import style from './style.less';
 import {citiesNo} from '../../services/cityService'
 
 const homeController = ($scope,$rootScope, baseService, chartService) => {

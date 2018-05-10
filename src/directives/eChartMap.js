@@ -1,14 +1,153 @@
-import echarts from '../libs/chart/echarts.min.js'
-// import'../libs/chart/bmap.min.js'
-
 export default app => {
     app.directive('emapChart', ['$window', 'baseService', ($window, baseService) => {
         let controller = ($scope, element, attrs) => {
-
-            var myChart = echarts.init(element[0]);
-            $scope.getMapData = () => {
-                var bmap = new BMap.Map($(element[0]).attr('id'));
-                baseService.getData(baseService.api.report + 'allTerminalForMap', {}, function (res) {
+            $scope.initPage = function () {
+                var bmap = new BMap.Map("allmap");
+                var point = new BMap.Point(113.649644, 34.75661);
+                bmap.centerAndZoom(point, 5);
+                bmap.enableScrollWheelZoom(true);
+                let styleJson = [{
+                        "featureType": "water",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#000000"
+                        }
+                    },
+                    {
+                        "featureType": "land",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#0a2439"
+                        }
+                    },
+                    {
+                        "featureType": "boundary",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#2d5f8c"
+                        }
+                    },
+                    {
+                        "featureType": "railway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "highway",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#49122c"
+                        }
+                    },
+                    {
+                        "featureType": "highway",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#005b96",
+                            "lightness": 1
+                        }
+                    },
+                    {
+                        "featureType": "highway",
+                        "elementType": "labels",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "red"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#00508b"
+                        }
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "green",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#056197",
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "subway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "manmade",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "local",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "labels",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "boundary",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#2d5f8c"
+                        }
+                    },
+                    {
+                        "featureType": "building",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#red"
+                        }
+                    },
+                    {
+                        "featureType": "label",
+                        "elementType": "labels.text.fill",
+                        "stylers": {
+                            "color": "#3d8eab",
+                            "visibility": "on"
+                        }
+                    },
+                    {
+                        "featureType": "label",
+                        "elementType": "labels.text.stroke",
+                        "stylers": {
+                            "color": "#444444",
+                            "visibility": "on"
+                        }
+                    }
+                ]
+                bmap.setMapStyle({
+                    styleJson: styleJson
+                });
+                baseService.getData(baseService.api.apiUrl + '/api/report/allTerminalForMap', {}, function (res) {
                     var terminalist = [];
                     // ************************************自定义覆盖物**************************************************************
                     // 覆盖物构造方法
@@ -58,20 +197,16 @@ export default app => {
 
                 })
             }
-            attrs.$observe('mapData', function () { //通过$observe监听attrs中绑定的option属性，可以通过ajax请求数据，动态更新图表。
-
-
-                if (typeof (BMap) == 'undefined') {
-                    var script = document.createElement("script");
-                    script.src = "http://api.map.baidu.com/api?v=2.0&ak=hWot28fmyYXe1AMOfBfHoMMfSlnVnkeb&callback=baiduMapLoaded";
-                    document.body.appendChild(script);
-                    $window.baiduMapLoaded = function () {
-                        $scope.getMapData();
-                    }
-                } else {
-                    $scope.getMapData();
+            if (typeof (BMap) == 'undefined') {
+                var script = document.createElement("script");
+                script.src = "http://api.map.baidu.com/api?v=2.0&ak=hWot28fmyYXe1AMOfBfHoMMfSlnVnkeb&callback=baiduMapLoaded";
+                document.body.appendChild(script);
+                $window.baiduMapLoaded = function () {
+                    $scope.initPage();
                 }
-            }, true);
+            } else {
+                $scope.initPage();
+            }
         }
         return {
             restrict: 'AE',
