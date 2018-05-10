@@ -8,11 +8,11 @@ export default app => {
         };
     }]);
     //OSS图片裁减
-    app.filter('formateTime', function ($filter) {
+    app.filter('formateTime', ['$filter',function ($filter) {
         return function (date) {
             return $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
         }
-    });
+    }]);
     app.filter('formateDate', function () {
         return function (date) {
             if (date) {
@@ -43,13 +43,13 @@ export default app => {
         }
     });
     //OSS图片裁减
-    app.filter('play_url', function ($sce) {
+    app.filter('play_url', ['$sce',function ($sce) {
         return function (url) {
             return $sce.trustAsResourceUrl(url);
         }
-    });
+    }]);
 
-    app.filter('getOrganizations', function ($rootScope) {
+    app.filter('getOrganizations', ['$rootScope',function ($rootScope) {
         return function (oid) {
             var groups = $rootScope.userData.root_organizations;
             var cName = '';
@@ -80,7 +80,7 @@ export default app => {
             }
             return finalName.join('>');
         }
-    });
+    }]);
     app.filter('scheduleStatusTxt', function () {
         return function (status) {
             var statusTxt = '';

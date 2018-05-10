@@ -144,7 +144,7 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
 .config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 }])
-.config(($datepickerProvider,$timepickerProvider) => {
+.config(['$datepickerProvider','$timepickerProvider',($datepickerProvider,$timepickerProvider) => {
     angular.extend($datepickerProvider.defaults, {
         iconLeft: 'fa fa-angle-left',
         iconRight: 'fa fa-angle-right'
@@ -153,7 +153,7 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
         iconUp: 'fa fa-angle-up',
         iconDown: 'fa fa-angle-down'
       });
-})
+}])
 .config(['ngDialogProvider', function (ngDialogProvider) {
     ngDialogProvider.setDefaults({
         closeByDocument: true
