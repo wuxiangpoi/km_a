@@ -1,6 +1,7 @@
 import './style.less';
 import userSaveTpl from '../../tpl/user_save.html';
 import resetPasswordTpl from "../../tpl/reset_password.html"
+import relatedDomainTpl from "../../tpl/related_domain.html"
 
 const userController = ($scope, baseService) => {
 	$scope.displayed = [];
@@ -24,14 +25,13 @@ const userController = ($scope, baseService) => {
 			email: item ? item.email : '',
 			domains: item ? item.domains : []                
 		}
-		baseService.confirmDialog(540,item ? '编辑帐号' : '添加帐号', item, userSaveTpl, (vm) => {
+		baseService.confirmDialog(540,item ? '编辑帐号' : '添加帐号', postData, userSaveTpl, (vm) => {
 			if (vm.modalForm.$valid) {
 				var onData = postData;
                     if (!item) {
                         onData.password = baseService.md5_pwd($('#userPsd').val());
                     }
-				let url = item ? 'modifyDomain' : 'addDomain';
-				baseService.postData(baseService.api.domain + url, postData, (res) => {
+				baseService.postData(baseService.api.admin + 'saveAdmin', postData, (res) => {
 					baseService.alert(item ? '编辑成功' : '添加成功', 'success');
 					vm.closeThisDialog();
 					$scope.callServer($scope.tableState);
@@ -45,9 +45,53 @@ const userController = ($scope, baseService) => {
 			baseService.getJson(baseService.api.admin + 'getAdminRoleInfoList ', {}, function (data) {
 				vm.roles = data;
 			})
+			vm.chooseDomain = function () {
+				baseService.confirmDialog(640, '选择关联企业', {}, relatedDomainTpl, function (vm1) {
+					postData.domains = vm1.domains;
+					vm1.closeThisDialog();
+				}, function (vm1) {
+					function getDomainList(domains){
+						if(domains.length){
+							baseService.getJson(baseService.api.admin + 'getDomainList',{
+								domains: domains
+							},function(domainsList){
+								vm1.domainsList = domainsList;
+							})
+						}
+					}
+					vm1.displayed = [];
+					vm1.sp = {};
+					vm1.tableState = {};
+					vm1.domains = item ? item.domains : [];
+					vm1.domainsList = [];
+					vm1.callServer = function (tableState) {
+						baseService.initTable(vm1, tableState, baseService.api.domain + 'getDomainPageList');
+					}
+					vm1.initPage = function () {
+						vm1.tableState.pagination.start = 0;
+						vm1.callServer(vm1.tableState);
+					}
+					getDomainList(vm1.domains);
+					vm1.addClick = function(domain){
+						vm1.domains.push(domain.key);
+						vm1.domainsList.push(domain);
+					}
+					vm1.del = function (item) {
+						vm1.domainsList = baseService.removeAryId(vm1.domainsList, item.id);
+						vm1.domains = baseService.removeAry(vm1.domains, item.key);
+					}
+				})
+			}
 		})
 	}
-
+	$scope.getDomains = function(item){
+		item.tips = [];
+		baseService.getJson(baseService.api.admin + 'getDomainList',{
+			domains: item.domains
+		},function(domainsList){
+			item.tips = domainsList;
+		})
+	}
 	$scope.changeEnabled = function (item, index) {
 		baseService.confirm(item.enabled == 0 ? '解禁账户' : '禁用账户', item.enabled == 0 ? '您确定解禁管理员：' + item.name : '您确定禁用管理员：' + item.name, true,
 			(vm) => {

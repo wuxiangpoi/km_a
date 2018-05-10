@@ -33,15 +33,14 @@
 						<!-- <td>{{row.email}}</td>
 						<td>{{row.phone}}</td> -->
 						<td>
-							<div ng-if="row.domains.length > 0" class="tdClick plr">
-								<div ng-click="getDomains(row)" bs-dropdown aria-haspopup="true" aria-expanded="false">
+							<div ng-if="row.domains.length > 0" class="tdClick polr">
+								<div bs-on-before-show="getDomains(row)"  data-placement="left" data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false">
 									{{row.domains.length}}
 								</div>
-								<!-- <ul class="dropdown-menu dropdown-tip dropdown-menu-left" role="menu">
-										<li ng-show="!row.tips">loading</li>
-										<li ng-show="row.tips">关联企业名称</li>
-										<li ng-show="row.tips" ng-repeat="tip in row.tips">{{tip.name}}</li>
-									</ul> -->
+								  <ul class="dropdown-menu dropdown-left dropdown-tip" role="menu">
+									<li>关联企业：</li>
+                                    <li ng-show="row.tips" ng-repeat="tip in row.tips">{{tip.name}}</li>
+								  </ul>
 							</div>
 							<span ng-if="row.domains.length == 0">0</span>
 						</td>

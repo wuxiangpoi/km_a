@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="col-sm-8 marb20 p0" style="background:#f6f7fa;height:350px;">
+<div>
+    <div class="col-sm-8 marb20" style="background:#f6f7fa;height:350px;">
         <div ng-if="data.type==0">
             <img src="../img/loading.gif" ng-if="data.width > data.height" style="width:100%;height:350px;display:block;" lazy-src="{{data.nUrl}}" />
             <img src="../img/loading.gif" ng-if="data.width < data.height || data.width == data.height" style="width:auto;height:350px;display:block;min-width:200px;margin:0 auto;"
@@ -10,7 +10,7 @@
             <source ng-src="{{data.play_url}}">
         </video>
     </div>
-    <div class="col-sm-4 pdr0 modalDetail">
+    <div class="col-sm-4 modalDetail">
         <div class="row">
             <label class="col-sm-4 control-label pdr0">名称</label>
             <div class="col-sm-8 pdr0 ellipsTXt">{{data.name}}

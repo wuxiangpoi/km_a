@@ -1,5 +1,5 @@
 import {opOptions} from '../../filter/options';
-import verfilesSaveTpl from '../../tpl/verfiles_save.html'
+import verfilesSaveTpl from '../../tpl/upload_list.html'
 
 const versionfileController = ($rootScope,$scope, baseService, FileUploader) => {
 	$scope.displayed = [];

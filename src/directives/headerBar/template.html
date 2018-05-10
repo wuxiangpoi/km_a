@@ -8,12 +8,12 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
-                <a class="dropdown-toggle count-info user" data-toggle="dropdown">
+                <a class="dropdown-toggle count-info user"  data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false">
                     <i class="iconfont icon-touxiang"></i>
                     <span>{{userData.admin.name}}</span>
                     <i class="fa fa-caret-down"></i>
                 </a>
-                <ul class="dropdown-menu am-flip-x">
+                <ul class="dropdown-menu" role="menu">
                     <li>
                         <a href="" ng-click="updatePwd()">
                             <i class="fa fa-user fa-fw"></i> 修改密码</a>

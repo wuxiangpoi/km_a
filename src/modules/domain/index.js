@@ -123,7 +123,6 @@ const domainController = ($scope, baseService, FileUploader) => {
 			}
 		});
 		$scope.uploader.onAfterAddingFile = function (item) {
-			console.log(1)
 			var host = '';
 			var accessid = '';
 			var policyBase64 = '';

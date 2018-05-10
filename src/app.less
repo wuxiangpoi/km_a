@@ -76,7 +76,17 @@ a {
 .fr {
   float: right;
 }
+
+.polr {
+  position: relative;
+}
 //字体图标
+.btn {
+  .iconfont {
+    font-size: 14px!important;
+  }
+}
+
 .fa {
   vertical-align: middle;
   &.fa-close {
@@ -114,7 +124,7 @@ a {
     color: #a4a4a4!important;
     background: #e2e3e6!important;
     border: 1px solid #e2e3e6!important;
-    font-size: 16px;
+    font-size: 14px;
     &:hover,&:focus {
       color: #a4a4a4!important;
     background: #e2e3e6!important;
@@ -280,7 +290,21 @@ body.mini-navbar {
 }
 }
 
-
+.dropdown-toolTip-wrap {
+  display: inline-block;
+  position: relative;
+  .toolTipPrev {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: none!important;
+    border: 0!important;
+    cursor: pointer;
+    z-index:2;
+    top: 0;
+    left: 0;
+  }
+}
 
 //搜索样式
 .serchWrap {
@@ -429,6 +453,12 @@ input[type="checkbox"] {
   margin-top: 0;
   vertical-align: middle;
 }
+.ellipsTXt {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+}
 .ellipsisTd {
   max-width: 160px;
   overflow: hidden;
@@ -440,57 +470,58 @@ input[type="checkbox"] {
     background: #fff;
     padding: 20px;
     min-height: 400px;
-    .table-wrapper {
-      overflow-x: auto;
-      
-      .table {
-        .pagination {
-          margin: 0;
-        }
-        
-        th,td {
-          font-size: 14px;
-          vertical-align: middle!important;
-          white-space: nowrap;
-          padding: 0 8px!important;
-          line-height: 44px!important;
-        }
-      }
-    }
+    
+}
+.table-wrapper {
+  overflow-x: auto;
+  
+  .table {
     .pagination {
-      margin: 10px 0 0!important;
-      a {
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        color: #c4c4c4!important;
-        padding: 0!important;
-        text-align: center;
-        line-height: 26px!important;
-        margin-left: 5px!important;
-        border: none!important;
-      }
-      a.next {
-        transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-        -moz-transform: rotate(180deg);
-        -webkit-transform: rotate(180deg);
-        -o-transform: rotate(180deg);
-      }
-      li.first > a,li.last > a {
-        border-top-left-radius: 50%;
-        border-bottom-left-radius: 50%;
-        border-top-right-radius: 50%;
-        border-bottom-right-radius: 50%;
-      }
-      li.active a{
-        color: #fff!important;
-        background-color: @main-color;
-      }
-      li.active a:hover {
-        background-color: @main-color;
-      }
+      margin: 0;
     }
+    
+    th,td {
+      font-size: 14px;
+      vertical-align: middle!important;
+      white-space: nowrap;
+      padding: 0 8px!important;
+      line-height: 44px!important;
+    }
+  }
+}
+.pagination {
+  margin: 10px 0 0!important;
+  a {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    color: #c4c4c4!important;
+    padding: 0!important;
+    text-align: center;
+    line-height: 26px!important;
+    margin-left: 5px!important;
+    border: none!important;
+  }
+  a.next {
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+  }
+  li.first > a,li.last > a {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+  li.active a{
+    color: #fff!important;
+    background-color: @main-color;
+  }
+  li.active a:hover {
+    background-color: @main-color;
+  }
 }
 //小屏样式
 @media (max-width: 768px){
@@ -810,4 +841,40 @@ input[type="checkbox"] {
 }
 .progress-bar {
   background-color: @main-color!important;
+}
+
+.dropdown-menu {
+  color: #333;
+  &.dropdown-tip {
+    padding: 5px;
+    font-size: 12px;
+    line-height: 18px;
+    width: 252px;
+    
+  &.dropdown-left {
+    left: -264px!important;
+    top: 0!important;
+    padding: 5px!important;
+    line-height: 18px;
+    max-height: 400px;
+    &::after, &::before {
+      content: "";
+      position: absolute;
+      left: 250px;
+      padding: 0;
+      border-top: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+  }
+    &::before {
+      top: 14px;
+      border-left: 12px solid #ccc;
+    }
+    &::after {
+      top: 14px;
+      border-left: 12px solid #fff;
+  }
+  }
+  }
+  
 }

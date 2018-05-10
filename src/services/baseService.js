@@ -208,6 +208,15 @@ export default app => {
                 var joinChar = imgUrl.indexOf('?') >= 0 ? '&' : '?';
                 return imgUrl + joinChar + 'x-oss-process=image/resize,m_lfit,h_' + size + ',w_' + size;
             },
+            removeAryId: function (aObj, val) {
+                var nArr = [];
+                for (var i = 0; i < aObj.length; i++) {
+                    if (aObj[i].id != val) {
+                        nArr.push(aObj[i]);
+                    }
+                }
+                return nArr;
+            },
             removeAry: function (aObj, val) {
                 var nArr = [];
                 for (var i = 0; i < aObj.length; i++) {

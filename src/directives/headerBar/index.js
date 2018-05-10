@@ -14,7 +14,7 @@ let controller = ($scope,baseService,userService) => {
         $scope.navInfo = toState.info;
     })
     $scope.updatePwd = function () {
-        baseService.confirmDialog('修改密码', postData, updatePasswordTpl, function (vm) {
+        baseService.confirmDialog(540,'修改密码', postData, updatePasswordTpl, function (vm) {
             if (vm.modalForm.$valid && postData.newPassword == postData.reNewPassword) {
                 var updpostData = {
                     password: baseService.md5_pwd(vm.data.password),
@@ -24,7 +24,7 @@ let controller = ($scope,baseService,userService) => {
                 m.isPosting = false;
                 baseService.postData(baseService.api.auth + 'updatePwd', postData, function (data) {
                     vm.isPosting = false;
-                    vm.$hide();
+                    vm.closeThisDialog();
                     baseService.alert('修改成功', 'success');
                 })
             } else {
@@ -37,7 +37,7 @@ let controller = ($scope,baseService,userService) => {
 			vm.isPosting = true;
 			baseService.postData(baseService.api.auth + 'logout', {}, () => {
                 vm.isPosting = false;
-                vm.$hide();
+                vm.closeThisDialog();
 				baseService.goToState('login');
 			})
 		})

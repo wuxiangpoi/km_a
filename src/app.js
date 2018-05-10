@@ -115,6 +115,20 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
         return "";
 
     }
+    $rootScope.getRootDicNameStrs = function (key) {
+        var ar = $rootScope.userData.root_dic[key];
+        var s = '';
+        for (var i = 0; i < ar.length; i++) {
+            var _dic = ar[i];
+            s += "," + _dic.name;
+        }
+        if (s) {
+            s = s.substr(1);
+        }
+
+        return s;
+
+    }
     $rootScope.perms = function (rid) {
         if ($rootScope.userData) {
             return ("," + $rootScope.userData.current_perms + ",").indexOf("," + rid + ",") > -1 ? true : false;
@@ -130,11 +144,15 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
 .config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 }])
-.config(($datepickerProvider) => {
+.config(($datepickerProvider,$timepickerProvider) => {
     angular.extend($datepickerProvider.defaults, {
         iconLeft: 'fa fa-angle-left',
         iconRight: 'fa fa-angle-right'
     });
+    angular.extend($timepickerProvider.defaults, {
+        iconUp: 'fa fa-angle-up',
+        iconDown: 'fa fa-angle-down'
+      });
 })
 .config(['ngDialogProvider', function (ngDialogProvider) {
     ngDialogProvider.setDefaults({
