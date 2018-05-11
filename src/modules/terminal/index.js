@@ -89,7 +89,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 
 			}
 
-		})
+		},'<div></div')
 	}
 	$scope.details = function (item) {
 		baseService.getJson(baseService.api.terminal + 'getTerminalInfo', {
