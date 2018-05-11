@@ -8,7 +8,7 @@ export default app => {
             name: 'ledShow',
             url: '/ledShow',
             template: require('./template.html'),
-            info: '首页',
+            info: '大屏',
             controller: 'ledShowController',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {

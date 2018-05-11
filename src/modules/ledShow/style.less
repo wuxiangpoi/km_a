@@ -2,10 +2,6 @@
   display: none;
 }
 
-.homePage {
-  padding: 0;
-}
-
 .anchorBL {
   display: none;
 }
@@ -19,22 +15,28 @@
   margin: 0;
 }
 
-.chartWrap {
-  background: -webkit-radial-gradient(#0a2439,#041828);
-  /* Safari 5.1 - 6.0 */
-  background: -o-radial-gradient(#0a2439,#041828);
-  /* Opera 11.6 - 12.0 */
-  background: -moz-radial-gradient(#0a2439,#041828);
-  /* Firefox 3.6 - 15 */
-  background: radial-gradient(#0a2439,#041828);
-  /* 标准的语法 */
+.ledShow {
+  padding: 0px;
+  overflow: hidden;
+  background: #0a2439;
 }
+
+/* .meterWrap {
+  background: url('../../img/huan.gif') no-repeat center center;
+  width: 1920px;
+  height: 1080px;
+  transform: scale(0.5)
+} */
+
+/* .chartWrap {
+  padding: 10px;
+} */
 .mapWrap {
   position: relative;
 }
 .mapWrap .mapTip {
   position: absolute;
-  left: 10px;
+  left: 30px;
   bottom: 10px;
   color: #08a3ad;
   width: 100%;
@@ -47,25 +49,3 @@
   margin: 0 4px;
 }
 
-
-@media (max-width: 1500px){
-  .col-md-6 {
-    width: 50%;
-}
-.col-md-6 > div {
-    padding-right: 0!important;
-}
-.col-md-12 {
-  width: 100%;
-}
-}
-
-@media (max-width: 768px){
-  .col-xs-12 {
-    width: 100%;
-}
-.col-xs-12 > div {
-    padding: 0!important;
-}
-
-}

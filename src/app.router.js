@@ -2,6 +2,7 @@ import login from './modules/login/route.js'
 import errPage from './modules/errPage/route.js'
 import dashboard from './modules/dashboard/route.js'
 import home from './modules/home/route.js'
+import ledShow from './modules/ledShow/route.js'
 import domain from './modules/domain/route.js'
 import dictionary from './modules/dictionary/route.js'
 import versionfile from './modules/versionfile/route.js'
@@ -18,7 +19,7 @@ import temp from './modules/temp/route.js'
 import terminalmigrate from './modules/terminalmigrate/route.js'
 import materialchart from './modules/materialchart/route.js'
 
-const states = [dashboard, home,domain,dictionary,versionfile,checkModel, terminal,user, role,material,terminalreport,income,incomedetail,terminalcommand,temp, login,errPage,terminalmigrate,materialchart]
+const states = [dashboard, home,ledShow,domain,dictionary,versionfile,checkModel, terminal,user, role,material,terminalreport,income,incomedetail,terminalcommand,temp, login,errPage,terminalmigrate,materialchart]
 
 export default app => {
     states.forEach(state => {
