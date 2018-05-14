@@ -1,5 +1,5 @@
 import echarts from '../libs/chart/echarts.min.js'
-import pie_brg from '../../img/pie_brg.png'
+import pie_brg from '../img/pie_brg.png'
 export default app => {
     app.factory('chartService', ['baseService', function (baseService) {
         let chartService = {
