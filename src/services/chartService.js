@@ -1,4 +1,5 @@
 import echarts from '../libs/chart/echarts.min.js'
+import pie_brg from '../../img/pie_brg.png'
 export default app => {
     app.factory('chartService', ['baseService', function (baseService) {
         let chartService = {
@@ -525,7 +526,7 @@ export default app => {
 									color: '#00a0e9',
 									fontSize: 18,
 									backgroundColor: {
-										image: '../../img/pie_brg.png'
+										image: pie_brg
 									},
 									height: 110
 								}
