@@ -377,7 +377,7 @@ export default app => {
                             }
                         }
                         vm.eoption = chartService.initChartSchedule(vm.playList, minLen);
-                    });
+                    },'<div></div>');
                 })
             },
             showMaterial: function (item, detailType, cb) {

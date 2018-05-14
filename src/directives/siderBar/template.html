@@ -15,7 +15,7 @@
                     </a>
                     <ul ng-if="menu.children" class="nav nav-second-level collapse" ng-class="{'in':menu.collapseVar==collapseVar}">
                         <li ui-sref-active="active" ng-repeat="sMenu in menu.children" ng-if="sMenu.auth">
-                            <a ui-sref="{{sMenu.state}}" >{{sMenu.name}}</a>
+                            <a ui-sref="{{sMenu.state}}">{{sMenu.name}}</a>
                         </li>
                     </ul>
                 </li>
