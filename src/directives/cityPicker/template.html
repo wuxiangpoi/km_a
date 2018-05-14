@@ -16,6 +16,9 @@
           <a>区县</a>
         </li>
         <li class="emitDataBtn">
+          <button ng-click="cancelData()" class="btn btn-default btn-sm">取消</button>
+        </li>
+        <li class="emitDataBtn">
           <button ng-click="emitData()" class="btn btn-primary btn-sm">确定</button>
         </li>
       </ul>
@@ -25,21 +28,21 @@
         <li ng-repeat="(p,v) in provinces">
           <span class="provincesLabel">{{p}}</span>
           <div class="cityWrap">
-            <a ng-class="{'active':cityData.province == c.code}" ng-click="chooseDistricts(c)" ng-repeat="c in v" class="cityItem">{{c.address}}</a>
+            <a ng-class="{'active':province == c.code}" ng-click="chooseDistricts(c)" ng-repeat="c in v" class="cityItem">{{c.address}}</a>
           </div>
         </li>
       </ul>
       <ul ng-show="currentType == 2">
         <li>
           <div class="cityWrap">
-            <a ng-class="{'active':cityData.city == c}" ng-repeat="(c,v) in currentCities" ng-click="chooseDistricts(c,v)" class="cityItem">{{v}}</a>
+            <a ng-class="{'active':city == c}" ng-repeat="(c,v) in currentCities" ng-click="chooseDistricts(c,v)" class="cityItem">{{v}}</a>
           </div>
         </li>
       </ul>
       <ul ng-show="currentType == 3">
           <li>
             <div class="cityWrap">
-              <a ng-repeat="(c,v) in currentDistricts" ng-click="chooseDistricts(c,v)" class="cityItem">{{v}}</a>
+              <a ng-class="{'active':district == c}" ng-repeat="(c,v) in currentDistricts" ng-click="chooseDistricts(c,v)" class="cityItem">{{v}}</a>
             </div>
           </li>
         </ul>

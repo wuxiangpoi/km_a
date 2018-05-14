@@ -25,6 +25,22 @@ export default app => {
                     })
                 }, 0)
             }
+            $scope.cancelData = () => {
+                $scope.province = '';
+                $scope.provinceName = '';
+                $scope.city = '';
+                $scope.cityName = '';
+                $scope.district = '';
+                $scope.districtName = '';
+                $scope.selectedCity = '请选择省/市/区';
+                $scope.choose(1);
+                $scope.showDistricts = false;
+                setTimeout(function () {
+                    $scope.$apply(function () {
+                        $scope.change();
+                    })
+                }, 0)
+            }
             $scope.showSelect = (e) => {
                 $scope.showDistricts = !$scope.showDistricts;
             }
@@ -32,10 +48,12 @@ export default app => {
                 $scope.currentType = type;
                 switch (type) {
                     case 1:
-                        //$scope.currentDistricts = ChineseDistricts[86];
+                        $scope.currentDistricts = ChineseDistricts[86];
+                        $scope.currentCities = [];
                         break;
                     case 2:
                         $scope.currentCities = ChineseDistricts[$scope.province];
+                        $scope.currentDistricts = [];
                         break;
                     case 3:
                         $scope.currentDistricts = ChineseDistricts[$scope.city];
@@ -96,7 +114,7 @@ export default app => {
                 $scope.showDistricts = false;
                 $scope.$apply();
             })
-            
+
         }
         return {
             restrict: 'AE',

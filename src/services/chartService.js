@@ -1,21 +1,11 @@
+import echarts from '../libs/chart/echarts.min.js'
 export default app => {
     app.factory('chartService', ['baseService', function (baseService) {
         let chartService = {
             initChartSchedule(playList, mLen) {
-                var playData = {
+                let playData = {
                     tooltip: {
                         trigger: 'item'
-                        // axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                        // 	type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                        // },
-                        // backgroundColor: '#fff',
-                        // padding: [10, 20, 10, 5],
-                        // textStyle: {
-                        // 	color: '#000'
-                        // },
-                        // formatter: '<span style="color:#000;">{b}{c}{d}</span><br /><span style="width:10px;height:10px;border-radius:50%;background:#08a9d6;display:inline-block;margin-right:4px;"></span><span style="color:#08a9d6;font-size:12px;">播放时长</span><span style="color:#54e3c5;"> {b}小时</span>',
-                        // extraCssText: 'box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);'
-
                     },
                     grid: {
                         top: '0%',
@@ -131,7 +121,8 @@ export default app => {
                             }
                         },
                         data: []
-                    }, {
+                    }, 
+                    {
                         name: '播放时长',
                         type: 'bar',
                         stack: '总量',
@@ -181,7 +172,8 @@ export default app => {
 
                         },
                         data: []
-                    }]
+                    }
+                ]
                 };
                 var interval, dateInterval;
                 var intervalDay = 5 * 24 * 60 * 60 * 1000;
@@ -254,6 +246,7 @@ export default app => {
                 playData.series[1].data = endDatelist;
                 playData.xAxis.min = chartData.minDate;
                 playData.xAxis.max = chartData.maxDate;
+                console.log(playData)
                 return playData;
             },
             initChartMap(data) {

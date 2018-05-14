@@ -3,6 +3,7 @@ import confirmTpl from '../tpl/confirm.tpl.html'
 import confirmDialogTpl from '../tpl/confirm_dialog.tpl.html'
 import materialDetailTpl from '../tpl/material_detail.html'
 import modalFooterCheckTpl from '../tpl/modal_footerCheck.html'
+import scheduleDetailsTpl from '../tpl/schedule_details.html'
 
 export default app => {
     app.factory('baseService', ['$rootScope', '$http', '$state', 'ngDialog', '$alert', ($rootScope, $http, $state, ngDialog, $alert) => {
@@ -336,13 +337,13 @@ export default app => {
                 }
             },
             showSchedule: function (item, detailType, chartService, cb) {
-                var me = this;
+                let me = this;
                 this.postData(this.api.programSchedule + 'getProgramScheduleById', {
                     id: item.pid,
                     domain: item.domain
                 }, function (schedule) {
                     schedule.detailType = detailType;
-                    me.confirmDialog(750, '排期详情', schedule, "tpl/schedule_details.html", function (type, ngDialog, vm) {
+                    me.confirmDialog(720, '排期详情', schedule, scheduleDetailsTpl, function (type, vm) {
                         if (cb) {
                             cb(type);
                         }
@@ -387,9 +388,9 @@ export default app => {
                         cb(type);
                     }
                 }, (vm) => {
-                    // vm.imgPreview = function (item) {
-                    //     $rootScope.$broadcast('callImg', item, 1);
-                    // }
+                    vm.imgPreview = function (item) {
+                        $rootScope.$broadcast('callImg', item, 1);
+                    }
                 }, modalFooterCheckTpl);
 
             },

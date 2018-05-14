@@ -1,7 +1,7 @@
 import angular from 'angular';
 import template from './template.html';
 
-import './style.less';
+import style from './style.less';
 
 export default app => {
     app.directive('imageView', (baseService) => {

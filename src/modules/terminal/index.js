@@ -11,7 +11,7 @@ import {
 } from '../../filter/options';
 
 
-const terminalController = ($scope, $rootScope, $stateParams, baseService,sentencesService) => {
+const terminalController = ($scope, $rootScope, $stateParams, baseService,sentencesService,chartService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
 	if ($stateParams.domain) {
@@ -274,7 +274,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 	}
 }
 
-terminalController.$inject = ['$scope', '$rootScope', '$stateParams', 'baseService','sentencesService'];
+terminalController.$inject = ['$scope', '$rootScope', '$stateParams', 'baseService','sentencesService','chartService'];
 
 export default angular => {
 	return angular.module('terminalModule', []).controller('terminalController', terminalController);

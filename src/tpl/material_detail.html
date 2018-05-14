@@ -1,10 +1,10 @@
 <div>
     <div class="col-sm-8 marb20" style="background:#f6f7fa;height:350px;">
-        <div ng-if="data.type==0">
+        <div ng-if="data.type==0" class="polr">
             <img src="../img/loading.gif" ng-if="data.width > data.height" style="width:100%;height:350px;display:block;" lazy-src="{{data.nUrl}}" />
             <img src="../img/loading.gif" ng-if="data.width < data.height || data.width == data.height" style="width:auto;height:350px;display:block;min-width:200px;margin:0 auto;"
             lazy-src="{{data.nUrl}}" />
-
+            <button class="fullScreenBtn" ng-click=imgPreview(data)><i class="fa fa-arrows-alt"></i></button>
         </div>
         <video ng-if="data.type==1" width="100%" height="100%" controls>
             <source ng-src="{{data.play_url}}">

@@ -1,19 +1,18 @@
-<div class="modal-header">
-		<h4 class="modal-title">{{title}}</h4>
-	</div>
-	<div class="modal-body">
+<div>
 	<div class="table-wrapper row">
 		<div class="tableHeader clearfix">
 			<div class="clearfix plr">
-				<div class="col-sm-6 ellipsTXt p0"  style="margin-bottom:10px;">
+				<div class="col-sm-6 ellipsTXt p0" style="margin-bottom:10px;">
 					排期名称：{{data.name}}
 				</div>
 				<div class="chartLend ngLend">
-                    <span class="lendItem"><i></i>全天播放</span>
-                    <span class="lendItem"><i class="times"></i>次数播放</span>
-                </div>
+					<span class="lendItem">
+						<i></i>全天播放</span>
+					<span class="lendItem">
+						<i class="times"></i>次数播放</span>
+				</div>
 			</div>
-
+	
 		</div>
 	</div>
 	<div class="row" style="position:relative;width:720px;;height:390px;margin-top:-10px;overflow-y: auto;overflow-x:hidden;">
@@ -25,10 +24,4 @@
 		</div>
 		<div class="row" ng-style="chartStyle" e-chart eoption="eoption"></div>
 	</div>
-</div>
-<div class="modal-footer" ng-if="data.detailType == 1">
-	<button class="btn btn-primary" type="button" ng-click="modalConfirmSubmit(1)">审核通过
-	</button>
-	<button class="btn btn-default" type="button" ng-click="modalConfirmSubmit(4)">审核不通过
-	</button>
 </div>
