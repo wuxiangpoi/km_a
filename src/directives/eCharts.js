@@ -2,7 +2,7 @@ import echarts from '../libs/chart/echarts.min.js'
 
 
 export default app => {
-    app.directive('eChart', ($window) => {
+    app.directive('eChart', ['$window',($window) => {
         let controller = ($scope, element, attrs) => {
             var myChart = echarts.init(element[0]);
             $scope.$watch(attrs['eoption'], function () {
@@ -47,5 +47,5 @@ export default app => {
             },
             link: controller
         };
-    })
+    }])
 };

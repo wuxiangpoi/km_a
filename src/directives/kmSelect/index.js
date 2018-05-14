@@ -4,7 +4,7 @@ import template from './template.html';
 import './style.less';
 
 export default app => {
-    app.directive('kmSelect', (baseService) => {
+    app.directive('kmSelect', ['baseService',(baseService) => {
         let link = ($scope, element, attrs) => {
             $scope.valueName = attrs['val'];
             $scope.labelName = attrs['name'];
@@ -31,5 +31,5 @@ export default app => {
             }
 
         }
-    })
+    }])
 };

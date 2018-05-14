@@ -4,7 +4,7 @@ import template from './template.html';
 import './style.less';
 
 export default app => {
-    app.directive('kmUpload', (baseService,FileUploader) => {
+    app.directive('kmUpload', ['baseService','FileUploader',(baseService,FileUploader) => {
         let link = ($scope, element, attrs) => {
             $scope.isShow = false;
             $scope.isHide = false;
@@ -42,5 +42,5 @@ export default app => {
             template: template,
             link: link
         }
-    })
+    }])
 };

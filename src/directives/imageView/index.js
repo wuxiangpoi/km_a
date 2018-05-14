@@ -4,7 +4,7 @@ import template from './template.html';
 import style from './style.less';
 
 export default app => {
-    app.directive('imageView', (baseService) => {
+    app.directive('imageView', ['baseService',(baseService) => {
         let link = ($scope, element, attrs) => {
             function fullScreen() {
                 var el = document.documentElement,
@@ -132,5 +132,5 @@ export default app => {
             link: link
 
         }
-    })
+    }])
 };

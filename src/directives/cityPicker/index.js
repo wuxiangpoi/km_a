@@ -7,7 +7,7 @@ import {
 import style from './style.less';
 
 export default app => {
-    app.directive('cityPicker', (baseService, $window) => {
+    app.directive('cityPicker', ['baseService', '$window',(baseService, $window) => {
         let link = ($scope, element, attrs) => {
             $scope.provinceName = '';
             $scope.cityName = '';
@@ -129,5 +129,5 @@ export default app => {
             }
 
         }
-    })
+    }])
 };
