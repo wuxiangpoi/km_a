@@ -21,8 +21,8 @@ const domainController = ($scope, baseService, FileUploader) => {
 		$scope.callServer($scope.tableState, 0)
 	}
 	$scope.save = (item) => {
-		let materialCheck = ['1'];
-		let programCheck = ['1', '0'];
+		let materialCheck = ['1', '0'];
+		let programCheck = ['1', '2', '0'];
 		if (item) {
 			if (item.materialCheck == '') {
 				materialCheck = ['', ''];

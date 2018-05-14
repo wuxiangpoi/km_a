@@ -103,7 +103,7 @@ export default app => {
                     controller: ['$scope', function ($scope) {
                         $scope.data = data
                         $scope.title = title
-                        $scope.html = html
+                        $scope.html = html                        
                         if (replaceFooterHtml) {
                             $scope.replaceFooterHtml = replaceFooterHtml;
                         }

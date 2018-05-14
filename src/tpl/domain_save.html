@@ -21,8 +21,8 @@
     <div class="form-group clearfix">
         <label class="col-sm-3 control-label">关联邮箱：</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" required ng-pattern="/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/" name="email"
-                ng-model="data.email" />
+            <input type="text" class="form-control" required ng-pattern="/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/"
+                name="email" ng-model="data.email" />
             <div class="help-block" ng-messages="modalForm.email.$error" ng-if="isShowMessage">
                 <p ng-message="pattern">请输入正确邮箱</p>
                 <p ng-message="required">请输入邮箱</p>
@@ -56,8 +56,8 @@
         <div class="col-sm-9 pdr0 row">
             <div class="form-group col-sm-5 pdr0">
                 <div class="dateTimeWrap">
-                    <input type="text" class="form-control" data-date-type="string"  data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd" ng-model="data.contractStart" placeholder="起始日期"
-                        data-autoclose="1" bs-datepicker>
+                    <input type="text" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
+                        ng-model="data.contractStart" placeholder="起始日期" data-autoclose="1" bs-datepicker>
                     <i class="fa fa-calendar"></i>
                 </div>
 
@@ -67,8 +67,8 @@
             </div>
             <div class="form-group col-sm-5 p0">
                 <div class="dateTimeWrap">
-                    <input type="text" class="form-control"  data-date-type="string"  data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd" ng-model="data.contractEnd" placeholder="截止日期"
-                        data-autoclose="1" bs-datepicker>
+                    <input type="text" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
+                        ng-model="data.contractEnd" placeholder="截止日期" data-autoclose="1" bs-datepicker>
                     <i class="fa fa-calendar"></i>
                 </div>
 
@@ -92,13 +92,13 @@
             <div class="col-sm-10 pdr0">
                 <input type="text" required ng-pattern="/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/" class="form-control" name="price" ng-model="data.price"
                 />
-                <div class="help-block" ng-messages="modalForm.price.$error"  ng-if="isShowMessage">
-                        <p ng-message="required">请输入单屏价格</p>
-                        <p ng-message="pattern">请输入正确单屏价格</p>
-                    </div>
+                <div class="help-block" ng-messages="modalForm.price.$error" ng-if="isShowMessage">
+                    <p ng-message="required">请输入单屏价格</p>
+                    <p ng-message="pattern">请输入正确单屏价格</p>
+                </div>
             </div>
             <div class="col-sm-2 pdr0 lh34">元/年</div>
-            
+
         </div>
         <div ng-if="data.id" class="col-sm-9 lh34">
             {{data.price}} 元/年
@@ -123,7 +123,6 @@
                 type="checkbox">内部终审
             <input name="programCheck" ng-click="updateSelection($event,'0','programCheck',2)" ng-checked="data.programCheck.indexOf('0') != -1"
                 type="checkbox">平台审核
-
         </div>
     </div>
 

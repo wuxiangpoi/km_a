@@ -1,10 +1,10 @@
 <div class="modal-header">{{title}}
     <span class="tex-red" style="font-size:14px;" ng-if="data.info">{{data.info}}</span>
 </div>
-<div class="modal-body clearfix" me-include html="html">
+<div class="modal-body clearfix" me-include html="{{html}}">
    
 </div>
-<div class="modal-footer" ng-if="replaceFooterHtml" me-include html="replaceFooterHtml">
+<div class="modal-footer" ng-if="replaceFooterHtml" me-include html="{{replaceFooterHtml}}">
 </div>
 <div class="modal-footer" ng-if="!replaceFooterHtml">
     <button type="button" class="btn btn-primary btn-lg" ng-class="{'disabled':isPosting}" ng-click="confirm()">
