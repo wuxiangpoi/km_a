@@ -60,8 +60,8 @@ const domainController = ($scope, baseService, FileUploader) => {
 			contractStart: item ? baseService.formateDate(item.contractStart) : '',
 			contractEnd: item ? baseService.formateDate(item.contractEnd) : '',
 			contact: item ? item.contact : '',
-			materialCheck: materialCheck,
-			programCheck: programCheck,
+			materialCheck: item ? materialCheck : ['1', ''],
+			programCheck: item ? programCheck : ['1', '', '0'],
 			// programCmdCheck: item ? item.programCmdCheck.split(',') : [''],
 			ledShow: item ? item.ledShow : 0
 		}

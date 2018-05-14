@@ -5,8 +5,11 @@ export default app => {
         return {
             restrict: 'EA',
             replace: true,
+            scope: {
+                html: '='
+            },
             link: ($scope, ele, attrs) => {
-                var template = angular.element((attrs['html']));
+                var template = $scope.html;
                 // Step 2: compile the template
                 var linkFn = $compile(template);
                 // Step 3: link the compiled template with the scope.

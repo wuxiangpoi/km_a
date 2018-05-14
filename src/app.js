@@ -140,6 +140,18 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
         var joinChar = imgUrl.indexOf('?') >= 0 ? '&' : '?';
         return imgUrl + joinChar + 'x-oss-process=image/resize,m_lfit,' + size + ',w_' + size;
     }
+    $rootScope.getCheckStatusAttrOld = function (val, index) {
+        for (var i in $rootScope.root_checkStatusOld) {
+            if ($rootScope.root_checkStatusOld.hasOwnProperty(i)) {
+
+                var _dic = $rootScope.root_checkStatusOld[i];
+                if (_dic.val == val) {
+                    return index == 0 ? _dic.name : _dic.color;
+                }
+            }
+        }
+        return '';
+    }
 }])
 .config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
