@@ -58,19 +58,14 @@ const app = angular.module('sbAdminApp', loadBasicModules());
 
 //引入过滤器
 import filters from './filter'
-filters.forEach(filter => {
-    filter(app);
-})
+filters(app);
 //引入全局services
 import services from './services'
-services.forEach(service => {
-    service(app);
-})
+services(app);
 //引入全局指令
 import directives from './directives'
-directives.forEach(directive => {
-    directive(app);
-})
+directives(app);
+
 import appRouter from './app.router';
 
 appRouter(app);

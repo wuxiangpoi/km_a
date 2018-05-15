@@ -13,4 +13,8 @@ import imageView from './imageView'
 
 const directives = [headerBar,siderBar,kmSelect,eCharts,eChartMeter,eChartMap,meInclude,meLazyload,cityPicker,upload,zTree,imageView]
     
-export default directives
+export default app => {
+    directives.forEach(directive => {
+        directive(app);
+    })
+}

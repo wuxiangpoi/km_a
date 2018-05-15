@@ -2,4 +2,8 @@ import kmFilter from './kmFilter'
 
 const filters = [kmFilter]
     
-export default filters
+export default app => {
+    filters.forEach(filter => {
+        filter(app);
+    })
+}

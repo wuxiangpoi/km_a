@@ -4,4 +4,8 @@ import chartService from './chartService'
 import sentencesService from './sentencesService'
 const services = [baseService,userService,chartService,sentencesService]
     
-export default services
+export default app => {
+    services.forEach(service => {
+        service(app);
+    })
+}
