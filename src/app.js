@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 //引入全局样式
-import './libs/bootstrap/dist/css/bootstrap.min.css'
+import './libs/bootstrap/css/bootstrap.min.css'
 
 //引入字体图标
 import './libs/font-awesome-4.7.0/css/font-awesome.min.css'
@@ -13,7 +13,7 @@ import './app.less';
 
 //引入js
 import '../bower_components/jquery.cookie/jquery.cookie.js'
-import './libs/bootstrap/dist/js/bootstrap.min.js'
+import './libs/bootstrap/js/bootstrap.min.js'
 
 
 let loadBasicModules = () => {
