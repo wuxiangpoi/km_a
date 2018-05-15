@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 //引入全局样式
-import '../bower_components/bootstrap/dist/css/bootstrap.min.css'
+import './libs/bootstrap/dist/css/bootstrap.min.css'
 
 //引入字体图标
 import './libs/font-awesome-4.7.0/css/font-awesome.min.css'
@@ -13,16 +13,13 @@ import './app.less';
 
 //引入js
 import '../bower_components/jquery.cookie/jquery.cookie.js'
-import '../bower_components/bootstrap/dist/js/bootstrap.min.js'
+import './libs/bootstrap/dist/js/bootstrap.min.js'
 
 
 let loadBasicModules = () => {
     let ngDepModules = [];
     require('../bower_components/angular-animate/angular-animate.min.js');
     ngDepModules.push('ngAnimate');
-
-    require('angular-sanitize');
-    ngDepModules.push('ngSanitize');
 
     require('./libs/localService.js');
     ngDepModules.push('ngLocale');
