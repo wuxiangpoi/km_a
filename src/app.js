@@ -30,7 +30,7 @@ let loadBasicModules = () => {
     require('../bower_components/oclazyload/dist/ocLazyLoad');
     ngDepModules.push('oc.lazyLoad');
 
-    require('../bower_components/angular-strap/dist/lib.css');
+    require('./libs/lib.css');
     require('../bower_components/angular-strap/dist/angular-strap.min.js');
     require('../bower_components/angular-strap/dist/angular-strap.tpl.min.js');
     ngDepModules.push('mgcrea.ngStrap');
