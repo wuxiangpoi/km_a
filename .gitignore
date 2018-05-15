@@ -1,4 +1,6 @@
 .dist/
 node_modules/
 .sass-chache/
-app/TBXEditor
+app/TBXEditor/
+.idea/
+dist/

@@ -22,7 +22,7 @@ module.exports = function () {
         },
         output : {
             path         : helpers.root('./dist'),
-            publicPath   : '/',
+            //publicPath   : '/',
             //library      : '[name]_[hash:8]',
             filename     : isProd ? '[name].[hash:8].js' : '[name].bundle.js',
             chunkFilename: isProd ? '[name].[hash:8].js' : '[name].bundle.js'
