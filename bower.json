@@ -33,7 +33,7 @@
     "jquery": "*",
     "jquery.cookie": "^1.4.1",
     "jquery-ui": "1.12.1",
-    "angular-strap": "^2.3.12",
+    "angular-strap": "2.3.12",
     "oclazyload": "ocLazyLoad#^1.1.0",
     "ng-dialog": "^1.4.0"
   }
