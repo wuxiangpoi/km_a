@@ -21,7 +21,7 @@ let loadBasicModules = () => {
     require('../bower_components/angular-animate/angular-animate.min.js');
     ngDepModules.push('ngAnimate');
 
-    require('../bower_components/angular-sanitize/angular-sanitize.min.js');
+    require('angular-sanitize');
     ngDepModules.push('ngSanitize');
 
     require('./libs/localService.js');
