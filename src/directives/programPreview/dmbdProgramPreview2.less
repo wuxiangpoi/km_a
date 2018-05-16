@@ -1,0 +1,133 @@
+//节目预览
+.dmbd-program-preview2 {
+  height: auto;
+
+  > .page-nav {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: white;
+
+    > .nav-table {
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+      height: 100%;
+      font-size: 12px;
+
+      > * {
+        display: table-cell;
+        vertical-align: middle;
+        height: 100%;
+
+        span {
+          color: #24243e;
+          padding: 5px;
+          margin: 0 5px;
+          cursor: pointer;
+
+          &:first-child,
+          &:last-child {
+            margin: 0;
+          }
+
+          &:hover {
+            background-color: #777777;
+            color: white;
+          }
+
+          &.selected {
+            background-color: #999999;
+            color: white;
+            cursor: default;
+          }
+
+        }
+
+        button {
+          vertical-align: middle;
+          font-size: 18px;
+          color: #666666;
+          background-color: transparent;
+          border: none;
+          outline: none;
+
+          &.disabled {
+            color: #CCCCCC;
+            cursor: default;
+          }
+        }
+      }
+
+      > .nav-all {
+        width: 5em;
+        text-align: center;
+      }
+
+      > .nav-left {
+        width: 2em;
+        text-align: center;
+      }
+
+      > .nav-right {
+        width: 2em;
+        text-align: center;
+      }
+
+      > .nav-center {
+        width: auto;
+        text-align: left;
+        overflow: hidden;
+
+        > .nav-items {
+          width: -moz-fit-content;
+          width: fit-content;
+          height: 100%;
+          white-space: nowrap;
+
+          -webkit-transition: transform 500ms;
+          -moz-transition: transform 500ms;
+          -ms-transition: transform 500ms;
+          -o-transition: transform 500ms;
+          transition: transform 500ms;
+        }
+      }
+
+    }
+
+  }
+
+  .page-content {
+    background-color: #f1f2f5;
+
+    .page-viewer {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      &.full-screen {
+        background-color: black;
+      }
+
+      > .program-fullscreen {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        border: none;
+        outline: none;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.7);
+        }
+      }
+    }
+
+  }
+
+}

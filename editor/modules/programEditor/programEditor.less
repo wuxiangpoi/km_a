@@ -1,0 +1,324 @@
+.qmedia-editor {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  /* 禁止选中 */
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  /*font-family: sans-serif;*/
+  font-style: normal;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.4;
+
+  @top-height: 50px;
+  @left-width: 190px;
+
+  > .editor-header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: @top-height;
+    line-height: @top-height;
+    background-color: #F6F7FA;
+    -webkit-box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.2);
+
+    > section {
+      width: 100%;
+      height: 100%;
+      display: table;
+
+      > * {
+        display: table-cell;
+        vertical-align: middle;
+        height: 100%;
+      }
+
+      > .left {
+        width: auto;
+        text-align: left;
+        white-space: nowrap;
+        float: none;
+
+        > select {
+          cursor: pointer;
+          font-size: 12px;
+        }
+
+        label {
+          color: #24243e;
+          vertical-align: middle;
+        }
+
+        span {
+          color: #24243e;
+          vertical-align: middle;
+          cursor: pointer;
+          font-size: 12px;
+        }
+
+        > .icon-qiehuanhengping:before {
+          font-size: 1.3em;
+          padding-right: 0.5em;
+          vertical-align: middle;
+        }
+
+        > .icon-pingmubili {
+          margin-left: 2em;
+        }
+
+        > .icon-pingmubili:before {
+          font-size: 1.3em;
+          padding-right: 0.5em;
+          vertical-align: middle;
+        }
+
+        > .icon-xianshiwangge {
+          margin-left: 2em;
+        }
+
+        > .icon-xianshiwangge:before {
+          font-size: 1.3em;
+          padding-right: 0.5em;
+          vertical-align: middle;
+        }
+
+        > .scaleLabel {
+          margin-left: 2em;
+        }
+
+        > .scaleRange {
+          vertical-align: middle;
+          font-size: 12px;
+          width: 100px;
+        }
+
+      }
+
+      > .right {
+        width: auto;
+        text-align: right;
+        float: none;
+        overflow: hidden;
+        white-space: nowrap;
+
+        > span {
+          padding: 5px 12px;
+          color: white;
+          font-size: 12px;
+          background-color: #00a0e9;
+          margin: 0 5px;
+          -webkit-border-radius: 4px;
+          -moz-border-radius: 4px;
+          border-radius: 4px;
+          cursor: pointer;
+          vertical-align: middle;
+
+          &.disabled {
+            background-color: #c4c4c4;
+            cursor: default;
+          }
+
+          &:hover {
+            -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+          }
+
+          > .icon-chexiao,
+          > .icon-zhongzhi {
+            font-size: 20px;
+            vertical-align: middle;
+            cursor: inherit;
+          }
+        }
+      }
+    }
+  }
+
+  > .editor-left {
+    position: absolute;
+    top: @top-height;
+    bottom: 0;
+    left: 0;
+    width: @left-width;
+    background-color: #f6f7fa;
+
+    @bottom-height: 60px;
+
+    > .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: @bottom-height;
+      line-height: @bottom-height;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 0;
+
+      > button {
+        background-color: #00a0e9;
+        color: white;
+        font-size: 12px;
+        line-height: 1.4;
+        vertical-align: middle;
+        width: 80%;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+
+        &.icon-tianjia:before {
+          font-size: 2.2em;
+          vertical-align: middle;
+          margin-right: 0.5em;
+        }
+
+        &:hover {
+          -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+          -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+      }
+    }
+
+    > .middle {
+      position: absolute;
+      top: 0;
+      bottom: @bottom-height;
+      left: 0;
+      right: 0;
+      overflow: auto;
+
+      > .page-list {
+        width: 170px;
+        margin: 0 auto;
+        padding: 10px 0;
+        position: relative;
+
+        > li {
+          position: relative;
+          width: 170px;
+          height: 170px;
+          border: solid 1px #e2e2e2;
+          background-color: #f1f2f5;
+          margin: 10px 0;
+
+          &:first-child {
+            margin-top: 0;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          &:hover {
+            background-color: #f0f0f0;
+
+            > .buttons {
+              display: block;
+            }
+          }
+
+          &.selected {
+            border-color: #00a0e9;
+            background-color: #f0f0f0;
+          }
+
+          > .page-index {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            margin-top: -3px;
+            margin-left: -3px;
+
+            &:before {
+              content: '';
+              display: block;
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 0;
+              height: 0;
+
+              border-style: solid;
+              //border-width: 40px 40px 0 0;
+              //border-color: #00a0e9 transparent transparent transparent;
+
+              border-width: 0 28px 28px 28px;
+              border-color: transparent transparent #00a0e9 transparent;
+              -webkit-transform-origin: top center;
+              -moz-transform-origin: top center;
+              -ms-transform-origin: top center;
+              -o-transform-origin: top center;
+              transform-origin: top center;
+              -webkit-transform: translateX(-50%) rotate(-45deg);
+              -moz-transform: translateX(-50%) rotate(-45deg);
+              -ms-transform: translateX(-50%) rotate(-45deg);
+              -o-transform: translateX(-50%) rotate(-45deg);
+              transform: translateX(-50%) rotate(-45deg);
+              -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+              -moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+              box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            > label {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              -webkit-transform: translate(-50%, -50%);
+              -moz-transform: translate(-50%, -50%);
+              -ms-transform: translate(-50%, -50%);
+              -o-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+              color: white;
+            }
+          }
+
+          > .buttons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: none;
+
+            > button {
+              width: 24px;
+              height: 24px;
+              font-size: 20px;
+              color: #c4c4c4;
+              vertical-align: middle;
+
+              &:hover {
+                color: #24243e;
+              }
+
+            }
+          }
+
+        }
+
+      }
+    }
+
+  }
+
+  > .editor-program-main {
+    position: absolute;
+    top: @top-height;
+    bottom: 0;
+    left: @left-width;
+    right: 0;
+  }
+
+}

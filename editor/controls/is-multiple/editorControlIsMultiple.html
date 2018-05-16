@@ -1,0 +1,7 @@
+<div class="editor-control-isMultiple">
+    <span ng-repeat="i in items"
+          ng-click="changeVal(i)"
+          ng-class="{'selected':i.value===isMultiple}">
+        {{i.name}}
+    </span>
+</div>

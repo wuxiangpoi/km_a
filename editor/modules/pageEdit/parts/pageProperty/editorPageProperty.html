@@ -1,0 +1,28 @@
+<div class="editor-page-property">
+
+    <ul class="editor-property-tabs">
+        <!--<li ng-class="{'selected':tabIndex===0}" ng-click="setTabIndex(0)">基本</li>-->
+        <li ng-class="{'selected':tabIndex===1}" ng-click="setTabIndex(1)">背景</li>
+        <li ng-class="{'selected':tabIndex===2}" ng-click="setTabIndex(2)">音乐</li>
+    </ul>
+
+    <div class="editor-property-contents">
+        <!-- 基本编辑部分 -->
+        <editor-page-property-basic
+                ng-show="tabIndex===0"
+                page="page">
+        </editor-page-property-basic>
+
+        <!-- 背景编辑部分 -->
+        <editor-page-property-background
+                ng-show="tabIndex===1"
+                back-ground="page.background">
+        </editor-page-property-background>
+
+        <!-- 背景音乐部分 -->
+        <editor-page-property-music
+                ng-show="tabIndex===2"
+                music="page.music">
+        </editor-page-property-music>
+    </div>
+</div>

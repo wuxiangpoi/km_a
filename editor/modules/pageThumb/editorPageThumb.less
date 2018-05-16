@@ -1,0 +1,98 @@
+.editor-page-thumb {
+  position: relative;
+  overflow: hidden;
+
+  .center() {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .border-box() {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  > .program-thumb {
+    overflow: hidden;
+    background-color: white;
+
+    .center();
+
+    > .background-container-thumb {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+    > .elements-container-thumb {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+
+      > .element-layout-thumb {
+        @color: #e0e0e0;
+
+        position: absolute;
+        overflow: hidden;
+        border: solid 1px @color;
+        white-space: nowrap;
+        background-color: rgba(255, 255, 255, 0.2);
+
+        .border-box();
+
+        > .mark-thumb {
+          color: @color * 0.9;
+          font-size: 12px;
+
+          .center();
+        }
+
+        > .element-transform-thumb {
+          position: relative;
+          width: 100%;
+          height: 100%;
+
+          > .element-background-thumb {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+
+            .border-box();
+          }
+
+          > .element-border-thumb {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+
+            .border-box();
+
+            > .element-filter-thumb {
+              width: 100%;
+              height: 100%;
+              font-size: 0;
+
+              //元素样式
+            }
+          }
+
+        }
+
+      }
+    }
+  }
+}

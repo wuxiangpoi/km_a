@@ -1,0 +1,21 @@
+<div class="editor-control-pixelSelector"
+     ng-click="spreadChange($event)">
+    <div class="current" ng-class="{'open':isSpread}">{{pixelHorizontal}} × {{pixelVertical}}</div>
+    <div class="selector-panel"
+         ng-show="isSpread">
+        <div class="selector-item"
+             ng-repeat="pixel in pixels"
+             ng-class="{'selected': pixel.h===pixelHorizontal&&pixel.v===pixelVertical}"
+             ng-click="changeItem(pixel)">
+            <span class="option" title="{{pixel.h+' × '+pixel.v}}">{{pixel.h}} × {{pixel.v}}</span>
+            <button class="close iconfont icon-guanbi"
+                    title="删除"
+                    ng-if="pixel.isCustom&&(pixel.h!==pixelHorizontal||pixel.v!==pixelVertical)"
+                    ng-click="deleteItem(pixel,$event)"></button>
+        </div>
+        <div class="selector-item selector-custom"
+             ng-click="onCustomClick()">
+            <span>自定义</span>
+        </div>
+    </div>
+</div>

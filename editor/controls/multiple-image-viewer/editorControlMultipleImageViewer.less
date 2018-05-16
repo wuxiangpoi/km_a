@@ -1,0 +1,55 @@
+.editor-control-multiple-image-viewer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  > .viewer-main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  > .viewer-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: auto;
+    display: table;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+
+    > * {
+      display: table-cell;
+    }
+
+    > .viewer-btn {
+
+      &.left {
+        text-align: left;
+        padding-left: 0.5em;
+      }
+
+      &.right {
+        text-align: right;
+        padding-right: 0.5em;
+      }
+
+      > button {
+        color: gray;
+        cursor: default;
+
+        &.enable {
+          color: white;
+          cursor: pointer;
+        }
+      }
+    }
+
+    > .viewer-index {
+    }
+  }
+}

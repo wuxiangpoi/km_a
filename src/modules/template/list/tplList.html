@@ -1,0 +1,51 @@
+<!--<div class="tbxeditWrapper">-->
+<div class="template_list">
+    <div class="header no_select">
+        <button class="btn_template_add" ui-sref="dashboard.templateAdd">新建模板</button>
+        <button class="btn_template_add">从公共模板库导入</button>
+    </div>
+    <div class="body scroll_y">
+
+        <ul class="template_list_ul">
+            <li ng-repeat="template in templates">
+                <div class="template-view">
+                    <editor-page-thumb
+                            pixel-horizontal="template.pixelHorizontal"
+                            pixel-vertical="template.pixelVertical"
+                            size="200"
+                            program-size="200"
+                            page="template.page">
+                    </editor-page-thumb>
+                    <section class="template_opera_panel">
+                        <div>
+                            <button ng-click="templatePreview(template)">预览</button>
+                            <button ui-sref="dashboard.templateEdit({id:template.id})">修改</button>
+                            <button ng-click="deleteTemplate(template)">删除</button>
+                        </div>
+                    </section>
+                </div>
+                <div class="template-title">
+                    <div class="left"
+                         title="模板名称：{{template.name}}
+节目时长：{{template.page.stay|dmbdVideoTimeFormatFilter}}
+推荐分辨率：{{template.pixelHorizontal}}×{{template.pixelVertical}}
+创建时间：{{template.createTime|date:'yyyy-MM-dd HH:mm:ss'}}">{{template.name}}
+                    </div>
+                    <div class="right">{{template.pixelHorizontal}}×{{template.pixelVertical}}</div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+    <div class="footer">
+        <div class="pager">
+            <dmbd-pager
+                    page-size="pageSize"
+                    page-index="pageIndex"
+                    record-count="recordCount"
+                    on-paging="doPaging($index)">
+            </dmbd-pager>
+        </div>
+    </div>
+</div>
+<!--</div>-->

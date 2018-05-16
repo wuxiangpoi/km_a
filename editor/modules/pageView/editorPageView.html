@@ -1,0 +1,107 @@
+<div class="editor-page-view"
+     ng-switch="page.ver">
+
+    <audio style="display: none;" preload="auto" autoplay="autoplay" loop="loop"
+           ng-if="page.music"
+           ng-src="{{page.music.url|editorTrustAsResourceUrl}}"></audio>
+
+    <div class="program-view"
+         ng-style="scale|editorProgramViewStyle:pixelHorizontal:pixelVertical">
+
+        <!-- 场景背景层 -->
+        <div class="background-container-view"
+             ng-style="page.background|editorPageViewBackgroundStyle">
+        </div>
+
+        <!-- 控件容器层 -->
+        <div class="elements-container-view"
+             ng-mousedown="$event.preventDefault()">
+
+            <!-- 控件布局 -->
+            <div class="element-layout-view"
+                 ng-if="ele.ver===1"
+                 ng-repeat="ele in page.elements"
+                 ng-style="ele.layout|editorElementLayoutStyle">
+
+                <!-- 3D转换 -->
+                <div class="element-transform-view">
+
+                    <!-- 背景 -->
+                    <div class="element-background-view"
+                         ng-style="ele.background|editorElementBackgroundStyle:ele.border:pixelHorizontal:pixelVertical">
+                    </div>
+
+                    <!-- 边框 -->
+                    <div class="element-border-view"
+                         ng-style="ele.border|editorElementBorderStyle:pixelHorizontal:pixelVertical">
+
+                        <!-- 滤镜 -->
+                        <div class="element-filter-view"
+                             ng-style="ele.filter|editorElementFilterStyle"
+                             ng-switch="ele.type">
+
+                            <!-- 文字 -->
+                            <editor-view-text-marquee
+                                    ng-switch-when="160"
+                                    pixel-horizontal="pixelHorizontal"
+                                    pixel-vertical="pixelVertical"
+                                    data="ele.data">
+                            </editor-view-text-marquee>
+
+                            <!-- 时间 -->
+                            <editor-view-time
+                                    ng-switch-when="500"
+                                    pixel-horizontal="pixelHorizontal"
+                                    pixel-vertical="pixelVertical"
+                                    data="ele.data">
+                            </editor-view-time>
+
+                            <!-- 轮播图 -->
+                            <editor-view-carousel
+                                    ng-switch-when="250"
+                                    pixel-horizontal="pixelHorizontal"
+                                    pixel-vertical="pixelVertical"
+                                    data="ele.data">
+                            </editor-view-carousel>
+
+                            <!-- 多视频 -->
+                            <editor-view-serie
+                                    ng-switch-when="350"
+                                    data="ele.data">
+                            </editor-view-serie>
+
+                            <!-- 网页 -->
+                            <editor-view-webview
+                                    ng-switch-when="900"
+                                    data="ele.data">
+                            </editor-view-webview>
+
+                            <!-- 流媒体 -->
+                            <editor-view-stream
+                                    ng-switch-when="1000"
+                                    pixel-horizontal="pixelHorizontal"
+                                    pixel-vertical="pixelVertical"
+                                    data="ele.data">
+                            </editor-view-stream>
+
+                            <!-- 摄像头 -->
+                            <editor-view-camera
+                                    ng-switch-when="1100"
+                                    pixel-horizontal="pixelHorizontal"
+                                    pixel-vertical="pixelVertical"
+                                    data="ele.data">
+                            </editor-view-camera>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

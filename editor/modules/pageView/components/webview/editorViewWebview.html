@@ -1,0 +1,15 @@
+<div class="editor-page-view-webview"
+     ng-switch="data.ver">
+
+    <div class="version"
+         ng-switch-when="1">
+        <iframe class="webview"
+                frameborder="0"
+                scrolling="auto"
+                sandbox="allow-popups allow-pointer-lock allow-forms allow-same-origin allow-scripts"
+                ng-if="data.url"
+                ng-src="{{data.url|editorTrustAsResourceUrl}}">
+        </iframe>
+    </div>
+
+</div>

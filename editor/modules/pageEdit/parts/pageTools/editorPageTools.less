@@ -1,0 +1,52 @@
+.editor-page-tools {
+  width: 100%;
+  height: auto;
+
+  > .tool-list {
+    width: auto;
+    height: auto;
+    padding: 10px;
+
+    &:after,
+    &::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    > li {
+      float: left;
+      width: 33.33%;
+      height: auto;
+      text-align: center;
+      padding: 5px 0;
+
+      .button {
+        width: 80%;
+        height: auto;
+        margin: 0 auto;
+        background-color: transparent;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #e0e0e0;
+        }
+
+        > .icon {
+          display: block;
+          width: 100%;
+          font-size: 26px;
+          font-weight: normal;
+          cursor: inherit;
+        }
+
+        .text {
+          display: block;
+          width: 100%;
+          font-size: 12px;
+          cursor: inherit;
+        }
+      }
+    }
+  }
+}

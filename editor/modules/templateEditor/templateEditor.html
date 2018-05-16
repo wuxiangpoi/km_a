@@ -1,0 +1,37 @@
+<div class="qmedia-editor">
+    <section class="editor-template-main">
+        <editor-page-edit
+                pixel-horizontal="pixelHorizontal"
+                pixel-vertical="pixelVertical"
+                is-show-gridding="isShowGridding"
+                auto-anchor="autoAnchor"
+                page="page">
+        </editor-page-edit>
+    </section>
+    <section class="editor-header" ng-keydown="$event.stopPropagation()">
+        <section>
+            <div class="left">
+                <label class="iconfont icon-pingmubili"></label>
+
+                <editor-pixel-selector
+                        pixel-horizontal="pixelHorizontal"
+                        pixel-vertical="pixelVertical"
+                        on-custom="onCheckPixel({ph:pixelHorizontal,pv:pixelVertical,callback:callback})"
+                        on-change="pixelChange(ph,pv)">
+                </editor-pixel-selector>
+
+                <span class="iconfont icon-xianshiwangge" ng-click="changeGriddingState()"
+                      ng-bind="isShowGridding?'隐藏网格':'显示网格'"></span>
+            </div>
+            <div class="right">
+                <span ng-click="undo()" ng-class="{'disabled':undos.length === 0}"><label
+                        class="iconfont icon-chexiao"></label>撤销</span>
+                <span ng-click="redo()" ng-class="{'disabled':redos.length === 0}"><label
+                        class="iconfont icon-zhongzhi"></label>重做</span>
+                <span ng-click="goPreview()">预览</span>
+                <span ng-click="saveTemplate()">保存</span>
+                <span ng-click="goBack()">返回</span>
+            </div>
+        </section>
+    </section>
+</div>

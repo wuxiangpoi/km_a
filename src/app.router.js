@@ -19,13 +19,40 @@ import temp from './modules/temp/route.js'
 import terminalmigrate from './modules/terminalmigrate/route.js'
 import materialchart from './modules/materialchart/route.js'
 
-const states = [dashboard, home,ledShow,domain,dictionary,versionfile,checkModel, terminal,user, role,material,terminalreport,income,incomedetail,terminalcommand,temp, login,errPage,terminalmigrate,materialchart]
+import programRouter from './modules/program/programRouter';
+import templateRouter from './modules/template/templateRouter';
+
+
+const states = [
+    dashboard,
+    home,
+    ledShow,
+    domain,
+    dictionary,
+    versionfile,
+    checkModel,
+    terminal,
+    user,
+    role,
+    material,
+    terminalreport,
+    income,
+    incomedetail,
+    terminalcommand,
+    temp,
+    login,
+    errPage,
+    terminalmigrate,
+    materialchart,
+    programRouter,
+    templateRouter
+];
 
 export default app => {
     states.forEach(state => {
         state(app);
-    })
-    app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider',($stateProvider, $urlRouterProvider, $controllerProvider) => {
+    });
+    app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', ($stateProvider, $urlRouterProvider, $controllerProvider) => {
         $urlRouterProvider.otherwise('/login');
-    }])
+    }]);
 };

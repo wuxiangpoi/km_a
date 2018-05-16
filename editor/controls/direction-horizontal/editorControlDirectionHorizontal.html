@@ -1,0 +1,8 @@
+<div class="editor-control-direction-horizontal">
+    <span class="iconfont {{d.icon}}"
+          title="{{d.name}}"
+          ng-repeat="d in directions"
+          ng-click="changeDirection(d)"
+          ng-class="{'selected':d.value===direction}">
+    </span>
+</div>

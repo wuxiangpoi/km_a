@@ -1,0 +1,58 @@
+<div class="editor-element-properties">
+
+    <div class="editor-form-version">
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">品牌</label>
+            <editor-control-camera-brand
+                    brand="data.brand"
+                    on-change="brandChange(newVal, oldVal)">
+            </editor-control-camera-brand>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">IP地址</label>
+            <input class="editor-form-number"
+                   ng-model="data.ip"
+                   type="text">
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">端口</label>
+            <input class="editor-form-number"
+                   ng-model="data.port"
+                   type="number">
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">账号</label>
+            <input class="editor-form-number"
+                   ng-model="data.account"
+                   type="text">
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">密码</label>
+            <input class="editor-form-number"
+                   ng-model="data.password"
+                   type="text">
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">码流</label>
+            <editor-control-bit-stream
+                    code="data.code"
+                    on-change="codeChange(newVal, oldVal)">
+            </editor-control-bit-stream>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">通道号</label>
+            <input class="editor-form-number"
+                   ng-model="data.channel"
+                   type="number">
+        </section>
+
+    </div>
+
+</div>

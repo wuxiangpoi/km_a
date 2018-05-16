@@ -1,0 +1,67 @@
+<div class="dmbd-dialog" ng-keydown="$event.stopPropagation()">
+    <div class="dmbd-dialog-title">
+        保存节目
+    </div>
+
+    <section class="programSave">
+        <section class="title" style="padding-top: 10px;">
+            <label>节目名称</label>
+            <input type="text" ng-model="name">
+            <span>必填</span>
+        </section>
+
+        <!-- 群组选择器 -->
+        <section class="title" style="padding-bottom: 10px;padding-top: 5px;">
+            <label>组织机构</label>
+            <group-leaf-select class="group-leaf-select groupLeafSelect" initid="{{oid}}"></group-leaf-select>
+        </section>
+
+        <table class="content">
+            <tr>
+                <th>分辨率</th>
+                <td>
+                    <span>{{pixelHorizontal+'×'+pixelVertical}}</span>
+                </td>
+                <th></th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>场景数</th>
+                <td>{{pages.length}}</td>
+                <th>总时长</th>
+                <td>{{getTotalTimes()|dmbdVideoTimeFormatFilter}}</td>
+            </tr>
+            <tr>
+                <th>资源总数</th>
+                <td>{{resourceCount}}</td>
+                <th>资源大小</th>
+                <td>{{resourceSize|dmbdResourceSizeFilter}}</td>
+            </tr>
+        </table>
+
+        <div class="page-list-container">
+            <table class="content2">
+                <tr>
+                    <th>场景序号</th>
+                    <th>播放时长</th>
+                </tr>
+                <tr ng-repeat="page in pages">
+                    <td>{{$index+1}}</td>
+                    <td>
+                        <input type="number"
+                               ng-model="page.stay"
+                               ng-keydown="validInput($event)"
+                               ng-init="page.stay=pagesSeconds[$index]">
+                        秒
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </section>
+
+    <div class="dmbd-dialog-footer">
+        <button class="dialog_ok" ng-click="ensureClick()">确定</button>
+        <button class="dialog_close" ng-click="close_dialog()">取消</button>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="editor-control-audioViewer">
+    <audio preload="auto" autoplay></audio>
+    <div class="preview fa fa-music"></div>
+    <div class="audio-mask">
+        <button ng-hide="isLoaded" ng-click="loadAudio()">播放</button>
+        <button ng-if="isLoaded" ng-hide="isPlaying" ng-click="playAudio()">播放</button>
+        <button ng-if="isLoaded" ng-show="isPlaying" ng-click="pauseAudio()">暂停</button>
+    </div>
+</div>

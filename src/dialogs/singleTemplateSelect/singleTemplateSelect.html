@@ -1,0 +1,131 @@
+<div class="dmbd-dialog" ng-keydown="$event.stopPropagation()">
+    <div class="dmbd-dialog-title">
+        选择模板
+    </div>
+
+    <div class="singleTemplateSelect">
+        <nav class="nav">
+            <span ng-class="{'selected':tabIndex===0}" ng-click="selectTab(0)">空白模板</span>
+            <span ng-class="{'selected':tabIndex===1}" ng-click="selectTab(1)">公用模板</span>
+            <span ng-class="{'selected':tabIndex===2}" ng-click="selectTab(2)">我的模板</span>
+        </nav>
+        <div class="content">
+            <section ng-class="{'selected':tabIndex===0}">
+                <div class="content-body">
+                    <ul class="clear_fix">
+                        <li class="template-item" ng-repeat="template in emptyTemplates"
+                            ng-click="chooseTemplate(template)">
+                            <editor-page-thumb style="cursor: pointer;"
+                                               pixel-horizontal="template.pixelHorizontal"
+                                               pixel-vertical="template.pixelVertical"
+                                               size="160"
+                                               program-size="160"
+                                               page="template.page">
+                            </editor-page-thumb>
+                            <div class="template-title">
+                                <div class="left text_ellipsis"
+                                     title="模板名称：{{template.name}}
+模板时长：{{template.page.stay|dmbdVideoTimeFormatFilter}}">{{template.name}}
+                                </div>
+                                <div class="right"
+                                     title="推荐分辨率">{{template.pixelHorizontal}}×{{template.pixelVertical}}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-pager">
+                    <footer class="footer-pager">
+                        <dmbd-pager
+                                page-size="pageSize0"
+                                page-index="pageIndex0"
+                                record-count="recordCount0"
+                                on-paging="doPaging0($index)">
+                        </dmbd-pager>
+                    </footer>
+                </div>
+            </section>
+            <section ng-class="{'selected':tabIndex===1}">
+                <div class="content-body">
+                    <div ng-if="common_templates.length===0" class="empty">
+                        <label>暂无模板</label>
+                    </div>
+                    <ul class="clear_fix">
+                        <li class="template-item" ng-repeat="template in common_templates"
+                            ng-click="choosePublicTemplate(template)">
+                            <editor-page-thumb style="cursor: pointer;"
+                                               pixel-horizontal="template.pixelHorizontal"
+                                               pixel-vertical="template.pixelVertical"
+                                               size="160"
+                                               program-size="160"
+                                               page="template.page">
+                            </editor-page-thumb>
+                            <div class="template-title">
+                                <div class="left text_ellipsis"
+                                     title="模板名称：{{template.name}}
+模板时长：{{template.page.stay|dmbdVideoTimeFormatFilter}}">{{template.name}}
+                                </div>
+                                <div class="right"
+                                     title="推荐分辨率">{{template.pixelHorizontal}}×{{template.pixelVertical}}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-pager">
+                    <footer class="footer-pager">
+                        <dmbd-pager
+                                page-size="pageSize1"
+                                page-index="pageIndex1"
+                                record-count="recordCount1"
+                                on-paging="doPaging1($index)">
+                        </dmbd-pager>
+                    </footer>
+                </div>
+            </section>
+            <section ng-class="{'selected':tabIndex===2}">
+                <div class="content-body">
+                    <div ng-if="templates.length===0" class="empty">
+                        <label>暂无模板</label>
+                    </div>
+                    <ul class="clear_fix">
+                        <li class="template-item" ng-repeat="template in templates"
+                            ng-click="chooseTemplate(template)">
+                            <editor-page-thumb style="cursor: pointer;"
+                                               pixel-horizontal="template.pixelHorizontal"
+                                               pixel-vertical="template.pixelVertical"
+                                               size="160"
+                                               program-size="160"
+                                               page="template.page">
+                            </editor-page-thumb>
+                            <div class="template-title">
+                                <div class="left text_ellipsis"
+                                     title="模板名称：{{template.name}}
+模板时长：{{template.page.stay|dmbdVideoTimeFormatFilter}}
+创建时间：{{template.createTime|date:'yyyy-MM-dd HH:mm:ss'}}">{{template.name}}
+                                </div>
+                                <div class="right"
+                                     title="推荐分辨率">{{template.pixelHorizontal}}×{{template.pixelVertical}}
+                                </div>
+                            </div>
+                            <button class="template-delete fa fa-trash-o"
+                                    title="删除"
+                                    ng-click="deleteTemplate(template,$event)"></button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-pager">
+                    <footer class="footer-pager">
+                        <dmbd-pager
+                                page-size="pageSize2"
+                                page-index="pageIndex2"
+                                record-count="recordCount2"
+                                on-paging="doPaging2($index)">
+                        </dmbd-pager>
+                    </footer>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
