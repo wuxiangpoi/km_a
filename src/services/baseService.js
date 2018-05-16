@@ -227,9 +227,6 @@ export default app => {
                 }
                 return nArr;
             },
-            goToUrl: function (path) {
-                $location.path = '/dashboard';
-            },
             initTable: function ($scope, tableState, url, cb) {
                 $scope.isLoading = true;
                 $scope.tableState = tableState;
