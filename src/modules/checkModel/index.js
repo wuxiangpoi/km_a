@@ -38,14 +38,6 @@ const checkModelController = ($scope, baseService,$sce) => {
 					}else{
 						status = 5;
 					}
-					// checkModelService.check({
-					// 	id: item.id,
-					// 	status: status
-					// }, function () {
-					// 	ngDialog.close();
-					// 	baseService.alert("操作成功", 'success');
-					// 	$scope.callServer($scope.tableState);
-					// })
 				},function(vm){
 					vm.imgPreview = function (item) {
 						$rootScope.$broadcast('callImg', item, 1);

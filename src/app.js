@@ -147,9 +147,9 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
             }
             return '';
         }
-        $rootScope.myKeyup = function(e,click,params){
-            var keycode = window.event?e.keyCode:e.which;
-            if(keycode==13){
+        $rootScope.myKeyup = function (e, click, params) {
+            var keycode = window.event ? e.keyCode : e.which;
+            if (keycode == 13) {
                 click(params);
             }
         };
