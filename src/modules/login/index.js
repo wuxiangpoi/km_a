@@ -35,12 +35,7 @@ const loginController = ($scope, $rootScope, baseService, userService) => {
                 $scope.isShowMessage = true;
             }
         }
-        $scope.myKeyup = function(e){
-            var keycode = window.event?e.keyCode:e.which;
-            if(keycode==13){
-                $scope.login();
-            }
-        };
+       
 }
 
 loginController.$inject = ['$scope', '$rootScope', 'baseService', 'userService'];
