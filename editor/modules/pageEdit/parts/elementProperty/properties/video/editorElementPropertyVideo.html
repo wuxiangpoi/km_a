@@ -1,0 +1,21 @@
+<div class="editor-element-properties">
+
+    <div class="editor-form-version">
+
+        <section class="editor-form-section">
+            <editor-control-video-selector
+                    video="data.video"
+                    on-change="videoChange(newVal, oldVal)">
+            </editor-control-video-selector>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">声音<br/>开关</label>
+            <editor-control-switcher
+                    is-off="data.isMuted">
+            </editor-control-switcher>
+        </section>
+
+    </div>
+
+</div>

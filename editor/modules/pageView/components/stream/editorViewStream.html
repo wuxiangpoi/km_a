@@ -1,0 +1,14 @@
+<div class="editor-page-view-stream"
+     ng-switch="data.ver">
+
+    <div class="version"
+         ng-switch-when="1">
+
+        <video id="{{videoID}}" class="stream-video video-js vjs-default-skin" controls>
+            <source ng-src="{{data.url|editorHlsUrlFilter|editorTrustAsResourceUrl}}"
+                    type="application/x-mpegURL">
+        </video>
+
+    </div>
+
+</div>

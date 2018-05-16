@@ -1,0 +1,143 @@
+//保存节目
+.programSave {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  padding-bottom: 30px;
+
+  > .title {
+    width: 90%;
+    margin: 0 auto;
+
+    * {
+      vertical-align: middle;
+    }
+
+    > label {
+      color: #666666;
+      font-weight: bold;
+    }
+
+    > input {
+      color: #999999;
+      border: solid 1px #CCCCCC;
+      width: 350px;
+      padding: 4px;
+      margin: 0.5em;
+
+      &:focus {
+        color: #666666;
+      }
+    }
+
+    > span {
+      color: #c9c9c9;
+
+      &:before {
+        content: '*';
+        color: red;
+        vertical-align: middle;
+        margin-right: 0.5em;
+      }
+
+    }
+
+    > .group-leaf-select {
+      display: inline-block;
+      text-align: left;
+      vertical-align: middle;
+
+      .diy_select {
+        vertical-align: middle;
+        display: inline-block;
+        width: 120px;
+        border: solid 1px #CCCCCC;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        padding: 0 10px;
+        margin: 0 10px;
+        background-color: white;
+      }
+    }
+
+  }
+
+  > .content {
+    table-layout: fixed;
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 90%;
+    margin: 0 auto;
+    background-color: white;
+
+    tr {
+      height: 50px;
+    }
+
+    th {
+      text-align: center;
+      vertical-align: middle;
+      background-color: #f6f7fa;
+      color: #666666;
+      font-size: 12px;
+      font-weight: bold;
+      border: solid 1px #CCCCCC;
+    }
+
+    td {
+      text-align: center;
+      vertical-align: middle;
+      background-color: #f6f7fa;
+      color: #9f9f9f;
+      font-size: 12px;
+      border: solid 1px #CCCCCC;
+    }
+
+  }
+
+  > .page-list-container {
+    width: 90%;
+    max-height: 180px;
+    overflow: auto;
+    margin: 20px auto 0 auto;
+    background-color: white;
+
+    > .content2 {
+      table-layout: fixed;
+      border-spacing: 0;
+      border-collapse: collapse;
+      width: 100%;
+
+      tr {
+        height: 30px;
+      }
+
+      th {
+        text-align: center;
+        vertical-align: middle;
+        background-color: #f6f7fa;
+        color: #666666;
+        font-size: 12px;
+        font-weight: bold;
+        border: solid 1px #CCCCCC;
+      }
+
+      td {
+        text-align: center;
+        vertical-align: middle;
+        background-color: #f6f7fa;
+        color: #9f9f9f;
+        font-size: 12px;
+        border: solid 1px #CCCCCC;
+
+        input {
+          padding: 2px;
+          border: solid 1px #999999;
+          width: 80px;
+        }
+      }
+    }
+  }
+
+}

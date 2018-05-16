@@ -1,0 +1,11 @@
+<div class="editor-page-view-carousel">
+    <img class="carousel-image"
+         ng-if="data.images.length===1"
+         ng-src="{{data.images[0].url|editorOSSImageUrlResizeFilter:800}}">
+    <img class="carousel-image"
+         ng-if="data.images.length>1"
+         ng-repeat="image in data.images track by $index"
+         ng-src="{{image.url|editorOSSImageUrlResizeFilter:800}}"
+         ng-show="data.disableAnimation?$index===nextIndex:($index===prevIndex||$index===nextIndex)"
+         ng-style="{'animation':data.disableAnimation?'':($index===nextIndex?inAnimation:outAnimation)+' '+data.duration+'ms forwards'}">
+</div>

@@ -1,0 +1,18 @@
+<div class="editor-page-view-text-marquee"
+     ng-switch="data.ver">
+    <div class="version"
+         ng-switch-when="1"
+         ng-style="{
+            'animation':data.isScroll?outerAnimationStyle:''
+         }">
+        <div class="table-cell"
+             ng-style="{'text-align':data.isScroll?'':data.horizontalAlign,'vertical-align':data.verticalAlign,'font-size':data.size*fontUnit+'px'}">
+            <span style="display: inline-block;white-space: pre;"
+                  ng-style="{
+                      'font-family':(data.font|editorFontFamilyFilter),
+                      'color':'rgb('+data.color.r+','+data.color.g+','+data.color.b+')',
+                      'animation':data.isScroll?innerAnimationStyle:''
+                  }">{{data.value}}</span>
+        </div>
+    </div>
+</div>

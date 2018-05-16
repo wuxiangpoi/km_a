@@ -1,0 +1,22 @@
+<div class="editor-control-multiple-video-viewer">
+    <editor-control-video-viewer
+            class="viewer-main"
+            ng-repeat="video in videos"
+            ng-show="video===videos[curIndex]"
+            poster="video.snapshot|editorOSSImageUrlResizeFilter:200"
+            src="video.url">
+    </editor-control-video-viewer>
+    <div class="viewer-bottom">
+        <div class="viewer-btn left">
+            <button ng-click="prevVideo()"
+                    ng-class="{'enable':curIndex>0}">&lt;
+            </button>
+        </div>
+        <div class="viewer-index">{{curIndex+1}}/{{videos.length}}</div>
+        <div class="viewer-btn right">
+            <button ng-click="nextVideo()"
+                    ng-class="{'enable':curIndex<videos.length-1}">&gt;
+            </button>
+        </div>
+    </div>
+</div>

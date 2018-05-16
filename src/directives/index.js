@@ -11,10 +11,33 @@ import upload from './upload'
 import zTree from './zTree.js'
 import imageView from './imageView'
 
-const directives = [headerBar,siderBar,kmSelect,eCharts,eChartMeter,eChartMap,meInclude,meLazyload,cityPicker,upload,zTree,imageView]
-    
+import dmbdPager from './pager/dmbdPager';
+import imageViewer2 from './imageViewer/imageViewer2';
+import videoViewer2 from './videoViewer/videoViewer2';
+import audioViewer2 from './audioViewer/audioViewer2';
+import dmbdProgramPreview2 from './programPreview/dmbdProgramPreview2';
+
+const directives = [headerBar,
+    siderBar,
+    kmSelect,
+    eCharts,
+    eChartMeter,
+    eChartMap,
+    meInclude,
+    meLazyload,
+    cityPicker,
+    upload,
+    zTree,
+    imageView,
+    dmbdPager,
+    imageViewer2,
+    videoViewer2,
+    audioViewer2,
+    dmbdProgramPreview2
+];
+
 export default app => {
     directives.forEach(directive => {
         directive(app);
     })
-}
+};

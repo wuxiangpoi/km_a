@@ -1,0 +1,55 @@
+/*横条样式*/
+.editor-control-range {
+  -webkit-appearance: none; /*清除系统默认样式*/
+  -moz-appearance: none;
+  appearance: none;
+  height: 3px;
+  display: inline-block !important; /*清除bootstrap覆盖*/
+  font-size: 0;
+  background: #c9c9c9 linear-gradient(#24243e, #24243e) no-repeat;
+
+  /*拖动块的样式*/
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none; /*清除系统默认样式*/
+    -moz-appearance: none;
+    appearance: none;
+    height: 16px; /*拖动块高度*/
+    width: 16px; /*拖动块宽度*/
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: solid 2px rgba(36, 36, 62, 0.4);
+    background-color: #24243e; /*拖动块背景*/
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    cursor: pointer;
+  }
+
+  &::-moz-range-thumb {
+    -webkit-appearance: none; /*清除系统默认样式*/
+    -moz-appearance: none;
+    appearance: none;
+    height: 16px; /*拖动块高度*/
+    width: 16px; /*拖动块宽度*/
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: solid 2px rgba(36, 36, 62, 0.4);
+    background-color: #24243e; /*拖动块背景*/
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    cursor: pointer;
+  }
+
+  &::-webkit-slider-thumb:hover {
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-moz-range-thumb:hover {
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+}

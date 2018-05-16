@@ -1,0 +1,49 @@
+.editor-page-edit {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #F1F2F6;
+
+  @right-width: 250px;
+  @right-top-height: 210px;
+  @space-width: 20px;
+
+  .box-sizing() {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  > .main {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: @right-width;
+
+    border: solid @space-width transparent;
+    overflow: hidden;
+
+    .box-sizing();
+  }
+
+  > .right-top {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: @right-width;
+    height: @right-top-height;
+    overflow: auto;
+    background-color: #f6f7fa;
+  }
+
+  > .right-bottom {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: @right-width;
+    top: @right-top-height + @space-width;
+    overflow: auto;
+    background-color: #f6f7fa;
+  }
+}

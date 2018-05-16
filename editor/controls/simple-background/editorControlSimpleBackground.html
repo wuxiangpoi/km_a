@@ -1,0 +1,17 @@
+<div class="editor-control-simple-background">
+    <div class="left">
+        <editor-control-rgb-color
+                rgb-color="backGround.color"
+                on-change="backGroundColorChange(newVal, oldVal)">
+        </editor-control-rgb-color>
+    </div>
+    <div class="right">
+        <input type="checkbox"
+               ng-model="backGround.type"
+               ng-true-value="0"
+               ng-false-value="1"
+               ng-change="backGroundTypeChange(backGround.type)"
+               id="{{id}}">
+        <label for="{{id}}">无</label>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="editor-control-align-horizontal">
+    <span class="iconfont {{a.icon}}"
+          title="{{a.name}}"
+          ng-repeat="a in aligns"
+          ng-click="changeAlign(a)"
+          ng-class="{'selected':a.value===align}">
+    </span>
+</div>

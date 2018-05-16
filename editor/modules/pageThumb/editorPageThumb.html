@@ -1,0 +1,66 @@
+<div class="editor-page-thumb"
+     ng-style="{'width':size+'px','height':size+'px'}"
+     ng-switch="page.ver">
+
+    <div class="program-thumb"
+         ng-style="programSize|editorProgramThumbStyle:pixelHorizontal:pixelVertical">
+
+        <!-- 场景背景层 -->
+        <div class="background-container-thumb"
+             ng-style="page.background|editorPageThumbBackgroundStyle">
+        </div>
+
+        <!-- 元素容器层 -->
+        <div class="elements-container-thumb"
+             ng-mousedown="$event.preventDefault()">
+
+            <div class="element-layout-thumb"
+                 ng-if="ele.ver===1"
+                 ng-repeat="ele in page.elements"
+                 ng-style="ele.layout|editorElementLayoutStyle">
+
+                <!-- 3D转换 -->
+                <div class="element-transform-thumb">
+
+                    <!-- 背景 -->
+                    <div class="element-background-thumb"
+                         ng-style="ele.background|editorElementBackgroundStyle:ele.border:(pixelHorizontal*scale):(pixelVertical*scale)">
+                    </div>
+
+                    <!-- 边框 -->
+                    <div class="element-border-thumb"
+                         ng-style="ele.border|editorElementBorderStyle:(pixelHorizontal*scale):(pixelVertical*scale)">
+
+                        <!-- 滤镜 -->
+                        <div class="element-filter-thumb"
+                             ng-style="ele.filter|editorElementFilterStyle"
+                             ng-switch="ele.type">
+
+                            <!-- 轮播图 -->
+                            <editor-thumb-carousel
+                                    ng-switch-when="250"
+                                    data="ele.data">
+                            </editor-thumb-carousel>
+
+                            <!-- 多视频 -->
+                            <editor-thumb-serie
+                                    ng-switch-when="350"
+                                    data="ele.data">
+                            </editor-thumb-serie>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <label class="mark-thumb">{{ele.type|editorTypeDescribe}}</label>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

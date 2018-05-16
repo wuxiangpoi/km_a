@@ -1,0 +1,10 @@
+<div class="editor-page-view-time"
+     ng-switch="data.ver">
+    <div class="version"
+         ng-switch-when="1">
+        <span class="text"
+              ng-style="data|editorViewTimeStyle:pixelHorizontal:pixelVertical">
+            {{nowTime|editorDateTimeFormatterFilter:data.formatter}}
+        </span>
+    </div>
+</div>

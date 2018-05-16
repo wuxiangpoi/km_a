@@ -1,0 +1,50 @@
+<div class="dmbd-program-preview2"
+     ng-style="{'width':size+'px'}">
+    <div ng-if="programPages.length>1" class="page-nav">
+        <div class="nav-table">
+            <div class="nav-all">
+                <span ng-class="{'selected':isPreviewAll}" ng-click="previewAll()">全部场景</span>
+            </div>
+            <div class="nav-left">
+                <button ng-click="navToPrev($event)"
+                        ng-class="{'disabled':isLeftDisabled}">
+                    <i class="fa fa-chevron-circle-left"></i>
+                </button>
+            </div>
+            <div class="nav-center">
+                <div id="{{domID}}" class="nav-items">
+                    <span ng-repeat="page in programPages"
+                          ng-class="{'selected':!isPreviewAll&&page===programPages[curPageIndex]}"
+                          ng-click="previewPage(page,$event)">场景{{$index+1}}</span>
+                </div>
+            </div>
+            <div class="nav-right">
+                <button ng-click="navToNext($event)"
+                        ng-class="{'disabled':isRightDisabled}">
+                    <i class="fa fa-chevron-circle-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="page-content"
+         ng-style="{'width':'100%','height':size+'px'}">
+        <div class="page-viewer"
+             ng-class="{'full-screen':isFullScreen}">
+            <editor-page-view
+                    pixel-horizontal="programPixelHorizontal"
+                    pixel-vertical="programPixelVertical"
+                    page="currentPage"></editor-page-view>
+
+            <button class="program-fullscreen fa fa-expand"
+                    title="进入全屏"
+                    ng-hide="isFullScreen"
+                    ng-click="requestFullScreen($event)">
+            </button>
+            <button class="program-fullscreen fa fa-compress"
+                    title="退出全屏"
+                    ng-show="isFullScreen"
+                    ng-click="cancelFullScreen($event)">
+            </button>
+        </div>
+    </div>
+</div>

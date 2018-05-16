@@ -1,0 +1,23 @@
+<div class="editor-element-properties">
+
+    <div class="editor-form-version">
+
+        <section class="editor-form-section editor-form-section-input">
+            <editor-control-text-area
+                    class="editor-form-txtArea-input"
+                    rows="5"
+                    placeholder="请在这里输入流媒体地址"
+                    value="data.url"
+                    on-change="urlChange(newVal, oldVal)">
+            </editor-control-text-area>
+        </section>
+
+        <section ng-if="downloadurl" class="editor-form-section editor-form-section-input">
+            <div style="width: auto;height: auto;white-space: normal;padding:0 10px;color: #999999;">
+                <label>请点击<a target="_blank" ng-href="{{downloadurl}}" style="color: #00a0e9;"> 此处 </a>下载流媒体播放器进行预览，如果不能播放请检查流媒体地址是否填写正确</label>
+            </div>
+        </section>
+
+    </div>
+
+</div>

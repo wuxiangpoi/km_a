@@ -1,0 +1,75 @@
+<div class="qmedia-editor">
+    <section class="editor-program-main">
+        <editor-page-edit
+                ng-if="currentPage"
+                pixel-horizontal="pixelHorizontal"
+                pixel-vertical="pixelVertical"
+                is-show-gridding="isShowGridding"
+                auto-anchor="autoAnchor"
+                page="currentPage">
+        </editor-page-edit>
+    </section>
+    <section class="editor-left" ng-keydown="$event.stopPropagation()">
+        <section id="programPageThumbList" class="middle">
+            <ul class="page-list" ui-sortable="sortableOptions" ng-model="pages">
+                <li ng-repeat="page in pages" ng-click="selectPage(page,$event)"
+                    ng-class="{'selected':currentPage===page}"
+                    title="场景{{$index+1}}">
+                    <editor-page-thumb
+                            pixel-horizontal="pixelHorizontal"
+                            pixel-vertical="pixelVertical"
+                            size="170"
+                            program-size="160"
+                            page="page">
+                    </editor-page-thumb>
+                    <div class="page-index">
+                        <label>{{$index+1}}</label>
+                    </div>
+                    <div class="buttons">
+                        <button class="iconfont icon-changjingfuzhi"
+                                title="复制"
+                                ng-click="copyPage(page,$event)"></button>
+                        <button class="iconfont icon-shanchu"
+                                title="删除"
+                                ng-click="deletePage(page,$event)"></button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="bottom">
+            <button class="iconfont icon-tianjia" ng-click="showDialogForSelectTemplate()">新场景</button>
+        </section>
+    </section>
+    <section class="editor-header" ng-keydown="$event.stopPropagation()">
+        <section>
+            <div class="left">
+                <label style="margin-left: 1em;">场景数（ {{pages.length}} ）</label>
+                <label class="iconfont icon-pingmubili"></label>
+
+                <editor-pixel-selector
+                        pixel-horizontal="pixelHorizontal"
+                        pixel-vertical="pixelVertical"
+                        on-custom="onCheckPixel({ph:pixelHorizontal,pv:pixelVertical,callback:callback})"
+                        on-change="pixelChange(ph,pv)">
+                </editor-pixel-selector>
+
+                <span class="iconfont icon-xianshiwangge" ng-click="changeGriddingState()"
+                      ng-bind="isShowGridding?'隐藏网格':'显示网格'"></span>
+
+                <editor-control-hotkeys-tip style="margin-left:20px;"></editor-control-hotkeys-tip>
+            </div>
+            <div class="right">
+                <span ng-click="undo()" ng-class="{'disabled':undos.length === 0}"><label
+                        class="iconfont icon-chexiao"></label>撤销</span>
+                <span ng-click="redo()" ng-class="{'disabled':redos.length === 0}"><label
+                        class="iconfont icon-zhongzhi"></label>重做</span>
+                <!--<span ng-click="goCurrentPreview()">预览本页</span>-->
+                <span ng-click="saveTemplate()"
+                      ng-class="{'disabled':pages.length===0||currentPage.elements.length===0}">存为模板</span>
+                <span ng-click="goPreview()" ng-class="{'disabled':pages.length===0}">预览</span>
+                <span ng-click="saveProgram()" ng-class="{'disabled':pages.length===0}">保存节目</span>
+                <span ng-click="goBack()">返回</span>
+            </div>
+        </section>
+    </section>
+</div>

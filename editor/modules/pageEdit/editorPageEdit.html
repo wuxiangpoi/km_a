@@ -1,0 +1,32 @@
+<div class="editor-page-edit">
+    <div class="main" ng-click="editAreaClick()">
+        <editor-edit-area
+                style="margin: 0 auto;"
+                pixel-horizontal="pixelHorizontal"
+                pixel-vertical="pixelVertical"
+                page="page"
+                is-show-gridding="isShowGridding"
+                auto-anchor="autoAnchor"
+                current-element="currentElement">
+        </editor-edit-area>
+    </div>
+    <div class="right-top" ng-keydown="$event.stopPropagation()">
+        <editor-page-tools
+                pixel-horizontal="pixelHorizontal"
+                pixel-vertical="pixelVertical"
+                page="page">
+        </editor-page-tools>
+    </div>
+    <div class="right-bottom" ng-keydown="$event.stopPropagation()">
+        <editor-page-property
+                ng-if="!currentElement"
+                page="page">
+        </editor-page-property>
+        <editor-element-property
+                ng-if="currentElement"
+                pixel-horizontal="pixelHorizontal"
+                pixel-vertical="pixelVertical"
+                ele="currentElement">
+        </editor-element-property>
+    </div>
+</div>

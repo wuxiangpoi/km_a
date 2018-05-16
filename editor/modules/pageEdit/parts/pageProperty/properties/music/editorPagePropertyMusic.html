@@ -1,0 +1,29 @@
+<div class="editor-page-properties">
+
+    <div class="editor-form-version">
+
+        <section class="editor-form-section" style="text-align: center;"
+                 ng-if="!music">
+            <button class="editor-form-button"
+                    ng-click="openSingleMusicSelectDialog(null)">添加背景音乐
+            </button>
+        </section>
+
+        <section class="editor-form-section" style="text-align: center;"
+                 ng-if="music">
+            <editor-control-audio-viewer
+                    style="margin: 0 auto;"
+                    src="music.url">
+            </editor-control-audio-viewer>
+            <div class="editor-form-music-name">{{music.name}}</div>
+            <button class="editor-form-editMusic"
+                    ng-click="openSingleMusicSelectDialog(music)">修改背景音乐
+            </button>
+            <button class="editor-form-delMusic"
+                    ng-click="deleteMusic()">删除
+            </button>
+        </section>
+
+    </div>
+
+</div>

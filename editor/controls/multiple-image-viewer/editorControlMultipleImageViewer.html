@@ -1,0 +1,19 @@
+<div class="editor-control-multiple-image-viewer">
+    <div class="viewer-main"
+         ng-repeat="image in images"
+         ng-show="image===images[curIndex]"
+         ng-style="{'background': (image.url|editorOSSImageUrlResizeFilter:200|editorContainBackgroundFilter)}"></div>
+    <div class="viewer-bottom">
+        <div class="viewer-btn left">
+            <button ng-click="prevImage()"
+                    ng-class="{'enable':curIndex>0}">&lt;
+            </button>
+        </div>
+        <div class="viewer-index">{{curIndex+1}}/{{images.length}}</div>
+        <div class="viewer-btn right">
+            <button ng-click="nextImage()"
+                    ng-class="{'enable':curIndex<images.length-1}">&gt;
+            </button>
+        </div>
+    </div>
+</div>
