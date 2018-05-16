@@ -64,7 +64,7 @@ module.exports = [
         //返回
         $scope.goBack = function () {
             //window.history.back();
-            $state.go("template.list");
+            $state.go("dashboard.templateList");
         };
 
         //保存模板
