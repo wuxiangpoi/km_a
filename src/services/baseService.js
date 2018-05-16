@@ -8,7 +8,6 @@ import scheduleDetailsTpl from '../tpl/schedule_details.html'
 export default app => {
     app.factory('baseService', ['$rootScope', '$http', '$state', 'ngDialog', '$alert','programService', ($rootScope, $http, $state, ngDialog, $alert,programService) => {
         let apiUrl = 'http://47.92.116.16:7070';
-        console.log(programService)
         let baseService = {
             api: {
                 apiUrl: apiUrl,

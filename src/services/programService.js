@@ -111,10 +111,11 @@ module.exports = function (app) {
             };
 
             //根据ID获取节目
-            this.getProgramById = function (pid, success) {
+            this.getProgramById = function (pid, domain,success) {
                 var apiUrl = '/api/program/getProgramById';
                 return dmbdRest.get(apiUrl, {
-                    id: pid
+                    id: pid,
+                    domain: domain
                 }, function (content) {
                     var program = angular.fromJson(content.content);
                     program.id = content.id;
