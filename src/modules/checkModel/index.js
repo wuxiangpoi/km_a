@@ -1,9 +1,12 @@
 import './style.less';
-import {materialStatusOptions,materialTypeOptions} from '../../filter/options'
+import {
+	materialStatusOptions,
+	materialTypeOptions
+} from '../../filter/options'
 import scheduleDetailsTpl from '../../tpl/schedule_details.html'
 import programDetailsTpl from '../../tpl/program_details.html'
 
-const checkModelController = ($scope, baseService,$sce,programService,$filter) => {
+const checkModelController = ($scope, baseService, $sce, programService, $filter) => {
 	$scope.displayed = [];
 	$scope.sp = {};
 	$scope.tableState = {};
@@ -22,7 +25,7 @@ const checkModelController = ($scope, baseService,$sce,programService,$filter) =
 		if (item.type == 0) {
 			baseService.getJson(baseService.api.checkModel + 'getCheckInfo', {
 				id: item.id,
-				
+
 			}, function (data) {
 				data.play_url = $sce.trustAsResourceUrl(data.path);
 				data.detailType = detailType;
@@ -32,19 +35,18 @@ const checkModelController = ($scope, baseService,$sce,programService,$filter) =
 				} else {
 					data.nstatus = $rootScope.getCheckStatusAttrOld(data.status, 0);
 				}
-				baseService.confirmDialog(750, '详情', data, scheduleDetailsTpl, function (type,ngDialog) {
+				baseService.confirmDialog(750, '详情', data, scheduleDetailsTpl, function (type, ngDialog) {
 					var status = '';
-					if(type == 3){
+					if (type == 3) {
 						status = 1;
-					}else{
+					} else {
 						status = 5;
 					}
-				},function(vm){
+				}, function (vm) {
 					vm.imgPreview = function (item) {
 						$rootScope.$broadcast('callImg', item, 1);
 					}
-				}
-			)
+				})
 
 			});
 		} else {
@@ -53,11 +55,11 @@ const checkModelController = ($scope, baseService,$sce,programService,$filter) =
 			}, function (data) {
 				data.detailType = detailType;
 				data.nstatus = $filter('programStatusTxt')(data.status, 0);
-				baseService.confirmDialog(750, '详情', data, programDetailsTpl, function (type,ngDialog) {
+				baseService.confirmDialog(750, '详情', data, programDetailsTpl, function (type, ngDialog) {
 					var status = '';
-					if(type == 3){
+					if (type == 3) {
 						status = 1;
-					}else{
+					} else {
 						status = 5;
 					}
 					// checkModelService.check({
@@ -69,7 +71,7 @@ const checkModelController = ($scope, baseService,$sce,programService,$filter) =
 					// 	$scope.callServer($scope.tableState);
 					// })
 				}, function (vm) {
-					programService.getProgramById(data.id,item.domain,function (program) {
+					programService.getProgramById(data.id, item.domain, function (program) {
 						vm.program = program;
 					});
 				})
@@ -79,7 +81,7 @@ const checkModelController = ($scope, baseService,$sce,programService,$filter) =
 	}
 }
 
-checkModelController.$inject = ['$scope', 'baseService','$sce','programService','$filter'];
+checkModelController.$inject = ['$scope', 'baseService', '$sce', 'programService', '$filter'];
 
 export default angular => {
 	return angular.module('checkModelModule', []).controller('checkModelController', checkModelController);

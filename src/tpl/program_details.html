@@ -1,21 +1,21 @@
 <div class="row modalDetail">
-	<div class="col-sm-8 marb20 p0">
+	<div class="col-sm-8">
 		<div class="previewWrap">
 			<dmbd-program-preview2 ng-if="program" program-pixel-horizontal="program.pixelHorizontal" program-pixel-vertical="program.pixelVertical"
 			    program-pages="program.pages" size="478"></dmbd-program-preview2>
 		</div>
 	</div>
-	<div class="col-sm-4 pdr0 form-horizontal">
+	<div class="col-sm-4 pdr0">
 		<div style="height:40px;" ng-if="program.pages.length > 1"></div>
-		<div class="col-sm-12 form-horizontal ">
-			<label class="col-sm-3 form_right">节目名称</label>
-			<div class="col-sm-9 form_input">{{data.name}}
+		<div class="col-sm-12 ">
+			<label class="col-sm-3 control-label p0">节目名称</label>
+			<div class="col-sm-9">{{data.name}}
 			</div>
 
 		</div>
-		<div class="col-sm-12 form-horizontal " ng-if="data.status">
-			<label class="col-sm-3 form_right">当前状态</label>
-			<div class="col-sm-9 form_input">{{data.status | programStatusTxt}}</div>
+		<div class="col-sm-12 " ng-if="data.status">
+			<label class="col-sm-3 control-label p0">当前状态</label>
+			<div class="col-sm-9">{{data.status | programStatusTxt}}</div>
 		</div>
 	</div>
 
