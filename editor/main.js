@@ -1,4 +1,4 @@
-//var iconfont = require('./icon-font/icon-font.less');
+var iconfont = require('./icon-font/icon-font.less');
 
 
 //创建编辑器模块
