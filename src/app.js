@@ -15,6 +15,7 @@ import './app.less';
 import '../bower_components/jquery.cookie/jquery.cookie.js'
 import './libs/bootstrap/dist/js/bootstrap.min.js'
 
+import layer from '../bower_components/layer/dist/layer.js'
 
 let loadBasicModules = () => {
     let ngDepModules = [];

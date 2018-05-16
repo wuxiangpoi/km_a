@@ -12,19 +12,21 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ENV = process.env.npm_lifecycle_event;
 const isTest = ENV === 'test' || ENV === 'test-watch';
 const isProd = ENV === 'build';
+const path = require('path');
+
 
 module.exports = function () {
     const config = {
         context: helpers.root("./src"),
-        entry  : {
-            'vendor'   : ['angular', 'angular-ui-router'],
-            'app'      : './app.js'
+        entry: {
+            'vendor': ['angular', 'angular-ui-router'],
+            'app': './app.js'
         },
-        output : {
-            path         : helpers.root('./dist'),
+        output: {
+            path: helpers.root('./dist'),
             //publicPath   : '/',
             //library      : '[name]_[hash:8]',
-            filename     : isProd ? '[name].[hash:8].js' : '[name].bundle.js',
+            filename: isProd ? '[name].[hash:8].js' : '[name].bundle.js',
             chunkFilename: isProd ? '[name].[hash:8].js' : '[name].bundle.js'
             // publish to cdn
             // publicPath: "http://cdn.example.com/[hash:8]/",
@@ -52,8 +54,8 @@ module.exports = function () {
                  * See: https://github.com/webpack/source-map-loader
                  */
                 {
-                    test   : /\.js$/,
-                    loader : 'source-map-loader',
+                    test: /\.js$/,
+                    loader: 'source-map-loader',
                     exclude: [
                         // these packages have problems with their sourcemaps
                         helpers.root('node_modules/angular'),
@@ -76,7 +78,9 @@ module.exports = function () {
                 // Reference: https://github.com/babel/babel-loader
                 // Compiles ES6 and ES7 into ES5 code
                 {
-                    test: /\.js$/, loaders: ['babel'], exclude: /node_modules/
+                    test: /\.js$/,
+                    loaders: ['babel'],
+                    exclude: /node_modules/
                 },
                 /*
                  * Json loader support for *.json files.
@@ -84,32 +88,32 @@ module.exports = function () {
                  * See: https://github.com/webpack/json-loader
                  */
                 {
-                    test  : /\.json$/,
+                    test: /\.json$/,
                     loader: 'json-loader'
                 },
                 /*
                  * Reference https://github.com/webpack/less-loader
                  */
                 {
-                    test   : /\.less$/,
+                    test: /\.less$/,
                     exclude: helpers.root("./src/css/main.less"),
-                    loader : ExtractTextPlugin.extract("css!postcss!less")
+                    loader: ExtractTextPlugin.extract("css!postcss!less")
                 },
                 //{test: /\.less$/, loader: extractLESS.extract(['css', 'postcss!less'])},
                 //all css required in src/app files will be merged in js files
                 {
-                    test   : /\.less/,
+                    test: /\.less/,
                     include: helpers.root("./src/css/main.less"),
-                    loader : 'style!css!postcss!less'
+                    loader: 'style!css!postcss!less'
                 },
-                
+
                 /*
                  * to string and css loader support for *.css files
                  * Returns file content as string
                  *
                  */
                 {
-                    test   : /\.css$/,
+                    test: /\.css$/,
                     loaders: ['style-loader', 'css-loader']
                 },
 
@@ -120,13 +124,16 @@ module.exports = function () {
                 // HTML LOADER
                 // Reference: https://github.com/webpack/html-loader
                 // Allow loading html through js
-                {test: /\.html$/, loader: 'html?root=/&attrs=img:src img:data-src link:href'},
+                {
+                    test: /\.html$/,
+                    loader: 'html?root=/&attrs=img:src img:data-src link:href'
+                },
 
                 // FILE LOADER
                 // Reference: https://github.com/webpack/file-loader
                 // Copy resource files to output
                 {
-                    test  : /\.(png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$/i,
+                    test: /\.(png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$/i,
                     loader: 'file?name=images/[name].[ext]?[hash]'
                 }
 
@@ -141,12 +148,14 @@ module.exports = function () {
          */
         plugins: [
             new webpack.ProvidePlugin({
-                $: "jquery",
-                jQuery: "jquery"
-                }),
+                $: 'jquery',
+                jQuery: 'jquery',
+                'window.jQuery': 'jquery',
+                'window.$': 'jquery'
+            }),
             //vendor
             new webpack.optimize.CommonsChunkPlugin({
-                name  : 'commons.chunk',
+                name: 'commons.chunk',
                 chunks: ['app']
             }),
             new webpack.optimize.CommonsChunkPlugin('vendor', isProd ? 'vendor.[hash:8].js' : 'vendor.bundle.js'),
@@ -158,9 +167,9 @@ module.exports = function () {
             // Reference: https://github.com/ampedandwired/html-webpack-plugin
             // Render index.html
             new HtmlWebpackPlugin({
-                template      : helpers.root('./src/index.html'),
+                template: helpers.root('./src/index.html'),
                 //inject        : 'body',
-                chunks        : ['commons.chunk', 'vendor', 'app'],
+                chunks: ['commons.chunk', 'vendor', 'app'],
                 chunksSortMode: 'dependency'
             }),
             new ExtractTextPlugin(isProd ? '[name].[hash:8].css' : '[name].css')
@@ -188,7 +197,7 @@ module.exports = function () {
             // Minimize output infomation
             //stats      : 'minimal',
             // Server port
-            port       : 6060
+            port: 6060
         }
     };
 
@@ -216,4 +225,3 @@ module.exports = function () {
 
     return config;
 }();
-
