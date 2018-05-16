@@ -8,7 +8,7 @@
         <div class="form-group form-group-sm clearfix">
             <label class="col-sm-3 form_right">管理员账号</label>
             <div class="col-sm-9 form_input">
-                <input type="text" required class="form-control" name="account" ng-if="data.id==''" ng-model="data.account" />
+                <input type="text"  required class="form-control" name="account" ng-if="data.id==''" ng-model="data.account" />
                 <div class="help-block"  ng-messages="adminForm.account.$error" ng-if="isShowMessage">
                     <p ng-message="required">请输入管理员账号</p>
                 </div>

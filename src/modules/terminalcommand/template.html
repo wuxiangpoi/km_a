@@ -7,7 +7,7 @@
 			</div>
 			<div class="fr">
 				<div class="input-group serchWrap">
-					<input type="text" class="form-control" ng-model="sp.search" placeholder="终端编号/终端名称">
+					<input type="text" class="form-control" ng-keyup="myKeyup($event,initPage)" ng-model="sp.search" placeholder="终端编号/终端名称">
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-primary">
 							<i type="button" ng-click="initPage()" class="fa fa-search">

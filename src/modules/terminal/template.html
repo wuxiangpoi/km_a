@@ -65,7 +65,7 @@
 				</div>
 				<div class="fr">
 					<div class="input-group serchWrap">
-						<input type="text" class="form-control" ng-model="sp.search" placeholder="终端编号/终端名称/版本号">
+						<input type="text" class="form-control" ng-model="sp.search" ng-keyup="myKeyup($event,initPage)" placeholder="终端编号/终端名称/版本号">
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-primary">
 								<i type="button" ng-click="initPage()" class="fa fa-search">
@@ -76,7 +76,7 @@
 				</div>
 				<div class="fr" style="width: 120px;margin-right:5px;">
 					<div class="input-group">
-						<input type="text" class="form-control" ng-model="sp.domain" placeholder="企业代码">
+						<input type="text" class="form-control" ng-keyup="myKeyup($event,initPage)" ng-model="sp.domain" placeholder="企业代码">
 					</div>
 				</div>
 			</div>
