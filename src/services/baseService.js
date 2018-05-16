@@ -91,8 +91,9 @@ export default app => {
                 })
 
             },
-            confirmDialog(width,title, data, html, cb, beforeOpen, replaceFooterHtml) {
+            confirmDialog(width,title, data, html, cb, beforeOpen, type) {
                 this.beforeOpen = beforeOpen || 0
+                let me = this;
                 ngDialog.openConfirm({
                     template: confirmDialogTpl,
                     plain: true,
@@ -102,16 +103,23 @@ export default app => {
                     controller: ['$scope', function ($scope) {
                         $scope.data = data
                         $scope.title = title
-                        $scope.html = html                        
-                        if (replaceFooterHtml) {
-                            $scope.replaceFooterHtml = replaceFooterHtml;
+                        $scope.html = html
+                        if (me.isRealNum(type)) {
+                            switch(type){
+                                case 0:
+                                $scope.replaceFooterHtml = '<div></div';
+                                break;
+                                case 1:
+                                $scope.replaceFooterHtml = modalFooterCheckTpl;
+                                break;
+                            }
                         }
                         if (beforeOpen) {
                             beforeOpen($scope)
                         }
 
-                        $scope.confirm = function () {
-                            cb($scope);
+                        $scope.confirm = function (type) {
+                            cb($scope,type);
                         }
                         $scope.cancel = function () {
                             $scope.closeThisDialog()
@@ -373,7 +381,7 @@ export default app => {
                             }
                         }
                         vm.eoption = chartService.initChartSchedule(vm.playList, minLen);
-                    },'<div></div>');
+                    },0);
                 })
             },
             showMaterial: function (item, detailType, cb) {
@@ -387,7 +395,7 @@ export default app => {
                     vm.imgPreview = function (item) {
                         $rootScope.$broadcast('callImg', item, 1);
                     }
-                }, modalFooterCheckTpl);
+                }, 1);
 
             },
             showProgram: function (item, detailType, cb) {

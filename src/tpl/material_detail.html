@@ -48,7 +48,15 @@
             </div>
             <div class="row">
                 <label class="col-sm-4 control-label pdr0">当前状态</label>
-                <div class="col-sm-8 pdr0">{{data.nstatus}}</div>
+                <div ng-if="data.nstatus" class="col-sm-8">
+                    {{data.nstatus}}
+                </div>
+                <div ng-if="!data.nstatus && data.status == 0" class="col-sm-8">
+                    待提交
+                </div>
+                <div ng-if="!data.nstatus && data.status == 1" class="col-sm-8">
+                    已提交
+                </div>
             </div>
         </div>
 

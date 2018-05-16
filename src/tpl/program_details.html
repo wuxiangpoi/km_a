@@ -15,7 +15,15 @@
 		</div>
 		<div class="col-sm-12 " ng-if="data.status">
 			<label class="col-sm-3 control-label p0">当前状态</label>
-			<div class="col-sm-9">{{data.status | programStatusTxt}}</div>
+			<div ng-if="data.nstatus" class="col-sm-9">
+				{{data.nstatus}}
+			</div>
+			<div ng-if="!data.nstatus && data.status == 0" class="col-sm-9">
+				待提交
+			</div>
+			<div ng-if="!data.nstatus && data.status == 1" class="col-sm-9">
+				已提交
+			</div>
 		</div>
 	</div>
 

@@ -3,10 +3,10 @@ import {
 	materialStatusOptions,
 	materialTypeOptions
 } from '../../filter/options'
-import scheduleDetailsTpl from '../../tpl/schedule_details.html'
+import materialDetailTpl from '../../tpl/material_detail.html'
 import programDetailsTpl from '../../tpl/program_details.html'
 
-const checkModelController = ($scope, baseService, $sce, programService, $filter) => {
+const checkModelController = ($rootScope, $scope, baseService, $sce, programService, $filter) => {
 	$scope.displayed = [];
 	$scope.sp = {};
 	$scope.tableState = {};
@@ -28,60 +28,66 @@ const checkModelController = ($scope, baseService, $sce, programService, $filter
 
 			}, function (data) {
 				data.play_url = $sce.trustAsResourceUrl(data.path);
-				data.detailType = detailType;
 				data.nUrl = baseService.dmbdOSSImageUrlResizeFilter(data.path, 400);
-				if (data.status == 0) {
-					data.nstatus = '待提交审核'
-				} else {
-					data.nstatus = $rootScope.getCheckStatusAttrOld(data.status, 0);
-				}
-				baseService.confirmDialog(750, '详情', data, scheduleDetailsTpl, function (type, ngDialog) {
+				data.nstatus = $filter('materialStatusTxt')(data.status, 0);
+				baseService.confirmDialog(750, '详情', data, materialDetailTpl, function (vm, type) {
 					var status = '';
-					if (type == 3) {
+					if (type == 1) {
 						status = 1;
 					} else {
 						status = 5;
 					}
+					vm.isPosting = true;
+					baseService.postData(baseService.api.checkModel + 'check', {
+						id: item.id,
+						status: status
+					}, () => {
+						vm.isPosting = false;
+						vm.closeThisDialog();
+						baseService.alert("操作成功", 'success');
+						$scope.initPage();
+					})
 				}, function (vm) {
 					vm.imgPreview = function (item) {
 						$rootScope.$broadcast('callImg', item, 1);
 					}
-				})
+				}, 1)
 
 			});
 		} else {
 			baseService.getJson(baseService.api.checkModel + 'getCheckInfo', {
 				id: item.id
 			}, function (data) {
-				data.detailType = detailType;
 				data.nstatus = $filter('programStatusTxt')(data.status, 0);
-				baseService.confirmDialog(750, '详情', data, programDetailsTpl, function (type, ngDialog) {
+				baseService.confirmDialog(750, '详情', data, programDetailsTpl, function (vm,type) {
 					var status = '';
-					if (type == 3) {
+					if (type == 1) {
 						status = 1;
 					} else {
 						status = 5;
 					}
-					// checkModelService.check({
-					// 	id: item.id,
-					// 	status: status
-					// }, function () {
-					// 	ngDialog.close();
-					// 	baseService.alert("操作成功", 'success');
-					// 	$scope.callServer($scope.tableState);
-					// })
+					vm.isPosting = true;
+					baseService.postData(baseService.api.checkModel + 'check', {
+						id: item.id,
+						status: status
+					}, () => {
+						vm.isPosting = false;
+						vm.closeThisDialog();
+						baseService.alert("操作成功", 'success');
+						$scope.initPage();
+					})
 				}, function (vm) {
 					programService.getProgramById(data.id, item.domain, function (program) {
 						vm.program = program;
 					});
-				})
+				}, detailType)
 
 			});
 		}
 	}
 }
 
-checkModelController.$inject = ['$scope', 'baseService', '$sce', 'programService', '$filter'];
+checkModelController.$inject = ['$rootScope', '$scope', 'baseService', '$sce', 'programService', '$filter'];
 
 export default angular => {
 	return angular.module('checkModelModule', []).controller('checkModelController', checkModelController);

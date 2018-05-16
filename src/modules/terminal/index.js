@@ -4,6 +4,8 @@ import terminalDetailsTpl from '../../tpl/terminal_details.html'
 import versionFileListTpl from '../../tpl/versionFile_list.html'
 import sendNoticeTpl from '../../tpl/send_notice.html'
 import migrateTerminalsTpl from '../../tpl/migrate_terminals.html'
+import programDetailsTpl from '../../tpl/program_details.html'
+
 import {
 	opOptions,
 	terminalStatusOptions,
@@ -11,7 +13,7 @@ import {
 } from '../../filter/options';
 
 
-const terminalController = ($scope, $rootScope, $stateParams, baseService,sentencesService,chartService) => {
+const terminalController = ($scope, $rootScope, $stateParams, baseService,sentencesService,chartService,programService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
 	if ($stateParams.domain) {
@@ -77,25 +79,25 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 				} else {
 					item.detailType = 0;
 					item.status = 1;
-					baseService.confirmDialog(750, '节目预览', item, terminalProgramPlayListTpl, function (ngDialog, vm) {
+					baseService.confirmDialog(750, '节目预览', item, programDetailsTpl, function (ngDialog, vm) {
 
 					}, function (vm) {
 						programService.getProgramById(pitem.pid, $stateParams.id ? $stateParams.id : item.domain, function (program) {
 							vm.program = program;
 						});
-					})
+					},0)
 				}
 
 
 			}
 
-		},'<div></div')
+		},0)
 	}
 	$scope.details = function (item) {
 		baseService.getJson(baseService.api.terminal + 'getTerminalInfo', {
 			tid: item.id
 		}, function (data) {
-			baseService.confirmDialog(580, '终端详情', data, terminalDetailsTpl, function (vm) {}, (vm) => {}, '<div></div>')
+			baseService.confirmDialog(580, '终端详情', data, terminalDetailsTpl, function (vm) {}, (vm) => {}, 0)
 		});
 
 	}
@@ -179,7 +181,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 
 					}
 					
-				},'<div></div>')
+				},0)
 				break;
 		}
 	}
@@ -270,11 +272,11 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 					})
 				})
 			}
-		},'<div></div>')
+		},0)
 	}
 }
 
-terminalController.$inject = ['$scope', '$rootScope', '$stateParams', 'baseService','sentencesService','chartService'];
+terminalController.$inject = ['$scope', '$rootScope', '$stateParams', 'baseService','sentencesService','chartService','programService'];
 
 export default angular => {
 	return angular.module('terminalModule', []).controller('terminalController', terminalController);
