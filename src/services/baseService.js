@@ -1,13 +1,13 @@
+import config from '../../configs/config'
 import hex_md5 from '../libs/md5.js'
 import confirmTpl from '../tpl/confirm.tpl.html'
 import confirmDialogTpl from '../tpl/confirm_dialog.tpl.html'
 import materialDetailTpl from '../tpl/material_detail.html'
 import modalFooterCheckTpl from '../tpl/modal_footerCheck.html'
 import scheduleDetailsTpl from '../tpl/schedule_details.html'
-
 export default app => {
     app.factory('baseService', ['$rootScope', '$http', '$state', 'ngDialog', '$alert','programService', ($rootScope, $http, $state, ngDialog, $alert,programService) => {
-        let apiUrl = 'http://47.92.116.16:7070';
+        let apiUrl = config.host;
         let baseService = {
             api: {
                 apiUrl: apiUrl,
