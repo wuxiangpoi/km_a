@@ -88,11 +88,14 @@ appRouter(app);
 
 import tbodyTpl from './tpl/table.html'
 import tfooterTpl from './tpl/table_footer.html'
+import noPicImg from './img/no_pic.jpg'
 
 app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseService', 'userService', ($rootScope, $state, $location, $stateParams, ngDialog, baseService, userService) => {
     $rootScope.paginationNumber = [10, 15, 20, 30, 50, 100];
     $rootScope.tbodyTpl = tbodyTpl;
     $rootScope.tfooterTpl = tfooterTpl;
+    $rootScope.noPicImg = noPicImg;
+    
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         ngDialog.close();
 
