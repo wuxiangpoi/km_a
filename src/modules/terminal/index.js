@@ -209,8 +209,10 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 					} else {
 						vm.data.startDate = $rootScope.formateDate(vm.startDate);
 						vm.data.endDate = $rootScope.formateDate(vm.endDate);
+						vm.isPosting = true;
 						baseService.postData(baseService.api.terminalCommandSend + 'sendCommandWithNotice', vm.data, function (data) {
-							ngDialog.close();
+							vm.isPosting = false;
+							vm.closeAll();
 							baseService.alert('发布成功', 'success');
 						})
 					}
@@ -267,7 +269,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 						tids: $scope.ids.join(','),
 						domainTo: item.key
 					}, function () {
-						vm.closeThisDialog();
+						vm.closeAll();
 						baseService.alert('迁入成功', 'success');
 					})
 				})

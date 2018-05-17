@@ -66,7 +66,7 @@ const roleController = ($scope, baseService) => {
 					isCheck: false,
 					selectedNodes: []
 				}
-			},'<div><div>')
+			},0)
 		})
 
 	};

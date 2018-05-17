@@ -25,7 +25,7 @@ const userController = ($scope, baseService) => {
 			email: item ? item.email : '',
 			domains: item ? item.domains : []                
 		}
-		baseService.confirmDialog(540,item ? '编辑帐号' : '添加帐号', postData, userSaveTpl, (vm) => {
+		baseService.confirmDialog(540,item ? '编辑账号' : '添加账号', postData, userSaveTpl, (vm) => {
 			if (vm.modalForm.$valid) {
 				var onData = postData;
                     if (!item) {
