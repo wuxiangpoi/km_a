@@ -168,7 +168,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 					}
 					vm.opOptions = opOptions;
 					vm.upDate = function (item) {
-						baseService.confirm('终端升级', "确定升级该终端：" + item.name + "?", function (vm) {
+						baseService.confirm('终端升级', "确定升级该终端：" + item.name + "?", true,function (vm) {
 							baseService.postData(baseService.api.terminalCommandSend + 'sendCommand', {
 								tids: tids,
 								version: item.id,

@@ -128,7 +128,7 @@ module.exports = [
         //     });
         // };
         $scope.deleteTemplate = function (item) {
-            baseService.confirm('删除模版', "确定删除模版：" + item.name + "?", function (vm) {
+            baseService.confirm('删除模版', "确定删除模版：" + item.name + "?", true,function (vm) {
                 baseService.postData(baseService.api.apiUrl + '/api/templatePublic/deleteTemplatePublic', {
                     id: item.id
                 }, function (item) {
