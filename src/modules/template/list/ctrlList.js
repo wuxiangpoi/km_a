@@ -39,6 +39,48 @@ module.exports = [
         //         $scope.templates = data;
         //     });
         // }
+        function getTemplateList(params, success) {
+            let apiUrl = '/api/templatePublic/getTemplatePublicListPage';
+                baseService.postData(baseService.api.apiUrl + apiUrl, params, function (content) {
+                    var templates = [];
+
+                    var allPaths = [];
+                    content.data.forEach(function (item) {
+                        var template = {
+                            id: item.id,
+                            name: item.name,
+                            pixelHorizontal: item.pixelHorizontal,
+                            pixelVertical: item.pixelVertical,
+                            page: angular.fromJson(item.content),
+                            createTime: item.createTime,
+                            creator: item.creator
+                        };
+                        templates.push(template);
+
+                        var paths = editorResourceService.getResourcePathsFromPages([template.page]);//提炼出资源标识符
+                        paths.forEach(function (path) {
+                            allPaths.push(path);
+                        });
+                    });
+                    //allPaths = unique(allPaths);//去重复
+
+                    if (allPaths.length === 0) {
+
+                        success(templates, content.recordsTotal);
+                    } else {
+                        resourcePathService.getMaterialMapByPaths(allPaths, function (pathMaps) {
+                            templates.forEach(function (template) {
+                                editorResourceService.setResourcePropertyWithoutPathToPages([template.page], pathMaps);
+
+                                template.pixelHorizontal = template.pixelHorizontal || 1920;
+                                template.pixelVertical = template.pixelVertical || 1080;
+                            });
+                            success(templates, content.recordsTotal);
+                        });
+                    }
+
+                });
+        }
         $scope.callServer = function (tableState,page) {
             $scope.isLoading = true;
             if (baseService.isRealNum(page)) {
@@ -50,7 +92,9 @@ module.exports = [
             var start = pagination.start || 0;
             var num = $scope.sp.length;
             $scope.sp.start = start;
-            templateService.getTemplateList({}, function (data, recordCount) {
+            let params = $scope.sp;
+            getTemplateList(params, function (data, recordCount) {
+
                 $scope.displayed = data;
                 num = num || $rootScope.paginationNumber[0];
                 tableState.pagination.number = num;
