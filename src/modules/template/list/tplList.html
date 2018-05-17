@@ -1,4 +1,52 @@
-<div class="tbxeditWrapper">
+<div class="page-wrap animated fadeInRight">
+    <div class="level2">
+        <div ng-if="perms(822)">
+            <button type="button" ui-sref="dashboard.templateAdd" class="btn btn-primary addRole">
+                <i class="iconfont icon-tianjia-"></i>
+                新建模版
+            </button>
+        </div>
+    </div>
+    <div class="content-wrap">
+        <div class="tempWrap">
+            <ul class="clearfix">
+                <li class="tempItem" ng-repeat="template in displayed">
+                    <div class="imgWrap">
+                            <editor-page-thumb
+                            pixel-horizontal="template.pixelHorizontal"
+                            pixel-vertical="template.pixelVertical"
+                            size="200"
+                            program-size="200"
+                            page="template.page">
+                    </editor-page-thumb>
+                    </div>
+                    <div class="tempItemMid">
+                        <span ng-click="templatePreview(template)" class="fl">
+                            <i class="icon iconfont icon-bofang"></i>
+                        </span>
+                        <span ng-if="perms(822)" ng-click="deleteTemplate(template)" class="fr">
+                            <i class="icon iconfont icon-shanchu"></i>
+                        </span>
+                        <span ng-if="perms(823)" ui-sref="dashboard.templateEdit({id:template.id})" class="fr">
+                            <i class="icon iconfont icon-bianji"></i>
+                        </span>
+                    </div>
+                    <div class="tempItemFot">
+                        <p>{{template.name}}</p>
+                        <p class="txt-grey">{{template.pixelHorizontal + '*' + template.pixelVertical}}</p>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <table class="table" st-pipe="callServer" st-table="displayed">
+            <tbody me-include html="{{tbodyTpl}}"></tbody>
+            <tfoot ng-show="!isLoading" me-include html="{{tfooterTpl}}"></tfoot>
+        </table>
+
+    </div>
+</div>
+<!-- <div class="tbxeditWrapper">
 <div class="template_list">
     <div class="header no_select">
         <button class="btn_template_add" ui-sref="dashboard.templateAdd">新建模板</button>
@@ -48,4 +96,4 @@
         </div>
     </div>
 </div>
-</div>
+</div> -->
