@@ -262,7 +262,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 				vm.callServer(vm.tableState);
 			}
 			vm.migrate = function (item) {
-				baseService.confirm('迁入终端', '确定迁入企业：' + item.name + '?', function (vm) {
+				baseService.confirm('迁入终端', '确定迁入企业：' + item.name + '?',true, function (vm) {
 					baseService.postData(baseService.api.apiUrl + '/api/terminalMigrate/migrateTerminalsByIds', {
 						tids: $scope.ids.join(','),
 						domainTo: item.key
