@@ -387,7 +387,7 @@ export default app => {
             showMaterial: function (item, detailType, cb) {
                 item.detailType = detailType;
                 item.nUrl = this.dmbdOSSImageUrlResizeFilter(item.path, 400);
-                this.confirmDialog(720,detailType == 2 ? '素材详情' : '素材审核', item, materialDetailTpl, (type, vm) => {
+                this.confirmDialog(720,detailType == 0 ? '素材详情' : '素材审核', item, materialDetailTpl, (type, vm) => {
                     if (cb) {
                         cb(type);
                     }
@@ -395,7 +395,7 @@ export default app => {
                     vm.imgPreview = function (item) {
                         $rootScope.$broadcast('callImg', item, 1);
                     }
-                }, 1);
+                }, detailType);
 
             },
             showProgram: function (item, detailType, cb) {

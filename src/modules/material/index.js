@@ -61,7 +61,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
         $scope.callServer($scope.tableState, 0)
     }
     $scope.showMaterial = function (item) {
-        baseService.showMaterial(item, 1);
+        baseService.showMaterial(item, 0);
     }
     $scope.save = function () {
         baseService.confirmDialog(720, '添加素材', {}, materialSaveTpl, function (vm) {
@@ -229,7 +229,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
                     id: item.id,
                     name: vm.data.name
                 }, function () {
-                    vm.$hide();
+                    vm.closeThisDialog();
                     $scope.initPage();
                     baseService.alert(item ? '修改成功' : '添加成功', 'success');
                 }, function (msg) {

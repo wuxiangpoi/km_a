@@ -10,6 +10,7 @@ import cityPicker from './cityPicker'
 import upload from './upload'
 import zTree from './zTree.js'
 import imageView from './imageView'
+import kmAudio from './kmAudio'
 
 import dmbdPager from './pager/dmbdPager';
 import imageViewer2 from './imageViewer/imageViewer2';
@@ -29,6 +30,7 @@ const directives = [headerBar,
     upload,
     zTree,
     imageView,
+    kmAudio,
     dmbdPager,
     imageViewer2,
     videoViewer2,
