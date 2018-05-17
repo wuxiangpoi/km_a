@@ -1,4 +1,5 @@
 var remove = require('../../../../libs/array').remove;
+import { tempResolution } from '../../../filter/options'
 
 module.exports = [
     '$scope',
@@ -15,6 +16,7 @@ module.exports = [
         editorResourceService,
         resourcePathService) {
         $scope.sp = {};
+        $scope.tempResolution = tempResolution;
         //根据ID预览节目
         //$scope.programPreviewById = dialogService.openProgramPreviewDialogById;
 
@@ -57,6 +59,9 @@ module.exports = [
                 $scope.isLoading = false;
                 
             });
+        }
+        $scope.initPage = () => {
+            $scope.callServer($scope.tableState,0);
         }
         //模板预览
         $scope.templatePreview = function (template) {

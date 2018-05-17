@@ -1,3 +1,29 @@
+export let tempResolution = [{
+    val: '',
+    name: '屏幕分辨率'
+},
+{
+    val: 1920*1080,
+    name: '1920*1080'
+},
+{
+    val: 1080*1920,
+    name: '1080*1920'
+},{
+    val: 1366*768,
+    name: '1366*768'
+},
+{
+    val: 768*1366,
+    name: '768*1366'
+},{
+    val: 1024*768,
+    name: '1024*768'
+},
+{
+    val: 768*1024,
+    name: '768*1024'
+}]
 export let payTypeOptions = [{
     val: '',
     name: '请选择收费方式'

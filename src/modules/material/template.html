@@ -19,9 +19,9 @@
 			<div class="fr">
 				<div class="input-group serchWrap">
 					<input type="text" class="form-control" ng-keyup="myKeyup($event,initPage)" ng-model="sp.search" placeholder="素材名称" >
-					<span class="input-group-btn">
+					<span class="input-group-btn" ng-click="initPage()">
 						<button type="button" class="btn btn-primary">
-							<i type="button" ng-click="initPage()" class="fa fa-search">
+							<i type="button" class="fa fa-search">
 							</i>
 						</button>
 					</span>

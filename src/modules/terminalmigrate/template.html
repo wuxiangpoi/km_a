@@ -5,9 +5,9 @@
 			<div class="fr" style="margin-left: 10px;">
 				<div class="input-group serchWrap">
 					<input type="text" class="form-control" ng-keyup="myKeyup($event,initPage)" ng-model="sp.searchDomain" placeholder="企业代码/企业名称">
-					<span class="input-group-btn">
+					<span class="input-group-btn" ng-click="initPage()">
 						<button type="button" class="btn btn-primary">
-							<i type="button" ng-click="initPage()" class="fa fa-search">
+							<i type="button" class="fa fa-search">
 							</i>
 						</button>
 					</span>
