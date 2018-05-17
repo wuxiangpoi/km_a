@@ -22,8 +22,8 @@ const incomedetailController = ($scope, baseService, $stateParams) => {
         $scope.callServer($scope.tableState, 0)
     }
     $scope.exportExcel = function (item) {
-        baseService.confirm('导出表格', '确定将当前查询的所有的设备信息导出excel表格?', false,(vm) => {
-            vm.$closeThisDialog();
+        baseService.confirm('导出表格', '确定将当前查询的所有的设备信息导出excel表格?',true,(vm) => {
+            vm.closeThisDialog();
             window.open(baseService.api.chargeStat + 'exportExcelChageStatItems?id=' +
                 item.id);
         })
