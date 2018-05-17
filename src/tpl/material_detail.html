@@ -6,8 +6,8 @@
             lazy-src="{{data.nUrl}}" />
             <button class="fullScreenBtn" ng-click=imgPreview(data)><i class="fa fa-arrows-alt"></i></button>
         </div>
-        <video ng-if="data.type==1" width="100%" height="100%" controls>
-            <source ng-src="{{data.play_url}}">
+        <video ng-if="data.type==1" width="100%" height="100%!important" controls>
+            <source ng-src="{{data.path | play_url}}">
         </video>
         <div km-audio ng-if="data.type==2" audiodata="{{data}}"></div>
 

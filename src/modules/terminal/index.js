@@ -23,7 +23,10 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 	$scope.tableState = {};
 	$scope.ids = [];
 	$scope.idsNormal = [];
-	$scope.callServer = function (tableState) {
+	$scope.callServer = function (tableState,page) {
+		if (baseService.isRealNum(page)) {
+			$scope.tableState.pagination.start = page * $scope.sp.length;
+		}
 		baseService.initTable($scope, tableState, baseService.api.terminal + 'getTerminalPageList');
 	}
 	$scope.initPage = function () {

@@ -33,7 +33,7 @@ const incomedetailController = ($scope, baseService, $stateParams) => {
             baseService.postData(baseService.api.chargeStat + 'confirmChargeById', {
                 id: item.id
             }, () => {
-                vm.$closeThisDialog();
+                vm.closeThisDialog();
                 baseService.alert("操作成功", 'success');
                 $scope.callServer($scope.tableState);
             })

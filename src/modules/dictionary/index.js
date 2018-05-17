@@ -62,8 +62,8 @@ const dictionaryController = ($scope, baseService) => {
 			}, () => {
 				vm.isPosting = false;
 				baseService.alert('删除成功', 'success');
-				vm.$hide();
-				$scope.callServer($scope.tableState, 0);
+				vm.closeThisDialog();
+				$scope.callServer($scope.tableState);
 			})
 		})
 	}

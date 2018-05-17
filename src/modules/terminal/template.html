@@ -66,9 +66,9 @@
 				<div class="fr">
 					<div class="input-group serchWrap">
 						<input type="text" class="form-control" ng-model="sp.search" ng-keyup="myKeyup($event,initPage)" placeholder="终端编号/终端名称/版本号">
-						<span class="input-group-btn">
+						<span class="input-group-btn" ng-click="initPage()">
 							<button type="button" class="btn btn-primary">
-								<i type="button" ng-click="initPage()" class="fa fa-search">
+								<i type="button" class="fa fa-search">
 								</i>
 							</button>
 						</span>

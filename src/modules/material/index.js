@@ -251,7 +251,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
                 s = $scope.idsNoSubmitCheck.length ? $scope.idsNoSubmitCheck.join(',') : ''
             }
             if (s == '') {
-                vm.$hide();
+                vm.closeAll();
                 baseService.alert('提交成功', 'success');
                 $scope.ids = [];
                 $scope.idsNoSubmitCheck = [];
@@ -261,8 +261,8 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
                     id: s
                 }, () => {
                     vm.isPosting = false;
-                    baseService.alert('删除成功', 'success');
-                    vm.$hide();
+                    baseService.alert('提交成功', 'success');
+                    vm.closeAll();
                     $scope.callServer($scope.tableState, 0);
                     $scope.ids = [];
                     $scope.idsNoSubmitCheck = [];
