@@ -82,11 +82,11 @@
 									{{row.createTime | formateTime}}
 								</td>
 								<td >
-									<button ng-if="[0,4,5].indexOf(row.status) != -1" class="btn  btn-primary tableBtn btnGreen" ng-click="submitCheck(row)">提交
+									<button ng-if="[0,4,5].indexOf(row.status) != -1 && perms(814)" class="btn  btn-primary tableBtn btnGreen" ng-click="submitCheck(row)">提交
 									</button>
-									<button ng-if="[0,1,2,3,7].indexOf(row.status) != -1" class="btn btn-primary tableBtn" ng-click="saveName(row)">修改名称
+									<button ng-if="[0,1,2,3,7].indexOf(row.status) != -1 && perms(813)" class="btn btn-primary tableBtn" ng-click="saveName(row)">修改名称
 									</button>
-									<button ng-if="[0,4,5,6].indexOf(row.status) != -1" class="btn btn-primary tableBtn btnRed" ng-click="del(row)">删除
+									<button ng-if="[0,4,5,6].indexOf(row.status) != -1 && perms(815)" class="btn btn-primary tableBtn btnRed" ng-click="del(row)">删除
 									</button>
 								</td>
 					</tr>

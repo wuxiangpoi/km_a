@@ -46,7 +46,7 @@ let controller = ($rootScope, $scope, $state, baseService) => {
         auth: $rootScope.perms(3),
         collapseVar: 3,
         state: 'dashboard.terminalreport',
-        states: ['dashboard.terminalreport'],
+        states: ['dashboard.terminalreport','dashboard.terminal'],
         icon: 'iconfont icon-zhongduanguanli'
     }, {
         name: '审核管理',
