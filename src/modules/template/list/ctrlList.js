@@ -17,6 +17,19 @@ module.exports = [
         resourcePathService) {
         $scope.sp = {};
         $scope.tempResolution = tempResolution;
+        let publicStatusOptions = [{
+            val: '',
+            name: '发布状态'
+        },
+        {
+            val: 0,
+            name: '已发布'
+        },
+        {
+            val: 1,
+            name: '未发布'
+        }]
+        $scope.publicStatusOptions = publicStatusOptions;
         //根据ID预览节目
         //$scope.programPreviewById = dialogService.openProgramPreviewDialogById;
 
