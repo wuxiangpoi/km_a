@@ -197,7 +197,14 @@ module.exports = function () {
             // Minimize output infomation
             //stats      : 'minimal',
             // Server port
-            port: 6060
+            port: 6060,
+            // noInfo: true,
+            proxy: {
+                '*': {
+                target: 'http://47.92.116.16:7070',
+                secure: false
+              }
+            }
         }
     };
 

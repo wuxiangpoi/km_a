@@ -37,7 +37,7 @@
         <div class="form-group form-group-sm clearfix">
             <label class="col-sm-3 form_right">手机</label>
             <div class="col-sm-9 form_input">
-                <input type="text" name="phone" ng-pattern="/^1[34578]\d{9}$/" class="form-control" ng-model="data.phone" />
+                <input type="text" name="phone" ng-pattern="/^1[0-9]\d{9}$/" class="form-control" ng-model="data.phone" />
                 <div class="help-block" ng-messages="adminForm.phone.$error" ng-if="isShowMessage">
                     <p ng-message="pattern">请输入正确手机号</p>
                 </div>

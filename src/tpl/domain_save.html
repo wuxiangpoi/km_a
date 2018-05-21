@@ -43,7 +43,7 @@
     <div class="form-group clearfix">
         <label class="col-sm-3 control-label">联系电话：</label>
         <div class="col-sm-9">
-            <input type="text" required ng-pattern="/^1[34578]\d{9}$/" class="form-control" name="phone" ng-model="data.phone" />
+            <input type="text" required ng-pattern="/^1[0-9]\d{9}$/" class="form-control" name="phone" ng-model="data.phone" />
             <div class="help-block" ng-messages="modalForm.phone.$error" ng-if="isShowMessage">
                 <p ng-message="pattern">请输入正确手机号</p>
                 <p ng-message="required">请输入联系电话</p>
