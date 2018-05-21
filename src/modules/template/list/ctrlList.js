@@ -53,7 +53,8 @@ module.exports = [
                             pixelVertical: item.pixelVertical,
                             page: angular.fromJson(item.content),
                             createTime: item.createTime,
-                            creator: item.creator
+                            creator: item.creator,
+                            hot: item.hot
                         };
                         templates.push(template);
 
@@ -138,6 +139,16 @@ module.exports = [
                 });
             });
         };
-
+        $scope.public = function (item) {
+            baseService.confirm('发布模版', "确定发布模版：" + item.name + "?", true,function (vm) {
+                baseService.postData(baseService.api.apiUrl + '/api/templatePublic/deleteTemplatePublic', {
+                    id: item.id
+                }, function (item) {
+                    vm.closeThisDialog();
+                    baseService.alert("发布成功", 'success');
+                    $scope.callServer($scope.tableState);
+                });
+            });
+        };
     }
 ];

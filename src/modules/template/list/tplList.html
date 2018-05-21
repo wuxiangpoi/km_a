@@ -20,25 +20,34 @@
                             <editor-page-thumb
                             pixel-horizontal="template.pixelHorizontal"
                             pixel-vertical="template.pixelVertical"
-                            size="200"
-                            program-size="200"
+                            size="180"
+                            program-size="180"
                             page="template.page">
                     </editor-page-thumb>
                     </div>
                     <div class="tempItemMid">
-                        <span ng-click="templatePreview(template)" class="fl">
-                            <i class="icon iconfont icon-bofang"></i>
-                        </span>
-                        <span ng-if="perms(822)" ng-click="deleteTemplate(template)" class="fr">
-                            <i class="icon iconfont icon-shanchu"></i>
-                        </span>
-                        <span ng-if="perms(823)" ui-sref="dashboard.templateEdit({id:template.id})" class="fr">
-                            <i class="icon iconfont icon-bianji"></i>
-                        </span>
+                        <div class="clearfix">
+                                <span ng-click="templatePreview(template)" class="fl">
+                                        <i class="icon iconfont icon-bofang"></i>
+                                    </span>
+                                    <span ng-if="perms(822)" ng-click="deleteTemplate(template)" class="fr">
+                                        <i class="icon iconfont icon-shanchu"></i>
+                                    </span>
+                                    <span ng-if="perms(823)" ui-sref="dashboard.templateEdit({id:template.id})" class="fr">
+                                        <i class="icon iconfont icon-bianji"></i>
+                                    </span>
+                        </div>
+                        <div class="clearfix">
+                                <p>{{template.name}}</p>
+                                <p class="txtGrey">{{template.pixelHorizontal + '*' + template.pixelVertical}}</p>
+                        </div>
                     </div>
-                    <div class="tempItemFot">
-                        <p>{{template.name}}</p>
-                        <p class="txt-grey">{{template.pixelHorizontal + '*' + template.pixelVertical}}</p>
+                    <div class="tempItemFot clearfix">
+                        <span class="fl txtGrey">
+                            <i class="iconfont icon-xiazai"></i>
+                                {{template.hot}}
+                        </span>
+                        <button style="margin-top: 2px;" ng-click="public(template)" class="btn btn-primary tableBtn btnGreen btn-sm fr">发布</button>
                     </div>
                 </li>
 
