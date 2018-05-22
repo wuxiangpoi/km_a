@@ -1,5 +1,4 @@
 import {citiesNo} from '../../services/cityService'
-
 const homeController = ($scope,$rootScope, baseService, chartService) => {
 	$scope.sp = {};
 	var now = new Date();
@@ -116,28 +115,29 @@ const homeController = ($scope,$rootScope, baseService, chartService) => {
 			$scope.onlineCount = res.onlineCount;
 			$scope.offlineCount = res.offlineCount;
 		})
-		baseService.getData(baseService.api.report + 'terminalReportByRegion', {}, function (res) {
-			//*****************/
+		// baseService.getData(baseService.api.report + 'terminalReportByRegion', {}, function (res) {
+		// 	//*****************/
 	
-			var geoCoordMap = {};
-			for (var i in citiesNo) {
-				geoCoordMap[citiesNo[i].n] = citiesNo[i].p.split('|')[0].split(',');
-			}
-			var data = [];
+		// 	var geoCoordMap = {};
+		// 	for (var i in citiesNo) {
+		// 		geoCoordMap[citiesNo[i].n] = citiesNo[i].p.split('|')[0].split(',');
+		// 	}
+		// 	var data = [];
 	
-			for (var i = 0; i < res.length; i++) {
-				data.push({
-					name: citiesNo[res[i].cityCode].n,
-					value: res[i].count
-				})
-				$scope.mapInfo.push({
-					name: citiesNo[res[i].cityCode].n,
-					value: res[i].count
-				})
-			}
-			$scope.mapOption = chartService.initChartMap(data);
+		// 	for (var i = 0; i < res.length; i++) {
+		// 		data.push({
+		// 			name: citiesNo[res[i].cityCode].n,
+		// 			value: res[i].count
+		// 		})
+		// 		$scope.mapInfo.push({
+		// 			name: citiesNo[res[i].cityCode].n,
+		// 			value: res[i].count
+		// 		})
+		// 	}
+		// 	$scope.mapOption = chartService.initChartMap(data);
 	
-		})
+	
+		// })
 	}
 	$scope.getData();
 }

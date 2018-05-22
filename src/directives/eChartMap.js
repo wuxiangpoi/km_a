@@ -1,3 +1,4 @@
+import {citiesNo } from '../services/cityService'
 export default app => {
     app.directive('emapChart', ['$window', 'baseService', ($window, baseService) => {
         let controller = ($scope, element, attrs) => {
@@ -147,32 +148,44 @@ export default app => {
                 bmap.setMapStyle({
                     styleJson: styleJson
                 });
-                baseService.getData(baseService.api.apiUrl + '/api/report/allTerminalForMap', {}, function (res) {
-                    var terminalist = [];
+                baseService.getData(baseService.api.report + 'terminalReportByRegion', {}, function (res) {
+                    //*****************/
+            
                     // ************************************自定义覆盖物**************************************************************
                     // 覆盖物构造方法
-                    function ComplexCustomOverlay(point, index) {
+                    function ComplexCustomOverlay(point, index,value) {
                         this._point = point;
                         this._index = index;
+                        this._value = value;
                     }
                     ComplexCustomOverlay.prototype = new BMap.Overlay();
                     ComplexCustomOverlay.prototype.initialize = function (bmap) {
                         this._map = bmap;
                         var span = this._span = document.createElement("span");
+                        var spanNum = document.createElement("span");
+                        var spanVlu = document.createElement("span");
                         $(span).css({
                             'position': 'absolute',
                             'zIndex': BMap.Overlay.getZIndex(this._point.lat),
                             'display': 'block',
                             'color': '#FFF',
-                            'width': '20px',
-                            'height': '28px',
-                            'line-height': '26px',
-                            'background': 'url("http://api0.map.bdimg.com/images/marker_red_sprite.png") no-repeat',
+                            'width': '50px',
+                            'height': '50px',
+                            'padding':'5px',
+                            'background': 'url("${png64}") no-repeat',
+                            'background-size':'50px 50px',
                             'text-align': 'center',
                             'font-size': '12px',
                             'point-events': 'none'
                         });　　 //设置数字也就是我们的标注
-                        this._span.innerHTML = this._index;
+                        
+                        $(spanVlu).css({
+                            'display':'block'
+                        })
+                        spanVlu.innerHTML = this._value;
+                        spanNum.innerHTML = this._index;
+                        this._span.insertBefore(spanVlu,this._span.childNodes[0]);
+                        this._span.appendChild(spanNum);
                         bmap.getPanes().labelPane.appendChild(span);
 
                         return span;
@@ -184,18 +197,30 @@ export default app => {
                         this._span.style.left = pixel.x - 11 + 'px';
                         this._span.style.top = pixel.y - 28 + 'px';
                     }
-                    for (var k in res.content) {
-                        var point = new BMap.Point(k.split(',')[0], k.split(',')[1]);
+                    var data = [];
+	
+		            for (var i = 0; i < res.length; i++) {
+		            	data.push({
+		            		name: citiesNo[res[i].cityCode].n,
+		            		value: res[i].count
+		            	})
+		            
+		            }
+
+                    for (var i = 0; i < res.length; i++) {
+                        let x = citiesNo[res[i].cityCode].p.split(',')[0];
+                        let y = citiesNo[res[i].cityCode].p.split(',')[1].split('|')[0];
+                      
+                        var point = new BMap.Point(x, y);
                         var marker = new BMap.Marker(point);
-                        if (res.content[k].length > 1) {
-                            var myCompOverlay = new ComplexCustomOverlay(point, res.content[k].length);
-                        } else {
-                            var myCompOverlay = new ComplexCustomOverlay(point, '');
-                        }
+                        let myCompOverlay = new ComplexCustomOverlay(point,res[i].count,citiesNo[res[i].cityCode].n);
+
                         bmap.addOverlay(myCompOverlay);
                     }
-
+            
+            
                 })
+                
             }
             if (typeof (BMap) == 'undefined') {
                 var script = document.createElement("script");
