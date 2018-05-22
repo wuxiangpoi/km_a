@@ -5,7 +5,7 @@
 						<i class="iconfont icon-tianjia-"></i>
 						添加素材
 					</button>
-					<button ng-if="perms(814)" type="button" ng-click="idsNoSubmitCheck.length != 0?submitCheck():''" ng-class="{'disabled-sham': idsNoSubmitCheck.length == 0}" data-trigger="hover" bs-enabled="idsNoSubmitCheck.length == 0" data-placement="bottom" data-type="success" data-title="{{'请先选择待提交的素材'}}" bs-tooltip class="btn btn-primary warning">
+					<button ng-if="perms(814)" type="button" ng-click="idsNoSubmitCheck.length == 0 || idsNoSubmitCheck.length != ids.length?submitCheck():''" ng-class="{'disabled-sham': idsNoSubmitCheck.length == 0 || idsNoSubmitCheck.length != ids.length}" data-trigger="hover" bs-enabled="idsNoSubmitCheck.length == 0" data-placement="bottom" data-type="success" data-title="{{'请先选择待提交的素材'}}" bs-tooltip class="btn btn-primary warning">
 						提交素材
 					</button>
 				</div>
