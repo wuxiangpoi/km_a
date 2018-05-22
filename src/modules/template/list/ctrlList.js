@@ -142,10 +142,12 @@ module.exports = [
         //     });
         // };
         $scope.deleteTemplate = function (item) {
-            baseService.confirm('删除模版', "确定删除模版：" + item.name + "?", true,function (vm) {
+            baseService.confirm('删除模板', "确定删除模板：" + item.name + "?", function (vm) {
+                vm.isPosting = true;
                 baseService.postData(baseService.api.apiUrl + '/api/templatePublic/deleteTemplatePublic', {
                     id: item.id
                 }, function (item) {
+                    vm.isPosting = false;
                     vm.closeThisDialog();
                     baseService.alert("删除成功", 'success');
                     $scope.callServer($scope.tableState,0);
@@ -153,10 +155,12 @@ module.exports = [
             });
         };
         $scope.public = function (item) {
-            baseService.confirm('发布模版', "确定发布模版：" + item.name + "?", true,function (vm) {
+            baseService.confirm('发布模板', "确定发布模板：" + item.name + "?",function (vm) {
+                vm.isPosting = true;
                 baseService.postData(baseService.api.apiUrl + '/api/templatePublic/deleteTemplatePublic', {
                     id: item.id
                 }, function (item) {
+                    vm.isPosting = false;
                     vm.closeThisDialog();
                     baseService.alert("发布成功", 'success');
                     $scope.callServer($scope.tableState);

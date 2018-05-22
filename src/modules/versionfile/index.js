@@ -130,15 +130,15 @@ const versionfileController = ($rootScope,$scope, baseService, FileUploader) => 
 		})
 	}
 	$scope.del = (item) => {
-		baseService.confirm('删除', '确定删除版本文件：' + item.name,true, (vm) => {
+		baseService.confirm('删除', '确定删除版本文件：' + item.name,(vm) => {
 			vm.isPosting = true;
-			baseService.postData(baseService.api.dictionary + 'deleteDictionary', {
-				did: item.id
+			baseService.postData(baseService.api.versionFile + 'deleteVersionFile', {
+				id: item.id
 			}, () => {
 				vm.isPosting = false;
 				baseService.alert('删除成功', 'success');
 				vm.closeThisDialog();
-				$scope.callServer($scope.tableState, 0);
+				$scope.callServer($scope.tableState);
 			})
 		})
 	}

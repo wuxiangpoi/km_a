@@ -33,7 +33,7 @@ let controller = ($scope,baseService,userService) => {
         })
     }
     $scope.logout = function () {
-        baseService.confirm('退出', '是否退出登录？',true, (vm) => {
+        baseService.confirm('退出', '是否退出登录？', (vm) => {
 			vm.isPosting = true;
 			baseService.postData(baseService.api.auth + 'logout', {}, () => {
                 vm.isPosting = false;

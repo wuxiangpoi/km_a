@@ -1,4 +1,5 @@
 import {citiesNo } from '../services/cityService'
+import png64 from '../img/64-64.png'
 export default app => {
     app.directive('emapChart', ['$window', 'baseService', ($window, baseService) => {
         let controller = ($scope, element, attrs) => {
@@ -172,7 +173,7 @@ export default app => {
                             'width': '50px',
                             'height': '50px',
                             'padding':'5px',
-                            'background': 'url("${png64}") no-repeat',
+                            'background': `url(${png64}) no-repeat`,
                             'background-size':'50px 50px',
                             'text-align': 'center',
                             'font-size': '12px',

@@ -55,7 +55,7 @@ const dictionaryController = ($scope, baseService) => {
 		})
 	}
 	$scope.del = (item) => {
-		baseService.confirm('删除', '确定删除字典：' + item.name,true, (vm) => {
+		baseService.confirm('删除', '确定删除字典：' + item.name, (vm) => {
 			vm.isPosting = true;
 			baseService.postData(baseService.api.dictionary + 'deleteDictionary', {
 				did: item.id

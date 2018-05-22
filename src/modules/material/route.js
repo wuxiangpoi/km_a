@@ -7,7 +7,7 @@ export default app => {
             name: 'dashboard.material',
             url: '/material',
             template: require('./template.html'),
-            info: '模版管理|素材管理',
+            info: '模板管理|素材管理',
             controller: 'materialController',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {

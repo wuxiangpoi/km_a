@@ -14,6 +14,35 @@ const userController = ($scope, baseService) => {
 		}
 		baseService.initTable($scope, tableState, baseService.api.admin + 'getAdminPageList');
 	}
+	$scope.initPage = function(){
+		$scope.callServer($scope.tableState, 0)
+	}
+	baseService.getJson(baseService.api.admin + 'getAdminRoleInfoList ', {}, function (data) {
+		$scope.roleOptions = [{
+			name: '角色',
+			val: ''
+		}];
+		for(let i = 0; i < data.length; i ++){
+			$scope.roleOptions.push({
+				name: data[i].name,
+				val: data[i].id
+			})
+		}
+	})
+	$scope.roleStatusOptions = [
+		{
+			val: '',
+			name: '状态'
+		},
+		{
+			val: 1,
+			name: '激活'
+		},
+		{
+			val: 0,
+			name: '禁用'
+		}
+	]
 	$scope.save = (item) => {
 		let postData = {
 			id: item ? item.id : '',
@@ -93,13 +122,15 @@ const userController = ($scope, baseService) => {
 		})
 	}
 	$scope.changeEnabled = function (item, index) {
-		baseService.confirm(item.enabled == 0 ? '解禁账户' : '禁用账户', item.enabled == 0 ? '您确定解禁管理员：' + item.name : '您确定禁用管理员：' + item.name, true,
+		baseService.confirm(item.enabled == 0 ? '解禁账户' : '禁用账户', item.enabled == 0 ? '您确定解禁管理员：' + item.name : '您确定禁用管理员：' + item.name,
 			(vm) => {
 				let me = this;
+				vm.isPosting = true;
 				baseService.postData(baseService.api.admin + 'setAdminEnable', {
 					uid: item.id,
 					enabled: item.enabled == 0 ? 1 : 0
 				}, (res) => {
+					vm.isPosting = false;
 					baseService.alert('操作成功', 'success');
 					vm.closeThisDialog();
 					$scope.callServer($scope.tableState);

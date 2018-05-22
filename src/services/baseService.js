@@ -71,7 +71,7 @@ export default app => {
                     duration: 2
                 });
             },
-            confirm: function (title, info, posting, cb) {
+            confirm: function (title, info, cb) {
                 ngDialog.openConfirm({
                     template: confirmTpl,
                     cache: false,
@@ -80,10 +80,8 @@ export default app => {
                     controller: ['$scope', function ($scope) {
                         $scope.info = info
                         $scope.title = title
-                        $scope.isPosting = !posting;
                         $scope.confirm = () => {
-                            $scope.isPosting = posting;
-                            cb($scope);
+                            cb($scope,ngDialog);
                         }
 
                     }],
@@ -184,7 +182,7 @@ export default app => {
                     me.alert('网络或服务端异常', 'warning')
                 })
             },
-            postData: function (url, params, cb) {
+            postData: function (url, params, cb, errCb) {
                 var me = this;
                 $http.post(url, params, {
                     headers: {
@@ -206,6 +204,9 @@ export default app => {
                         // return false;
                     } else {
                         me.alert(data.message, 'warning');
+                        if(errCb){
+                            errCb();
+                        }
                         return false;
                     }
                 }, function (res) {

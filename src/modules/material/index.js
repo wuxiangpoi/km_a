@@ -243,7 +243,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
         });
     }
     $scope.submitCheck = (item) => {
-        baseService.confirm('提交', '是否提交素材?', true, (vm) => {
+        baseService.confirm('提交', '是否提交素材?', (vm,ngDialog) => {
             var s = '';
             if (item) {
                 s = item.id;
@@ -251,7 +251,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
                 s = $scope.idsNoSubmitCheck.length ? $scope.idsNoSubmitCheck.join(',') : ''
             }
             if (s == '') {
-                vm.closeAll();
+                ngDialog.close();
                 baseService.alert('提交成功', 'success');
                 $scope.ids = [];
                 $scope.idsNoSubmitCheck = [];
@@ -262,7 +262,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
                 }, () => {
                     vm.isPosting = false;
                     baseService.alert('提交成功', 'success');
-                    vm.closeAll();
+                    ngDialog.close();
                     $scope.callServer($scope.tableState, 0);
                     $scope.ids = [];
                     $scope.idsNoSubmitCheck = [];
@@ -272,7 +272,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
         })
     }
     $scope.del = (item) => {
-        baseService.confirm('删除素材', "确定删除素材：" + item.name + "?", true, (vm) => {
+        baseService.confirm('删除素材', "确定删除素材：" + item.name + "?",(vm) => {
             vm.isPosting = true;
             baseService.postData(baseService.api.material + 'delMaterial', {
                 id: item.id

@@ -14,6 +14,7 @@ module.exports = function (app) {
         //生产环境路由配置
         $stateProvider.state('dashboard.templateList', {
             url: '/templateList',
+            info: '模板管理',
             template: tplList,
             controller: ctrlList
         }).state('dashboard.templateAdd', {

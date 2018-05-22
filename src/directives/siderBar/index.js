@@ -100,7 +100,7 @@ let controller = ($rootScope, $scope, $state, baseService) => {
             }
         ]
     }, {
-        name: '模版管理',
+        name: '模板管理',
         auth: $rootScope.perms(8),
         collapseVar: 8,
         state: '',
@@ -114,7 +114,7 @@ let controller = ($rootScope, $scope, $state, baseService) => {
                 icon: ''
             },
             {
-                name: '模版管理',
+                name: '模板管理',
                 auth: $rootScope.perms(82),
                 collapseVar: 8,
                 state: 'dashboard.templateList',

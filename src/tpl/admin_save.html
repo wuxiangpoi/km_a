@@ -47,7 +47,7 @@
         <div class="form-group form-group-sm clearfix">
             <label class="col-sm-3 form_right">邮箱</label>
             <div class="col-sm-9 form_input">
-                <input type="text" class="form-control" ng-pattern="/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/"  name="email" ng-model="data.email" />
+                <input type="text" class="form-control" ng-pattern="/^[a-zA-Z0-9_-]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/"  name="email" ng-model="data.email" />
                 <div class="help-block" ng-messages="adminForm.email.$error" ng-if="isShowMessage">
                     <p ng-message="pattern">请输入正确邮箱</p>
                 </div>

@@ -131,11 +131,13 @@ const roleController = ($scope, baseService) => {
 	}
 
 	$scope.del = function (item) {
-		baseService.confirm('删除', '您确定删除角色：' + item.name + '?',true,
+		baseService.confirm('删除', '您确定删除角色：' + item.name + '?',
 			function (vm) {
+				vm.isPosting = true;
 				baseService.postData(baseService.api.admin + 'deleteAdminRoleInfo', {
 					id: item.id
 				}, function () {
+					vm.isPosting = false;
 					vm.closeThisDialog();
 					baseService.alert("删除成功", 'success');
 					$scope.callServer($scope.tableState);

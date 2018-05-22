@@ -10,12 +10,16 @@
 	<div class="content-wrap">
 		<div class="table-wrapper">
 				<div class="clearfix">
+						<div class="selectWrap clearfix">
+								<km-select options="roleOptions" selected="sp.role" val="val" name="name" change="initPage"></km-select>
+								<km-select options="roleStatusOptions" selected="sp.enabled" val="val" name="name" change="initPage"></km-select>
+							</div>
 						<div class="fr">
 							<div class="input-group serchWrap">
 								<input type="text" class="form-control" ng-model="sp.search" ng-keyup="myKeyup($event,initPage)" placeholder="登录账号/账号名称">
-								<span class="input-group-btn">
+								<span class="input-group-btn" ng-click="initPage()">
 									<button type="button" class="btn btn-primary">
-										<i type="button" ng-click="initPage()" class="fa fa-search">
+										<i type="button" class="fa fa-search">
 										</i>
 									</button>
 								</span>

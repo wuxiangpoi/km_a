@@ -81,8 +81,8 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 					baseService.showSchedule(pitem, 2, chartService);
 				} else {
 					item.detailType = 0;
-					item.status = 1;
-					baseService.confirmDialog(750, '节目预览', item, programDetailsTpl, function (ngDialog, vm) {
+					item.nstatus = '审核通过';
+					baseService.confirmDialog(750, '节目预览', item, programDetailsTpl, function (vm) {
 
 					}, function (vm) {
 						programService.getProgramById(pitem.pid, $stateParams.id ? $stateParams.id : item.domain, function (program) {
@@ -128,12 +128,14 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 			case 8:
 			case 9:
 			case 10:
-				baseService.confirm('终端操作', "确定对当前选中的设备执行命令：" + switchCommand(command) + "?", true, function (vm) {
+				baseService.confirm('终端操作', "确定对当前选中的设备执行命令：" + switchCommand(command) + "?",function (vm) {
+					vm.isPosting = true;
 					baseService.postData(baseService.api.terminalCommandSend + 'sendCommand', {
 							tids: tids,
 							command: command
 						},
 						function (data) {
+							vm.isPosting = false;
 							vm.closeThisDialog();
 							$scope.sendCommand()
 							baseService.alert('操作成功', 'success')
@@ -171,12 +173,14 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 					}
 					vm.opOptions = opOptions;
 					vm.upDate = function (item) {
-						baseService.confirm('终端升级', "确定升级该终端：" + item.name + "?", true,function (vm) {
+						baseService.confirm('终端升级', "确定升级该终端：" + item.name + "?",function (vm) {
+							vm.isPosting = true;
 							baseService.postData(baseService.api.terminalCommandSend + 'sendCommand', {
 								tids: tids,
 								version: item.id,
 								command: 31
 							}, function () {
+								vm.isPosting = false;
 								vm.closeThisDialog();
 								baseService.alert('升级成功', 'success', true);
 							})
@@ -267,13 +271,18 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 				vm.callServer(vm.tableState);
 			}
 			vm.migrate = function (item) {
-				baseService.confirm('迁入终端', '确定迁入企业：' + item.name + '?',true, function (vm) {
+				baseService.confirm('迁入终端', '确定迁入企业：' + item.name + '?',function (vm,ngDialog) {
+					vm.isPosting = true;
 					baseService.postData(baseService.api.apiUrl + '/api/terminalMigrate/migrateTerminalsByIds', {
 						tids: $scope.ids.join(','),
 						domainTo: item.key
 					}, function () {
-						vm.closeAll();
+						vm.isPosting = false;
+						ngDialog.close();
 						baseService.alert('迁入成功', 'success');
+					},function(){
+						vm.isPosting = false;
+						ngDialog.close();
 					})
 				})
 			}
