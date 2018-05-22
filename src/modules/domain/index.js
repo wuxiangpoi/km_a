@@ -97,7 +97,23 @@ const domainController = ($scope, baseService, FileUploader) => {
 
 		}, function (vm) {
 			vm.payTypeOptions = payTypeOptions;
-
+			vm.updateSelection = function ($event, value, chkName, pos) {
+				var checkbox = $event.target;
+				var checked = checkbox.checked;
+				if (checked) {
+					if(chkName == 'ledShow'){
+						vm.data.ledShow = 1
+					}else{
+						vm.data[chkName][pos] = value;
+					}
+				} else {
+					if(chkName == 'ledShow'){
+						vm.data.ledShow = 0
+					}else{
+						vm.data[chkName][pos] = '';
+					}
+				}
+			}
 		})
 	}
 	$scope.saveLogo = function (per) {

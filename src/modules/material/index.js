@@ -64,7 +64,9 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
         baseService.showMaterial(item, 0);
     }
     $scope.save = function () {
-        baseService.confirmDialog(720, '添加素材', {}, materialSaveTpl, function (vm) {
+        baseService.confirmDialog(720, '添加素材', {
+            showTip: true
+        }, materialSaveTpl, function (vm) {
             if (vm.uploader.queue.length) {
                 var filenameArray = [];
                 for (var i = 0; i < vm.uploader.queue.length; i++) {
@@ -234,7 +236,6 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
                     baseService.alert(item ? '修改成功' : '添加成功', 'success');
                 }, function (msg) {
                     vm.isPosting = false;
-                    baseService.alert(msg, 'warning', true)
                 })
 
             } else {

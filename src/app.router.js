@@ -18,6 +18,7 @@ import terminalcommand from './modules/terminalcommand/route.js'
 import temp from './modules/temp/route.js'
 import terminalmigrate from './modules/terminalmigrate/route.js'
 import materialchart from './modules/materialchart/route.js'
+import terminalchart from './modules/terminalchart/route.js'
 
 import programRouter from './modules/program/programRouter';
 import templateRouter from './modules/template/templateRouter';
@@ -44,6 +45,7 @@ const states = [
     errPage,
     terminalmigrate,
     materialchart,
+    terminalchart,
     programRouter,
     templateRouter
 ];

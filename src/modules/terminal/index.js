@@ -81,14 +81,16 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 					baseService.showSchedule(pitem, 2, chartService);
 				} else {
 					item.detailType = 0;
-					item.nstatus = '审核通过';
-					baseService.confirmDialog(750, '节目预览', item, programDetailsTpl, function (vm) {
+					programService.getProgramById(pitem.pid, $stateParams.id ? $stateParams.id : item.domain, function (program) {
+						
+						program.nstatus = '审核通过';
+						baseService.confirmDialog(750, '节目预览', program, programDetailsTpl, function (vm) {
 
-					}, function (vm) {
-						programService.getProgramById(pitem.pid, $stateParams.id ? $stateParams.id : item.domain, function (program) {
+						}, function (vm) {
 							vm.program = program;
-						});
-					},0)
+						},0)
+					});
+					
 				}
 
 

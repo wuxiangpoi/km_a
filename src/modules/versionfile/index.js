@@ -17,7 +17,9 @@ const versionfileController = ($rootScope,$scope, baseService, FileUploader) => 
 	}
 	$scope.opOptions = opOptions;
 	$scope.save = () => {
-		baseService.confirmDialog(720, '上传版本文件', {}, verfilesSaveTpl, (vm) => {
+		baseService.confirmDialog(720, '上传版本文件', {
+			showTip: false
+		}, verfilesSaveTpl, (vm) => {
 			if (vm.uploader.queue.length) {
 				var filenameArray = [];
 				for (var i = 0; i < vm.uploader.queue.length; i++) {

@@ -46,7 +46,7 @@ let controller = ($rootScope, $scope, $state, baseService) => {
         auth: $rootScope.perms(3),
         collapseVar: 3,
         state: 'dashboard.terminalreport',
-        states: ['dashboard.terminalreport','dashboard.terminal'],
+        states: ['dashboard.terminalreport', 'dashboard.terminal'],
         icon: 'iconfont icon-zhongduanguanli'
     }, {
         name: '审核管理',
@@ -82,9 +82,15 @@ let controller = ($rootScope, $scope, $state, baseService) => {
         auth: $rootScope.perms(9),
         collapseVar: 6,
         state: '',
-        states: ['dashboard.materialchart', 'dashboard.income'],
+        states: ['dashboard.materialchart', 'dashboard.income','dashboard.terminalchart'],
         icon: 'fa fa-tasks fa-fw',
         children: [{
+                name: '终端统计',
+                auth: true,
+                collapseVar: 6,
+                state: 'dashboard.terminalchart',
+                icon: ''
+            }, {
                 name: '内容统计',
                 auth: true,
                 collapseVar: 6,
@@ -153,7 +159,7 @@ let controller = ($rootScope, $scope, $state, baseService) => {
             }
         }
         if (toState.name == 'dashboard.templateAdd' || toState.name == 'dashboard.templateEdit') {
-                $('body').addClass('mini-navbar');
+            $('body').addClass('mini-navbar');
         } else {
             if (fromState.name == 'dashboard.templateAdd' || toState.name == 'dashboard.templateEdit') {
                 if ($('body').hasClass('mini-navbar')) {
