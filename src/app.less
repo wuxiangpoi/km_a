@@ -362,6 +362,9 @@ body.mini-navbar {
   .navbar-static-top {
     padding-left: 80px!important;
 }
+.tbxeditWrapper {
+  padding-left: 70px;
+}
 }
 
 .dropdown-toolTip-wrap {
@@ -440,7 +443,8 @@ body.mini-navbar {
   width: 100%;
   height: 100%;
   padding-top: 65px;
-  padding-left: 0px;
+  padding-left: 220px;
+  transition: .3s;
 }
 
 
@@ -469,6 +473,33 @@ body.mini-navbar {
   }
   .modalDetail {
     font-size: 12px;
+    dl {
+      margin-bottom: 0;
+      dt {
+        color: @grey;
+        font-weight: 400;
+        position: relative;
+        overflow: hidden;
+        &::after {
+          content: '';
+          height: 1px;
+          width: 100%;
+          position: absolute;
+          background: #ddd;
+          top: 8px;
+          left: 65px;
+        }
+      }
+    }
+    .control-label-left {
+      font-weight: 400;
+      line-height: 24px;
+      padding-right: 0;
+      margin-bottom: 0;
+      &+div {
+        line-height: 24px;
+      }
+    }
     .control-label {
       line-height: 24px;
       &+div {

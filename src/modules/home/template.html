@@ -1,19 +1,5 @@
-<div>
-    <div class="content-wrap homePage">
-            <div class="row">
-                <div class="col-sm-12 p0">
-                    <div class="chartWrap mapWrap">
-                        <div style="height:522px;" id="allmap" emap-chart map-data="{{mapOption}}"></div>
-                        <div class="mapTip">
-                            <div class="col-sm-12 p0" ng-repeat="item in mapInfo">
-                                <div class="fl">{{item.name}}</div>
-                                <div class="splitLine fl"></div>
-                                <div class="fl">{{item.value}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
+<div class="homePage">
+    <div class="chartWrap mapWrap">
+        <div id="allmap" emap-chart></div>
+    </div>
 </div>

@@ -146,7 +146,7 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 
 			var materialOption = {
 				title: {
-					text: '2017年素材统计',
+					text: '素材统计',
 					x: 'center',
 					textStyle: {
 						color: '#00a0e9'
@@ -349,7 +349,7 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 			var increaseCountList = [];
 			var programOption = {
 				title: {
-					text: '2017年节目统计',
+					text: '节目统计',
 					x: 'center',
 					textStyle: {
 						color: '#00a0e9'

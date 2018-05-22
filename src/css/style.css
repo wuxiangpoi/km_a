@@ -4048,7 +4048,7 @@ a:focus {
 #page-wrapper {
   padding: 0 15px;
   min-height: 568px;
-  position: relative !important;
+  height: 100%;
 }
 
 @media (min-width: 768px) {

@@ -3,7 +3,13 @@
 }
 
 .homePage {
-  padding: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 65px 0 0 220px;
+  transition: .3s;
 }
 
 .anchorBL {
@@ -14,13 +20,7 @@
   background: none;
   padding: 0;
 }
-.row {
-  margin: -23px -25px 0 -25px!important;
-}
 
-.chartPage .row {
-  margin: 0;
-}
 
 .chartWrap {
   background: -webkit-radial-gradient(#0a2439,#041828);
@@ -33,42 +33,19 @@
   /* 标准的语法 */
 }
 .mapWrap {
-  position: relative;
-}
-.mapWrap .mapTip {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  color: #08a3ad;
+  min-height: 260px;
   width: 100%;
-  font-size: 12px;
+  height: 100%;
+  margin-bottom: 15px;
+  #allmap {
+      height: 100%;
+      .BMap_bubble_title {
+          font-weight: bold;
+      }
+  }
 }
-.mapWrap .mapTip .splitLine {
-  width: 4px;
-  background: #06cad5;
-  height: 22px;
-  margin: 0 4px;
-}
-
-
-@media (max-width: 1500px){
-  .col-md-6 {
-    width: 50%;
-}
-.col-md-6 > div {
-    padding-right: 0!important;
-}
-.col-md-12 {
-  width: 100%;
-}
-}
-
-@media (max-width: 768px){
-  .col-xs-12 {
-    width: 100%;
-}
-.col-xs-12 > div {
-    padding: 0!important;
-}
-
+body.mini-navbar {
+  .homePage {
+    padding: 65px 0 0 70px;
+  }
 }

@@ -1,4 +1,4 @@
-import {terminalStatusOptions,scheduleStatusOptions} from './options';
+import {terminalStatusOptions,scheduleStatusOptions,opOptions} from './options';
 import {citiesNo} from '../services/cityService'
 
 export default app => {
@@ -81,6 +81,17 @@ export default app => {
             return finalName.join('>');
         }
     }]);
+    app.filter('opOptionsTxt', function () {
+        return function (status) {
+            var statusTxt = '';
+            for (var i = 0; i < opOptions.length; i++) {
+                if (opOptions[i].val == status) {
+                    statusTxt = opOptions[i].name;
+                }
+            }
+            return statusTxt;
+        };
+    });
     app.filter('scheduleStatusTxt', function () {
         return function (status) {
             var statusTxt = '';
