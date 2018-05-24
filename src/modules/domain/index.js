@@ -62,11 +62,10 @@ const domainController = ($scope, baseService, FileUploader) => {
 			contact: item ? item.contact : '',
 			materialCheck: item ? materialCheck : ['1', ''],
 			programCheck: item ? programCheck : ['1', '', '0'],
-			// programCmdCheck: item ? item.programCmdCheck.split(',') : [''],
 			ledShow: item ? item.ledShow : 0
 		}
 		baseService.confirmDialog(540, item ? '编辑企业' : '添加企业', postData, domainSaveTpl, (vm) => {
-			if (vm.modalForm.$valid) {
+			if (vm.modalForm.$valid && vm.data.contractEnd >= vm.data.contractStart) {
 				let onData = {
 					id: postData.id,
 					phone: postData.phone,
@@ -79,10 +78,10 @@ const domainController = ($scope, baseService, FileUploader) => {
 					contractStart: postData.contractStart.split('-').join(''),
 					contractEnd: postData.contractEnd.split('-').join(''),
 					contact: postData.contact,
-					materialCheck: materialCheck,
-					programCheck: programCheck,
+					materialCheck: postData.materialCheck,
+					programCheck: postData.programCheck,
 					// programCmdCheck: item ? item.programCmdCheck.split(',') : [''],
-					ledShow: item ? item.ledShow : 0
+					ledShow: postData.ledShow
 				}
 				let url = item ? 'modifyDomain' : 'addDomain';
 				onData.key = postData.key.toLowerCase();
@@ -205,13 +204,15 @@ const domainController = ($scope, baseService, FileUploader) => {
 	}
 	$scope.changeEnabled = function (item, index) {
 		baseService.confirm(item.status == 0 ? '启用企业' : '冻结企业', '您确定' + (item.status == 0 ? '启用' : '冻结') +
-			'企业：' + item.name + '?', true,
+			'企业：' + item.name + '?',
 			(vm) => {
 				let me = this;
+				vm.isPosting = true;
 				baseService.postData(baseService.api.domain + 'setDomainStatus', {
 					did: item.id,
 					status: item.status == 1 ? 0 : 1
 				}, (res) => {
+					vm.isPosting = false;
 					vm.closeThisDialog();
 					baseService.alert('操作成功', 'success');
 					$scope.callServer($scope.tableState, 0);

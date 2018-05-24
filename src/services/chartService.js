@@ -247,7 +247,6 @@ export default app => {
                 playData.series[1].data = endDatelist;
                 playData.xAxis.min = chartData.minDate;
                 playData.xAxis.max = chartData.maxDate;
-                console.log(playData)
                 return playData;
             },
            initChartPieTerminal(dataList) {

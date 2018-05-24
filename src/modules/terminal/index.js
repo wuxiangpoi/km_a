@@ -13,7 +13,7 @@ import {
 } from '../../filter/options';
 
 
-const terminalController = ($scope, $rootScope, $stateParams, baseService,sentencesService,chartService,programService) => {
+const terminalController = ($scope, $rootScope, $stateParams, baseService, sentencesService, chartService, programService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
 	if ($stateParams.domain) {
@@ -23,7 +23,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 	$scope.tableState = {};
 	$scope.ids = [];
 	$scope.idsNormal = [];
-	$scope.callServer = function (tableState,page) {
+	$scope.callServer = function (tableState, page) {
 		if (baseService.isRealNum(page)) {
 			$scope.tableState.pagination.start = page * $scope.sp.length;
 		}
@@ -82,21 +82,21 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 				} else {
 					item.detailType = 0;
 					programService.getProgramById(pitem.pid, $stateParams.id ? $stateParams.id : item.domain, function (program) {
-						
+
 						program.nstatus = '审核通过';
 						baseService.confirmDialog(750, '节目预览', program, programDetailsTpl, function (vm) {
 
 						}, function (vm) {
 							vm.program = program;
-						},0)
+						}, 0)
 					});
-					
+
 				}
 
 
 			}
 
-		},0)
+		}, 0)
 	}
 	$scope.details = function (item) {
 		baseService.getJson(baseService.api.terminal + 'getTerminalInfo', {
@@ -130,7 +130,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 			case 8:
 			case 9:
 			case 10:
-				baseService.confirm('终端操作', "确定对当前选中的设备执行命令：" + switchCommand(command) + "?",function (vm) {
+				baseService.confirm('终端操作', "确定对当前选中的设备执行命令：" + switchCommand(command) + "?", function (vm) {
 					vm.isPosting = true;
 					baseService.postData(baseService.api.terminalCommandSend + 'sendCommand', {
 							tids: tids,
@@ -163,7 +163,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 					vm.sp = {};
 					vm.tableState = {};
 					vm.ids = [];
-					vm.callServer = function (tableState,page) {
+					vm.callServer = function (tableState, page) {
 						if (baseService.isRealNum(page)) {
 							$scope.tableState.pagination.start = page * $scope.sp.length;
 						}
@@ -171,11 +171,11 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 					}
 					vm.initPage = () => {
 						vm.ids = [];
-						vm.callServer(vm.tableState,0);
+						vm.callServer(vm.tableState, 0);
 					}
 					vm.opOptions = opOptions;
 					vm.upDate = function (item) {
-						baseService.confirm('终端升级', "确定升级该终端：" + item.name + "?",function (vm) {
+						baseService.confirm('终端升级', "确定升级该终端：" + item.name + "?", function (vm) {
 							vm.isPosting = true;
 							baseService.postData(baseService.api.terminalCommandSend + 'sendCommand', {
 								tids: tids,
@@ -189,8 +189,8 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 						})
 
 					}
-					
-				},0)
+
+				}, 0)
 				break;
 		}
 	}
@@ -206,7 +206,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 		}
 		baseService.confirmDialog(540, '发布通知', data, sendNoticeTpl, function (vm) {
 			vm.isShowMessage = false;
-			if (vm.noticeForm.$valid) {
+			if (vm.noticeForm.$valid && data.contractEnd >= data.contractStart) {
 				if (sentencesService.checkCon(vm.data.noticeText).sentencesArr.length) {
 					baseService.alert('抱歉，您输入的内容包含被禁止的词汇，建议修改相关内容', 'warning');
 					vm.data.noticeText = sentencesService.checkCon(vm.data.noticeText).sentencesCon;
@@ -240,19 +240,19 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 			vm.data.start_m = '00';
 			vm.data.end_h = '00';
 			vm.data.end_m = '00';
-			vm.$watch('startTime',function(o,n){
-				if(o != undefined){
+			vm.$watch('startTime', function (o, n) {
+				if (o != undefined) {
 					vm.data.start_h = o.split(':')[0];
 					vm.data.start_m = o.split(':')[1];
 				}
-				
+
 			})
-			vm.$watch('endTime',function(o,n){
-				if(o != undefined){
+			vm.$watch('endTime', function (o, n) {
+				if (o != undefined) {
 					vm.data.end_h = o.split(':')[0];
 					vm.data.end_m = o.split(':')[1];
 				}
-				
+
 			})
 		})
 	}
@@ -273,7 +273,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 				vm.callServer(vm.tableState);
 			}
 			vm.migrate = function (item) {
-				baseService.confirm('迁入终端', '确定迁入企业：' + item.name + '?',function (vm,ngDialog) {
+				baseService.confirm('迁入终端', '确定迁入企业：' + item.name + '?', function (vm, ngDialog) {
 					vm.isPosting = true;
 					baseService.postData(baseService.api.apiUrl + '/api/terminalMigrate/migrateTerminalsByIds', {
 						tids: $scope.ids.join(','),
@@ -281,18 +281,33 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService,senten
 					}, function () {
 						vm.isPosting = false;
 						ngDialog.close();
+						$scope.callServer($scope.tableState);
 						baseService.alert('迁入成功', 'success');
-					},function(){
+					}, function () {
 						vm.isPosting = false;
 						ngDialog.close();
 					})
 				})
 			}
-		},0)
+		}, 0)
+	}
+	$scope.delTerminals = () => {
+		baseService.confirm('删除终端', '确定删除所选终端', (vm) => {
+			let me = this;
+			vm.isPosting = true;
+			baseService.postData(baseService.api.apiUrl + '/api/terminalMigrate/deleteTerminalsByIds', {
+				tids: $scope.ids.join(',')
+			}, (res) => {
+				vm.isPosting = false;
+				vm.closeThisDialog();
+				baseService.alert('删除成功', 'success');
+				$scope.callServer($scope.tableState);
+			})
+		})
 	}
 }
 
-terminalController.$inject = ['$scope', '$rootScope', '$stateParams', 'baseService','sentencesService','chartService','programService'];
+terminalController.$inject = ['$scope', '$rootScope', '$stateParams', 'baseService', 'sentencesService', 'chartService', 'programService'];
 
 export default angular => {
 	return angular.module('terminalModule', []).controller('terminalController', terminalController);

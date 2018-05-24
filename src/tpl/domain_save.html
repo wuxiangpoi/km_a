@@ -56,23 +56,30 @@
         <div class="col-sm-9 p0">
             <div class="form-group col-sm-5 pdr0">
                 <div class="dateTimeWrap">
-                    <input type="text" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
+                    <input  name="contractStart" required id="contractStart" type="text" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
                         ng-model="data.contractStart" placeholder="起始日期" data-autoclose="1" bs-datepicker>
-                    <i class="fa fa-calendar"></i>
+                    <label for="contractStart" class="fa fa-calendar"></label>
                 </div>
-
+                <div class="help-block" ng-messages="modalForm.contractStart.$error" ng-if="isShowMessage">
+                        <p ng-message="required">请输入起始日期</p>
+                    </div>
             </div>
             <div class="form-group col-sm-2 lh34 text-center">
                 至
             </div>
-            <div class="form-group col-sm-5 p0">
+            <div class="form-group col-sm-5 pdl0">
                 <div class="dateTimeWrap">
-                    <input type="text" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
+                    <input  name="contractEnd" required type="text" id="contractEnd" class="form-control dateSel" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
                         ng-model="data.contractEnd" placeholder="截止日期" data-autoclose="1" bs-datepicker>
-                    <i class="fa fa-calendar"></i>
+                    <label for="contractEnd" class="fa fa-calendar"></label>
                 </div>
-
+                <div class="help-block" ng-messages="modalForm.contractStart.$error" ng-if="isShowMessage">
+                        <p ng-message="required">请输入截止日期</p>
+                    </div>
             </div>
+            <div class="help-block" style="padding-left:15px;" ng-if="data.contractStart > data.contractEnd && isShowMessage">
+                    <p>结束日期开始日期不得大于</p>
+                </div>
         </div>
     </div>
     <div class="form-group clearfix">

@@ -44,6 +44,11 @@
 		    bs-tooltip class="btn btn-primary warning">
 			终端迁移
 		</button>
+		<button ng-if="perms(36)" type="button" ng-click="ids.length != 0?delTerminals():''" ng-class="{'disabled-sham': ids.length == 0}"
+		    data-trigger="hover" bs-enabled="ids.length == 0" data-placement="bottom" data-type="success" data-title="{{'请先选择终端'}}"
+		    bs-tooltip class="btn btn-primary warning">
+			终端删除
+		</button>
 	</div>
 	<ul class="nav nav-tabs contentTabs">
 		<li ui-sref="dashboard.terminalreport" ui-sref-active="active">

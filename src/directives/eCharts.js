@@ -9,7 +9,6 @@ export default app => {
                 var option = $scope.$eval(attrs['eoption']);
                 if (angular.isObject(option)) {
                     myChart.setOption(option);
-                    console.log(option)
                     $window.addEventListener('resize', function () {
                         myChart.resize();
                     })

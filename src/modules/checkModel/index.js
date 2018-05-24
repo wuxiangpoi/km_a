@@ -51,7 +51,7 @@ const checkModelController = ($rootScope, $scope, baseService, $sce, programServ
 					vm.imgPreview = function (item) {
 						$rootScope.$broadcast('callImg', item, 1);
 					}
-				}, 1)
+				}, detailType)
 
 			});
 		} else {

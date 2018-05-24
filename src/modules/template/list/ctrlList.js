@@ -157,7 +157,7 @@ module.exports = [
         $scope.public = function (item) {
             baseService.confirm('发布模板', "确定发布模板：" + item.name + "?",function (vm) {
                 vm.isPosting = true;
-                baseService.postData(baseService.api.apiUrl + '/api/templatePublic/deleteTemplatePublic', {
+                baseService.postData(baseService.api.apiUrl + '/api/templatePublic/releaseTemplatePublic', {
                     id: item.id
                 }, function (item) {
                     vm.isPosting = false;

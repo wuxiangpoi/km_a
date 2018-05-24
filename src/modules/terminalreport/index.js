@@ -16,7 +16,7 @@ const terminalreportController = ($scope, $rootScope, $stateParams, baseService)
 		$scope.callServer($scope.tableState, 0)
     }
     $scope.exportExcel = function (item) {
-        baseService.confirm('导出表格', '确定将当前企业的所有的终端信息导出excel表格?', true,function (vm) {
+        baseService.confirm('导出表格', '确定将当前企业的所有的终端信息导出excel表格?',function (vm) {
             vm.closeThisDialog();
             window.open(baseService.api.terminal + 'exportTerminal?domain=' +
                 item.domainCode);

@@ -5,6 +5,8 @@ import confirmDialogTpl from '../tpl/confirm_dialog.tpl.html'
 import materialDetailTpl from '../tpl/material_detail.html'
 import modalFooterCheckTpl from '../tpl/modal_footerCheck.html'
 import scheduleDetailsTpl from '../tpl/schedule_details.html'
+import programDetailsTpl from '../tpl/program_details.html'
+
 export default app => {
     app.factory('baseService', ['$rootScope', '$http', '$state', 'ngDialog', '$alert','programService', ($rootScope, $http, $state, ngDialog, $alert,programService) => {
         let apiUrl = config.host;
@@ -380,6 +382,12 @@ export default app => {
                                 height: minLen * 30 + 30 + 'px',
                                 width: '719px'
                             }
+                            vm.showPlay = function (nitem) {
+                                nitem.pid = nitem.id;
+                                nitem.domain = item.domain;
+                                nitem.pStatus = 1;
+                                me.showProgram(nitem);
+                            }
                         }
                         vm.eoption = chartService.initChartSchedule(vm.playList, minLen);
                     },0);
@@ -402,18 +410,12 @@ export default app => {
             showProgram: function (item, detailType, cb) {
                 var me = this;
                 programService.getProgramById(item.pid, item.domain, function (program) {
-                    program.status = item.pStatus ? item.pStatus : item.status;
-                    program.detailType = detailType;
-                    me.confirmDialog('节目预览', program, "tpl/program_details.html", function (type, ngDialog, vm) {
-                        if (cb) {
-                            cb(type);
-                        }
+						
+                    baseService.confirmDialog(750, '节目预览', program, programDetailsTpl, function (vm) {
+
                     }, function (vm) {
                         vm.program = program;
-                        vm.programPreview = function (program) {
-                            $rootScope.$broadcast('callImg', program, 2);
-                        }
-                    });
+                    },0)
                 });
 
             },

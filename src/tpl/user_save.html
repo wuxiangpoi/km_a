@@ -45,7 +45,7 @@
             <label class="col-sm-3 control-label">联系人</label>
             <div class="col-sm-9">
                 <input type="text" required class="form-control" name="contact" ng-model="data.contact" />
-                <div class="help-block" ng-messages="userForm.contact.$error" ng-if="isShowMessage">
+                <div class="help-block" ng-messages="modalForm.contact.$error" ng-if="isShowMessage">
                     <p ng-message="required">请输入联系人</p>
                 </div>
             </div>
@@ -54,7 +54,7 @@
             <label class="col-sm-3 control-label">邮箱</label>
             <div class="col-sm-9">
                 <input type="text" required ng-pattern="/^[a-zA-Z0-9_-]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/" class="form-control" name="email" ng-model="data.email" />
-                <div class="help-block" ng-messages="userForm.email.$error" ng-if="isShowMessage">
+                <div class="help-block" ng-messages="modalForm.email.$error" ng-if="isShowMessage">
                     <p ng-message="required">请输入邮箱</p>
                     <p ng-message="pattern">请输入正确邮箱</p>
                 </div>
@@ -64,7 +64,7 @@
             <label class="col-sm-3 control-label">联系电话</label>
             <div class="col-sm-9">
                 <input type="text" required ng-pattern="/^1[0-9]\d{9}$/" class="form-control" name="phone" ng-model="data.phone" />
-                <div class="help-block" ng-messages="userForm.phone.$error" ng-if="isShowMessage">
+                <div class="help-block" ng-messages="modalForm.phone.$error" ng-if="isShowMessage">
                     <p ng-message="required">请输入联系电话</p>
                     <p ng-message="pattern">请输入正确手机号</p>
                 </div>

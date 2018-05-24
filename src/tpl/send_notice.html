@@ -14,13 +14,11 @@
         <div class="col-sm-9">
             <div class="col-sm-6 p0">
                 <div class="dateTimeWrap">
-                    <input type="text" required class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
+                    <input id="startDate" type="text" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
                         ng-model="startDate" name="startDate" placeholder="起始日期" data-autoclose="1" bs-datepicker>
-                    <i class="fa fa-calendar"></i>
+                    <label for="startDate" class="fa fa-calendar"></i>
                 </div>
-                <div class="help-block" ng-messages="noticeForm.startDate.$error" ng-if="isShowMessage">
-                    <p ng-message="required">请输入起始日期</p>
-                </div>
+               
             </div>
             <div class="col-sm-6 pdr0">
                 <input type="text" data-time-type="string" class="form-control" size="8" ng-model="data.startTime" name="startTime" bs-timepicker data-time-format="HH:mm" data-model-time-format="HH:mm" data-length="8"
@@ -34,22 +32,21 @@
         <div class="col-sm-9">
             <div class="col-sm-6 p0">
                 <div class="dateTimeWrap">
-                    <input type="text" required class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
+                    <input type="text" id="endDate" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
                         ng-model="endDate" name="endDate" placeholder="结束日期" data-autoclose="1" bs-datepicker>
-                    <i class="fa fa-calendar"></i>
+                    <i for="endDate" class="fa fa-calendar"></i>
                 </div>
-                <div class="help-block" ng-messages="noticeForm.endDate.$error" ng-if="isShowMessage">
-                    <p ng-message="required">请输入结束日期</p>
-                </div>
+                <div class="help-block" ng-if="isShowMessage">
+                        <p ng-if="startDate > endDate">开始日期不得大于结束日期</p>
+                    </div>
             </div>
             <div class="col-sm-6 pdr0">
                 <input type="text" data-time-type="string" class="form-control" size="8" ng-model="data.endTime" name="endTime" bs-timepicker data-time-format="HH:mm" data-model-time-format="HH:mm" data-length="8"
                     data-minute-step="1" data-arrow-behavior="picker">
             </div>
+            
         </div>
-        <!-- <div class="help-block" ng-if="isShowMessage">
-                <p ng-if="data.contractStart > data.contractEnd">开始日期不得大于结束日期</p>
-            </div> -->
+        
     </div>
 
 </form>

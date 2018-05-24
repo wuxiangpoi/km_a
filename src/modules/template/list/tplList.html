@@ -48,7 +48,7 @@
                             <i class="iconfont icon-xiazai"></i>
                                 {{template.hot}}
                         </span>
-                        <button style="margin-top: 2px;" ng-click="public(template)" class="btn btn-primary tableBtn btnGreen btn-sm fr">发布</button>
+                        <button style="margin-top: 2px;" ng-if="perms(824)" ng-click="public(template)" class="btn btn-primary tableBtn btnGreen btn-sm fr">发布</button>
                     </div>
                 </li>
 

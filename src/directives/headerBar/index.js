@@ -21,7 +21,7 @@ let controller = ($scope,baseService,userService) => {
                     newPassword: baseService.md5_pwd(vm.data.newPassword),
                     reNewPassword: baseService.md5_pwd(vm.data.reNewPassword)
                 }
-                m.isPosting = false;
+                vm.isPosting = true;
                 baseService.postData(baseService.api.auth + 'updatePwd', postData, function (data) {
                     vm.isPosting = false;
                     vm.closeThisDialog();
