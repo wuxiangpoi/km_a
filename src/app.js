@@ -10,7 +10,7 @@ import './app.less';
 // import './libs/bootstrap/dist/js/bootstrap.min.js'
 
 // import '../bower_components/jquery-ui/jquery-ui.js'
-import '../bower_components/layer/dist/theme/default/layer.css'
+//import '../bower_components/layer/dist/theme/default/layer.css'
 // import layer from '../bower_components/layer/dist/layer.js'
 
 let loadBasicModules = () => {

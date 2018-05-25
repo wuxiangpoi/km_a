@@ -230,7 +230,14 @@ module.exports = function () {
             new webpack.optimize.DedupePlugin(),
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
             // Minify all javascript, switch loaders to minimizing mode
-            new webpack.optimize.UglifyJsPlugin(),
+            new webpack.optimize.UglifyJsPlugin({
+                output: {
+                  comments: false,
+                },
+                compress: {
+                  warnings: false
+                }
+              }),
             new CopyWebpackPlugin([{
                 from: __dirname + '/static',
                 to: __dirname + '/dist/static'

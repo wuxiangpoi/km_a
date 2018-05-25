@@ -7,7 +7,8 @@ module.exports = {
         jqLibs: ['jquery', './bower_components/jquery-ui/jquery-ui.js', './bower_components/layer/dist/layer.js', './bower_components/jquery.cookie/jquery.cookie.js', './src/libs/bootstrap/dist/js/bootstrap.min.js'],
         angularLibs: [
             './bower_components/angular-animate/angular-animate.min.js', './src/libs/localService.js', './bower_components/oclazyload/dist/ocLazyLoad', './bower_components/angular-ui-sortable/sortable.js', './bower_components/angular-strap/dist/angular-strap.min.js', './bower_components/angular-strap/dist/angular-strap.tpl.min.js', './bower_components/ng-dialog/js/ngDialog.js', './bower_components/angular-file-upload/dist/angular-file-upload.min.js', './bower_components/angular-messages/angular-messages.min.js', './src/libs/smart-table/smart-table.js'
-        ]
+        ],
+        echart: ['./src/libs/chart/echarts.min.js']
     },
 
     output: {

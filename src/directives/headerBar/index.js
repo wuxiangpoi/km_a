@@ -1,4 +1,3 @@
-import angular from 'angular';
 import template from './template.html';
 import './style.less';
 import updatePasswordTpl from '../../tpl/update_password.html';

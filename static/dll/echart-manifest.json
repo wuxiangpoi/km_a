@@ -1,0 +1,6 @@
+{
+  "name": "echart_lib",
+  "content": {
+    "./src/libs/chart/echarts.min.js": 13
+  }
+}
