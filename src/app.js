@@ -91,7 +91,7 @@ dialogs(app);
 
 import appRouter from './app.router';
 
-//appRouter(app);
+appRouter(app);
 
 import tbodyTpl from './tpl/table.html'
 import tfooterTpl from './tpl/table_footer.html'
