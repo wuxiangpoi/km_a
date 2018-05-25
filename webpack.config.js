@@ -6,13 +6,15 @@ const helpers = require('./webpack/helpers');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path')
+
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 // set the environment by npm lifecycle event , `npm run build` npm_lifecycle_event is build
 const ENV = process.env.npm_lifecycle_event;
 const isTest = ENV === 'test' || ENV === 'test-watch';
 const isProd = ENV === 'build';
-const path = require('path');
 
 
 module.exports = function () {
@@ -25,7 +27,7 @@ module.exports = function () {
         output: {
             path: helpers.root('./dist'),
             //publicPath   : '/',
-            //library      : '[name]_[hash:8]',
+            // library      : '[name]_[hash:8]',
             filename: isProd ? '[name].[hash:8].js' : '[name].bundle.js',
             chunkFilename: isProd ? '[name].[hash:8].js' : '[name].bundle.js'
             // publish to cdn
@@ -158,6 +160,14 @@ module.exports = function () {
                 name: 'commons.chunk',
                 chunks: ['app']
             }),
+            new webpack.DllReferencePlugin({
+                context: __dirname,
+                manifest: require('./static/dll/jqLibs-manifest.json')
+            }),
+            new webpack.DllReferencePlugin({
+                context: __dirname,
+                manifest: require('./static/dll/angularLibs-manifest.json')
+            }),
             new webpack.optimize.CommonsChunkPlugin('vendor', isProd ? 'vendor.[hash:8].js' : 'vendor.bundle.js'),
             // new webpack.DllPlugin({
             //     path   : 'manifest.json',
@@ -166,6 +176,7 @@ module.exports = function () {
             // }),
             // Reference: https://github.com/ampedandwired/html-webpack-plugin
             // Render index.html
+
             new HtmlWebpackPlugin({
                 template: helpers.root('./src/index.html'),
                 //inject        : 'body',
@@ -198,12 +209,13 @@ module.exports = function () {
             //stats      : 'minimal',
             // Server port
             port: 6060,
+            publicPath: 'static',
             // noInfo: true,
             proxy: {
                 '*': {
-                target: 'http://47.92.116.16:7070',
-                secure: false
-              }
+                    target: 'http://47.92.116.16:7070',
+                    secure: false
+                }
             }
         }
     };
@@ -218,7 +230,11 @@ module.exports = function () {
             new webpack.optimize.DedupePlugin(),
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
             // Minify all javascript, switch loaders to minimizing mode
-            new webpack.optimize.UglifyJsPlugin()
+            new webpack.optimize.UglifyJsPlugin(),
+            new CopyWebpackPlugin([{
+                from: __dirname + '/static',
+                to: __dirname + '/dist/static'
+            }])
         );
     }
 

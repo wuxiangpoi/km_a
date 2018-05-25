@@ -8,7 +8,8 @@
     "build": "rimraf www && webpack -p --bail --progress --profile --colors",
     "build-dev": "rimraf www && webpack --bail --progress --profile --colors",
     "pretest": "eslint src --ext .js",
-    "test": "echo \"Error: no test specified\""
+    "test": "echo \"Error: no test specified\"",
+    "dll": "webpack --config webpack.dll.config.js"
   },
   "keywords": [
     "webpack",
@@ -32,6 +33,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.9.0",
     "bower": "^1.8.4",
+    "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.23.1",
     "dll-link-webpack-plugin": "^3.0.4",
     "extract-text-webpack-plugin": "^1.0.1",

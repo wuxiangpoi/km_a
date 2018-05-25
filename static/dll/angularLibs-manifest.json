@@ -1,0 +1,17 @@
+{
+  "name": "angularLibs_lib",
+  "content": {
+    "./bower_components/angular-animate/angular-animate.min.js": 1,
+    "./src/libs/localService.js": 2,
+    "./bower_components/oclazyload/dist/ocLazyLoad.js": 3,
+    "./bower_components/angular-ui-sortable/sortable.js": 4,
+    "./bower_components/angular-strap/dist/angular-strap.min.js": 5,
+    "./bower_components/angular-strap/dist/angular-strap.tpl.min.js": 6,
+    "./bower_components/ng-dialog/js/ngDialog.js": 7,
+    "./node_modules/_angular@1.7.0@angular/index.js": 8,
+    "./node_modules/_angular@1.7.0@angular/angular.js": 9,
+    "./bower_components/angular-file-upload/dist/angular-file-upload.min.js": 10,
+    "./bower_components/angular-messages/angular-messages.min.js": 11,
+    "./src/libs/smart-table/smart-table.js": 12
+  }
+}
