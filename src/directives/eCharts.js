@@ -1,3 +1,4 @@
+import echarts from '../libs/chart/echarts.min.js'
 export default app => {
     app.directive('eChart', ['$window',($window) => {
         let controller = ($scope, element, attrs) => {

@@ -11,7 +11,7 @@ import './app.less';
 
 // import '../bower_components/jquery-ui/jquery-ui.js'
 //import '../bower_components/layer/dist/theme/default/layer.css'
-// import layer from '../bower_components/layer/dist/layer.js'
+//import layer from '../bower_components/layer/dist/layer.js'
 
 let loadBasicModules = () => {
     let ngDepModules = [
@@ -26,39 +26,39 @@ let loadBasicModules = () => {
         'ngMessages',
         'smart-table'
     ];
-    //require('../bower_components/angular-animate/angular-animate.min.js');
-    //ngDepModules.push('ngAnimate');
+    // require('../bower_components/angular-animate/angular-animate.min.js');
+    // ngDepModules.push('ngAnimate');
 
-    //require('./libs/localService.js');
-    //ngDepModules.push('ngLocale');
+    // require('./libs/localService.js');
+    // ngDepModules.push('ngLocale');
 
     // require('angular-ui-router');
-    //ngDepModules.push('ui.router');
+    // ngDepModules.push('ui.router');
 
-    //require('../bower_components/oclazyload/dist/ocLazyLoad');
-    //ngDepModules.push('oc.lazyLoad');
+    // require('../bower_components/oclazyload/dist/ocLazyLoad');
+    // ngDepModules.push('oc.lazyLoad');
 
-    //require('../bower_components/angular-ui-sortable/sortable.js');
-    //ngDepModules.push('ui.sortable');
+    // require('../bower_components/angular-ui-sortable/sortable.js');
+    // ngDepModules.push('ui.sortable');
 
-    //require('./libs/lib.css');
+    // require('./libs/lib.css');
     // require('../bower_components/angular-strap/dist/angular-strap.min.js');
     // require('../bower_components/angular-strap/dist/angular-strap.tpl.min.js');
-    //ngDepModules.push('mgcrea.ngStrap');
+    // ngDepModules.push('mgcrea.ngStrap');
 
-    //require('../bower_components/ng-dialog/css/ngDialog.css');
-    //require('../bower_components/ng-dialog/css/ngDialog-theme-default.css');
-    //require('../bower_components/ng-dialog/js/ngDialog.js');
-    //ngDepModules.push('ngDialog');
+    // require('../bower_components/ng-dialog/css/ngDialog.css');
+    // require('../bower_components/ng-dialog/css/ngDialog-theme-default.css');
+    // require('../bower_components/ng-dialog/js/ngDialog.js');
+    // ngDepModules.push('ngDialog');
 
-    //require('../bower_components/angular-file-upload/dist/angular-file-upload.min.js');
-    //ngDepModules.push('angularFileUpload');
+    // require('../bower_components/angular-file-upload/dist/angular-file-upload.min.js');
+    // ngDepModules.push('angularFileUpload');
 
-    //require('../bower_components/angular-messages/angular-messages.min.js');
-    //ngDepModules.push('ngMessages');
+    // require('../bower_components/angular-messages/angular-messages.min.js');
+    // ngDepModules.push('ngMessages');
 
-    //require('./libs/smart-table/smart-table.js');
-    //ngDepModules.push('smart-table');
+    // require('./libs/smart-table/smart-table.js');
+    // ngDepModules.push('smart-table');
     // require('angular-loading-bar');
     // require('angular-loading-bar/src/loading-bar.css');
     // ngDepModules.push('angular-loading-bar');

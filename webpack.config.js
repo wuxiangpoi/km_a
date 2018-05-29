@@ -21,12 +21,32 @@ module.exports = function () {
     const config = {
         context: helpers.root("./src"),
         entry: {
-            'vendor': ['angular', 'angular-ui-router'],
+            'jqVenter': [
+                'jquery',
+                '../bower_components/jquery-ui/jquery-ui.js',
+                '../bower_components/layer/dist/layer.js',
+                '../bower_components/jquery.cookie/jquery.cookie.js',
+                './libs/bootstrap/dist/js/bootstrap.min.js'
+            ],
+            'vendor': [
+                'angular',
+                'angular-ui-router',
+                '../bower_components/angular-animate/angular-animate.min.js',
+                './libs/localService.js',
+                '../bower_components/oclazyload/dist/ocLazyLoad',
+                '../bower_components/angular-ui-sortable/sortable.js',
+                '../bower_components/angular-strap/dist/angular-strap.min.js',
+                '../bower_components/angular-strap/dist/angular-strap.tpl.min.js',
+                '../bower_components/ng-dialog/js/ngDialog.js',
+                '../bower_components/angular-file-upload/dist/angular-file-upload.min.js',
+                '../bower_components/angular-messages/angular-messages.min.js',
+                './libs/smart-table/smart-table.js'
+            ],
             'app': './app.js'
         },
         output: {
             path: helpers.root('./dist'),
-            //publicPath   : '/',
+            // publicPath   : '/',
             // library      : '[name]_[hash:8]',
             filename: isProd ? '[name].[hash:8].js' : '[name].bundle.js',
             chunkFilename: isProd ? '[name].[hash:8].js' : '[name].bundle.js'
@@ -160,15 +180,16 @@ module.exports = function () {
                 name: 'commons.chunk',
                 chunks: ['app']
             }),
-            new webpack.DllReferencePlugin({
-                context: __dirname,
-                manifest: require('./static/dll/jqLibs-manifest.json')
-            }),
-            new webpack.DllReferencePlugin({
-                context: __dirname,
-                manifest: require('./static/dll/angularLibs-manifest.json')
-            }),
+            // new webpack.DllReferencePlugin({
+            //     context: __dirname,
+            //     manifest: require('./dll/jqLibs-manifest.json')
+            // }),
+
             new webpack.optimize.CommonsChunkPlugin('vendor', isProd ? 'vendor.[hash:8].js' : 'vendor.bundle.js'),
+            // new webpack.DllReferencePlugin({
+            //     context: __dirname,
+            //     manifest: require('./dll/angularLibs-manifest.json')
+            // }),
             // new webpack.DllPlugin({
             //     path   : 'manifest.json',
             //     name   : "[name]_[hash:8]",
@@ -180,8 +201,9 @@ module.exports = function () {
             new HtmlWebpackPlugin({
                 template: helpers.root('./src/index.html'),
                 //inject        : 'body',
-                chunks: ['commons.chunk', 'vendor', 'app'],
-                chunksSortMode: 'dependency'
+                chunks: ['jqVenter','commons.chunk', 'vendor', 'app'],
+                chunksSortMode: 'dependency',
+                favicon: './favicon.ico'
             }),
             new ExtractTextPlugin(isProd ? '[name].[hash:8].css' : '[name].css')
             //new RenamePlugin()
@@ -209,7 +231,6 @@ module.exports = function () {
             //stats      : 'minimal',
             // Server port
             port: 6060,
-            publicPath: 'static',
             // noInfo: true,
             proxy: {
                 '*': {
@@ -232,16 +253,12 @@ module.exports = function () {
             // Minify all javascript, switch loaders to minimizing mode
             new webpack.optimize.UglifyJsPlugin({
                 output: {
-                  comments: false,
+                    comments: false,
                 },
                 compress: {
-                  warnings: false
+                    warnings: false
                 }
-              }),
-            new CopyWebpackPlugin([{
-                from: __dirname + '/static',
-                to: __dirname + '/dist/static'
-            }])
+            }),
         );
     }
 

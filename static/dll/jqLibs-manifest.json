@@ -1,10 +1,10 @@
 {
   "name": "jqLibs_lib",
   "content": {
-    "./node_modules/_jquery@3.3.1@jquery/dist/jquery.js": 14,
-    "./bower_components/jquery-ui/jquery-ui.js": 15,
-    "./bower_components/layer/dist/layer.js": 16,
-    "./bower_components/jquery.cookie/jquery.cookie.js": 17,
-    "./src/libs/bootstrap/dist/js/bootstrap.min.js": 18
+    "./node_modules/_jquery@3.3.1@jquery/dist/jquery.js": 15,
+    "./bower_components/jquery-ui/jquery-ui.js": 16,
+    "./bower_components/layer/dist/layer.js": 17,
+    "./bower_components/jquery.cookie/jquery.cookie.js": 18,
+    "./src/libs/bootstrap/dist/js/bootstrap.min.js": 19
   }
 }
