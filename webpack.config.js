@@ -42,6 +42,7 @@ module.exports = function () {
                 '../bower_components/angular-messages/angular-messages.min.js',
                 './libs/smart-table/smart-table.js'
             ],
+            'echarts': './libs/chart/echarts.min.js',
             'app': './app.js'
         },
         output: {
@@ -185,7 +186,7 @@ module.exports = function () {
             //     manifest: require('./dll/jqLibs-manifest.json')
             // }),
 
-            new webpack.optimize.CommonsChunkPlugin('vendor', isProd ? 'vendor.[hash:8].js' : 'vendor.bundle.js'),
+            //new webpack.optimize.CommonsChunkPlugin('vendor', isProd ? 'vendor.[hash:8].js' : 'vendor.bundle.js'),
             // new webpack.DllReferencePlugin({
             //     context: __dirname,
             //     manifest: require('./dll/angularLibs-manifest.json')
