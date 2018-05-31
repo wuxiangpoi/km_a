@@ -11,7 +11,7 @@
             <div class="clearfix">
                     <div class="selectWrap clearfix">
                         <km-select options="tempResolution" selected="sp.resolution" val="val" name="name" change="initPage"></km-select>
-                        <km-select options="publicStatusOptions" selected="sp.resolution" val="val" name="name" change="initPage"></km-select>
+                        <km-select options="publicStatusOptions" selected="sp.status" val="val" name="name" change="initPage"></km-select>
                     </div>
                 </div>
         <div class="tempWrap">
@@ -48,7 +48,12 @@
                             <i class="iconfont icon-xiazai"></i>
                                 {{template.hot}}
                         </span>
-                        <button style="margin-top: 2px;" ng-if="perms(824)" ng-click="public(template)" class="btn btn-primary tableBtn btnGreen btn-sm fr">发布</button>
+                        <span class="fr" ng-if="template.status == 0">
+                            <button style="margin-top: 2px;" ng-if="perms(824)" ng-click="public(template)" class="btn btn-primary tableBtn btnGreen btn-sm">发布</button>
+                        </span>
+                        <span class="fr txtGrey" ng-if="template.status == 1">
+                            已发布
+                        </span>
                     </div>
                 </li>
 

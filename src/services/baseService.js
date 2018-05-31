@@ -8,7 +8,7 @@ import scheduleDetailsTpl from '../tpl/schedule_details.html'
 import programDetailsTpl from '../tpl/program_details.html'
 
 export default app => {
-    app.factory('baseService', ['$rootScope', '$http', '$state', 'ngDialog', '$alert','programService', ($rootScope, $http, $state, ngDialog, $alert,programService) => {
+    app.factory('baseService', ['$rootScope', '$http', '$state', 'ngDialog', '$alert', 'programService', ($rootScope, $http, $state, ngDialog, $alert, programService) => {
         let apiUrl = config.host;
         let baseService = {
             api: {
@@ -83,7 +83,7 @@ export default app => {
                         $scope.info = info
                         $scope.title = title
                         $scope.confirm = () => {
-                            cb($scope,ngDialog);
+                            cb($scope, ngDialog);
                         }
 
                     }],
@@ -91,7 +91,7 @@ export default app => {
                 })
 
             },
-            confirmDialog(width,title, data, html, cb, beforeOpen, type) {
+            confirmDialog(width, title, data, html, cb, beforeOpen, type) {
                 this.beforeOpen = beforeOpen || 0
                 let me = this;
                 ngDialog.openConfirm({
@@ -105,13 +105,13 @@ export default app => {
                         $scope.title = title
                         $scope.html = html
                         if (me.isRealNum(type)) {
-                            switch(type){
+                            switch (type) {
                                 case 0:
-                                $scope.replaceFooterHtml = '<div></div';
-                                break;
+                                    $scope.replaceFooterHtml = '<div></div';
+                                    break;
                                 case 1:
-                                $scope.replaceFooterHtml = modalFooterCheckTpl;
-                                break;
+                                    $scope.replaceFooterHtml = modalFooterCheckTpl;
+                                    break;
                             }
                         }
                         if (beforeOpen) {
@@ -119,7 +119,7 @@ export default app => {
                         }
 
                         $scope.confirm = function (type) {
-                            cb($scope,type);
+                            cb($scope, type);
                         }
                         $scope.cancel = function () {
                             $scope.closeThisDialog()
@@ -206,7 +206,7 @@ export default app => {
                         // return false;
                     } else {
                         me.alert(data.message, 'warning');
-                        if(errCb){
+                        if (errCb) {
                             errCb();
                         }
                         return false;
@@ -383,20 +383,27 @@ export default app => {
                                 width: '719px'
                             }
                             vm.showPlay = function (nitem) {
-                                nitem.pid = nitem.id;
-                                nitem.domain = item.domain;
-                                nitem.pStatus = 1;
-                                me.showProgram(nitem);
+
+                                item.detailType = 0;
+                                programService.getProgramById(nitem.id, item.domain, function (program) {
+
+                                    program.nstatus = '审核通过';
+                                    baseService.confirmDialog(750, '节目预览', program, programDetailsTpl, function (vm) {
+
+                                    }, function (vm) {
+                                        vm.program = program;
+                                    }, 0)
+                                });
                             }
                         }
                         vm.eoption = chartService.initChartSchedule(vm.playList, minLen);
-                    },0);
+                    }, 0);
                 })
             },
             showMaterial: function (item, detailType, cb) {
                 item.detailType = detailType;
                 item.nUrl = this.dmbdOSSImageUrlResizeFilter(item.path, 400);
-                this.confirmDialog(720,detailType == 0 ? '素材详情' : '素材审核', item, materialDetailTpl, (type, vm) => {
+                this.confirmDialog(720, detailType == 0 ? '素材详情' : '素材审核', item, materialDetailTpl, (type, vm) => {
                     if (cb) {
                         cb(type);
                     }
@@ -410,16 +417,16 @@ export default app => {
             showProgram: function (item, detailType, cb) {
                 var me = this;
                 programService.getProgramById(item.pid, item.domain, function (program) {
-						
+
                     baseService.confirmDialog(750, '节目预览', program, programDetailsTpl, function (vm) {
 
                     }, function (vm) {
                         vm.program = program;
-                    },0)
+                    }, 0)
                 });
 
             },
-            
+
         }
 
         return baseService;

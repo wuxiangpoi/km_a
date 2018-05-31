@@ -204,27 +204,24 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 			end_m: '',
 			noticeText: '',
 		}
-		baseService.confirmDialog(540, '发布通知', data, sendNoticeTpl, function (vm) {
+		baseService.confirmDialog(540, '发布通知', data, sendNoticeTpl, function (vm, ngDialog) {
 			vm.isShowMessage = false;
-			if (vm.noticeForm.$valid && data.contractEnd >= data.contractStart) {
+			vm.startTime = vm.startDate.split('-').join('') + vm.data.start_h*60 + vm.data.start_m;
+			vm.endTime = vm.endDate.split('-').join('') + vm.data.end_h*60 + vm.data.end_m;
+			if (vm.modalForm.$valid && vm.endTime >= vm.startTime) {
 				if (sentencesService.checkCon(vm.data.noticeText).sentencesArr.length) {
 					baseService.alert('抱歉，您输入的内容包含被禁止的词汇，建议修改相关内容', 'warning');
 					vm.data.noticeText = sentencesService.checkCon(vm.data.noticeText).sentencesCon;
 				} else {
-					var startTime = vm.startDate.toString() + vm.data.start_h.toString() + (vm.data.start_m / 60).toString();
-					var endTime = vm.endDate.toString() + vm.data.end_h.toString() + (vm.data.end_m / 60).toString();
-					if (parseInt(startTime) > parseInt(endTime)) {
-						baseService.alert('结束时间不得小于开始时间', 'warning');
-					} else {
-						vm.data.startDate = $rootScope.formateDate(vm.startDate);
-						vm.data.endDate = $rootScope.formateDate(vm.endDate);
-						vm.isPosting = true;
-						baseService.postData(baseService.api.terminalCommandSend + 'sendCommandWithNotice', vm.data, function (data) {
-							vm.isPosting = false;
-							vm.closeAll();
-							baseService.alert('发布成功', 'success');
-						})
-					}
+					vm.data.startDate = vm.startDate;
+					vm.data.endDate = vm.endDate;
+					vm.isPosting = true;
+					baseService.postData(baseService.api.terminalCommandSend + 'sendCommandWithNotice', vm.data, function (data) {
+						vm.isPosting = false;
+						vm.closeThisDialog();
+						baseService.alert('发布成功', 'success');
+					})
+					
 				}
 
 
@@ -240,14 +237,15 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 			vm.data.start_m = '00';
 			vm.data.end_h = '00';
 			vm.data.end_m = '00';
-			vm.$watch('startTime', function (o, n) {
+			vm.$watch('data.startTime', function (o, n) {
 				if (o != undefined) {
 					vm.data.start_h = o.split(':')[0];
 					vm.data.start_m = o.split(':')[1];
+
 				}
 
 			})
-			vm.$watch('endTime', function (o, n) {
+			vm.$watch('data.endTime', function (o, n) {
 				if (o != undefined) {
 					vm.data.end_h = o.split(':')[0];
 					vm.data.end_m = o.split(':')[1];
@@ -281,7 +279,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 					}, function () {
 						vm.isPosting = false;
 						ngDialog.close();
-						$scope.callServer($scope.tableState);
+						$scope.initPage();
 						baseService.alert('迁入成功', 'success');
 					}, function () {
 						vm.isPosting = false;
@@ -301,7 +299,10 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 				vm.isPosting = false;
 				vm.closeThisDialog();
 				baseService.alert('删除成功', 'success');
-				$scope.callServer($scope.tableState);
+				$scope.initPage();
+			}, () => {
+				vm.isPosting = false;
+				vm.closeThisDialog();
 			})
 		})
 	}

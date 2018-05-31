@@ -88,7 +88,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
 
 
             } else {
-                baseService.alert('请先选择文件', 'warning', true);
+                baseService.alert('请先选择文件', 'warning');
             }
         }, function (vm) {
 
@@ -116,25 +116,25 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
                     if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + audiofile_type.toLowerCase() + ',').indexOf(type) != -1) {
                         if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1) {
                             if (item.size > 10 * 1024 * 1024) {
-                                baseService.alert('不得上传大于10Mb的图片', 'warning', true);
+                                baseService.alert('不得上传大于10Mb的图片', 'warning');
                             } else {
                                 return true;
                             }
                         } else if ((',' + audiofile_type.toLowerCase() + ',').indexOf(type) != -1) {
                             if (item.size > 10 * 1024 * 1024) {
-                                baseService.alert('不得上传大于10Mb的音乐', 'warning', true);
+                                baseService.alert('不得上传大于10Mb的音乐', 'warning');
                             } else {
                                 return true;
                             }
                         } else {
                             if (item.size > 500 * 1024 * 1024) {
-                                baseService.alert('不得上传大于500Mb的视频', 'warning', true);
+                                baseService.alert('不得上传大于500Mb的视频', 'warning');
                             } else {
                                 return true;
                             }
                         }
                     } else {
-                        baseService.alert('提示', '上传的文件格式平台暂时不支持，目前支持的图片格式是:' + imgfile_type + '，目前支持的视频格式是:' + videofile_type, 'warning');
+                        baseService.alert('暂不支持该格式文件','warning');
                         return false;
                     }
                 }

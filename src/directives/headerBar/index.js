@@ -21,10 +21,12 @@ let controller = ($scope,baseService,userService) => {
                     reNewPassword: baseService.md5_pwd(vm.data.reNewPassword)
                 }
                 vm.isPosting = true;
-                baseService.postData(baseService.api.auth + 'updatePwd', postData, function (data) {
+                baseService.postData(baseService.api.auth + 'updatePwd', updpostData, (data) => {
                     vm.isPosting = false;
                     vm.closeThisDialog();
                     baseService.alert('修改成功', 'success');
+                },()=>{
+                    vm.isPosting = false;
                 })
             } else {
                 vm.isShowMessage = true;

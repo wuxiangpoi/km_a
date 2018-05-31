@@ -6,6 +6,8 @@ const helpers = require('./webpack/helpers');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+
 const path = require('path')
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -61,40 +63,6 @@ module.exports = function () {
          * See: http://webpack.github.io/docs/configuration.html#module
          */
         module: {
-
-            /*
-             * An array of applied pre and post loaders.
-             *
-             * See: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
-             */
-            preLoaders: [
-
-                /*
-                 * Source map loader support for *.js files
-                 * Extracts SourceMaps for source files that as added as sourceMappingURL comment.
-                 *
-                 * See: https://github.com/webpack/source-map-loader
-                 */
-                {
-                    test: /\.js$/,
-                    loader: 'source-map-loader',
-                    exclude: [
-                        // these packages have problems with their sourcemaps
-                        helpers.root('node_modules/angular'),
-                        helpers.root('node_modules/angular-route')
-                    ]
-                }
-
-            ],
-
-            /*
-             * An array of automatically applied loaders.
-             *
-             * IMPORTANT: The loaders here are resolved relative to the resource which they are applied to.
-             * This means they are not resolved relative to the configuration file.
-             *
-             * See: http://webpack.github.io/docs/configuration.html#module-loaders
-             */
             loaders: [
                 // JS LOADER
                 // Reference: https://github.com/babel/babel-loader
@@ -156,7 +124,7 @@ module.exports = function () {
                 // Copy resource files to output
                 {
                     test: /\.(png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$/i,
-                    loader: 'file?name=images/[name].[ext]?[hash]'
+                    loader: 'file?name=images/[name].[ext]'
                 }
 
             ]
@@ -168,29 +136,24 @@ module.exports = function () {
          * Reference: http://webpack.github.io/docs/configuration.html#plugins
          * List: http://webpack.github.io/docs/list-of-plugins.html
          */
+        externals: {
+            'echarts': 'echarts'
+        },
         plugins: [
             new webpack.ProvidePlugin({
                 $: 'jquery',
                 jQuery: 'jquery',
                 'window.jQuery': 'jquery',
-                'window.$': 'jquery',
-                'echarts': helpers.root('./src/libs/chart/echarts.min.js')
+                'window.$': 'jquery'
             }),
             //vendor
             new webpack.optimize.CommonsChunkPlugin({
                 name: 'commons.chunk',
                 chunks: ['app']
             }),
-            // new webpack.DllReferencePlugin({
-            //     context: __dirname,
-            //     manifest: require('./dll/jqLibs-manifest.json')
-            // }),
 
             new webpack.optimize.CommonsChunkPlugin('vendor', isProd ? 'vendor.[hash:8].js' : 'vendor.bundle.js'),
-            // new webpack.DllReferencePlugin({
-            //     context: __dirname,
-            //     manifest: require('./dll/angularLibs-manifest.json')
-            // }),
+
             // new webpack.DllPlugin({
             //     path   : 'manifest.json',
             //     name   : "[name]_[hash:8]",
@@ -202,7 +165,7 @@ module.exports = function () {
             new HtmlWebpackPlugin({
                 template: helpers.root('./src/index.html'),
                 //inject        : 'body',
-                chunks: ['jqVenter','commons.chunk', 'vendor', 'app'],
+                chunks: ['jqVenter', 'commons.chunk', 'vendor', 'app'],
                 chunksSortMode: 'dependency',
                 favicon: './favicon.ico'
             }),
@@ -227,23 +190,27 @@ module.exports = function () {
          */
         devServer: {
             // Base path for the serve content.
-            contentBase: 'src',
+            contentBase: '',
             // Minimize output infomation
             //stats      : 'minimal',
             // Server port
             port: 6060,
             // noInfo: true,
             proxy: {
-                '*': {
-                    target: 'http://47.92.116.16:7070',
+                "/api": {
+                    target: "http://47.92.116.16:7070",
                     secure: false
-                }
+                  }
             }
         }
     };
 
     if (isProd) {
         config.plugins.push(
+            new CleanWebpackPlugin(path.resolve(__dirname, './dist'), {
+                root: path.resolve(__dirname, './'),
+                verbose: true
+            }),
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
             // Only emit files when there are no errors
             new webpack.NoErrorsPlugin(),
@@ -260,6 +227,10 @@ module.exports = function () {
                     warnings: false
                 }
             }),
+            new CopyWebpackPlugin([{
+                from: __dirname + '/static',
+                to : __dirname + '/dist/static'
+            }])
         );
     }
 

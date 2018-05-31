@@ -57,7 +57,7 @@
 								</div>
 								  <ul class="dropdown-menu dropdown-left dropdown-tip" role="menu">
 									<li>关联企业：</li>
-                                    <li ng-show="row.tips" ng-repeat="tip in row.tips">{{tip.name}}</li>
+                                    <li class="fl" ng-show="row.tips" ng-repeat="tip in row.tips">{{$index == 0?tip.name:',' + tip.name}}</li>
 								  </ul>
 							</div>
 							<span ng-if="row.domains.length == 0">0</span>

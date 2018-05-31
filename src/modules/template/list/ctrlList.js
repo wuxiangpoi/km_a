@@ -22,11 +22,11 @@ module.exports = [
             name: '发布状态'
         },
         {
-            val: 0,
+            val: 1,
             name: '已发布'
         },
         {
-            val: 1,
+            val: 0,
             name: '未发布'
         }]
         $scope.publicStatusOptions = publicStatusOptions;
@@ -67,7 +67,8 @@ module.exports = [
                             page: angular.fromJson(item.content),
                             createTime: item.createTime,
                             creator: item.creator,
-                            hot: item.hot
+                            hot: item.hot,
+                            status: item.status
                         };
                         templates.push(template);
 

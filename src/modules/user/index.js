@@ -122,7 +122,7 @@ const userController = ($scope, baseService) => {
 		})
 	}
 	$scope.changeEnabled = function (item, index) {
-		baseService.confirm(item.enabled == 0 ? '解禁账户' : '禁用账户', item.enabled == 0 ? '您确定解禁管理员：' + item.name : '您确定禁用管理员：' + item.name,
+		baseService.confirm(item.enabled == 0 ? '解禁账户' : '禁用账户', item.enabled == 0 ? '您确定解禁此账号：' + item.name : '您确定禁用此账号：' + item.name,
 			(vm) => {
 				let me = this;
 				vm.isPosting = true;

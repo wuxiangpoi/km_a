@@ -5,12 +5,16 @@ import png64 from '../img/64-64.png'
 export default app => {
     app.directive('emapChart', ['$window', 'baseService', '$rootScope', ($window, baseService, $rootScope) => {
         let controller = ($scope, element, attrs) => {
-            $scope.hasDomains = $rootScope.userData.hasDomains;
+            if($rootScope.userData){
+                $scope.hasDomains = $rootScope.userData.hasDomains;
+            }
             $scope.initPage = function () {
                 var bmap = new BMap.Map("allmap",{enableMapClick:false});
                 var point = new BMap.Point(113.649644, 34.75661);
                 var top_left_navigation = new BMap.NavigationControl(); //左上角，添加默认缩放平移控件
-                bmap.addControl(top_left_navigation);
+                if($rootScope.userData){
+                    bmap.addControl(top_left_navigation);
+                }
                 bmap.centerAndZoom(point, 5);
                 bmap.enableScrollWheelZoom(true);
                 var spanSma = this._span = document.createElement("span");
