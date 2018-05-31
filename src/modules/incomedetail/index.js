@@ -29,7 +29,7 @@ const incomedetailController = ($scope, baseService, $stateParams) => {
         })
     }
     $scope.confirmCharge = function (item) {
-        baseService.confirm('确认收费', '确认收费?',true, (vm) => {
+        baseService.confirm('确认收费', '确认收费?', (vm) => {
             baseService.postData(baseService.api.chargeStat + 'confirmChargeById', {
                 id: item.id
             }, () => {
