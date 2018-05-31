@@ -116,7 +116,7 @@ module.exports = function () {
                 // Allow loading html through js
                 {
                     test: /\.html$/,
-                    loader: 'html?root=/&attrs=img:src img:data-src link:href'
+                    loader: 'html-loader'
                 },
 
                 // FILE LOADER
