@@ -51,7 +51,7 @@ export let hasProgramOptions = [{
 ]
 export let terminalStatusOptions = [{
         val: '',
-        name: '网络状态'
+        name: '终端状态'
     },
     {
         val: 1,

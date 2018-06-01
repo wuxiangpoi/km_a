@@ -31,12 +31,14 @@ const dictionaryController = ($scope, baseService) => {
 				postData.value = postData.data.value;
 			}
 			if (vm.dictionaryForm.$valid) {
-				vm.isPosting = false;
-				baseService.getJson(baseService.api.dictionary + 'addDictionary', postData, function (vm) {
+				vm.isPosting = true;
+				baseService.postData(baseService.api.dictionary + 'addDictionary', postData, function () {
 					vm.isPosting = false;
 					baseService.alert('添加成功', 'success');
 					vm.closeThisDialog();
 					$scope.callServer($scope.tableState, 0);
+				},function(){
+					vm.isPosting = false;
 				})
 			} else {
 				vm.isShowMessage = true;

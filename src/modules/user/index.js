@@ -91,7 +91,7 @@ const userController = ($scope, baseService) => {
 					vm1.displayed = [];
 					vm1.sp = {};
 					vm1.tableState = {};
-					vm1.domains = item ? item.domains : [];
+					vm1.domains = item ? item.domains : postData.domains;
 					vm1.domainsList = [];
 					vm1.callServer = function (tableState) {
 						baseService.initTable(vm1, tableState, baseService.api.domain + 'getDomainPageList');
