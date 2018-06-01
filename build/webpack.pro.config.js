@@ -9,7 +9,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const baseConf = require('./webpack.base.config');
 
 module.exports = merge(baseConf, {
-plugins: [
+    plugins: [
         new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
             root: path.resolve(__dirname, '../'),
             verbose: true
@@ -17,19 +17,17 @@ plugins: [
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
             mangle: {
-              screw_ie8: true,
-              keep_fnames: true,
+                screw_ie8: true,
+                keep_fnames: true,
             },
             compress: {
-              screw_ie8: true,
+                screw_ie8: true,
             },
             comments: false,
-          }),
-        new CopyWebpackPlugin([
-            {
-                from: path.resolve(__dirname, '../static'),
-                to: path.resolve(__dirname, '../dist/static')
-            }
-        ])
+        }),
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, '../static'),
+            to: path.resolve(__dirname, '../dist/static')
+        }])
     ]
 });

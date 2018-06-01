@@ -92,11 +92,8 @@ module.exports = {
             'window.$': 'jquery'
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
+            name: ['vendor','manifest'],
             minChunks: Infinity,
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest',
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../src/index.html'),
