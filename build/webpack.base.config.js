@@ -48,7 +48,8 @@ module.exports = {
                     {
                         loader: "css-loader",
                         options: {
-                            sourceMap: true
+                            sourceMap: true,
+                            minimize: true
                         }
                     }
                 ]
@@ -57,12 +58,22 @@ module.exports = {
                 test: /\.less$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
-                    use: ['css-loader', 'less-loader']
+                    use: [{
+                        loader: "css-loader",
+                        options: {
+                            minimize: true
+                        }
+                    },{
+                        loader: 'less-loader'
+                    }]
                 })
             },
             {
                 test: /\.html$/,
-                loader: 'html-loader'
+                loader: 'html-loader',
+                query: {
+                    minimize: true
+                }
             },
             {
                 test: /\.(png|jpg|gif|jpeg|eot|svg|ttf|woff|woff2)(\?\S*)?$/,
