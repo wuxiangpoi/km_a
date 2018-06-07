@@ -3,9 +3,8 @@ import {
 	domainStatusOptions,
 	payTypeOptions
 } from '../../filter/options.js'
-import domainSaveTpl from '../../tpl/domain_save.html';
 
-const domainController = ($scope, baseService, FileUploader) => {
+const domainController = ($scope, baseService, FileUploader,modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
 	$scope.tableState = {};
@@ -64,7 +63,7 @@ const domainController = ($scope, baseService, FileUploader) => {
 			programCheck: item ? programCheck : ['1', '', '0'],
 			ledShow: item ? item.ledShow : 0
 		}
-		baseService.confirmDialog(540, item ? '编辑企业' : '添加企业', postData, domainSaveTpl, (vm) => {
+		modalService.confirmDialog(540, item ? '编辑企业' : '添加企业', postData, '/static/tpl/domain_save.html', (vm) => {
 			if (vm.modalForm.$valid && vm.data.contractEnd >= vm.data.contractStart) {
 				let onData = {
 					id: postData.id,
@@ -78,17 +77,20 @@ const domainController = ($scope, baseService, FileUploader) => {
 					contractStart: postData.contractStart.split('-').join(''),
 					contractEnd: postData.contractEnd.split('-').join(''),
 					contact: postData.contact,
-					materialCheck: postData.materialCheck,
-					programCheck: postData.programCheck,
+					materialCheck: postData.materialCheck.join(','),
+					programCheck: postData.programCheck.join(','),
 					// programCmdCheck: item ? item.programCmdCheck.split(',') : [''],
 					ledShow: postData.ledShow
 				}
 				let url = item ? 'modifyDomain' : 'addDomain';
 				onData.key = postData.key.toLowerCase();
-				baseService.postData(baseService.api.domain + url, onData, () => {
-					vm.closeThisDialog();
-					baseService.alert(item ? '编辑成功' : '添加成功', 'success');
-					$scope.callServer($scope.tableState, 0);
+				baseService.saveForm(vm,baseService.api.domain + url, onData, (res) => {
+					if(res){
+						vm.closeThisDialog();
+						modalService.alert(item ? '编辑成功' : '添加成功', 'success');
+						$scope.callServer($scope.tableState, 0);
+					}
+					
 				})
 			} else {
 				vm.isShowMessage = true;
@@ -120,7 +122,7 @@ const domainController = ($scope, baseService, FileUploader) => {
 			name: 'customFilter',
 			fn: function (item /*{File|FileLikeObject}*/ , options) {
 				if (this.queue.length >= 1) {
-					baseService.alert('每次只能上传一个', 'warning')
+					modalService.alert('每次只能上传一个', 'warning')
 					return false;
 				}
 				var ctype = item.name.substr(item.name.lastIndexOf('.') + 1).toLowerCase();
@@ -129,7 +131,7 @@ const domainController = ($scope, baseService, FileUploader) => {
 				if ((',' + file_type + ',').indexOf(type) != -1) {
 					return true;
 				} else {
-					baseService.alert('上传的文件格式平台暂时不支持，目前支持的格式是:' + file_type, 'warning');
+					modalService.alert('上传的文件格式平台暂时不支持，目前支持的格式是:' + file_type, 'warning');
 
 					return false;
 
@@ -195,33 +197,34 @@ const domainController = ($scope, baseService, FileUploader) => {
 		item.isPosting = true;
 		baseService.postData(baseService.api.domain + 'sendRegistrationEmailAndReset', {
 			id: item.id
-		}, function () {
+		}, function (res) {
 			item.isPosting = false;
-			baseService.alert("发送成功", 'success');
-		}, function () {
-			item.isPosting = false;
+			if(res){
+				modalService.alert("发送成功", 'success');
+			}
 		})
 	}
 	$scope.changeEnabled = function (item, index) {
-		baseService.confirm(item.status == 0 ? '启用企业' : '冻结企业', '您确定' + (item.status == 0 ? '启用' : '冻结') +
+		modalService.confirm(item.status == 0 ? '启用企业' : '冻结企业', '您确定' + (item.status == 0 ? '启用' : '冻结') +
 			'企业：' + item.name + '?',
 			(vm) => {
 				let me = this;
-				vm.isPosting = true;
-				baseService.postData(baseService.api.domain + 'setDomainStatus', {
+				baseService.saveForm(vm,baseService.api.domain + 'setDomainStatus', {
 					did: item.id,
 					status: item.status == 1 ? 0 : 1
 				}, (res) => {
-					vm.isPosting = false;
-					vm.closeThisDialog();
-					baseService.alert('操作成功', 'success');
-					$scope.callServer($scope.tableState, 0);
+					if(res){
+						vm.closeThisDialog();
+						modalService.alert('操作成功', 'success');
+						$scope.callServer($scope.tableState, 0);
+					}
+					
 				})
 			})
 	}
 }
 
-domainController.$inject = ['$scope', 'baseService', 'FileUploader'];
+domainController.$inject = ['$scope', 'baseService', 'FileUploader','modalService'];
 
 export default angular => {
 	return angular.module('domainModule', []).controller('domainController', domainController);

@@ -8,7 +8,7 @@ const materialchartController = ($scope, baseService) => {
     var prevYear = year - 1;
     var dataList = [];
     $scope.getData = function () {
-        baseService.getData(baseService.api.apiUrl + '/api/report/materialReport/' + $scope.sp.year, {}, function (res) {
+        baseService.getJson(baseService.api.apiUrl + '/api/report/materialReport/' + $scope.sp.year, {}, function (res) {
             var dataList = res;
             var materialCountList = [];
             var monthList = [];
@@ -184,7 +184,7 @@ const materialchartController = ($scope, baseService) => {
 
 
             if ($scope.sp.year == year) {
-                baseService.getData(baseService.api.apiUrl + '/api/report/materialReport/' + prevYear, {}, function (resPrev) {
+                baseService.getJson(baseService.api.apiUrl + '/api/report/materialReport/' + prevYear, {}, function (resPrev) {
                     var dataListPrev = [];
                     for (var i = 0; i < 12; i++) {
                         dataListPrev.push({
@@ -213,7 +213,7 @@ const materialchartController = ($scope, baseService) => {
 
             }
         })
-        baseService.getData(baseService.api.apiUrl + '/api/report/programReport/' + $scope.sp.year, {}, function (res) {
+        baseService.getJson(baseService.api.apiUrl + '/api/report/programReport/' + $scope.sp.year, {}, function (res) {
             var dataList = res;
             var monthList = [];
             var totalCountList = [];
@@ -408,7 +408,7 @@ const materialchartController = ($scope, baseService) => {
                 $scope.programOption = programOption;
             }
             if ($scope.sp.year == year) {
-                baseService.getData(baseService.api.apiUrl + '/api/report/programReport/' + prevYear, {}, function (resPrev) {
+                baseService.getJson(baseService.api.apiUrl + '/api/report/programReport/' + prevYear, {}, function (resPrev) {
                     var dataListPrev = [];
                     for (var i = 0; i < 12; i++) {
                         dataListPrev.push({

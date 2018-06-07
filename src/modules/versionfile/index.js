@@ -1,47 +1,51 @@
-import {opOptions} from '../../filter/options';
-import verfilesSaveTpl from '../../tpl/upload_list.html'
+import {
+	opOptions
+} from '../../filter/options';
 
-const versionfileController = ($rootScope,$scope, baseService, FileUploader) => {
+const versionfileController = ($rootScope, $scope, baseService, FileUploader, modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
 	$scope.tableState = {};
-	
+
 	$scope.callServer = function (tableState, page) {
 		if (baseService.isRealNum(page)) {
 			$scope.tableState.pagination.start = page * $scope.sp.length;
 		}
-		baseService.initTable($scope,tableState,baseService.api.versionFile + 'getVersionFileListPage');
+		baseService.initTable($scope, tableState, baseService.api.versionFile + 'getVersionFileListPage');
 	}
-	$scope.initPage = function(){
+	$scope.initPage = function () {
 		$scope.callServer($scope.tableState, 0)
 	}
 	$scope.opOptions = opOptions;
 	$scope.save = () => {
-		baseService.confirmDialog(720, '上传版本文件', {
+		modalService.confirmDialog(720, '上传版本文件', {
 			showTip: false
-		}, verfilesSaveTpl, (vm) => {
+		}, '/static/tpl/upload_list.html', (vm) => {
 			if (vm.uploader.queue.length) {
 				var filenameArray = [];
 				for (var i = 0; i < vm.uploader.queue.length; i++) {
 					filenameArray.push(vm.uploader.queue[i].file.desc);
 				}
-				baseService.postData(baseService.api.material + 'addMaterial_checkUpload', {
+				baseService.saveForm(vm, baseService.api.material + 'addMaterial_checkUpload', {
 					filenameArray: JSON.stringify(filenameArray)
 				}, function (res) {
-					if (res.length) {
-						for (var i = 0; i < res.length; i++) {
-							vm.uploader.queue[res[i].index].message = res[i].message;
-							vm.uploader.queue[res[i].index].oname = res[i].name;
+					if (res) {
+						if (res.length) {
+							for (var i = 0; i < res.length; i++) {
+								vm.uploader.queue[res[i].index].message = res[i].message;
+								vm.uploader.queue[res[i].index].oname = res[i].name;
+							}
+						} else {
+							vm.closeThisDialog();
+							$rootScope.$broadcast('callUploader', vm.uploader);
 						}
-					} else {
-						vm.closeThisDialog();
-						$rootScope.$broadcast('callUploader', vm.uploader);
 					}
+
 				})
 
 
 			} else {
-				baseService.alert('请先选择文件', 'warning');
+				modalService.alert('请先选择文件', 'warning');
 			}
 		}, (vm) => {
 			vm.uploader = new FileUploader();
@@ -50,7 +54,7 @@ const versionfileController = ($rootScope,$scope, baseService, FileUploader) => 
 				fn: function (item /*{File|FileLikeObject}*/ , options) {
 
 					if (this.queue.length >= 1) {
-						baseService.alert('每次只能上传一个','warning')
+						modalService.alert('每次只能上传一个', 'warning')
 						return false;
 					}
 
@@ -60,7 +64,7 @@ const versionfileController = ($rootScope,$scope, baseService, FileUploader) => 
 					if ((',' + file_type + ',').indexOf(type) != -1) {
 						return true;
 					} else {
-						baseService.alert('上传的文件格式平台暂时不支持' + ctype + '，目前支持的格式是:' + file_type,'warning');
+						modalService.alert('上传的文件格式平台暂时不支持' + ctype + '，目前支持的格式是:' + file_type, 'warning');
 
 						return false;
 
@@ -87,7 +91,7 @@ const versionfileController = ($rootScope,$scope, baseService, FileUploader) => 
 				//	var	 expire = 0;
 				var token = '';
 				baseService.postData(baseService.api.versionFile + 'saveVersionFile_getOssSignature', {
-					
+
 				}, function (obj) {
 					host = obj['host']
 					policyBase64 = obj['policy']
@@ -119,34 +123,35 @@ const versionfileController = ($rootScope,$scope, baseService, FileUploader) => 
 
 			};
 			vm.uploader.onCompleteItem = function (fileItem, response, status, headers) {
-				if(response){
+				if (response) {
 					if (response.code != 1) {
 						fileItem.isSuccess = false;
 						fileItem.isError = true;
 						fileItem.errorMsg = response.message;
 					}
 				}
-				
+
 
 			};
 		})
 	}
 	$scope.del = (item) => {
-		baseService.confirm('删除', '确定删除版本文件：' + item.name,(vm) => {
-			vm.isPosting = true;
-			baseService.postData(baseService.api.versionFile + 'deleteVersionFile', {
+		modalService.confirm('删除', '确定删除版本文件：' + item.name, (vm) => {
+			modalService.postData(baseService.api.versionFile + 'deleteVersionFile', {
 				id: item.id
-			}, () => {
-				vm.isPosting = false;
-				baseService.alert('删除成功', 'success');
-				vm.closeThisDialog();
-				$scope.callServer($scope.tableState);
+			}, (res) => {
+				if(res){
+					modalService.alert('删除成功', 'success');
+					vm.closeThisDialog();
+					$scope.callServer($scope.tableState);
+				}
+				
 			})
 		})
 	}
 }
 
-versionfileController.$inject = ['$rootScope','$scope', 'baseService','FileUploader'];
+versionfileController.$inject = ['$rootScope', '$scope', 'baseService', 'FileUploader', 'modalService'];
 
 export default angular => {
 	return angular.module('versionfileModule', []).controller('versionfileController', versionfileController);

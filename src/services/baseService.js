@@ -1,14 +1,8 @@
 import config from '../../configs/config'
 import hex_md5 from '../libs/md5.js'
-import confirmTpl from '../tpl/confirm.tpl.html'
-import confirmDialogTpl from '../tpl/confirm_dialog.tpl.html'
-import materialDetailTpl from '../tpl/material_detail.html'
-import modalFooterCheckTpl from '../tpl/modal_footerCheck.html'
-import scheduleDetailsTpl from '../tpl/schedule_details.html'
-import programDetailsTpl from '../tpl/program_details.html'
 
 export default app => {
-    app.factory('baseService', ['$rootScope', '$http', '$state', 'ngDialog', '$alert', 'programService', ($rootScope, $http, $state, ngDialog, $alert, programService) => {
+    app.factory('baseService', ['httpService', 'modalService', '$rootScope', '$state', 'programService', (httpService, modalService, $rootScope, $state, programService) => {
         let apiUrl = config.host;
         let baseService = {
             api: {
@@ -64,162 +58,63 @@ export default app => {
                     return false;
                 }
             },
-            alert: function (info, type) {
-                $alert({
-                    content: info,
-                    placement: 'top',
-                    type: type,
-                    show: true,
-                    duration: 2
-                });
-            },
-            confirm: function (title, info, cb) {
-                ngDialog.openConfirm({
-                    template: confirmTpl,
-                    cache: false,
-                    plain: true,
-                    className: 'ngdialog-theme-default',
-                    controller: ['$scope', function ($scope) {
-                        $scope.info = info
-                        $scope.title = title
-                        $scope.confirm = () => {
-                            cb($scope, ngDialog);
-                        }
-
-                    }],
-                    width: 540
-                })
-
-            },
-            confirmDialog(width, title, data, html, cb, beforeOpen, type) {
-                this.beforeOpen = beforeOpen || 0
+            getJson(url, requestData, cb) {
                 let me = this;
-                ngDialog.openConfirm({
-                    template: confirmDialogTpl,
-                    plain: true,
-                    cache: false,
-                    className: 'ngdialog-theme-default',
-                    width: width,
-                    controller: ['$scope', function ($scope) {
-                        $scope.data = data
-                        $scope.title = title
-                        $scope.html = html
-                        if (me.isRealNum(type)) {
-                            switch (type) {
-                                case 0:
-                                    $scope.replaceFooterHtml = '<div></div';
-                                    break;
-                                case 1:
-                                    $scope.replaceFooterHtml = modalFooterCheckTpl;
-                                    break;
+                httpService.getJson(url, requestData)
+                    .then((res) => {
+                        let data = res.data;
+                        if (data.code == 1) {
+                            cb(data.content);
+                        } else if (data.code == 2) {
+                            me.goToState('login');
+                        } else {
+                            modalService.alert(data.message, 'warning');
+                        }
+                    })
+                    .then((err) => {
+                        if (err) {
+                            modalService.alert('网络或服务端异常', 'warning')
+                        }
+                    })
+            },
+            postData(url, formData, cb) {
+                let me = this;
+                httpService.postData(url, formData)
+                    .then((res) => {
+                        let data = res.data;
+                        if (data.code == 1) {
+                            if (data.content) {
+                                cb(data.content);
+                            } else {
+                                cb(data)
                             }
+                        } else if (data.code == 2) {
+                            me.goToState('login');
+                            return false;
+                        } else {
+                            modalService.alert(data.message, 'warning');
+                            cb();
+                            return false;
                         }
-                        if (beforeOpen) {
-                            beforeOpen($scope)
+                    })
+                    .then((err) => {
+                        if (err) {
+                            modalService.alert('网络或服务端异常', 'warning')
                         }
-
-                        $scope.confirm = function (type) {
-                            cb($scope, type);
-                        }
-                        $scope.cancel = function () {
-                            $scope.closeThisDialog()
-                        }
-
-                    }]
+                    })
+            },
+            saveForm(scope, url, formData, cb) {
+                scope.isPosting = true;
+                this.postData(url, formData, (res) => {
+                    scope.isPosting = false;
+                    cb(res);
                 })
             },
-            getJson: function (url, params, cb) {
-                var me = this;
-                $http.post(url, params, {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    transformRequest: function (obj) {
-                        var str = [];
-                        for (var p in obj) {
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                        }
-                        return str.join("&");
-                    }
-                }).then(function (res) {
-                    var data = res.data;
-                    if (data.code == 1) {
-                        cb(data.content);
-                    } else if (data.code == 2) {
-                        me.goToState('login');
-                        return false;
-                    } else {
-                        me.alert(data.message, 'warning');
-                        return false;
-                    }
-                }, function (res) {
-                    me.alert('网络或服务端异常', 'warning')
-                })
-            },
-            getData: function (url, params, cb) {
-                var me = this;
-                $http.get(url, params, {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    transformRequest: function (obj) {
-                        var str = [];
-                        for (var p in obj) {
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                        }
-                        return str.join("&");
-                    }
-                }).then(function (res) {
-                    var data = res.data;
-                    if (data.code == 1) {
-                        cb(data.content);
-                    } else if (data.code == 2) {
-                        me.goToState('login');
-                        return false;
-                    } else {
-                        me.alert(data.message, 'warning');
-                        return false;
-                    }
-                }, function (res) {
-                    me.alert('网络或服务端异常', 'warning')
-                })
-            },
-            postData: function (url, params, cb, errCb) {
-                var me = this;
-                $http.post(url, params, {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    transformRequest: function (obj) {
-                        var str = [];
-                        for (var p in obj) {
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                        }
-                        return str.join("&");
-                    }
-                }).then(function (res) {
-                    var data = res.data;
-                    if (data.code == 1) {
-                        cb(data.content);
-                    } else if (data.code == 2) {
-                        me.goToState('login');
-                        // return false;
-                    } else {
-                        me.alert(data.message, 'warning');
-                        if (errCb) {
-                            errCb();
-                        }
-                        return false;
-                    }
-                }, function (res) {
-                    me.alert('网络或服务端异常', 'warning')
-                })
-            },
-            dmbdOSSImageUrlResizeFilter: function (imgUrl, size) {
+            dmbdOSSImageUrlResizeFilter(imgUrl, size) {
                 var joinChar = imgUrl.indexOf('?') >= 0 ? '&' : '?';
                 return imgUrl + joinChar + 'x-oss-process=image/resize,m_lfit,h_' + size + ',w_' + size;
             },
-            removeAryId: function (aObj, val) {
+            removeAryId(aObj, val) {
                 var nArr = [];
                 for (var i = 0; i < aObj.length; i++) {
                     if (aObj[i].id != val) {
@@ -228,7 +123,7 @@ export default app => {
                 }
                 return nArr;
             },
-            removeAry: function (aObj, val) {
+            removeAry(aObj, val) {
                 var nArr = [];
                 for (var i = 0; i < aObj.length; i++) {
                     if (aObj[i] != val) {
@@ -237,7 +132,7 @@ export default app => {
                 }
                 return nArr;
             },
-            initTable: function ($scope, tableState, url, cb) {
+            initTable($scope, tableState, url, cb) {
                 $scope.isLoading = true;
                 $scope.tableState = tableState;
                 var pagination = tableState.pagination;
@@ -257,19 +152,19 @@ export default app => {
                     }
                 })
             },
-            formateDay: function (day) {
+            formateDay(day) {
                 if (day < 10) {
                     return '0' + day.toString();
                 } else {
                     return day.toString();
                 }
             },
-            getPerms: function (cb) {
+            getPerms(cb) {
                 this.postData(this.api.admin + 'getPermsList', {}, function (data) {
                     cb(data);
                 })
             },
-            getMonthTxt: function (month) {
+            getMonthTxt(month) {
                 switch (month) {
                     case 1:
                         return '一月'
@@ -309,24 +204,24 @@ export default app => {
                         break;
                 }
             },
-            formateDay: function (day) {
+            formateDay(day) {
                 if (day < 10) {
                     return '0' + day.toString();
                 } else {
                     return day.toString();
                 }
             },
-            formateDate: function (date) {
+            formateDate(date) {
                 let dateStr = date.toString();
                 return dateStr.substring(0, 4) + '-' + dateStr.substring(4, 6) + '-' + dateStr.substring(6, 8);
             },
-            formateDayTime: function (date) {
+            formateDayTime(date) {
                 return Date.parse(date.substring(0, 4) + '/' + date.substring(4, 6) + '/' + date.substring(6, 8));
             },
-            formateDayTxt: function (date) {
+            formateDayTxt(date) {
                 return date.substring(0, 4) + '年' + date.substring(4, 6) + '月' + date.substring(6, 8) + '日';
             },
-            getFirstorLastDay: function getLastDay(date, type) {
+            getFirstorLastDay(date, type) {
                 var now = new Date(date);
                 var year = now.getFullYear();
                 var month = now.getMonth();
@@ -343,14 +238,14 @@ export default app => {
                     return cdt;
                 }
             },
-            showSchedule: function (item, detailType, chartService, cb) {
+            showSchedule(item, detailType, chartService, cb) {
                 let me = this;
                 this.postData(this.api.programSchedule + 'getProgramScheduleById', {
                     id: item.pid,
                     domain: item.domain
                 }, function (schedule) {
                     schedule.detailType = detailType;
-                    me.confirmDialog(720, '排期详情', schedule, scheduleDetailsTpl, function (type, vm) {
+                    modalService.confirmDialog(720, '排期详情', schedule, '/static/tpl/schedule_details.html', function (type, vm) {
                         if (cb) {
                             cb(type);
                         }
@@ -388,7 +283,7 @@ export default app => {
                                 programService.getProgramById(nitem.id, item.domain, function (program) {
 
                                     program.nstatus = '审核通过';
-                                    baseService.confirmDialog(750, '节目预览', program, programDetailsTpl, function (vm) {
+                                    modalService.confirmDialog(750, '节目预览', program, '/static/tpl/program_details.html', function (vm) {
 
                                     }, function (vm) {
                                         vm.program = program;
@@ -400,7 +295,7 @@ export default app => {
                     }, 0);
                 })
             },
-            showMaterial: function (item, detailType, cb) {
+            showMaterial(item, detailType, cb) {
                 item.detailType = detailType;
                 item.nUrl = this.dmbdOSSImageUrlResizeFilter(item.path, 400);
                 this.confirmDialog(720, detailType == 0 ? '素材详情' : '素材审核', item, materialDetailTpl, (type, vm) => {
@@ -414,7 +309,7 @@ export default app => {
                 }, detailType);
 
             },
-            showProgram: function (item, detailType, cb) {
+            showProgram(item, detailType, cb) {
                 var me = this;
                 programService.getProgramById(item.pid, item.domain, function (program) {
 

@@ -1,7 +1,7 @@
 import './style.less';
 import {domainStatusOptions} from '../../filter/options'
 
-const terminalreportController = ($scope, $rootScope, $stateParams, baseService) => {
+const terminalreportController = ($scope, $rootScope, $stateParams, baseService,modalService) => {
     $scope.displayed = [];
     $scope.sp = {};
     $scope.tableState = {};
@@ -16,7 +16,7 @@ const terminalreportController = ($scope, $rootScope, $stateParams, baseService)
 		$scope.callServer($scope.tableState, 0)
     }
     $scope.exportExcel = function (item) {
-        baseService.confirm('导出表格', '确定将当前企业的所有的终端信息导出excel表格?',function (vm) {
+        modalService.confirm('导出表格', '确定将当前企业的所有的终端信息导出excel表格?',function (vm) {
             vm.closeThisDialog();
             window.open(baseService.api.terminal + 'exportTerminal?domain=' +
                 item.domainCode);
@@ -24,7 +24,7 @@ const terminalreportController = ($scope, $rootScope, $stateParams, baseService)
     }
 }
 
-terminalreportController.$inject = ['$scope', '$rootScope', '$stateParams', 'baseService'];
+terminalreportController.$inject = ['$scope', '$rootScope', '$stateParams', 'baseService','modalService'];
 
 export default angular => {
     return angular.module('terminalreportModule', []).controller('terminalreportController', terminalreportController);

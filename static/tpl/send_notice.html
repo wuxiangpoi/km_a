@@ -1,0 +1,61 @@
+<div class="modal-header" me-include="/static/tpl/modal_header.html"></div>
+<div class="modal-body clearfix">
+    <form name="modalForm" novalidate>
+        <div class="form-group clearfix">
+            <label class="col-sm-3 control-label">通知内容：</label>
+            <div class="col-sm-9">
+                <textarea ng-model="data.noticeText" name="noticeText" style="height:96px;resize:none;overflow-x:hidden;" required class="form-control"></textarea>
+                <div class="help-block" ng-messages="modalForm.noticeText.$error" ng-if="isShowMessage">
+                    <p ng-message="required">请输入通知内容</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="form-group clearfix">
+            <label class="col-sm-3 control-label">开始时间：</label>
+            <div class="col-sm-9">
+                <div class="col-sm-6 p0">
+                    <div class="dateTimeWrap">
+                        <input id="startDate" required type="text" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
+                            ng-model="startDate" name="startDate" placeholder="起始日期" data-autoclose="1" bs-datepicker>
+                        <label for="startDate" class="fa fa-calendar"></label>
+                    </div>
+                    <div class="help-block" ng-messages="modalForm.startDate.$error" ng-if="isShowMessage">
+                        <p ng-message="required">请输入起始日期</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 pdr0">
+                    <input type="text" data-time-type="string" class="form-control" size="8" ng-model="data.startTime" name="startTime" bs-timepicker data-time-format="HH:mm" data-model-time-format="HH:mm" data-length="8"
+                        data-minute-step="1" data-arrow-behavior="picker">
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <label class="col-sm-3 control-label">结束时间：</label>
+            <div class="col-sm-9">
+                <div class="col-sm-6 p0">
+                    <div class="dateTimeWrap">
+                        <input type="text" required id="endDate" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
+                            ng-model="endDate" name="endDate" placeholder="结束日期" data-autoclose="1" bs-datepicker>
+                        <label for="endDate" class="fa fa-calendar"></label>
+                    </div>
+                    <div class="help-block" ng-messages="modalForm.endDate.$error" ng-if="isShowMessage">
+                            <p ng-message="required">请输入结束日期</p>
+                        </div>
+                    <div class="help-block" ng-if="isShowMessage">
+                            <p ng-if="startTime > endTime">开始日期不得大于结束日期</p>
+                        </div>
+                </div>
+                <div class="col-sm-6 pdr0">
+                    <input type="text" data-time-type="string" class="form-control" size="8" ng-model="data.endTime" name="endTime" bs-timepicker data-time-format="HH:mm" data-model-time-format="HH:mm" data-length="8"
+                        data-minute-step="1" data-arrow-behavior="picker">
+                </div>
+                
+            </div>
+            
+        </div>
+    
+    </form>
+</div>
+
+<div class="modal-footer" me-include="/static/tpl/modal_footer.html"></div>

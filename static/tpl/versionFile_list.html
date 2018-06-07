@@ -1,0 +1,65 @@
+<div class="modal-header" me-include="/static/tpl/modal_header.html"></div>
+<div class="modal-body">
+    <div class="clearfix">
+        <km-select options="opOptions" selected="sp.os" val="val" name="name" change="initPage"></km-select>
+        <div class="fr">
+            <div class="input-group serchWrap">
+                <input type="text" class="form-control" ng-model="sp.search" placeholder="关键字搜索">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary">
+                        <i type="button" ng-click="initPage()" class="fa fa-search">
+                        </i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <table class="table" st-pipe="callServer" st-table="displayed">
+            <thead>
+                <tr>
+                    <th>版本名称</th>
+                    <th>系统类型</th>
+                    <th>大小</th>
+                    <th>备注</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody ng-if="displayed.length == 0">
+                <tr>
+                    <td colspan="10" class="text-center">没有查询到记录</td>
+                </tr>
+            </tbody>
+            <tbody ng-show="!isLoading">
+                <tr ng-repeat="row in displayed">
+                    <td class="ellipsisTd" ng-click="details(row)">{{row.name}}</td>
+                    <td>{{row.os== 1 ? "android" : "windows"}}</td>
+                    <td>{{row.size | dmbdResourceSizeFilter}}</td>
+                            <td>{{row.remark}}</td>
+                            <td>{{row.createTime | formateTime}}</td>
+                            <td>
+                                <button class="btn btn-primary tableBtn" ng-click="upDate(row)">升级</button>                            </td>
+    
+                </tr>
+            </tbody>
+            <tbody ng-show="isLoading">
+                <tr>
+                    <td colspan="{{displayed.length}}" class="text-center">Loading ... </td>
+                </tr>
+            </tbody>
+            <tfoot ng-show="!isLoading">
+                <tr>
+                    <td ng-if="tableState.pagination.numberOfPages >= 2" colspan='2' class="text-left" style="vertical-align:top!important;width:50px;">每页
+                        <select style="width:50px;margin:0 4px;" ng-model="sp.length" ng-change="callServer(tableState)">
+                            <option value="" hidden>{{paginationNumber[0]}}</option>
+                            <option ng-repeat="n in paginationNumber" value="{{n}}">{{n}}</option>
+                        </select>条</td>
+    
+                    <td class="text-right" st-pagination="" st-items-by-page="10" colspan="6">
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

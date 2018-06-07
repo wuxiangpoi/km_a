@@ -3,6 +3,7 @@ import { tempResolution } from '../../../filter/options'
 
 module.exports = [
     '$scope',
+    'modalService',
     'publicTemplateService',
     'dialogService',
     'baseService',
@@ -10,6 +11,7 @@ module.exports = [
     'resourcePathService',
     'resourcePathService',
     function ($scope,
+        modalService,
         templateService,
         dialogService,
         baseService,
@@ -143,27 +145,27 @@ module.exports = [
         //     });
         // };
         $scope.deleteTemplate = function (item) {
-            baseService.confirm('删除模板', "确定删除模板：" + item.name + "?", function (vm) {
+            modalService.confirm('删除模板', "确定删除模板：" + item.name + "?", function (vm) {
                 vm.isPosting = true;
                 baseService.postData(baseService.api.apiUrl + '/api/templatePublic/deleteTemplatePublic', {
                     id: item.id
                 }, function (item) {
                     vm.isPosting = false;
                     vm.closeThisDialog();
-                    baseService.alert("删除成功", 'success');
+                    modalService.alert("删除成功", 'success');
                     $scope.callServer($scope.tableState,0);
                 });
             });
         };
         $scope.public = function (item) {
-            baseService.confirm('发布模板', "确定发布模板：" + item.name + "?",function (vm) {
+            modalService.confirm('发布模板', "确定发布模板：" + item.name + "?",function (vm) {
                 vm.isPosting = true;
                 baseService.postData(baseService.api.apiUrl + '/api/templatePublic/releaseTemplatePublic', {
                     id: item.id
                 }, function (item) {
                     vm.isPosting = false;
                     vm.closeThisDialog();
-                    baseService.alert("发布成功", 'success');
+                    modalService.alert("发布成功", 'success');
                     $scope.callServer($scope.tableState);
                 });
             });

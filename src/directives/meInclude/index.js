@@ -1,18 +1,32 @@
-import angular from 'angular';
-
+import angular from 'angular'
 export default app => {
-    app.directive('meInclude', ['$compile',($compile) => {
+    app.directive('meInclude', ['$compile', '$templateRequest', ($compile, $templateRequest) => {
         return {
-            restrict: 'EA',
             replace: true,
-            link: ($scope, ele, attrs) => {
-                var template = angular.element((attrs['html']));
-                // Step 2: compile the template
-                var linkFn = $compile(template);
-                // Step 3: link the compiled template with the scope.
-                var element = linkFn($scope);
+            restrict: 'EA',
+            link: function (scope, ele, attrs) {
+                let DUMMY_SCOPE = {
+                        $destroy: angular.noop
+                    },
+                    childScope,
+                    destroyChildScope = function () {
+                        (childScope || DUMMY_SCOPE).$destroy();
+                    };
+                let srcExp = attrs.meInclude || attrs.src;
+                srcExp += '?_' + (+new Date());
+                scope.$watch("srcExp", () => {
+                    if (srcExp) {
+                        $templateRequest(srcExp, true).then(res => {
+                            destroyChildScope();
+                            childScope = scope.$new(false);
+                            let content = $compile(res)(childScope);
+                            $(ele[0]).append(content);
+                        })
 
-                $(ele[0]).append(element[0]);
+                    }
+
+                    scope.$on("$destroy", destroyChildScope);
+                });
             }
         }
     }])

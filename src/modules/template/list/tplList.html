@@ -60,8 +60,8 @@
             </ul>
         </div>
         <table class="table" st-pipe="callServer" st-table="displayed">
-            <tbody me-include html="{{tbodyTpl}}"></tbody>
-            <tfoot ng-show="!isLoading" me-include html="{{tfooterTpl}}"></tfoot>
+            <tbody me-include="/static/tpl/table.html"></tbody>
+				<tfoot ng-show="!isLoading" me-include="/static/tpl/table_footer.html"></tfoot>
         </table>
 
     </div>

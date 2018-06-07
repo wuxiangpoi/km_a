@@ -22,7 +22,7 @@ const terminalchartController = ($scope, baseService,chartService) => {
 	}
 	
 	$scope.getData = function () {
-		baseService.getData(baseService.api.report + 'terminalReport/' + $scope.sp.year, {}, function (res) {
+		baseService.getJson(baseService.api.report + 'terminalReport/' + $scope.sp.year, {}, function (res) {
 			var dataList = [];
 			for (var i = 0; i < 12; i++) {
 				dataList.push({
@@ -41,7 +41,7 @@ const terminalchartController = ($scope, baseService,chartService) => {
 				}
 			}
 			if ($scope.sp.year == year) {
-				baseService.getData(baseService.api.apiUrl + '/api/report/terminalReport/' + prevYear, {}, function (resPrev) {
+				baseService.getJson(baseService.api.apiUrl + '/api/report/terminalReport/' + prevYear, {}, function (resPrev) {
 					var dataListPrev = [];
 					for (var i = 0; i < 12; i++) {
 						dataListPrev.push({
@@ -71,7 +71,7 @@ const terminalchartController = ($scope, baseService,chartService) => {
 
 
 		})
-		baseService.getData(baseService.api.report + 'newTerminalPerMonthReport/' + year, {}, function (res) {
+		baseService.getJson(baseService.api.report + 'newTerminalPerMonthReport/' + year, {}, function (res) {
 			/************************ */
 			var data = [];
 			if (res.length) {
@@ -85,7 +85,7 @@ const terminalchartController = ($scope, baseService,chartService) => {
 				}
 			}
 			if ($scope.sp.year == year) {
-				baseService.getData(baseService.api.apiUrl + '/api/report/newTerminalPerMonthReport/' + prevYear, {}, function (resPrev) {
+				baseService.getJson(baseService.api.apiUrl + '/api/report/newTerminalPerMonthReport/' + prevYear, {}, function (resPrev) {
 					var dataListPrev = [];
 
 					for (var i = 0; i < 12; i++) {
@@ -107,13 +107,13 @@ const terminalchartController = ($scope, baseService,chartService) => {
 
 			}
 		})
-		baseService.getData(baseService.api.report + 'terminalReportAll', {}, function (res) {
+		baseService.getJson(baseService.api.report + 'terminalReportAll', {}, function (res) {
 			var totalMax = 10000;
 			$scope.totalCount = res.totalCount;
 			$scope.onlineCount = res.onlineCount;
 			$scope.offlineCount = res.offlineCount;
 		})
-		// baseService.getData(baseService.api.report + 'terminalReportByRegion', {}, function (res) {
+		// baseService.getJson(baseService.api.report + 'terminalReportByRegion', {}, function (res) {
 		// 	//*****************/
 	
 		// 	var geoCoordMap = {};

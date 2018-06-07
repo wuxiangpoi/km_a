@@ -55,8 +55,8 @@
 						<td class="tdClick ellipsisTd" ng-click="showMaterial(row)">
 							<div style="position:relative;">
 								<div style="width:80px;position:absolute;top:10px;">
-									<img ng-if="row.type == 0" src="../../img/loading.gif" style="width:80px;height:60px;" lazy-src="{{dmbdOSSImageUrlResizeFilter(row.path,100)}}">
-									<img ng-if="row.type == 1" src="../../img/loading.gif" style="width:80px;height:60px;" lazy-src="{{ata.status == 7?noPicImg:dmbdOSSImageUrlResizeFilter(row.snapshot,100)}}">
+									<img ng-if="row.type == 0" src="/static/img/loading.gif" style="width:80px;height:60px;" lazy-src="{{dmbdOSSImageUrlResizeFilter(row.path,100)}}">
+									<img ng-if="row.type == 1" src="/static/img/loading.gif" style="width:80px;height:60px;" lazy-src="{{ata.status == 7?noPicImg:dmbdOSSImageUrlResizeFilter(row.snapshot,100)}}">
 									<div ng-if="row.type == 1" class="vedioPre">
 										<i class="iconfont icon-xialajiantou"></i>
 									</div>
@@ -93,8 +93,8 @@
 						</td>
 					</tr>
 				</tbody>
-				<tbody me-include html="{{tbodyTpl}}"></tbody>
-				<tfoot ng-show="!isLoading" me-include html="{{tfooterTpl}}"></tfoot>
+				<tbody me-include="/static/tpl/table.html"></tbody>
+				<tfoot ng-show="!isLoading" me-include="/static/tpl/table_footer.html"></tfoot>
 			</table>
 		</div>
 	</div>

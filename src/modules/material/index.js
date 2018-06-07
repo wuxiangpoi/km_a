@@ -1,11 +1,9 @@
 import './style.less';
-import materialSaveNameTpl from '../../tpl/material_saveName.html'
-import materialSaveTpl from '../../tpl/upload_list.html'
 import {
     materialsTypeOptions
 } from '../../filter/options.js'
 
-const materialController = ($rootScope,$scope, baseService, FileUploader) => {
+const materialController = ($rootScope,$scope, baseService, FileUploader,modalService) => {
     $scope.displayed = [];
     $scope.sp = {};
     $scope.tableState = {};
@@ -64,31 +62,34 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
         baseService.showMaterial(item, 0);
     }
     $scope.save = function () {
-        baseService.confirmDialog(720, '添加素材', {
+        modalService.confirmDialog(720, '添加素材', {
             showTip: true
-        }, materialSaveTpl, function (vm) {
+        }, '/static/tpl/upload_list.html', function (vm) {
             if (vm.uploader.queue.length) {
                 var filenameArray = [];
                 for (var i = 0; i < vm.uploader.queue.length; i++) {
                     filenameArray.push(vm.uploader.queue[i].file.desc);
                 }
-                baseService.postData(baseService.api.material + 'addMaterial_checkUpload', {
+                baseService.saveForm(vm,baseService.api.material + 'addMaterial_checkUpload', {
                     filenameArray: JSON.stringify(filenameArray)
                 }, function (res) {
-                    if (res.length) {
-                        for (var i = 0; i < res.length; i++) {
-                            vm.uploader.queue[res[i].index].message = res[i].message;
-                            vm.uploader.queue[res[i].index].oname = res[i].name;
+                    if(res){
+                        if (res.length) {
+                            for (var i = 0; i < res.length; i++) {
+                                vm.uploader.queue[res[i].index].message = res[i].message;
+                                vm.uploader.queue[res[i].index].oname = res[i].name;
+                            }
+                        } else {
+                            vm.closeThisDialog();
+                            $rootScope.$broadcast('callUploader', vm.uploader);
                         }
-                    } else {
-                        vm.closeThisDialog();
-                        $rootScope.$broadcast('callUploader', vm.uploader);
                     }
+                    
                 })
 
 
             } else {
-                baseService.alert('请先选择文件', 'warning');
+                modalService.alert('请先选择文件', 'warning');
             }
         }, function (vm) {
 
@@ -103,7 +104,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
                 fn: function fn(item /*{File|FileLikeObject}*/ , options) {
 
                     if (this.queue.length >= 10) {
-                        baseService.alert('上传队列达到最大值10个', 'warining', true);
+                        modalService.alert('上传队列达到最大值10个', 'warining', true);
                         return false;
                     }
 
@@ -116,25 +117,25 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
                     if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + audiofile_type.toLowerCase() + ',').indexOf(type) != -1) {
                         if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1) {
                             if (item.size > 10 * 1024 * 1024) {
-                                baseService.alert('不得上传大于10Mb的图片', 'warning');
+                                modalService.alert('不得上传大于10Mb的图片', 'warning');
                             } else {
                                 return true;
                             }
                         } else if ((',' + audiofile_type.toLowerCase() + ',').indexOf(type) != -1) {
                             if (item.size > 10 * 1024 * 1024) {
-                                baseService.alert('不得上传大于10Mb的音乐', 'warning');
+                                modalService.alert('不得上传大于10Mb的音乐', 'warning');
                             } else {
                                 return true;
                             }
                         } else {
                             if (item.size > 500 * 1024 * 1024) {
-                                baseService.alert('不得上传大于500Mb的视频', 'warning');
+                                modalService.alert('不得上传大于500Mb的视频', 'warning');
                             } else {
                                 return true;
                             }
                         }
                     } else {
-                        baseService.alert('暂不支持该格式文件','warning');
+                        modalService.alert('暂不支持该格式文件','warning');
                         return false;
                     }
                 }
@@ -224,18 +225,19 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
         var modalData = {
             name: item.name
         }
-        baseService.confirmDialog(540,'编辑', modalData, materialSaveNameTpl, function (vm) {
+        modalService.confirmDialog(540,'编辑', modalData, '/static/tpl/material_saveName.html', function (vm) {
             if (vm.modalForm.$valid) {
                 vm.isPosting = true;
-                baseService.postData(baseService.api.material + 'saveMaterial', {
+                baseService.saveForm(vm,baseService.api.material + 'saveMaterial', {
                     id: item.id,
                     name: vm.data.name
-                }, function () {
-                    vm.closeThisDialog();
-                    $scope.initPage();
-                    baseService.alert(item ? '修改成功' : '添加成功', 'success');
-                }, function (msg) {
-                    vm.isPosting = false;
+                }, function (res) {
+                    if(res){
+                        vm.closeThisDialog();
+                        $scope.initPage();
+                        modalService.alert(item ? '修改成功' : '添加成功', 'success');
+                    }
+                    
                 })
 
             } else {
@@ -244,7 +246,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
         });
     }
     $scope.submitCheck = (item) => {
-        baseService.confirm('提交', '是否提交素材?', (vm,ngDialog) => {
+        modalService.confirm('提交', '是否提交素材?', (vm,ngDialog) => {
             var s = '';
             if (item) {
                 s = item.id;
@@ -253,7 +255,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
             }
             if (s == '') {
                 ngDialog.close();
-                baseService.alert('提交成功', 'success');
+                modalService.alert('提交成功', 'success');
                 $scope.ids = [];
                 $scope.idsNoSubmitCheck = [];
             } else {
@@ -262,7 +264,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
                     id: s
                 }, () => {
                     vm.isPosting = false;
-                    baseService.alert('提交成功', 'success');
+                    modalService.alert('提交成功', 'success');
                     ngDialog.close();
                     $scope.callServer($scope.tableState, 0);
                     $scope.ids = [];
@@ -273,13 +275,13 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
         })
     }
     $scope.del = (item) => {
-        baseService.confirm('删除素材', "确定删除素材：" + item.name + "?",(vm) => {
+        modalService.confirm('删除素材', "确定删除素材：" + item.name + "?",(vm) => {
             vm.isPosting = true;
             baseService.postData(baseService.api.material + 'delMaterial', {
                 id: item.id
             }, () => {
                 vm.isPosting = false;
-                baseService.alert('删除成功', 'success');
+                modalService.alert('删除成功', 'success');
                 vm.closeThisDialog();
                 $scope.callServer($scope.tableState, 0);
             })
@@ -287,7 +289,7 @@ const materialController = ($rootScope,$scope, baseService, FileUploader) => {
     }
 }
 
-materialController.$inject = ['$rootScope','$scope', 'baseService', 'FileUploader'];
+materialController.$inject = ['$rootScope','$scope', 'baseService', 'FileUploader','modalService'];
 
 export default angular => {
     return angular.module('materialModule', []).controller('materialController', materialController);

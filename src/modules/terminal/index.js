@@ -1,10 +1,4 @@
 import style from './style.less';
-import terminalProgramPlayListTpl from '../../tpl/terminal_programPlay_list.html'
-import terminalDetailsTpl from '../../tpl/terminal_details.html'
-import versionFileListTpl from '../../tpl/versionFile_list.html'
-import sendNoticeTpl from '../../tpl/send_notice.html'
-import migrateTerminalsTpl from '../../tpl/migrate_terminals.html'
-import programDetailsTpl from '../../tpl/program_details.html'
 
 import {
 	opOptions,
@@ -13,7 +7,7 @@ import {
 } from '../../filter/options';
 
 
-const terminalController = ($scope, $rootScope, $stateParams, baseService, sentencesService, chartService, programService) => {
+const terminalController = ($scope, $rootScope, $stateParams, baseService, sentencesService, chartService, programService, modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
 	if ($stateParams.domain) {
@@ -64,7 +58,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 		}
 	}
 	$scope.showPrograms = (item) => {
-		baseService.confirmDialog(720, '播放列表', item, terminalProgramPlayListTpl, function (ngDialog) {
+		modalService.confirmDialog(720, '播放列表', item, '/static/tpl/terminal_programPlay_list.html', function (ngDialog) {
 
 		}, function (vm) {
 			vm.displayed = [];
@@ -84,7 +78,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 					programService.getProgramById(pitem.pid, $stateParams.id ? $stateParams.id : item.domain, function (program) {
 
 						program.nstatus = '审核通过';
-						baseService.confirmDialog(750, '节目预览', program, programDetailsTpl, function (vm) {
+						modalService.confirmDialog(750, '节目预览', program, '/static/tpl/program_details.html', function (vm) {
 
 						}, function (vm) {
 							vm.program = program;
@@ -102,7 +96,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 		baseService.getJson(baseService.api.terminal + 'getTerminalInfo', {
 			tid: item.id
 		}, function (data) {
-			baseService.confirmDialog(580, '终端详情', data, terminalDetailsTpl, function (vm) {}, (vm) => {}, 0)
+			modalService.confirmDialog(580, '终端详情', data, '/static/tpl/terminal_details.html', function (vm) {}, (vm) => {}, 0)
 		});
 
 	}
@@ -130,32 +124,36 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 			case 8:
 			case 9:
 			case 10:
-				baseService.confirm('终端操作', "确定对当前选中的设备执行命令：" + switchCommand(command) + "?", function (vm) {
-					vm.isPosting = true;
-					baseService.postData(baseService.api.terminalCommandSend + 'sendCommand', {
+				modalService.confirm('终端操作', "确定对当前选中的设备执行命令：" + switchCommand(command) + "?", function (vm) {
+					baseService.saveForm(vm, baseService.api.terminalCommandSend + 'sendCommand', {
 							tids: tids,
 							command: command
 						},
-						function (data) {
-							vm.isPosting = false;
-							vm.closeThisDialog();
-							$scope.sendCommand()
-							baseService.alert('操作成功', 'success')
+						function (res) {
+							if (res) {
+								vm.closeThisDialog();
+								$scope.sendCommand()
+								modalService.alert('操作成功', 'success')
+							}
+
 						});
 				})
 				break;
 			case 31:
-				baseService.confirmDialog(720, '终端升级', {}, versionFileListTpl, function (vm) {
+				modalService.confirmDialog(720, '终端升级', {}, '/static/tpl/versionFile_list.html', function (vm) {
 					if (vm.displayed.length == 0) {
-						baseService.alert('请至少勾选一个版本文件再进行操作', 'warning');
+						modalService.alert('请至少勾选一个版本文件再进行操作', 'warning');
 					} else {
-						baseService.postData(baseService.api.terminalCommandSend + 'sendCommand', {
+						baseService.saveForm(vm, baseService.api.terminalCommandSend + 'sendCommand', {
 							tids: tids,
 							version: vm.ids.join(','),
 							command: 31
-						}, function () {
-							vm.closeThisDialog();
-							baseService.alert('操作成功', 'success', true);
+						}, function (res) {
+							if (res) {
+								vm.closeThisDialog();
+								modalService.alert('操作成功', 'success', true);
+							}
+
 						})
 					}
 				}, function (vm) {
@@ -175,22 +173,23 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 					}
 					vm.opOptions = opOptions;
 					vm.upDate = function (item) {
-						baseService.confirm('终端升级', "确定升级该终端：" + item.name + "?", function (vm) {
-							vm.isPosting = true;
-							baseService.postData(baseService.api.terminalCommandSend + 'sendCommand', {
+						modalService.confirm('终端升级', "确定升级该终端：" + item.name + "?", function (vm) {
+							baseService.saveForm(vm,baseService.api.terminalCommandSend + 'sendCommand', {
 								tids: tids,
 								version: item.id,
 								command: 31
-							}, function () {
-								vm.isPosting = false;
-								vm.closeThisDialog();
-								baseService.alert('升级成功', 'success', true);
+							}, function (res) {
+								if(res){
+									vm.closeThisDialog();
+									modalService.alert('升级成功', 'success');
+								}
+								
 							})
 						})
 
 					}
 
-				}, 0)
+				})
 				break;
 		}
 	}
@@ -204,24 +203,25 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 			end_m: '',
 			noticeText: '',
 		}
-		baseService.confirmDialog(540, '发布通知', data, sendNoticeTpl, function (vm, ngDialog) {
+		modalService.confirmDialog(540, '发布通知', data, '/static/tpl/send_notice.html', function (vm, ngDialog) {
 			vm.isShowMessage = false;
-			vm.startTime = vm.startDate.split('-').join('') + vm.data.start_h*60 + vm.data.start_m;
-			vm.endTime = vm.endDate.split('-').join('') + vm.data.end_h*60 + vm.data.end_m;
+			vm.startTime = vm.startDate.split('-').join('') + vm.data.start_h * 60 + vm.data.start_m;
+			vm.endTime = vm.endDate.split('-').join('') + vm.data.end_h * 60 + vm.data.end_m;
 			if (vm.modalForm.$valid && vm.endTime >= vm.startTime) {
 				if (sentencesService.checkCon(vm.data.noticeText).sentencesArr.length) {
-					baseService.alert('抱歉，您输入的内容包含被禁止的词汇，建议修改相关内容', 'warning');
+					modalService.alert('抱歉，您输入的内容包含被禁止的词汇，建议修改相关内容', 'warning');
 					vm.data.noticeText = sentencesService.checkCon(vm.data.noticeText).sentencesCon;
 				} else {
 					vm.data.startDate = vm.startDate;
 					vm.data.endDate = vm.endDate;
-					vm.isPosting = true;
-					baseService.postData(baseService.api.terminalCommandSend + 'sendCommandWithNotice', vm.data, function (data) {
-						vm.isPosting = false;
-						vm.closeThisDialog();
-						baseService.alert('发布成功', 'success');
+					baseService.saveForm(vm,baseService.api.terminalCommandSend + 'sendCommandWithNotice', vm.data, function (res) {
+						if(res){
+							vm.closeThisDialog();
+							modalService.alert('发布成功', 'success');
+						}
+						
 					})
-					
+
 				}
 
 
@@ -256,7 +256,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 	}
 	$scope.migrateTerminals = function () {
 
-		baseService.confirmDialog(540, '终端迁移', {}, migrateTerminalsTpl, function (vm) {
+		modalService.confirmDialog(540, '终端迁移', {}, '/static/tpl/migrate_terminals.html', function (vm) {
 
 		}, function (vm) {
 			vm.displayed = [];
@@ -271,44 +271,41 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 				vm.callServer(vm.tableState);
 			}
 			vm.migrate = function (item) {
-				baseService.confirm('迁入终端', '确定迁入企业：' + item.name + '?', function (vm, ngDialog) {
-					vm.isPosting = true;
-					baseService.postData(baseService.api.apiUrl + '/api/terminalMigrate/migrateTerminalsByIds', {
+				modalService.confirm('迁入终端', '确定迁入企业：' + item.name + '?', function (vm, ngDialog) {
+					baseService.saveForm(vm,baseService.api.apiUrl + '/api/terminalMigrate/migrateTerminalsByIds', {
 						tids: $scope.ids.join(','),
 						domainTo: item.key
-					}, function () {
-						vm.isPosting = false;
+					}, function (res) {
 						ngDialog.close();
-						$scope.initPage();
-						baseService.alert('迁入成功', 'success');
-					}, function () {
-						vm.isPosting = false;
-						ngDialog.close();
+						if(res){
+							$scope.initPage();
+							modalService.alert('迁入成功', 'success');
+						}
+						
 					})
 				})
 			}
 		}, 0)
 	}
 	$scope.delTerminals = () => {
-		baseService.confirm('删除终端', '确定删除所选终端', (vm) => {
+		modalService.confirm('删除终端', '确定删除所选终端', (vm) => {
 			let me = this;
-			vm.isPosting = true;
-			baseService.postData(baseService.api.apiUrl + '/api/terminalMigrate/deleteTerminalsByIds', {
+			baseService.saveForm(vm,baseService.api.apiUrl + '/api/terminalMigrate/deleteTerminalsByIds', {
 				tids: $scope.ids.join(',')
 			}, (res) => {
-				vm.isPosting = false;
 				vm.closeThisDialog();
-				baseService.alert('删除成功', 'success');
-				$scope.initPage();
-			}, () => {
-				vm.isPosting = false;
-				vm.closeThisDialog();
+
+				if(res){
+					modalService.alert('删除成功', 'success');
+					$scope.initPage();
+				}
+				
 			})
 		})
 	}
 }
 
-terminalController.$inject = ['$scope', '$rootScope', '$stateParams', 'baseService', 'sentencesService', 'chartService', 'programService'];
+terminalController.$inject = ['$scope', '$rootScope', '$stateParams', 'baseService', 'sentencesService', 'chartService', 'programService', 'modalService'];
 
 export default angular => {
 	return angular.module('terminalModule', []).controller('terminalController', terminalController);

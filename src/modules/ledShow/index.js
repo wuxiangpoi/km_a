@@ -25,7 +25,7 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 	}
 	
 	$scope.getData = function () {
-		baseService.getData(baseService.api.report + 'terminalReport/' + $scope.sp.year, {}, function (res) {
+		baseService.getJson(baseService.api.report + 'terminalReport/' + $scope.sp.year, {}, function (res) {
 			var dataList = [];
 			for (var i = 0; i < 12; i++) {
 				dataList.push({
@@ -44,7 +44,7 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 				}
 			}
 			if ($scope.sp.year == year) {
-				baseService.getData(baseService.api.apiUrl + '/api/report/terminalReport/' + prevYear, {}, function (resPrev) {
+				baseService.getJson(baseService.api.apiUrl + '/api/report/terminalReport/' + prevYear, {}, function (resPrev) {
 					var dataListPrev = [];
 					for (var i = 0; i < 12; i++) {
 						dataListPrev.push({
@@ -74,7 +74,7 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 
 
 		})
-		baseService.getData(baseService.api.report + 'newTerminalPerMonthReport/' + year, {}, function (res) {
+		baseService.getJson(baseService.api.report + 'newTerminalPerMonthReport/' + year, {}, function (res) {
 			/************************ */
 			var data = [];
 			if (res.length) {
@@ -88,7 +88,7 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 				}
 			}
 			if ($scope.sp.year == year) {
-				baseService.getData(baseService.api.apiUrl + '/api/report/newTerminalPerMonthReport/' + prevYear, {}, function (resPrev) {
+				baseService.getJson(baseService.api.apiUrl + '/api/report/newTerminalPerMonthReport/' + prevYear, {}, function (resPrev) {
 					var dataListPrev = [];
 
 					for (var i = 0; i < 12; i++) {
@@ -110,13 +110,13 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 
 			}
 		})
-		baseService.getData(baseService.api.report + 'terminalReportAll', {}, function (res) {
+		baseService.getJson(baseService.api.report + 'terminalReportAll', {}, function (res) {
 			var totalMax = 10000;
 			$scope.totalCount = res.totalCount;
 			$scope.onlineCount = res.onlineCount;
 			$scope.offlineCount = res.offlineCount;
 		})
-		baseService.getData(baseService.api.report + 'terminalReportByRegion', {}, function (res) {
+		baseService.getJson(baseService.api.report + 'terminalReportByRegion', {}, function (res) {
 			//*****************/
 	
 			var geoCoordMap = {};
@@ -138,7 +138,7 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 			$scope.mapOption = chartService.initChartMap(data);
 	
 		})
-		baseService.getData(baseService.api.apiUrl + '/api/report/materialReport/' + $scope.sp.year, {}, function (res) {
+		baseService.getJson(baseService.api.apiUrl + '/api/report/materialReport/' + $scope.sp.year, {}, function (res) {
 			var dataList = res;
 			var materialCountList = [];
 			var monthList = [];
@@ -313,7 +313,7 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 				$scope.materialOption = materialOption;
 			}
 			if ($scope.sp.year == year) {
-				baseService.getData(baseService.api.apiUrl + '/api/report/materialReport/' + prevYear, {}, function (resPrev) {
+				baseService.getJson(baseService.api.apiUrl + '/api/report/materialReport/' + prevYear, {}, function (resPrev) {
 					var dataListPrev = [];
 					for (var i = 0; i < 12; i++) {
 						dataListPrev.push({
@@ -342,7 +342,7 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 
 			}
 		})
-		baseService.getData(baseService.api.apiUrl + '/api/report/programReport/' + $scope.sp.year, {}, function (res) {
+		baseService.getJson(baseService.api.apiUrl + '/api/report/programReport/' + $scope.sp.year, {}, function (res) {
 			var dataList = res;
 			var monthList = [];
 			var totalCountList = [];
@@ -537,7 +537,7 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 				$scope.programOption = programOption;
 			}
 			if ($scope.sp.year == year) {
-				baseService.getData(baseService.api.apiUrl + '/api/report/programReport/' + prevYear, {}, function (resPrev) {
+				baseService.getJson(baseService.api.apiUrl + '/api/report/programReport/' + prevYear, {}, function (resPrev) {
 					var dataListPrev = [];
 					for (var i = 0; i < 12; i++) {
 						dataListPrev.push({

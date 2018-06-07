@@ -1,8 +1,6 @@
 import './style.less';
-import roleSaveTpl from '../../tpl/role_save.html';
-import permsSetTpl from '../../tpl/perms_set.html'
 
-const roleController = ($scope, baseService) => {
+const roleController = ($scope, baseService,modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
 	$scope.tableState = {};
@@ -54,9 +52,9 @@ const roleController = ($scope, baseService) => {
 	}
 	$scope.checkPerms = function (item) {
 		getPerms(function () {
-			baseService.confirmDialog(540,'查看权限', {
+			modalService.confirmDialog(540,'查看权限', {
 				set: 1
-			}, permsSetTpl, function (ngDialog, vm) {
+			}, '/static/tpl/perms_set.html', function (ngDialog, vm) {
 
 			}, function (vm) {
 				vm.zTreeSetting = {
@@ -66,7 +64,7 @@ const roleController = ($scope, baseService) => {
 					isCheck: false,
 					selectedNodes: []
 				}
-			},0)
+			})
 		})
 
 	};
@@ -77,19 +75,20 @@ const roleController = ($scope, baseService) => {
 			fids: item ? item.fids : '',
 			remark: item ? item.remark : '',
 		}
-		baseService.confirmDialog(540,item ? '编辑角色' : '添加角色', postData, roleSaveTpl, (vm) => {
+		modalService.confirmDialog(540,item ? '编辑角色' : '添加角色', postData, '/static/tpl/role_save.html', (vm) => {
 			if (vm.modalForm.$valid) {
 				if (vm.fids && vm.fids.length) {
 					vm.data.fids = vm.fids.join(',');
-					vm.isPosting = false;
-					baseService.postData(baseService.api.admin + 'saveAdminRoleInfo', vm.data, function () {
-						vm.isPosting = false;
-						vm.closeThisDialog();
-						baseService.alert(item ? '修改成功' : '添加成功', 'success');
-						$scope.callServer($scope.tableState,0);
+					baseService.saveForm(vm,baseService.api.admin + 'saveAdminRoleInfo', vm.data, function (res) {
+						if(res){
+							vm.closeThisDialog();
+							modalService.alert(item ? '修改成功' : '添加成功', 'success');
+							$scope.callServer($scope.tableState,0);
+						}
+						
 					})
 				} else {
-					baseService.alert('请先选择权限', 'warning');
+					modalService.alert('请先选择权限', 'warning');
 				}
 			} else {
 				vm.isShowMessage = true;
@@ -101,9 +100,9 @@ const roleController = ($scope, baseService) => {
 			}
 			vm.checkPerms = function () {
 				getPerms(function () {
-					baseService.confirmDialog(540,'权限设置', {
+					modalService.confirmDialog(540,'权限设置', {
 						set: 2
-					}, permsSetTpl, function (vm1) {
+					}, '/static/tpl/perms_set.html', function (vm1) {
 						var zTree = $.fn.zTree.getZTreeObj('modalZtree');
 						var okNodes = zTree.getCheckedNodes(true);
 						var fids = [];
@@ -114,7 +113,7 @@ const roleController = ($scope, baseService) => {
 							vm1.closeThisDialog();
 							vm.fids = fids;
 						} else {
-							baseService.alert('请先选择权限', 'warning', true);
+							modalService.alert('请先选择权限', 'warning', true);
 						}
 					}, function (vm1) {
 						vm1.zTreeSetting = {
@@ -131,22 +130,23 @@ const roleController = ($scope, baseService) => {
 	}
 
 	$scope.del = function (item) {
-		baseService.confirm('删除', '您确定删除角色：' + item.name + '?',
+		modalService.confirm('删除', '您确定删除角色：' + item.name + '?',
 			function (vm) {
-				vm.isPosting = true;
-				baseService.postData(baseService.api.admin + 'deleteAdminRoleInfo', {
+				baseService.saveForm(vm,baseService.api.admin + 'deleteAdminRoleInfo', {
 					id: item.id
-				}, function () {
-					vm.isPosting = false;
-					vm.closeThisDialog();
-					baseService.alert("删除成功", 'success');
-					$scope.callServer($scope.tableState);
+				}, function (res) {
+					if(res){
+						vm.closeThisDialog();
+						modalService.alert("删除成功", 'success');
+						$scope.callServer($scope.tableState);
+					}
+					
 				})
 			})
 	}
 }
 
-roleController.$inject = ['$scope', 'baseService'];
+roleController.$inject = ['$scope', 'baseService','modalService'];
 
 export default angular => {
 	return angular.module('roleModule', []).controller('roleController', roleController);

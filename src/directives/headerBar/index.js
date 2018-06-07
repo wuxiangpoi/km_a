@@ -1,8 +1,7 @@
 import template from './template.html';
 import './style.less';
-import updatePasswordTpl from '../../tpl/update_password.html';
 
-let controller = ($scope,baseService,userService) => {
+let controller = ($scope,baseService,userService,modalService) => {
     $scope.navInfo = '';
     let postData = {
         password: '',
@@ -13,20 +12,19 @@ let controller = ($scope,baseService,userService) => {
         $scope.navInfo = toState.info;
     })
     $scope.updatePwd = function () {
-        baseService.confirmDialog(540,'修改密码', postData, updatePasswordTpl, function (vm) {
+        modalService.confirmDialog(540,'修改密码', postData, updatePasswordTpl, function (vm) {
             if (vm.modalForm.$valid && postData.newPassword == postData.reNewPassword) {
                 var updpostData = {
                     password: baseService.md5_pwd(vm.data.password),
                     newPassword: baseService.md5_pwd(vm.data.newPassword),
                     reNewPassword: baseService.md5_pwd(vm.data.reNewPassword)
                 }
-                vm.isPosting = true;
-                baseService.postData(baseService.api.auth + 'updatePwd', updpostData, (data) => {
-                    vm.isPosting = false;
-                    vm.closeThisDialog();
-                    baseService.alert('修改成功', 'success');
-                },()=>{
-                    vm.isPosting = false;
+                baseService.saveForm(vm,baseService.api.auth + 'updatePwd', updpostData, (res) => {
+                    if(res){
+                        vm.closeThisDialog();
+                        modalService.alert('修改成功', 'success');
+                    }
+                    
                 })
             } else {
                 vm.isShowMessage = true;
@@ -34,21 +32,23 @@ let controller = ($scope,baseService,userService) => {
         })
     }
     $scope.logout = function () {
-        baseService.confirm('退出', '是否退出登录？', (vm) => {
-			vm.isPosting = true;
-			baseService.postData(baseService.api.auth + 'logout', {}, () => {
-                vm.isPosting = false;
-                vm.closeThisDialog();
-				baseService.goToState('login');
+        modalService.confirm('退出', '是否退出登录？', (vm) => {
+			baseService.saveForm(vm,baseService.api.auth + 'logout', {}, (res) => {
+                if(res){
+                    vm.closeThisDialog();
+                    baseService.goToState('login');
+                }
+                
 			})
 		})
         
     }
+    
     $scope.toggleFullwidth = function () {
         $('body').toggleClass('mini-navbar');
     }
 }
-controller.$inject = ['$scope','baseService','userService'];
+controller.$inject = ['$scope','baseService','userService','modalService'];
 
 export default app => {
     app.directive('headerBar', () => {

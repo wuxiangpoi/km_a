@@ -1,7 +1,6 @@
 import {
     citiesNo
 } from '../services/cityService'
-import png64 from '../img/64-64.png'
 export default app => {
     app.directive('emapChart', ['$window', 'baseService', '$rootScope', ($window, baseService, $rootScope) => {
         let controller = ($scope, element, attrs) => {
@@ -198,7 +197,7 @@ export default app => {
                         'width': '50px',
                         'height': '50px',
                         'padding': '5px',
-                        'background': `url(${png64}) no-repeat`,
+                        'background': 'url(/static/img/64-64.png) no-repeat',
                         'background-size': '50px 50px',
                         'text-align': 'center',
                         'font-size': '12px',
@@ -321,7 +320,7 @@ export default app => {
 
                     //     // if(this.getZoom() > 7){   
 
-                    //     // baseService.getData(baseService.api.apiUrl + '/api/report/allTerminalForMap', {}, function (res) {
+                    //     // baseService.getJson(baseService.api.apiUrl + '/api/report/allTerminalForMap', {}, function (res) {
                     //     //var terminalist = [];
                     //     // ************************************自定义覆盖物**************************************************************
 
@@ -401,7 +400,7 @@ export default app => {
                 } else {
                     mapUrl = '/api/terminal/getTerminalAllForMap';
                 }
-                baseService.getData(baseService.api.apiUrl + mapUrl, {}, function (res) {
+                baseService.getJson(baseService.api.apiUrl + mapUrl, {}, function (res) {
                     let resCon;
                     if (!$scope.hasDomains) {
                         resCon = res.content;

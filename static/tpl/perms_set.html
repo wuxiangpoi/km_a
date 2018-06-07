@@ -1,0 +1,8 @@
+<div class="modal-header" me-include="/static/tpl/modal_header.html"></div>
+<div class="modal-body">
+    <div class="modalZtree groupTreeWrap" style="max-height:400px;overflow:auto;">
+        <ul z-tree id="modalZtree" class="ztree" ztreeSetting="{{zTreeSetting}}"></ul>
+    </div>
+</div>
+
+<div ng-if="data.set != 1" class="modal-footer" me-include="/static/tpl/modal_footer.html"></div>

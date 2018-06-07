@@ -1,9 +1,6 @@
 import './style.less';
-import userSaveTpl from '../../tpl/user_save.html';
-import resetPasswordTpl from "../../tpl/reset_password.html"
-import relatedDomainTpl from "../../tpl/related_domain.html"
 
-const userController = ($scope, baseService) => {
+const userController = ($scope, baseService,modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
 	$scope.tableState = {};
@@ -17,7 +14,7 @@ const userController = ($scope, baseService) => {
 	$scope.initPage = function(){
 		$scope.callServer($scope.tableState, 0)
 	}
-	baseService.getJson(baseService.api.admin + 'getAdminRoleInfoList ', {}, function (data) {
+	baseService.getJson(baseService.api.admin + 'getAdminRoleInfoList', {}, function (data) {
 		$scope.roleOptions = [{
 			name: '角色',
 			val: ''
@@ -54,16 +51,20 @@ const userController = ($scope, baseService) => {
 			email: item ? item.email : '',
 			domains: item ? item.domains : []                
 		}
-		baseService.confirmDialog(540,item ? '编辑账号' : '添加账号', postData, userSaveTpl, (vm) => {
+		modalService.confirmDialog(540,item ? '编辑账号' : '添加账号', postData, '/static/tpl/user_save.html', (vm) => {
 			if (vm.modalForm.$valid) {
 				var onData = postData;
+				onData.domains = postData.domains.join(',');
                     if (!item) {
                         onData.password = baseService.md5_pwd($('#userPsd').val());
                     }
-				baseService.postData(baseService.api.admin + 'saveAdmin', postData, (res) => {
-					baseService.alert(item ? '编辑成功' : '添加成功', 'success');
-					vm.closeThisDialog();
-					$scope.callServer($scope.tableState);
+				baseService.saveForm(vm,baseService.api.admin + 'saveAdmin', postData, (res) => {
+					if(res){
+						modalService.alert(item ? '编辑成功' : '添加成功', 'success');
+						vm.closeThisDialog();
+						$scope.callServer($scope.tableState);
+					}
+					
 				})
 			} else {
 				vm.isShowMessage = true;
@@ -71,11 +72,11 @@ const userController = ($scope, baseService) => {
 
 		}, function (vm) {
 			vm.roles = [];
-			baseService.getJson(baseService.api.admin + 'getAdminRoleInfoList ', {}, function (data) {
+			baseService.getJson(baseService.api.admin + 'getAdminRoleInfoList', {}, function (data) {
 				vm.roles = data;
 			})
 			vm.chooseDomain = function () {
-				baseService.confirmDialog(640, '选择关联企业', {}, relatedDomainTpl, function (vm1) {
+				modalService.confirmDialog(640, '选择关联企业', {}, '/static/tpl/related_domain.html', function (vm1) {
 					postData.domains = vm1.domains;
 					vm1.closeThisDialog();
 				}, function (vm1) {
@@ -122,32 +123,34 @@ const userController = ($scope, baseService) => {
 		})
 	}
 	$scope.changeEnabled = function (item, index) {
-		baseService.confirm(item.enabled == 0 ? '解禁账户' : '禁用账户', item.enabled == 0 ? '您确定解禁此账号：' + item.name : '您确定禁用此账号：' + item.name,
+		modalService.confirm(item.enabled == 0 ? '解禁账户' : '禁用账户', item.enabled == 0 ? '您确定解禁此账号：' + item.name : '您确定禁用此账号：' + item.name,
 			(vm) => {
 				let me = this;
-				vm.isPosting = true;
-				baseService.postData(baseService.api.admin + 'setAdminEnable', {
+				baseService.saveForm(vm,baseService.api.admin + 'setAdminEnable', {
 					uid: item.id,
 					enabled: item.enabled == 0 ? 1 : 0
 				}, (res) => {
-					vm.isPosting = false;
-					baseService.alert('操作成功', 'success');
-					vm.closeThisDialog();
-					$scope.callServer($scope.tableState);
+					if(res){
+						modalService.alert('操作成功', 'success');
+						vm.closeThisDialog();
+						$scope.callServer($scope.tableState);
+					}
+					
 				})
 			})
 	}
 	$scope.resetPwd = function (item) {
-		baseService.confirmDialog(540, '重置密码', {}, resetPasswordTpl, function (vm) {
+		modalService.confirmDialog(540, '重置密码', {}, '/static/tpl/update_password.html', function (vm) {
 			if(vm.modalForm.$valid){
-				vm.isPosting = true;
-				baseService.postData(baseService.api.admin + 'resetPwd', {
+				baseService.saveForm(vm,baseService.api.admin + 'resetPwd', {
 					uid: item.id,
 					password: baseService.md5_pwd(vm.data.password)
-				}, function (data) {
-					vm.closeThisDialog();
-					vm.isPosting = false;
-					baseService.alert("操作成功", 'success');
+				}, function (res) {
+					if(res){
+						vm.closeThisDialog();
+						modalService.alert("操作成功", 'success');
+					}
+					
 				});
 			}else {
 				vm.isShowMessage = true;
@@ -157,7 +160,7 @@ const userController = ($scope, baseService) => {
 	}
 }
 
-userController.$inject = ['$scope', 'baseService'];
+userController.$inject = ['$scope', 'baseService','modalService'];
 
 export default angular => {
 	return angular.module('userModule', []).controller('userController', userController);

@@ -3,10 +3,8 @@ import {
 	materialStatusOptions,
 	materialTypeOptions
 } from '../../filter/options'
-import materialDetailTpl from '../../tpl/material_detail.html'
-import programDetailsTpl from '../../tpl/program_details.html'
 
-const checkModelController = ($rootScope, $scope, baseService, $sce, programService, $filter) => {
+const checkModelController = ($rootScope, $scope, baseService, $sce, programService, $filter,modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
 	$scope.tableState = {};
@@ -30,28 +28,29 @@ const checkModelController = ($rootScope, $scope, baseService, $sce, programServ
 				data.play_url = $sce.trustAsResourceUrl(data.path);
 				data.nUrl = baseService.dmbdOSSImageUrlResizeFilter(data.path, 400);
 				data.nstatus = $filter('materialStatusTxt')(data.status, 0);
-				baseService.confirmDialog(750, '详情', data, materialDetailTpl, function (vm, type) {
+				modalService.confirmDialog(750, '详情', data, '/static/tpl/material_detail.html', function (vm, type) {
 					var status = '';
 					if (type == 1) {
 						status = 1;
 					} else {
 						status = 5;
 					}
-					vm.isPosting = true;
-					baseService.postData(baseService.api.checkModel + 'check', {
+					baseService.saveForm(vm,baseService.api.checkModel + 'check', {
 						id: item.id,
 						status: status
-					}, () => {
-						vm.isPosting = false;
-						vm.closeThisDialog();
-						baseService.alert("操作成功", 'success');
-						$scope.initPage();
+					}, (res) => {
+						if(res){
+							vm.closeThisDialog();
+							modalService.alert("操作成功", 'success');
+							$scope.initPage();
+						}
+						
 					})
 				}, function (vm) {
 					vm.imgPreview = function (item) {
 						$rootScope.$broadcast('callImg', item, 1);
 					}
-				}, detailType)
+				})
 
 			});
 		} else {
@@ -59,22 +58,23 @@ const checkModelController = ($rootScope, $scope, baseService, $sce, programServ
 				id: item.id
 			}, function (data) {
 				data.nstatus = $filter('programStatusTxt')(data.status, 0);
-				baseService.confirmDialog(750, '详情', data, programDetailsTpl, function (vm,type) {
+				modalService.confirmDialog(750, '详情', data, '/static/tpl/program_details.html', function (vm,type) {
 					var status = '';
 					if (type == 1) {
 						status = 1;
 					} else {
 						status = 5;
 					}
-					vm.isPosting = true;
-					baseService.postData(baseService.api.checkModel + 'check', {
+					baseService.saveForm(vm,baseService.api.checkModel + 'check', {
 						id: item.id,
 						status: status
-					}, () => {
-						vm.isPosting = false;
-						vm.closeThisDialog();
-						baseService.alert("操作成功", 'success');
-						$scope.initPage();
+					}, (res) => {
+						if(res){
+							vm.closeThisDialog();
+							modalService.alert("操作成功", 'success');
+							$scope.initPage();
+						}
+						
 					})
 				}, function (vm) {
 					programService.getProgramById(data.id, item.domain, function (program) {
@@ -87,7 +87,7 @@ const checkModelController = ($rootScope, $scope, baseService, $sce, programServ
 	}
 }
 
-checkModelController.$inject = ['$rootScope', '$scope', 'baseService', '$sce', 'programService', '$filter'];
+checkModelController.$inject = ['$rootScope', '$scope', 'baseService', '$sce', 'programService', '$filter','modalService'];
 
 export default angular => {
 	return angular.module('checkModelModule', []).controller('checkModelController', checkModelController);

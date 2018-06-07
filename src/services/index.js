@@ -1,3 +1,5 @@
+import modalService from './modalService'
+import httpService from './httpService'
 import baseService from './baseService'
 import userService from './userService'
 import chartService from './chartService'
@@ -15,6 +17,8 @@ import resourcePathService from './resourcePathService';
 
 
 const services = [
+    modalService,
+    httpService,
     baseService,
     userService,
     chartService,

@@ -1,5 +1,5 @@
 
-const incomedetailController = ($scope, baseService, $stateParams) => {
+const incomedetailController = ($scope, baseService, $stateParams,modalService) => {
     $scope.displayed = [];
     $scope.sp = {};
     $scope.tableState = {};
@@ -22,26 +22,29 @@ const incomedetailController = ($scope, baseService, $stateParams) => {
         $scope.callServer($scope.tableState, 0)
     }
     $scope.exportExcel = function (item) {
-        baseService.confirm('导出表格', '确定将当前查询的所有的设备信息导出excel表格?',(vm) => {
+        modalService.confirm('导出表格', '确定将当前查询的所有的设备信息导出excel表格?',(vm) => {
             vm.closeThisDialog();
             window.open(baseService.api.chargeStat + 'exportExcelChageStatItems?id=' +
                 item.id);
         })
     }
     $scope.confirmCharge = function (item) {
-        baseService.confirm('确认收费', '确认收费?', (vm) => {
-            baseService.postData(baseService.api.chargeStat + 'confirmChargeById', {
+        modalService.confirm('确认收费', '确认收费?', (vm) => {
+            baseService.saveForm(vm,baseService.api.chargeStat + 'confirmChargeById', {
                 id: item.id
-            }, () => {
-                vm.closeThisDialog();
-                baseService.alert("操作成功", 'success');
-                $scope.callServer($scope.tableState);
+            }, (res) => {
+                if(res){
+                    vm.closeThisDialog();
+                    modalService.alert("操作成功", 'success');
+                    $scope.callServer($scope.tableState);
+                }
+                
             })
         })
     }
 }
 
-incomedetailController.$inject = ['$scope', 'baseService', '$stateParams'];
+incomedetailController.$inject = ['$scope', 'baseService', '$stateParams','modalService'];
 
 export default angular => {
     return angular.module('incomedetailModule', []).controller('incomedetailController', incomedetailController);
