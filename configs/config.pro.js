@@ -1,6 +1,6 @@
 let config = {
     "host": "",
-    "temp": +(new Date())
+    "temp": process.temp.NODE_TEMP
 }
 
 module.exports = config;

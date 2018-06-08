@@ -1,6 +1,4 @@
-var config_dev = require('./config.dev');
-var config_test = require('./config.test');
-var config_dep = require('./config.dep');
+var config_dev = require('./config.dev.js');
 var config_pro = require('./config.pro.js');
 
 
