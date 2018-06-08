@@ -10,6 +10,11 @@ const baseConf = require('./webpack.base.config');
 
 module.exports = merge(baseConf, {
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
         new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
             root: path.resolve(__dirname, '../'),
             verbose: true

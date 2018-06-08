@@ -1,4 +1,6 @@
 import angular from 'angular'
+import config from '../../../configs/config'
+let temp = config.temp;
 export default app => {
     app.directive('meInclude', ['$compile', '$templateRequest', ($compile, $templateRequest) => {
         return {
@@ -13,7 +15,7 @@ export default app => {
                         (childScope || DUMMY_SCOPE).$destroy();
                     };
                 let srcExp = attrs.meInclude || attrs.src;
-                srcExp += '?_' + (+new Date());
+                srcExp += '?_' + temp;
                 scope.$watch("srcExp", () => {
                     if (srcExp) {
                         $templateRequest(srcExp, true).then(res => {

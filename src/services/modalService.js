@@ -1,3 +1,5 @@
+import config from '../../configs/config'
+let temp = config.temp;
 const modalService = (ngDialog, $alert) => {
     return {
         alert: function (info, type) {
@@ -11,7 +13,7 @@ const modalService = (ngDialog, $alert) => {
         },
         confirm: function (title, info, cb) {
             ngDialog.openConfirm({
-                template: 'static/tpl/confirm.tpl.html',
+                template: 'static/tpl/confirm.tpl.html' + '?_' + temp,
                 cache: false,
                 className: 'ngdialog-theme-default',
                 controller: ['$scope', function ($scope) {
@@ -28,7 +30,7 @@ const modalService = (ngDialog, $alert) => {
         },
         confirmDialog(width, title, data, tempUrl, cb, beforeOpen) {
             ngDialog.openConfirm({
-                template: tempUrl,
+                template: tempUrl + '?_' + temp,
                 cache: false,
                 className: 'ngdialog-theme-default',
                 width: width,
@@ -51,7 +53,7 @@ const modalService = (ngDialog, $alert) => {
         },
         confirmAlert: function (title, info, type, sInfo, tInfo, cb, link) {
             ngDialog.openConfirm({
-                template: '/static/tpl/confirmalert.html',
+                template: '/static/tpl/confirmalert.html' + '?_' + temp,
                 cache: false,
                 className: 'ngdialog-theme-default',
                 controller: ['$scope', function ($scope) {

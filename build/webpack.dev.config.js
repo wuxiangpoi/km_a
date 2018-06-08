@@ -6,18 +6,23 @@ const baseConf = require('./webpack.base.config');
 
 module.exports = merge(baseConf, {
     devServer: {
-        port: 7070,
+        port: 9090,
         hot: true,
         inline: true,
         open: true,
         proxy: {
             '/api': {
-                target: 'http://47.92.116.16:7070',
+                target: 'http://47.92.116.16:9090',
                 secure: false
             }
         }
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"dev"'
+            }
+        }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin()
     ]

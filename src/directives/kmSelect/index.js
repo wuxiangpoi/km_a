@@ -7,6 +7,13 @@ export default app => {
         let link = ($scope, element, attrs) => {
             $scope.valueName = attrs['val'];
             $scope.labelName = attrs['name'];
+            if($scope.selected != '' && $scope.options){
+                for(let i = 0; i < $scope.options.length; i ++){
+                    if($scope.selected == $scope.options[i][attrs['val']]){
+                        $scope.selectedItem = $scope.options[i];
+                    }
+                }
+            }
             $scope.select = function (item) {
                 $scope.selectedItem = item;
                 $scope.selected = item[$scope.valueName];
