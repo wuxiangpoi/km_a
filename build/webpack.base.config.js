@@ -20,7 +20,6 @@ module.exports = {
             './bower_components/ng-dialog/js/ngDialog.js',
             './bower_components/angular-file-upload/dist/angular-file-upload.min.js',
             './bower_components/angular-messages/angular-messages.min.js',
-            './src/libs/angular-slider/angular-slider.min.js',
             './src/libs/smart-table/smart-table.js'
         ],
         'jqVenter': [

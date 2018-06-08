@@ -6,13 +6,13 @@ const baseConf = require('./webpack.base.config');
 
 module.exports = merge(baseConf, {
     devServer: {
-        port: 9090,
+        port: 7070,
         hot: true,
         inline: true,
         open: true,
         proxy: {
             '/api': {
-                target: 'http://47.92.116.16:9090',
+                target: 'http://47.92.116.16:7070',
                 secure: false
             }
         }
