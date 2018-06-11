@@ -57,7 +57,7 @@
 						<!-- <td>{{switchCharge(row.chargeType)}}</td> -->
 						<td>
 							<button ng-if="perms(23)" class="btn btn-primary tableBtn btnGreen" ng-click="save(row)">编辑</button>
-							<a ng-if="perms(24)" class="btn btn-primary fileLoad tableBtn" href="javascript:;">
+							<a ng-if="perms(24)" class="btn btn-primary fileLoad tableBtn" href="javascript:void(0);">
 								编辑Logo
 								<input ng-click="saveLogo(row)" type="file" nv-file-select="" name="file" uploader="uploader" multiple />
 							</a>
