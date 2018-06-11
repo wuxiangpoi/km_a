@@ -1,4 +1,5 @@
 import angular from 'angular';
+import config from '../configs/config'
 
 //引入全局样式
 import './app.depend.less'
@@ -124,6 +125,13 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
             }
         };
     }])
+    .config([  
+        '$compileProvider',  
+        function( $compileProvider )  
+        {     
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/);  
+        }  
+    ])
     .config(['$qProvider', function ($qProvider) {
         $qProvider.errorOnUnhandledRejections(false);
     }])

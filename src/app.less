@@ -137,6 +137,24 @@ a {
 }
 
 //按钮样式
+a.fileLoad {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  color: #fff!important;
+  text-decoration: none;
+  text-indent: 0;
+  padding: 0 22px;
+  background: #00a0e9;
+}
+
+a.fileLoad input {
+  position: absolute;
+  font-size: 100px;
+  right: 0;
+  top: 0;
+  opacity: 0;
+}
 .btn.fileLoad {
   position: relative;
   overflow: hidden;
@@ -889,7 +907,7 @@ input[type="checkbox"] {
   border-radius: 4px 4px 0 0;
   box-shadow: 0 0 5px #ccc;
   -webkit-box-shadow: 0 0 5px #ccc;
-  z-index: 10;
+  z-index: 300;
 }
 
 .dialog-upload.dhide {
