@@ -12,7 +12,11 @@ module.exports = merge(baseConf, {
         open: true,
         proxy: {
             '/api': {
-                target: 'http://47.92.116.16:7070',
+                target: 'http://192.168.1.158:7070',
+                secure: false
+            },
+            '/client': {
+                target: 'http://192.168.1.158:7070',
                 secure: false
             }
         }
