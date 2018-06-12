@@ -3,7 +3,7 @@
     {{selectedItem?selectedItem[labelName]:options[0][labelName]}}
     <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu select" role="menu">
+  <ul class="dropdown-menu select am-flip-x" role="menu">
     <li ng-repeat="op in options" ng-click="select(op)">
       <a>{{op[labelName]}}</a>
     </li>

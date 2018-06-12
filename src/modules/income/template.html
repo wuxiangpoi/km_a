@@ -3,9 +3,11 @@
 		<div class="clearfix">
 			<div class="selectWrap fl">
 				<div class="dateTimeSelectWrap">
-					<input type="text" class="form-control" data-animation="am-flip-x" data-date-type="string" data-date-format="yyyy-MM" data-model-date-format="yyyy-MM"
+					<input type="text" id="dateSel" class="form-control" data-animation="am-flip-x" data-date-type="string" data-date-format="yyyy-MM" data-model-date-format="yyyy-MM"
 					    ng-model="dateSel" placeholder="起始日期" data-autoclose="1" data-start-view="1" data-min-view="1" bs-datepicker>
-					<span class="caret"></span>
+						<label for="dateSel" class="timeLabel">{{dateSel}}
+							<span class="caret"></span>
+						</label>
 				</div>
 				<km-select options="chargeStatusOptions" selected="sp.status" val="val" name="name" change="initPage"></km-select>
 

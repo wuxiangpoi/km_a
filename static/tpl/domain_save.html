@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-    
+
         <div ng-if="!data.id" class="form-group clearfix">
             <label class="col-sm-3 control-label">企业代码：</label>
             <div class="col-sm-9">
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="form-group clearfix">
             <label class="col-sm-3 control-label">联系人：</label>
             <div class="col-sm-9">
@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="form-group clearfix">
             <label class="col-sm-3 control-label">联系电话：</label>
             <div class="col-sm-9">
@@ -52,36 +52,42 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="form-group clearfix">
             <label class="col-sm-3 control-label">合同时间：</label>
             <div class="col-sm-9 p0">
                 <div class="form-group col-sm-5 pdr0">
                     <div class="dateTimeWrap">
-                        <input  name="contractStart" required id="contractStart" type="text" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
-                            ng-model="data.contractStart" placeholder="起始日期" data-autoclose="1" bs-datepicker>
-                        <label for="contractStart" class="fa fa-calendar"></label>
+                        <input name="contractStart" required id="contractStart" type="text" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd"
+                            data-model-date-format="yyyy-MM-dd" ng-model="data.contractStart" placeholder="起始日期" data-autoclose="1"
+                            bs-datepicker>
+                        <label for="contractStart" class="timeLabel">{{data.contractStart?data.contractStart:'起始日期'}}
+                            <i class="fa fa-calendar"></i>
+                        </label>
                     </div>
                     <div class="help-block" ng-messages="modalForm.contractStart.$error" ng-if="isShowMessage">
-                            <p ng-message="required">请输入起始日期</p>
-                        </div>
+                        <p ng-message="required">请输入起始日期</p>
+                    </div>
                 </div>
                 <div class="form-group col-sm-2 lh34 text-center">
                     至
                 </div>
                 <div class="form-group col-sm-5 pdl0">
                     <div class="dateTimeWrap">
-                        <input  name="contractEnd" required type="text" id="contractEnd" class="form-control dateSel" data-date-type="string" data-date-format="yyyy-MM-dd" data-model-date-format="yyyy-MM-dd"
-                            ng-model="data.contractEnd" placeholder="截止日期" data-autoclose="1" bs-datepicker>
-                        <label for="contractEnd" class="fa fa-calendar"></label>
+                        <input name="contractEnd" required type="text" id="contractEnd" class="form-control dateSel" data-date-type="string" data-date-format="yyyy-MM-dd"
+                            data-model-date-format="yyyy-MM-dd" ng-model="data.contractEnd" placeholder="截止日期" data-autoclose="1"
+                            bs-datepicker>
+                        <label for="contractEnd" class="timeLabel">{{data.contractEnd?data.contractEnd:'截止日期'}}
+                            <i class="fa fa-calendar"></i>
+                        </label>
                     </div>
                     <div class="help-block" ng-messages="modalForm.contractStart.$error" ng-if="isShowMessage">
-                            <p ng-message="required">请输入截止日期</p>
-                        </div>
+                        <p ng-message="required">请输入截止日期</p>
+                    </div>
                 </div>
                 <div class="help-block" style="padding-left:15px;" ng-if="data.contractStart > data.contractEnd && isShowMessage">
-                        <p>开始日期不得大于结束日期</p>
-                    </div>
+                    <p>开始日期不得大于结束日期</p>
+                </div>
             </div>
         </div>
         <div class="form-group clearfix">
@@ -107,7 +113,7 @@
                     </div>
                 </div>
                 <div class="col-sm-2 pdr0 lh34">元/年</div>
-    
+
             </div>
             <div ng-if="data.id" class="col-sm-9 lh34">
                 {{data.price}} 元/年
@@ -122,7 +128,7 @@
                     type="checkbox">平台审核
             </div>
         </div>
-    
+
         <div class="form-group clearfix">
             <label class="col-sm-3 control-label">节目审核：</label>
             <div class="col-sm-9 lh34">
@@ -134,12 +140,12 @@
                     type="checkbox">平台审核
             </div>
         </div>
-    
+
         <div class="form-group clearfix">
             <label class="col-sm-3 control-label">文字屏管理：</label>
             <div class="col-sm-9 lh34">
                 <input name="ledShow" ng-click="updateSelection($event,'1','ledShow')" ng-checked="data.ledShow == 1" type="checkbox">开启
-    
+
             </div>
         </div>
     </form>
