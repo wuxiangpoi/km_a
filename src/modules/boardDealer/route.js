@@ -4,20 +4,20 @@ export default app => {
     app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider',($stateProvider, $urlRouterProvider, $controllerProvider) => {
         
         $stateProvider.state({
-            name: 'dashboard.checkModel',
-            url: '/checkModel',
+            name: 'dashboard.boardDealer',
+            url: '/boardDealer',
             template: require('./template.html'),
-            controller: 'checkModelController',
-            info: '审核管理|内容审核',
+            controller: 'boardDealerController',
+            info: '授权管理|板卡商管理',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {
                     return $q(resolve => {
                         require.ensure([], () => {
-                            let checkModelModule = require('./index.js').default(angular);
+                            let boardDealerModule = require('./index.js').default(angular);
                             $ocLazyLoad.load({
-                                name: 'checkModelModule'
+                                name: 'boardDealerModule'
                             });
-                            resolve(checkModelModule);
+                            resolve(boardDealerModule);
                         });
                     })
                 }]
