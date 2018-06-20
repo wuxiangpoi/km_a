@@ -417,16 +417,33 @@ export default app => {
                             }
                         }
                     }
+                    let mapInfo = [];
+
                     for (let i in mapJson) {
                         let x = citiesNo[i].p.split(',')[0];
                         let y = citiesNo[i].p.split(',')[1].split('|')[0];
                         let scal = citiesNo[i].p.split(',')[1].split('|')[1];
                         var point = new BMap.Point(x, y);
-
+                        function getRandom(min, max){
+                            var r = Math.random() * (max - min);
+                            var re = Math.round(r + min);
+                            re = Math.max(Math.min(re, max), min)
+                             
+                            return re;
+                        }
                         var marker = new BMap.Marker(point);
-                        let myCompOverlay = new ComplexCustomOverlay(point, mapJson[i].length, citiesNo[i].n, scal, mapJson[i], resCon);
-                        bmap.addOverlay(myCompOverlay);
+                        if(citiesNo[i].n != '黄冈'){
+                            let len = mapJson[i].length + getRandom(50,200);
+                            mapInfo.push({
+                                name: citiesNo[i].n,
+                                value: len
+                            })
+                            let myCompOverlay = new ComplexCustomOverlay(point, len, citiesNo[i].n, scal, mapJson[i], resCon);
+                            bmap.addOverlay(myCompOverlay);
+                        }
+                        
                     }
+                    $scope.$emit('emitMapData',mapInfo);
                 });
 
 

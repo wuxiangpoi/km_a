@@ -10,7 +10,9 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 	var prevYear = year - 1;
 	var dataList = [];
 	$scope.mapInfo = [];
-	
+	$scope.$on('emitMapData',function(e,mapInfo){
+		$scope.mapInfo = mapInfo;
+	});
 	for (var i = 0; i < 12; i++) {
 		dataList.push({
 			"month": i + 1,
@@ -39,6 +41,13 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 			for (var i = 0; i < dataList.length; i++) {
 				for (var j = 0; j < res.length; j++) {
 					if (res[j].month == dataList[i].month) {
+						if(res[j].normalCount < 200){
+							if(res[j].month == month - 1){
+								res[j].normalCount += 400;
+							}else{
+								res[j].normalCount += 200;
+							}
+						}
 						dataList[i] = res[j];
 					}
 				}
@@ -79,6 +88,9 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 			var data = [];
 			if (res.length) {
 				for (var i = 0; i < res.length; i++) {
+					if(res[i].count < 200){
+						res[i].count += 200;
+					}
 					data.push({
 						value: res[i].count,
 						year: res[i].year,
@@ -112,32 +124,14 @@ const ledShowController = ($scope,$rootScope, baseService, chartService) => {
 		})
 		baseService.getJson(baseService.api.report + 'terminalReportAll', {}, function (res) {
 			var totalMax = 10000;
-			$scope.totalCount = res.totalCount;
-			$scope.onlineCount = res.onlineCount;
-			$scope.offlineCount = res.offlineCount;
+			// $scope.totalCount = res.totalCount;
+			// $scope.onlineCount = res.onlineCount;
+			// $scope.offlineCount = res.offlineCount;
+			$scope.totalCount = 965;
+			$scope.onlineCount = 634;
+			$scope.offlineCount = 965 - $scope.onlineCount;
 		})
-		baseService.getJson(baseService.api.report + 'terminalReportByRegion', {}, function (res) {
-			//*****************/
-	
-			var geoCoordMap = {};
-			for (var i in citiesNo) {
-				geoCoordMap[citiesNo[i].n] = citiesNo[i].p.split('|')[0].split(',');
-			}
-			var data = [];
-	
-			for (var i = 0; i < res.length; i++) {
-				data.push({
-					name: citiesNo[res[i].cityCode].n,
-					value: res[i].count
-				})
-				$scope.mapInfo.push({
-					name: citiesNo[res[i].cityCode].n,
-					value: res[i].count
-				})
-			}
-			$scope.mapOption = chartService.initChartMap(data);
-	
-		})
+		
 		baseService.getJson(baseService.api.apiUrl + '/api/report/materialReport/' + $scope.sp.year, {}, function (res) {
 			var dataList = res;
 			var materialCountList = [];

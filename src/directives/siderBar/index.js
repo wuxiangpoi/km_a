@@ -33,29 +33,31 @@ let controller = ($rootScope, $scope, $state, baseService) => {
                 icon: ''
             }
         ]
-    }, {
-        name: '授权码管理',
-        auth: $rootScope.perms(11),
-        collapseVar: 11,
-        icon: 'fa fa-cogs fa-fw',
-        state: '',
-        states: ['dashboard.authorization', 'dashboard.boardDealer'],
-        children: [{
-                name: '板卡商管理',
-                auth: $rootScope.perms(11),
-                collapseVar: 1,
-                state: 'dashboard.boardDealer',
-                icon: ''
-            },
-            {
-                name: '授权码管理',
-                auth: $rootScope.perms(12),
-                collapseVar: 1,
-                state: 'dashboard.authorization',
-                icon: ''
-            }
-        ]
-    }, {
+    }, 
+    // {
+    //     name: '授权码管理',
+    //     auth: $rootScope.perms(11),
+    //     collapseVar: 11,
+    //     icon: 'fa fa-cogs fa-fw',
+    //     state: '',
+    //     states: ['dashboard.authorization', 'dashboard.boardDealer'],
+    //     children: [{
+    //             name: '板卡商管理',
+    //             auth: $rootScope.perms(11),
+    //             collapseVar: 1,
+    //             state: 'dashboard.boardDealer',
+    //             icon: ''
+    //         },
+    //         {
+    //             name: '授权码管理',
+    //             auth: $rootScope.perms(12),
+    //             collapseVar: 1,
+    //             state: 'dashboard.authorization',
+    //             icon: ''
+    //         }
+    //     ]
+    // }, 
+    {
         name: '企业管理',
         auth: $rootScope.perms(2),
         collapseVar: 2,
@@ -69,29 +71,39 @@ let controller = ($rootScope, $scope, $state, baseService) => {
         state: 'dashboard.terminalreport',
         states: ['dashboard.terminalreport', 'dashboard.terminal'],
         icon: 'iconfont icon-zhongduanguanli'
-    }, {
+    },
+    {
         name: '审核管理',
         auth: $rootScope.perms(4),
-        collapseVar: 45,
-        state: '',
-        states: ['dashboard.checkModel','dashboard.checkDealer'],
-        icon: 'iconfont icon-shenheguanli',
-        children: [{
-                name: '内容审核',
-                auth: true,
-                collapseVar: 45,
-                state: 'dashboard.checkModel',
-                icon: ''
-            },
-            {
-                name: '商户审核',
-                auth: true,
-                collapseVar: 45,
-                state: 'dashboard.checkDealer',
-                icon: ''
-            }
-        ]
-    }, {
+        collapseVar: 4,
+        state: 'dashboard.checkModel',
+        states: ['dashboard.checkModel'],
+        icon: 'iconfont icon-zhongduanguanli'
+    },
+    //  {
+    //     name: '审核管理',
+    //     auth: $rootScope.perms(4),
+    //     collapseVar: 45,
+    //     state: '',
+    //     states: ['dashboard.checkModel','dashboard.checkDealer'],
+    //     icon: 'iconfont icon-shenheguanli',
+    //     children: [{
+    //             name: '内容审核',
+    //             auth: true,
+    //             collapseVar: 45,
+    //             state: 'dashboard.checkModel',
+    //             icon: ''
+    //         },
+    //         {
+    //             name: '商户审核',
+    //             auth: true,
+    //             collapseVar: 45,
+    //             state: 'dashboard.checkDealer',
+    //             icon: ''
+    //         }
+    //     ]
+    // }, 
+    {
         name: '账户管理',
         auth: $rootScope.perms(5),
         collapseVar: 5,

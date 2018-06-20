@@ -12,7 +12,7 @@
                 <div class="chartWrap mapWrap">
                     <div id="allmap" style="height:540px;" emap-chart map-data="{{mapOption}}"></div>
                     <div class="mapTip" style="transform:scale(0.85,1);">
-                        <div ng-repeat="item in mapInfo">
+                        <div ng-repeat="item in mapInfo" ng-if="$index < 5">
                             <div class="fl">{{item.name}}</div>
                             <div class="splitLine fl"></div>
                             <div class="fl">{{item.value}}</div>
