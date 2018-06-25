@@ -122,7 +122,7 @@ let controller = ($rootScope, $scope, $state, baseService) => {
         auth: $rootScope.perms(9),
         collapseVar: 6,
         state: '',
-        states: ['dashboard.materialchart', 'dashboard.income', 'dashboard.terminalchart'],
+        states: ['dashboard.materialchart', 'dashboard.income', 'dashboard.terminalchart','dashboard.authIncome'],
         icon: 'fa fa-tasks fa-fw',
         children: [{
                 name: '终端统计',
@@ -179,7 +179,7 @@ let controller = ($rootScope, $scope, $state, baseService) => {
         auth: $rootScope.perms(7),
         collapseVar: 7,
         state: '',
-        states: ['dashboard.terminalcommand', 'dashboard.terminalmigrate'],
+        states: ['dashboard.terminalcommand', 'dashboard.terminalmigrate','dashboard.terminalcharge'],
         icon: 'icon iconfont icon-rizhiguanli',
         children: [{
                 name: '操作日志',
