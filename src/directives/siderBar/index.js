@@ -194,6 +194,13 @@ let controller = ($rootScope, $scope, $state, baseService) => {
                 collapseVar: 7,
                 state: 'dashboard.terminalmigrate',
                 icon: ''
+            },
+            {
+                name: '终端日期变动',
+                auth: $rootScope.perms(72),
+                collapseVar: 7,
+                state: 'dashboard.terminalcharge',
+                icon: ''
             }
         ]
     }]

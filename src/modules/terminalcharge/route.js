@@ -4,20 +4,20 @@ export default app => {
     app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider',($stateProvider, $urlRouterProvider, $controllerProvider) => {
         
         $stateProvider.state({
-            name: 'dashboard.income',
-            url: '/income',
+            name: 'dashboard.terminalcharge',
+            url: '/terminalcharge',
             template: require('./template.html'),
-            info: '数据统计|商户账目',
-            controller: 'incomeController',
+            info: '操作日志|终端日期变动',
+            controller: 'terminalchargeController',
             resolve: {
                 '': ['$q', '$ocLazyLoad', ($q, $ocLazyLoad) => {
                     return $q(resolve => {
                         require.ensure([], () => {
-                            let incomeModule = require('./index.js').default(angular);
+                            let terminalchargeModule = require('./index.js').default(angular);
                             $ocLazyLoad.load({
-                                name: 'incomeModule'
+                                name: 'terminalchargeModule'
                             });
-                            resolve(incomeModule);
+                            resolve(terminalchargeModule);
                         });
                     })
                 }]
