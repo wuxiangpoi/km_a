@@ -4,13 +4,13 @@
         <div ng-if="!data.id" class="form-group clearfix">
             <label class="col-sm-3 control-label">板卡商代码：</label>
             <div class="col-sm-9">
-                <input type="text" required class="form-control" name="key" ng-model="data.key" />
+                <input type="text" autofocus required class="form-control" name="key" ng-model="data.key" />
                 <div class="help-block" ng-messages="modalForm.key.$error" ng-if="isShowMessage">
                     <p ng-message="required">请输入板卡商代码</p>
                 </div>
             </div>
         </div>
-        <div ng-if="!data.id" class="form-group clearfix">
+        <div class="form-group clearfix">
             <label class="col-sm-3 control-label">板卡商名称：</label>
             <div class="col-sm-9">
                 <input type="text" required class="form-control" name="key" ng-model="data.key" />

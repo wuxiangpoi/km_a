@@ -19,6 +19,14 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 	$scope.initPage = function () {
 		$scope.callServer($scope.tableState, 0)
 	}
+	$scope.$watch('dateSel',(n,o) => {
+        if(n != o){
+            $scope.sp.year = n.split('-')[0].toString();
+            $scope.sp.month = n.split('-')[1].toString();
+            $scope.initPage();
+        }
+        
+    })
 	$scope.save = (item) => {
 		let materialCheck = ['1', '0'];
 		let programCheck = ['1', '2', '0'];

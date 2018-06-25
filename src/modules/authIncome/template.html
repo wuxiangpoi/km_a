@@ -1,11 +1,6 @@
 <div class="page-wrap animated fadeInRight">
 	<div class="level2">
-		<div  ng-if="perms(22)">
-			<button type="button" ng-click="save()" class="btn btn-primary addRole">
-				<i class="iconfont icon-tianjia-"></i>
-				添加授权码
-			</button>
-		</div>
+		
 	</div>
 	<div class="content-wrap">
 			<div class="clearfix">
@@ -26,15 +21,11 @@
 				<thead>
 					<tr>
 						<th>授权编号</th>
-						<th>板卡商代码</th>
 						<th>板卡商名称</th>
-						<th>单价（元）</th>
-						<th>授权时间</th>
-						<th>授权数量</th>
-						<th>已使用数量</th>
-						<th>超限开关</th>
-						<th>创建时间</th>
-						<th>操作账号</th>
+						<th>终端数</th>
+						<th>收费状态</th>
+						<th>应收金额（元）</th>
+						<th>实收金额（元）</th>
 						<th>操作</th>
 					</tr>
 				</thead>
@@ -43,19 +34,12 @@
 					<tr ng-repeat="row in displayed">
 						<td class="ellipsisTd">{{row.name}}</td>
 						<td>{{row.key}}</td>
-						<td>{{row.key}}</td>
-						<td>
-							<font ng-if="row.status == 1" class="txtGreen">正常</font>
-							<font ng-if="row.status != 1" class="txtRed">冻结</font>
-						</td>
 						<td>{{row.email}}</td>
 						<td>{{row.contact}}</td>
 						<td>{{row.contact}}</td>
 						<td>{{row.contact}}</td>
-						<td>{{row.contact}}</td>
-						<td>{{row.contact}}</td>
 						<td>
-							<button ng-if="perms(23)" class="btn btn-primary tableBtn btnGreen" ng-click="save(row)">编辑</button>
+							<button ng-if="perms(23)" class="btn btn-primary tableBtn btnGreen" ng-click="save(row)">详情</button>
 						</td>
 					</tr>
 				</tbody>
