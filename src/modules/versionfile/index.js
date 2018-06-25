@@ -126,6 +126,8 @@ const versionfileController = ($rootScope, $scope, baseService, FileUploader, mo
 						fileItem.isSuccess = false;
 						fileItem.isError = true;
 						fileItem.errorMsg = response.message;
+					}else{
+						$scope.initPage();
 					}
 				}
 
