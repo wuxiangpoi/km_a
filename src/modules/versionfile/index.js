@@ -21,66 +21,7 @@ const versionfileController = ($rootScope, $scope, baseService, FileUploader, mo
 		modalService.confirmDialog(720, '上传版本文件', {
 			showTip: false
 		}, '/static/tpl/upload_list.html', (vm) => {
-			if (vm.uploader.queue.length) {
-				var filenameArray = [];
-				for (var i = 0; i < vm.uploader.queue.length; i++) {
-					filenameArray.push(vm.uploader.queue[i].file.desc);
-				}
-				baseService.saveForm(vm, baseService.api.material + 'addMaterial_checkUpload', {
-					filenameArray: JSON.stringify(filenameArray)
-				}, function (res) {
-					if (res) {
-						if (res.length) {
-							for (var i = 0; i < res.length; i++) {
-								vm.uploader.queue[res[i].index].message = res[i].message;
-								vm.uploader.queue[res[i].index].oname = res[i].name;
-							}
-						} else {
-							vm.closeThisDialog();
-							$rootScope.$broadcast('callUploader', vm.uploader);
-						}
-					}
-
-				})
-
-
-			} else {
-				modalService.alert('请先选择文件', 'warning');
-			}
-		}, (vm) => {
-			vm.uploader = new FileUploader();
-			vm.uploader.filters.push({
-				name: 'customFilter',
-				fn: function (item /*{File|FileLikeObject}*/ , options) {
-
-					if (this.queue.length >= 1) {
-						modalService.alert('每次只能上传一个', 'warning')
-						return false;
-					}
-
-					var ctype = item.name.substr(item.name.lastIndexOf('.') + 1);
-					var type = ',' + ctype + ',';
-					var file_type = 'apk,zip';
-					if ((',' + file_type + ',').indexOf(type) != -1) {
-						return true;
-					} else {
-						modalService.alert('上传的文件格式平台暂时不支持' + ctype + '，目前支持的格式是:' + file_type, 'warning');
-
-						return false;
-
-					}
-
-				}
-			});
-			vm.uploader.onAfterAddingFile = function (fileItem) {
-				var fileName = fileItem.file.name.split('.');
-				fileName.pop();
-				fileItem.file.desc = fileName.join(',');
-			};
-			vm.uploader.onBeforeUploadItem = function (item) {
-				if (!item.formData.length) {
-					item.cancel();
-				}
+			vm.beforeUploadItem = function (item) {
 				var host = '';
 				var accessid = '';
 				var policyBase64 = '';
@@ -122,6 +63,63 @@ const versionfileController = ($rootScope, $scope, baseService, FileUploader, mo
 				});
 
 			};
+			if (vm.uploader.queue.length) {
+				var filenameArray = [];
+				for (var i = 0; i < vm.uploader.queue.length; i++) {
+					filenameArray.push(vm.uploader.queue[i].file.desc);
+				}
+				baseService.saveForm(vm, baseService.api.material + 'addMaterial_checkUpload', {
+					filenameArray: JSON.stringify(filenameArray)
+				}, function (res) {
+					if (res) {
+						if (res.length) {
+							for (var i = 0; i < res.length; i++) {
+								vm.uploader.queue[res[i].index].message = res[i].message;
+								vm.uploader.queue[res[i].index].oname = res[i].name;
+							}
+						} else {
+							vm.closeThisDialog();
+							$rootScope.$broadcast('callUploader', vm.uploader,vm.beforeUploadItem);
+						}
+					}
+
+				})
+
+
+			} else {
+				modalService.alert('请先选择文件', 'warning');
+			}
+		}, (vm) => {
+			vm.uploader = new FileUploader();
+			vm.uploader.filters.push({
+				name: 'customFilter',
+				fn: function (item /*{File|FileLikeObject}*/ , options) {
+
+					if (this.queue.length >= 1) {
+						modalService.alert('每次只能上传一个', 'warning')
+						return false;
+					}
+
+					var ctype = item.name.substr(item.name.lastIndexOf('.') + 1);
+					var type = ',' + ctype + ',';
+					var file_type = 'apk,zip';
+					if ((',' + file_type + ',').indexOf(type) != -1) {
+						return true;
+					} else {
+						modalService.alert('上传的文件格式平台暂时不支持' + ctype + '，目前支持的格式是:' + file_type, 'warning');
+
+						return false;
+
+					}
+
+				}
+			});
+			vm.uploader.onAfterAddingFile = function (fileItem) {
+				var fileName = fileItem.file.name.split('.');
+				fileName.pop();
+				fileItem.file.desc = fileName.join(',');
+			};
+			
 			vm.uploader.onCompleteItem = function (fileItem, response, status, headers) {
 				if (response) {
 					if (response.code != 1) {
@@ -137,7 +135,7 @@ const versionfileController = ($rootScope, $scope, baseService, FileUploader, mo
 	}
 	$scope.del = (item) => {
 		modalService.confirm('删除', '确定删除版本文件：' + item.name, (vm) => {
-			modalService.postData(baseService.api.versionFile + 'deleteVersionFile', {
+			baseService.postData(baseService.api.versionFile + 'deleteVersionFile', {
 				id: item.id
 			}, (res) => {
 				if(res){
