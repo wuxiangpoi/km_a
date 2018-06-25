@@ -57,10 +57,10 @@
 						<!-- <td>{{switchCharge(row.chargeType)}}</td> -->
 						<td>
 							<button ng-if="perms(23)" class="btn btn-primary tableBtn btnGreen" ng-click="save(row)">编辑</button>
-							<a ng-if="perms(24)" href="javascript:void(0);" class="fileLoad btn btn-primary lh34">
+							<!-- <a ng-if="perms(24)" href="javascript:void(0);" class="fileLoad btn btn-primary lh34">
 								编辑Logo
 								<input ng-click="saveLogo(row)" type="file" nv-file-select="" name="file" uploader="uploader" multiple />
-							</a>
+							</a> -->
 							<button ng-if="row.status == 1 && perms(26)" class="btn btn-primary tableBtn btnRed" ng-click="changeEnabled(row,$index)">冻结</button>
 							<button ng-if="row.status != 1 && perms(26)" class="btn btn-primary tableBtn" ng-click="changeEnabled(row,$index)">启用</button>
 							<button ng-if="perms(25)" ng-class="{'disabled': row.isPosting}" class="btn btn-primary tableBtn" ng-click="resetEmail(row,$index)">

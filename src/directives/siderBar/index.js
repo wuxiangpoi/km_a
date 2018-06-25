@@ -35,7 +35,7 @@ let controller = ($rootScope, $scope, $state, baseService) => {
         ]
     }, 
     {
-        name: '授权码管理',
+        name: '授权管理',
         auth: $rootScope.perms(11),
         collapseVar: 11,
         icon: 'fa fa-cogs fa-fw',
@@ -138,10 +138,17 @@ let controller = ($rootScope, $scope, $state, baseService) => {
                 icon: ''
             },
             {
-                name: '账目统计',
+                name: '商户账目',
                 auth: $rootScope.perms(92),
                 collapseVar: 6,
                 state: 'dashboard.income',
+                icon: ''
+            },
+            {
+                name: '授权码账目',
+                auth: $rootScope.perms(92),
+                collapseVar: 6,
+                state: 'dashboard.authIncome',
                 icon: ''
             }
         ]

@@ -17,6 +17,7 @@ import material from './modules/material/route.js'
 import terminalreport from './modules/terminalreport/route.js'
 import income from './modules/income/route.js'
 import incomedetail from './modules/incomedetail/route.js'
+import authIncome from './modules/authIncome/route.js'
 import terminalcommand from './modules/terminalcommand/route.js'
 import temp from './modules/temp/route.js'
 import terminalmigrate from './modules/terminalmigrate/route.js'
@@ -45,6 +46,7 @@ const states = [
     terminalreport,
     income,
     incomedetail,
+    authIncome,
     terminalcommand,
     temp,
     login,
