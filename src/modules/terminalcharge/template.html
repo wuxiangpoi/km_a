@@ -23,11 +23,13 @@
 					<tr>
 						<th>终端编号</th>
 						<th>终端名称</th>
-						<th>用户账号</th>
-						<th>命令代码</th>
-						<th>命令名称</th>
-						<th>下发状态</th>
-						<th>下发时间</th>
+						<th>所属企业</th>
+						<th>原计费期</th>
+						<th>新计费期</th>
+						<th>日期调整类型</th>
+						<th>调整原因</th>
+						<th>操作账号</th>
+						<th>操作时间</th>
 					</tr>
 				</thead>
 
@@ -43,6 +45,8 @@
 								<span class="txtGreen" ng-if="row.status == 1">成功</span>
 								<span class="txtRed" ng-if="row.status != 0 && row.status != 1">失败</span>
 							</td>
+							<td>{{row.sendTime | formateTime}}</td>
+							<td>{{row.sendTime | formateTime}}</td>
 							<td>{{row.sendTime | formateTime}}</td>
 						</tr>
 					</tbody>
