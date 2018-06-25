@@ -209,9 +209,9 @@ const materialController = ($rootScope,$scope, baseService, FileUploader,modalSe
                         fileItem.isSuccess = false;
                         fileItem.isError = true;
                         fileItem.errorMsg = response.message;
+                    }else{
+                        $scope.initPage();
                     }
-                }else{
-                    $scope.initPage();
                 }
                 
 
