@@ -19,9 +19,9 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-					<tr ng-repeat="row in displayed">
-						<td>{{row.name}}</td>
-						<td>{{row.remark}}</td>
+					<tr ng-repeat="row in displayed" bindonce>
+						<td bo-text="row.name"></td>
+						<td bo-text="row.remark"></td>
 						<td>
 							<div>
 								<button class="btn btn-primary tableBtn" ng-click="checkPerms(row,1)">查看权限</button>

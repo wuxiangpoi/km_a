@@ -40,19 +40,18 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-					<tr ng-repeat="row in displayed">
-						<td class="tdClick" ui-sref="dashboard.terminal({domain:row.domainCode})">{{row.domainCode}}</td>
-						<td class="ellipsisTd">{{row.domainName}}</td>
+					<tr ng-repeat="row in displayed" bindonce>
+						<td class="tdClick" ui-sref="dashboard.terminal({domain:row.domainCode})" bo-text="row.domainCode"></td>
+						<td class="ellipsisTd" bo-text="row.domainName"></td>
 						<td>
-							<font ng-if="row.domainStatus == 0" class="txtRed">冻结</font>
-							<font ng-if="row.domainStatus == 1" class="txtGreen">正常</font>
+							<span bo-text="row.domainStatus == 0?'冻结':'正常'" bo-class="{'txtRed':row.domainStatus == 0,'txtGreen':row.domainStatus == 1}"></span>
 						</td>
-						<td>{{row.terminalTotal}}</td>
-						<td>{{row.terminalOnline}}</td>
-						<td>{{row.terminalOffline}}</td>
-						<td>{{row.terminalAbnormal}}</td>
+						<td bo-text="row.terminalTotal"></td>
+						<td bo-text="row.terminalOnline"></td>
+						<td bo-text="row.terminalOffline"></td>
+						<td bo-text="row.terminalAbnormal"></td>
 						<td>
-							<button ng-if="perms(35)" class="btn btn-primary tableBtn btnGreen" ng-click="exportExcel(row)">导出</button>
+							<button bo-if="perms(35)" class="btn btn-primary tableBtn btnGreen" ng-click="exportExcel(row)">导出</button>
 						</td>
 					</tr>
 				</tbody>

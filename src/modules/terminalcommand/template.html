@@ -32,18 +32,18 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-						<tr ng-repeat="row in displayed">
-							<td ng-click="details(row)">{{row.terNo}}</td>
-							<td class="ellipsisTd">{{row.terName}}</td>
-							<td>{{row.userAccount}}</td>
-							<td>{{row.cmdCode}}</td>
-							<td>{{getRootDicName('terminal_cmd', row.cmdCode)}}</td>
+						<tr ng-repeat="row in displayed" bindonce>
+							<td ng-click="details(row)" bo-text="row.terNo"></td>
+							<td class="ellipsisTd" bo-text="row.terName"></td>
+							<td bo-text="row.userAccount"></td>
+							<td bo-text="row.cmdCode"></td>
+							<td >{{getRootDicName('terminal_cmd', row.cmdCode)}}</td>
 							<td>
-								<span class="txtGrey" ng-if="row.status == 0">待下发</span>
-								<span class="txtGreen" ng-if="row.status == 1">成功</span>
-								<span class="txtRed" ng-if="row.status != 0 && row.status != 1">失败</span>
+								<span class="txtGrey" bo-if="row.status == 0">待下发</span>
+								<span class="txtGreen" bo-if="row.status == 1">成功</span>
+								<span class="txtRed" bo-if="row.status != 0 && row.status != 1">失败</span>
 							</td>
-							<td>{{row.sendTime | formateTime}}</td>
+							<td bo-text="row.sendTime | formateTime"></td>
 						</tr>
 					</tbody>
 					<tbody me-include="/static/tpl/table.html"></tbody>

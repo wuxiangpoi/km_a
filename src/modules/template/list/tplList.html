@@ -16,7 +16,7 @@
                 </div>
         <div class="tempWrap">
             <ul class="clearfix">
-                <li class="tempItem" ng-repeat="template in displayed">
+                <li class="tempItem" ng-repeat="template in displayed" bindonce>
                     <div class="imgWrap">
                             <editor-page-thumb
                             pixel-horizontal="template.pixelHorizontal"
@@ -31,10 +31,10 @@
                                 <span ng-click="templatePreview(template)" class="fl">
                                         <i class="icon iconfont icon-bofang"></i>
                                     </span>
-                                    <span ng-if="perms(822)" ng-click="deleteTemplate(template)" class="fr">
+                                    <span bo-if="perms(822)" ng-click="deleteTemplate(template)" class="fr">
                                         <i class="icon iconfont icon-shanchu"></i>
                                     </span>
-                                    <span ng-if="perms(823)" ui-sref="dashboard.templateEdit({id:template.id})" class="fr">
+                                    <span bo-if="perms(823)" ui-sref="dashboard.templateEdit({id:template.id})" class="fr">
                                         <i class="icon iconfont icon-bianji"></i>
                                     </span>
                         </div>
@@ -49,9 +49,9 @@
                                 {{template.hot}}
                         </span>
                         <span class="fr" ng-if="template.status == 0">
-                            <button style="margin-top: 2px;" ng-if="perms(824)" ng-click="public(template)" class="btn btn-primary tableBtn btnGreen btn-sm">发布</button>
+                            <button style="margin-top: 2px;" bo-if="perms(824)" ng-click="public(template)" class="btn btn-primary tableBtn btnGreen btn-sm">发布</button>
                         </span>
-                        <span class="fr txtGrey" ng-if="template.status == 1">
+                        <span class="fr txtGrey" bo-if="template.status == 1">
                             已发布
                         </span>
                     </div>

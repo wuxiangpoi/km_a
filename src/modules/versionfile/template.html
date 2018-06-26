@@ -38,14 +38,12 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-					<tr ng-repeat="row in displayed">
-						<td class="ellipsisTd">{{row.name}}</td>
-						<td>{{row.os == 1? "android":"windows"}}</td>
-						<td>
-							{{row.size | dmbdResourceSizeFilter}}
-						</td>
-						<td>{{row.remark}}</td>
-						<td>{{row.createTime | formateTime}}</td>
+					<tr bindonce ng-repeat="row in displayed">
+						<td class="ellipsisTd" bo-text="row.name"></td>
+						<td bo-text="row.os == 1? 'android':'windows'"></td>
+						<td bo-text="row.size | dmbdResourceSizeFilter"></td>
+						<td bo-text="row.remark"></td>
+						<td bo-text="row.createTime | formateTime"></td>
 						<td>
 							<div>
 								<button class="btn btn-primary tableBtn btnRed" ng-click="del(row)">删除</button>

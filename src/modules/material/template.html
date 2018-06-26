@@ -48,7 +48,7 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-					<tr ng-repeat="row in displayed">
+					<tr ng-repeat="row in displayed" bindonce>
 						<td class="checkBoxTable">
 							<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
 						</td>
@@ -70,25 +70,18 @@
 							</div>
 
 						</td>
-						<td>{{row.size | dmbdResourceSizeFilter}}</td>
+						<td bo-text="row.size | dmbdResourceSizeFilter"></td>
 						<td>
-							<span ng-if="row.type != 2">
-								{{row.width + "*" + row.height}}
-							</span>
+							<span bo-if="row.type != 2" bo-text="row.width + '*' + row.height"></span>
 						</td>
+						<td bo-text="row.status == 0?'待提交':'已提交'"></td>
+						<td class="createTimeTd" bo-text="row.createTime | formateTime"></td>
 						<td>
-							<font ng-if="row.status == 0">待提交</font>
-							<font ng-if="row.status == 1">已提交</font>
-						</td>
-						<td class="createTimeTd">
-							{{row.createTime | formateTime}}
-						</td>
-						<td>
-							<button ng-if="[0,4,5].indexOf(row.status) != -1 && perms(814)" class="btn  btn-primary tableBtn btnGreen" ng-click="submitCheck(row)">提交
+							<button bo-if="[0,4,5].indexOf(row.status) != -1 && perms(814)" class="btn  btn-primary tableBtn btnGreen" ng-click="submitCheck(row)">提交
 							</button>
-							<button ng-if="[0,1,2,3,7].indexOf(row.status) != -1 && perms(813)" class="btn btn-primary tableBtn" ng-click="saveName(row)">修改名称
+							<button bo-if="[0,1,2,3,7].indexOf(row.status) != -1 && perms(813)" class="btn btn-primary tableBtn" ng-click="saveName(row)">修改名称
 							</button>
-							<button ng-if="[0,4,5,6].indexOf(row.status) != -1 && perms(815)" class="btn btn-primary tableBtn btnRed" ng-click="del(row)">删除
+							<button bo-if="[0,4,5,6].indexOf(row.status) != -1 && perms(815)" class="btn btn-primary tableBtn btnRed" ng-click="del(row)">删除
 							</button>
 						</td>
 					</tr>

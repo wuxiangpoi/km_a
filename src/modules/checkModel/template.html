@@ -8,7 +8,7 @@
 			<div class="fr">
 				<div class="input-group serchWrap">
 					<input type="text" class="form-control" ng-keyup="myKeyup($event,initPage)" ng-model="sp.search" placeholder="企业代码/企业名称">
-					<span class="input-group-btn"  ng-click="initPage()">
+					<span class="input-group-btn" ng-click="initPage()">
 						<button type="button" class="btn btn-primary">
 							<i type="button" class="fa fa-search">
 							</i>
@@ -32,26 +32,15 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-					<tr ng-repeat="row in displayed">
-						<td class="ellipsisTd">{{row.name}}</td>
-						<td>{{row.type == 0? '素材':'节目'}}</td>
-						<td>{{row.domain}}</td>
-						<td>{{row.domainName}}</td>
+					<tr ng-repeat="row in displayed" bindonce>
+						<td class="ellipsisTd" bo-text="row.name"></td>
+						<td bo-text="row.type == 0? '素材':'节目'"></td>
+						<td bo-text="row.domain"></td>
+						<td bo-text="row.domainName"></td>
+						<td bo-text="row.status | materialStatusTxt" bo-class="{'txtGrey':row.status == 0,'txtGreen':row.status == 1,'txtRed':row.status == 5}"></td>
+						<td bo-text="row.createTime | formateTime"></td>
 						<td>
-							<font ng-if="row.status == 0" class="txtGrey">待审核</font>
-							<font ng-if="row.status == 1" class="txtGreen">通过</font>
-							<font ng-if="row.status == 5" class="txtRed">不通过</font>
-
-						</td>
-						<td>
-							{{row.createTime | formateTime}}
-						</td>
-						<td>
-							<div>
-								<button ng-if="row.status != 0" class="btn btn-primary tableBtn" ng-click="details(row,0)">详情</button>
-								<button ng-if="row.status == 0" class="btn btn-primary tableBtn" ng-click="details(row,1)">审核</button>
-								<!-- <button ng-if="row.status == 0" class="btn btn-primary tableBtn" ng-click="changeStatus(row,$index,5)">不通过</button> -->
-							</div>
+							<button bo-text="row.status == 0? '审核':'详情'" class="btn btn-primary tableBtn" ng-click="details(row,{{row.status == 0?1:0}})"></button>
 						</td>
 					</tr>
 				</tbody>

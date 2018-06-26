@@ -26,14 +26,14 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-					<tr ng-repeat="row in displayed">
-						<td>{{row.key}}</td>
-						<td class="ellipsisTd">{{row.name}}</td>
+					<tr bindonce ng-repeat="row in displayed">
+						<td bo-text="row.key"></td>
+						<td class="ellipsisTd" bo-text="row.name"></td>
 						<td>
-							<span ng-if="row.type==1">{{row.value}}</span>
+							<span bo-if="row.type==1" bo-text="row.value"></span>
 						</td>
 						<td>
-							<span>{{row.type==0? '主键':'次键'}}</span>
+							<span bo-text="row.type==0? '主键':'次键'"></span>
 						</td>
 						<td>
 							<div>

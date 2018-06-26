@@ -33,13 +33,13 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-						<tr ng-repeat="row in displayed">
-							<td ng-click="details(row)">{{row.terminalNo}}</td>
-							<td class="ellipsisTd">{{row.terminalName}}</td>
-							<td>{{row.domainFrom}}</td>
-							<td>{{row.domainTo}}</td>
-							<td>{{row.creator}}</td>
-							<td>{{row.createTime | formateTime}}</td>
+						<tr ng-repeat="row in displayed" bindonce>
+							<td ng-click="details(row)" bo-text="row.terminalNo"></td>
+							<td class="ellipsisTd"  bo-text="row.terminalName"></td>
+							<td bo-text="row.domainFrom"></td>
+							<td bo-text="row.domainTo"></td>
+							<td bo-text="row.creator"></td>
+							<td bo-text="row.createTime | formateTime"></td>
 						</tr>
 					</tbody>
 					<tbody me-include="/static/tpl/table.html"></tbody>
