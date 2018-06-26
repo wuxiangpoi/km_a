@@ -140,7 +140,7 @@ const userController = ($scope, baseService,modalService) => {
 			})
 	}
 	$scope.resetPwd = function (item) {
-		modalService.confirmDialog(540, '重置密码', {}, '/static/tpl/update_password.html', function (vm) {
+		modalService.confirmDialog(540, '重置密码', {}, '/static/tpl/reset_password.html', function (vm) {
 			if(vm.modalForm.$valid){
 				baseService.saveForm(vm,baseService.api.admin + 'resetPwd', {
 					uid: item.id,

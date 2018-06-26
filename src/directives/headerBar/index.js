@@ -12,7 +12,7 @@ let controller = ($scope,baseService,userService,modalService) => {
         $scope.navInfo = toState.info;
     })
     $scope.updatePwd = function () {
-        modalService.confirmDialog(540,'修改密码', postData, updatePasswordTpl, function (vm) {
+        modalService.confirmDialog(540,'修改密码', postData, '/static/tpl/update_password.html', function (vm) {
             if (vm.modalForm.$valid && postData.newPassword == postData.reNewPassword) {
                 var updpostData = {
                     password: baseService.md5_pwd(vm.data.password),
