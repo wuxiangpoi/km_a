@@ -3,7 +3,8 @@ import style from './style.less';
 import {
 	opOptions,
 	terminalStatusOptions,
-	hasProgramOptions
+	hasProgramOptions,
+	maturityAdjustOptions
 } from '../../filter/options';
 
 
@@ -301,6 +302,19 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 				}
 				
 			})
+		})
+	}
+	$scope.terminalcharge = () => {
+		modalService.confirmDialog(540, '发布通知', {}, '/static/tpl/terminal_charge.html', function (vm, ngDialog) {
+			vm.isShowMessage = false;
+			if (vm.modalForm.$valid) {
+				
+
+			} else {
+				vm.isShowMessage = true;
+			}
+		}, function (vm) {
+			vm.maturityAdjustOptions = maturityAdjustOptions;
 		})
 	}
 }

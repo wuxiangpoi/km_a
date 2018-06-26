@@ -24,6 +24,18 @@ export let tempResolution = [{
     val: '768*1024',
     name: '768*1024'
 }]
+export let maturityAdjustOptions = [{
+    val: '',
+    name: '日期调整类型'
+},
+{
+    val: 0,
+    name: '计费开始日期'
+},
+{
+    val: 1,
+    name: '到期日'
+}]
 export let payTypeOptions = [{
     val: '',
     name: '请选择收费方式'
