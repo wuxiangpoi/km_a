@@ -1,5 +1,5 @@
 
-const incomedetailController = ($scope, baseService, $stateParams,modalService) => {
+const authIncomedetailController = ($scope, baseService, $stateParams,modalService) => {
     $scope.displayed = [];
     $scope.sp = {};
     $scope.tableState = {};
@@ -43,14 +43,14 @@ const incomedetailController = ($scope, baseService, $stateParams,modalService) 
         })
     }
     $scope.details = (item) => {
-        modalService.confirmDialog(720, '明细', {}, '/static/tpl/income_detail.html', function (vm, ngDialog) {
+        modalService.confirmDialog(720, '明细', {}, '/static/tpl/authIncome_detail.html', function (vm, ngDialog) {
 			
 		})
     }
 }
 
-incomedetailController.$inject = ['$scope', 'baseService', '$stateParams','modalService'];
+authIncomedetailController.$inject = ['$scope', 'baseService', '$stateParams','modalService'];
 
 export default angular => {
-    return angular.module('incomedetailModule', []).controller('incomedetailController', incomedetailController);
+    return angular.module('authIncomedetailModule', []).controller('authIncomedetailController', authIncomedetailController);
 }

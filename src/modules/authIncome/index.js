@@ -30,7 +30,11 @@ const authIncomeController = ($scope, baseService, modalService) => {
 	$scope.initPage = function () {
 		$scope.callServer($scope.tableState, 0)
 	}
-	
+	$scope.toDetails = (id) => {
+        baseService.goToState('dashboard.authIncomedetail', {
+            id: id
+        });
+    }
 
 }
 

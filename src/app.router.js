@@ -22,6 +22,7 @@ import terminalcommand from './modules/terminalcommand/route.js'
 import temp from './modules/temp/route.js'
 import terminalmigrate from './modules/terminalmigrate/route.js'
 import terminalcharge from './modules/terminalcharge/route.js'
+import authIncomedetail from './modules/authIncomedetail/route.js'
 import materialchart from './modules/materialchart/route.js'
 import terminalchart from './modules/terminalchart/route.js'
 
@@ -54,6 +55,7 @@ const states = [
     errPage,
     terminalmigrate,
     terminalcharge,
+    authIncomedetail,
     materialchart,
     terminalchart,
     programRouter,
