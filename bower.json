@@ -2,9 +2,6 @@
   "name": "km_a",
   "description": "ES6 + Webpack seed for Angular 1.x",
   "main": "src/app.js",
-  "authors": [
-    "lilili <1824098914@qq.com>"
-  ],
   "license": "ISC",
   "keywords": [
     "webpack",
