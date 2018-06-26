@@ -1,6 +1,6 @@
 <div class="page-wrap animated fadeInRight">
-	<div class="level2">
-		<div class="dropdown-toolTip-wrap" ng-if="perms(31)">
+	<div class="level2" bindonce>
+		<div class="dropdown-toolTip-wrap" bo-if="perms(31)">
 			<button type="button" ng-if="idsNormal.length == 0 || idsNormal.length != ids.length" data-trigger="hover" bs-enabled="idsNormal.length == 0 || idsNormal.length != ids.length"
 			    data-placement="bottom" data-type="success" data-title="{{'请先选择在线终端'}}" bs-tooltip class="btn toolTipPrev btn-primary warning">
 			</button>
@@ -29,27 +29,27 @@
 			</ul>
 		</div>
 
-		<button ng-if="perms(32)" type="button" ng-click="ids.length != 0?sendNotice():''" ng-class="{'disabled-sham': ids.length == 0}"
+		<button bo-if="perms(32)" type="button" ng-click="ids.length != 0?sendNotice():''" ng-class="{'disabled-sham': ids.length == 0}"
 		    data-trigger="hover" bs-enabled="ids.length == 0" data-placement="bottom" data-type="success" data-title="{{'请先选择终端'}}"
 		    bs-tooltip class="btn btn-primary warning">
 			发布紧急通知
 		</button>
-		<button ng-if="perms(31)" type="button" ng-click="ids.length != 0?sendCommand(31):''" ng-class="{'disabled-sham': ids.length == 0}"
+		<button bo-if="perms(31)" type="button" ng-click="ids.length != 0?sendCommand(31):''" ng-class="{'disabled-sham': ids.length == 0}"
 		    data-trigger="hover" bs-enabled="ids.length == 0" data-placement="bottom" data-type="success" data-title="{{'请先选择终端'}}"
 		    bs-tooltip class="btn btn-primary warning">
 			终端升级
 		</button>
-		<button ng-if="perms(34)" type="button" ng-click="ids.length != 0?migrateTerminals():''" ng-class="{'disabled-sham': ids.length == 0}"
+		<button bo-if="perms(34)" type="button" ng-click="ids.length != 0?migrateTerminals():''" ng-class="{'disabled-sham': ids.length == 0}"
 		    data-trigger="hover" bs-enabled="ids.length == 0" data-placement="bottom" data-type="success" data-title="{{'请先选择终端'}}"
 		    bs-tooltip class="btn btn-primary warning">
 			终端迁移
 		</button>
-		<button ng-if="perms(36)" type="button" ng-click="ids.length != 0?delTerminals():''" ng-class="{'disabled-sham': ids.length == 0}"
+		<button bo-if="perms(36)" type="button" ng-click="ids.length != 0?delTerminals():''" ng-class="{'disabled-sham': ids.length == 0}"
 		    data-trigger="hover" bs-enabled="ids.length == 0" data-placement="bottom" data-type="success" data-title="{{'请先选择终端'}}"
 		    bs-tooltip class="btn btn-primary warning">
 			终端删除
 		</button>
-		<button ng-if="perms(36)" type="button" ng-click="ids.length != 0?terminalcharge():''" ng-class="{'disabled-sham': ids.length == 0}"
+		<button bo-if="perms(36)" type="button" ng-click="ids.length != 0?terminalcharge():''" ng-class="{'disabled-sham': ids.length == 0}"
 		    data-trigger="hover" bs-enabled="ids.length == 0" data-placement="bottom" data-type="success" data-title="{{'请先选择终端'}}"
 		    bs-tooltip class="btn btn-primary warning">
 			调整终端日期
@@ -107,24 +107,17 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-					<tr ng-repeat="row in displayed">
+					<tr ng-repeat="row in displayed" bindonce>
 						<td>
 							<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
 						</td>
-						<td class="tdClick" ng-click="details(row)">{{row.no}}</td>
-						<td>{{row.name}}</td>
-						<td ng-if="!stateParamsId">{{row.domain + '('+ row.domainName +')'}}</td>
-						<td>
-							<font ng-if="row.status == 2" class="txtGrey">离线</font>
-							<font ng-if="row.status == 4" class="txtGrey">到期</font>
-							<font ng-if="row.status == 1" class="txtGreen">在线</font>
-							<font ng-if="row.status == 3" class="txtRed">异常</font>
-						</td>
-						<td>{{row.resolution}}</td>
-						<td>{{row.city_no | getCityName}}</td>
-						<td class="tdClick" ng-click="showPrograms(row)">
-							{{row.programCounts}}
-						</td>
+						<td class="tdClick" ng-click="details(row)" bo-text="row.no"></td>
+						<td bo-text="row.no">{{row.name}}</td>
+						<td bo-if="!stateParamsId" bo-text="row.no">{{row.domain + '('+ row.domainName +')'}}</td>
+						<td bo-text="row.status | terminalStatusTxt" bo-class="{'txtGreen':row.status == 1,'txtRed':row.status == 3,'txtGrey':row.status == 2 || row.status == 4}"></td>
+						<td bo-text="row.resolution"></td>
+						<td bo-text="row.city_no | getCityName"></td>
+						<td class="tdClick" ng-click="showPrograms(row)" bo-text="row.programCounts"></td>
 					</tr>
 				</tbody>
 				<tbody me-include="/static/tpl/table.html"></tbody>
