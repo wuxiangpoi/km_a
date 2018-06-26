@@ -18,6 +18,7 @@ let loadBasicModules = () => {
         'angularFileUpload',
         'ngMessages',
         'smart-table',
+        'pasvaz.bindonce',
         'qmedia.editor'
     ];
     return ngDepModules;
@@ -49,10 +50,8 @@ appRouter(app);
 
 app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseService', 'userService', ($rootScope, $state, $location, $stateParams, ngDialog, baseService, userService) => {
         $rootScope.paginationNumber = [10, 15, 20, 30, 50, 100];
-        
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             ngDialog.close();
-
             if (!$rootScope.userData) {
                 if (toState.name.split('.')[0] == 'dashboard') {
                     event.preventDefault();

@@ -12,6 +12,7 @@ module.exports = {
             'angular',
             'angular-ui-router',
             './bower_components/angular-animate/angular-animate.min.js',
+            './src/libs/bindonce.js',
             './src/libs/localService.js',
             './bower_components/oclazyload/dist/ocLazyLoad',
             './bower_components/angular-ui-sortable/sortable.js',
