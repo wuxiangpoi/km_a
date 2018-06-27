@@ -1,27 +1,17 @@
 export default app => {
-    app.directive('eChart', ['$window',($window) => {
+    app.directive('eChart', ['$window', ($window) => {
         let controller = ($scope, element, attrs) => {
             var myChart = echarts.init(element[0]);
-            $scope.$watch(attrs['eoption'], function () {
-                var option = $scope.$eval(attrs['eoption']);
-                if (angular.isObject(option)) {
-                    myChart.setOption(option);
-                    $window.addEventListener('resize', function () {
-                        myChart.resize();
-                    })
-                    myChart.resize();
-                }
-            }, true);
-            attrs.$observe('eData', function () {
-                var option = $scope.$eval(attrs.eData);
-                if (angular.isObject(option)) {
-                    myChart.setOption(option);
-                    $window.addEventListener('resize', function () {
-                        myChart.resize();
-                    })
-                    myChart.resize();
-                }
-            }, true);
+            window.addEventListener('resize', function () {
+                myChart.resize(); //监测图表自适应  
+            })
+
+            $scope.$watch('eoption', function (n, o) {
+                if (typeof (n) == 'object') {
+                    myChart.setOption($scope.eoption);
+
+                };
+            });
             $scope.getDom = function () {
                 return {
                     'height': element[0].style.height,

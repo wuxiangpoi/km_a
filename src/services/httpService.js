@@ -12,7 +12,7 @@ const httpService = ($q, $http) => {
             }).then(function (response) {
                 deferred.reject(response);
             });
-    
+
             return deferred.promise;
         },
         postData(url, formData) {

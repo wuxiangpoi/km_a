@@ -36,8 +36,8 @@ const dictionaryController = ($scope, baseService, modalService) => {
 			if (vm.dictionaryForm.$valid) {
 				baseService.saveForm(vm, baseService.api.dictionary + 'addDictionary', postData, function (res) {
 					if (res) {
-						modalService.alert('添加成功', 'success');
 						vm.closeThisDialog();
+						modalService.alert('添加成功', 'success');
 						$scope.callServer($scope.tableState, 0);
 					}
 
@@ -64,8 +64,8 @@ const dictionaryController = ($scope, baseService, modalService) => {
 				did: item.id
 			}, (res) => {
 				if (res) {
-					modalService.alert('删除成功', 'success');
 					vm.closeThisDialog();
+					modalService.alert('删除成功', 'success');
 					$scope.callServer($scope.tableState);
 				}
 
