@@ -7,6 +7,7 @@ import domain from './modules/domain/route.js'
 import dictionary from './modules/dictionary/route.js'
 import versionfile from './modules/versionfile/route.js'
 import authorization from './modules/authorization/route.js'
+import authorizationdetail from './modules/authorizationdetail/route.js'
 import boardDealer from './modules/boardDealer/route.js'
 import checkModel from './modules/checkModel/route.js'
 import checkDealer from './modules/checkDealer/route.js'
@@ -38,6 +39,7 @@ const states = [
     dictionary,
     versionfile,
     authorization,
+    authorizationdetail,
     boardDealer,
     checkModel,
     checkDealer,
