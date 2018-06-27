@@ -1,38 +1,38 @@
+import axios from 'axios'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+let transform = function (data) {
+    return $.param(data, true);
+};
 const httpService = ($q, $http) => {
     return {
         getJson(url, params) {
             let deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: url + '?tmp=' + (+new Date()),
-                params: params,
-                dataType: 'json'
-            }).then(function (data) {
-                deferred.resolve(data);
-            }).then(function (response) {
-                deferred.reject(response);
-            });
+            axios.get(url + '?tmp=' + (+new Date()), {
+                    params: params,
+                    paramsSerializer: params => {
+                        return transform(params)
+                    }
+                })
+                .then(res => {
+                    deferred.resolve(res);
+                }).then(response => {
+                    deferred.reject(response);
+                });
 
             return deferred.promise;
         },
         postData(url, formData) {
-            let transform = function (data) {
-                return $.param(data);
-            };
+
             let deferred = $q.defer();
-            $http.post(url, formData, {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                    },
+            axios.post(url, formData, {
                     transformRequest: transform
                 })
-                .then(function (data) {
-                    deferred.resolve(data);
+                .then(res => {
+                    deferred.resolve(res);
                 })
-                .then(function (error) {
+                .then(error => {
                     deferred.reject(error);
                 });
-
             return deferred.promise;
         }
     };
