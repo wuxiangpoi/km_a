@@ -306,18 +306,18 @@ export default app => {
                     vm.imgPreview = function (item) {
                         $rootScope.$broadcast('callImg', item, 1);
                     }
-                }, detailType);
+                });
 
             },
             showProgram(item, detailType, cb) {
                 var me = this;
                 programService.getProgramById(item.pid, item.domain, function (program) {
-
-                    baseService.confirmDialog(750, '节目预览', program, programDetailsTpl, function (vm) {
+                    program.detailType = detailType;
+                    modalService.confirmDialog(750, detailType == 0 ? '节目详情' : '节目审核', program, '/static/tpl/program_details.html', function (vm) {
 
                     }, function (vm) {
                         vm.program = program;
-                    }, 0)
+                    })
                 });
 
             },

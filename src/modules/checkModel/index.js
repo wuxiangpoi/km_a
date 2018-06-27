@@ -82,7 +82,7 @@ const checkModelController = ($rootScope, $scope, baseService, $sce, programServ
 					programService.getProgramById(data.id, item.domain, function (program) {
 						vm.program = program;
 					});
-				}, detailType)
+				})
 
 			});
 		}
