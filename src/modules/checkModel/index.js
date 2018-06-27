@@ -28,6 +28,7 @@ const checkModelController = ($rootScope, $scope, baseService, $sce, programServ
 				data.play_url = $sce.trustAsResourceUrl(data.path);
 				data.nUrl = baseService.dmbdOSSImageUrlResizeFilter(data.path, 400);
 				data.nstatus = $filter('materialStatusTxt')(data.status, 0);
+				data.detailType = detailType;
 				modalService.confirmDialog(750, '详情', data, '/static/tpl/material_detail.html', function (vm, type) {
 					var status = '';
 					if (type == 1) {
@@ -58,6 +59,7 @@ const checkModelController = ($rootScope, $scope, baseService, $sce, programServ
 				id: item.id
 			}, function (data) {
 				data.nstatus = $filter('programStatusTxt')(data.status, 0);
+				data.detailType = detailType;
 				modalService.confirmDialog(750, '详情', data, '/static/tpl/program_details.html', function (vm,type) {
 					var status = '';
 					if (type == 1) {

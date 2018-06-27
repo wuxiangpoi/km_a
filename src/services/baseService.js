@@ -298,7 +298,7 @@ export default app => {
             showMaterial(item, detailType, cb) {
                 item.detailType = detailType;
                 item.nUrl = this.dmbdOSSImageUrlResizeFilter(item.path, 400);
-                this.confirmDialog(720, detailType == 0 ? '素材详情' : '素材审核', item, materialDetailTpl, (type, vm) => {
+                modalService.confirmDialog(720, detailType == 0 ? '素材详情' : '素材审核', item, '/static/tpl/material_detail.html', (type, vm) => {
                     if (cb) {
                         cb(type);
                     }

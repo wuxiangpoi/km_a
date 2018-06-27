@@ -40,7 +40,7 @@
 						<td bo-text="row.status | materialStatusTxt" bo-class="{'txtGrey':row.status == 0,'txtGreen':row.status == 1,'txtRed':row.status == 5}"></td>
 						<td bo-text="row.createTime | formateTime"></td>
 						<td>
-							<button bo-text="row.status == 0? '审核':'详情'" class="btn btn-primary tableBtn" ng-click="details(row,{{row.status == 0?1:0}})"></button>
+							<button bo-text="row.status == 0? '审核':'详情'" class="btn btn-primary tableBtn" ng-click="details(row,row.status == 0?1:0)"></button>
 						</td>
 					</tr>
 				</tbody>
