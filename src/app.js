@@ -1,5 +1,5 @@
 import angular from 'angular';
-
+import "babel-polyfill"
 //引入全局样式
 import './app.depend.less'
 import './main.less';
