@@ -66,6 +66,13 @@ const httpService = ($q, $http) => {
                     deferred.reject(error);
                 });
             return deferred.promise;
+        },
+        all(requestArr) {
+            let deferred = $q.defer();
+            axios.all(requestArr)
+                .then(axios.spread((acct, perms) => {
+                    // 请求现在都执行完成
+                }));
         }
     };
 
