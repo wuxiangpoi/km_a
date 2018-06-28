@@ -99,8 +99,10 @@ export default app => {
                     })
                     .then((err) => {
                         if (err) {
-                            cb();
                             modalService.alert('网络或服务端异常', 'warning')
+                            if(cb){
+                                cb();
+                            }
                         }
                     })
             },
