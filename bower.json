@@ -34,5 +34,8 @@
     "ng-dialog": "^1.4.0",
     "layer": "^3.1.1",
     "angular-ui-sortable": "^0.19.0"
+  },
+  "devDependencies": {
+    "angular-toastr": "^2.1.1"
   }
 }

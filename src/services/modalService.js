@@ -1,15 +1,9 @@
 import config from '../../configs/config'
 let temp = config.temp;
-const modalService = (ngDialog, $alert) => {
+const modalService = (ngDialog, toastr) => {
     return {
         alert: function (info, type) {
-            $alert({
-                content: info,
-                placement: 'top',
-                type: type,
-                show: true,
-                duration: 2
-            });
+            toastr[type](info);
         },
         confirm: function (title, info, cb) {
             ngDialog.openConfirm({
@@ -81,7 +75,7 @@ const modalService = (ngDialog, $alert) => {
 
 }
 
-modalService.$inject = ['ngDialog', '$alert'];
+modalService.$inject = ['ngDialog', 'toastr'];
 
 export default app => {
     app.factory('modalService', modalService)

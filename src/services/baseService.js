@@ -97,7 +97,7 @@ export default app => {
                             return false;
                         }
                     })
-                    .then((err) => {
+                    .catch((err) => {
                         if (err) {
                             modalService.alert('网络或服务端异常', 'warning')
                             if(cb){

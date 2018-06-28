@@ -15,6 +15,7 @@ let loadBasicModules = () => {
         'ui.sortable',
         'mgcrea.ngStrap',
         'ngDialog',
+        'toastr',
         'angularFileUpload',
         'ngMessages',
         'smart-table',
@@ -123,12 +124,11 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
             }
         };
     }])
-    .config([  
-        '$compileProvider',  
-        function( $compileProvider )  
-        {     
-            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/);  
-        }  
+    .config([
+        '$compileProvider',
+        function ($compileProvider) {
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/);
+        }
     ])
     .config(['$qProvider', function ($qProvider) {
         $qProvider.errorOnUnhandledRejections(false);
@@ -146,6 +146,13 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
     .config(['ngDialogProvider', function (ngDialogProvider) {
         ngDialogProvider.setDefaults({
             closeByDocument: true
+        });
+    }])
+    .config(['toastrConfig', function (toastrConfig) {
+        angular.extend(toastrConfig, {
+            positionClass: 'toast-top-center',
+            extendedTimeOut: 1000,
+            timeOut: 2000,
         });
     }])
     .run(['fileUploaderOptions', function (fileUploaderOptions) {

@@ -40,22 +40,20 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-					<tr ng-repeat="row in displayed">
-						<td class="ellipsisTd">{{row.name}}</td>
-						<td>{{row.key}}</td>
-						<td>{{row.key}}</td>
+					<tr ng-repeat="row in displayed" bindonce>
+						<td bo-text="row.domain"></td>
+						<td bo-text="row.domain"></td>
+						<td bo-text="row.domain"></td>
+						<td bo-text="row.domain"></td>
+						<td bo-text="row.domain"></td>
+						<td bo-text="row.domain"></td>
+						<td bo-text="row.domain"></td>
+						<td class="ellipsisTd" bo-text="row.domainName"></td>
+						<td bo-text=""></td>
+						<td bo-text="row.terminals"></td>
 						<td>
-							<font ng-if="row.status == 1" class="txtGreen">正常</font>
-							<font ng-if="row.status != 1" class="txtRed">冻结</font>
-						</td>
-						<td>{{row.email}}</td>
-						<td>{{row.contact}}</td>
-						<td>{{row.contact}}</td>
-						<td>{{row.contact}}</td>
-						<td>{{row.contact}}</td>
-						<td>{{row.contact}}</td>
-						<td>
-							<button ng-if="perms(23)" class="btn btn-primary tableBtn btnGreen" ng-click="save(row)">编辑</button>
+							<button class="btn btn-primary tableBtn" ng-click="save(row)">详情
+							</button>
 						</td>
 					</tr>
 				</tbody>
