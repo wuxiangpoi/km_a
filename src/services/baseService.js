@@ -71,7 +71,7 @@ export default app => {
                             modalService.alert(data.message, 'warning');
                         }
                     })
-                    .then((err) => {
+                    .catch((err) => {
                         if (err) {
                             modalService.alert('网络或服务端异常', 'warning')
                         }
@@ -99,6 +99,7 @@ export default app => {
                     })
                     .then((err) => {
                         if (err) {
+                            cb();
                             modalService.alert('网络或服务端异常', 'warning')
                         }
                     })
