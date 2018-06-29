@@ -25,7 +25,12 @@ export default app => {
                 checkModel: apiUrl + '/api/checkModel/',
                 report: apiUrl + '/api/report/',
                 chargeStat: apiUrl + '/api/chargeStat/',
-                role: apiUrl + '/api/role/'
+                role: apiUrl + '/api/role/',
+                boardVendor: apiUrl + '/api/boardVendor/',
+                boardLicenseKey: apiUrl + '/api/boardLicenseKey/',
+                merchantInfo: apiUrl + '/api/merchantInfo/',
+                chargeLicenseStat: apiUrl + '/api/chargeLicenseStat/',
+                terminalBillingDueUpdateLog:  apiUrl + '/api/terminalBillingDueUpdateLog/'
             },
             md5_pwd(pwd) {
                 var hexDigits = ['0', '1', '2', '3', '4', '5', '6', '7',
@@ -301,7 +306,7 @@ export default app => {
             showMaterial(item, detailType, cb) {
                 item.detailType = detailType;
                 item.nUrl = this.dmbdOSSImageUrlResizeFilter(item.path, 400);
-                modalService.confirmDialog(720, detailType == 0 ? '素材详情' : '素材审核', item, '/static/tpl/material_detail.html', (type, vm) => {
+                modalService.confirmDialog(720, detailType == 0 ? '素材详情' : '素材审核', item, '/static/tpl/material_detail.html', (vm, ngDialog, type) => {
                     if (cb) {
                         cb(type);
                     }
@@ -316,7 +321,7 @@ export default app => {
                 var me = this;
                 programService.getProgramById(item.pid, item.domain, function (program) {
                     program.detailType = detailType;
-                    modalService.confirmDialog(750, detailType == 0 ? '节目详情' : '节目审核', program, '/static/tpl/program_details.html', function (vm) {
+                    modalService.confirmDialog(750, detailType == 0 ? '节目详情' : '节目审核', program, '/static/tpl/program_details.html', function (vm, ngDialog, type) {
 
                     }, function (vm) {
                         vm.program = program;

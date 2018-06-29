@@ -36,22 +36,22 @@ let controller = ($rootScope, $scope, $state, baseService) => {
     }, 
     {
         name: '授权管理',
-        auth: $rootScope.perms(11),
-        collapseVar: 11,
+        auth: $rootScope.perms(6),
+        collapseVar: 6,
         icon: 'fa fa-cogs fa-fw',
         state: '',
         states: ['dashboard.authorization', 'dashboard.boardDealer'],
         children: [{
                 name: '板卡商管理',
-                auth: $rootScope.perms(11),
-                collapseVar: 1,
+                auth: $rootScope.perms(61),
+                collapseVar: 6,
                 state: 'dashboard.boardDealer',
                 icon: ''
             },
             {
                 name: '授权码管理',
-                auth: $rootScope.perms(12),
-                collapseVar: 1,
+                auth: $rootScope.perms(62),
+                collapseVar: 6,
                 state: 'dashboard.authorization',
                 icon: ''
             }
@@ -75,21 +75,21 @@ let controller = ($rootScope, $scope, $state, baseService) => {
      {
         name: '审核管理',
         auth: $rootScope.perms(4),
-        collapseVar: 45,
+        collapseVar: 4,
         state: '',
         states: ['dashboard.checkModel','dashboard.checkDealer'],
         icon: 'iconfont icon-shenheguanli',
         children: [{
                 name: '内容审核',
-                auth: true,
-                collapseVar: 45,
+                auth: $rootScope.perms(41),
+                collapseVar: 4,
                 state: 'dashboard.checkModel',
                 icon: ''
             },
             {
                 name: '商户审核',
                 auth: true,
-                collapseVar: 45,
+                collapseVar: $rootScope.perms(42),
                 state: 'dashboard.checkDealer',
                 icon: ''
             }
@@ -120,34 +120,34 @@ let controller = ($rootScope, $scope, $state, baseService) => {
     }, {
         name: '数据统计',
         auth: $rootScope.perms(9),
-        collapseVar: 6,
+        collapseVar: 9,
         state: '',
         states: ['dashboard.materialchart', 'dashboard.income', 'dashboard.terminalchart','dashboard.authIncome'],
         icon: 'fa fa-tasks fa-fw',
         children: [{
                 name: '终端统计',
                 auth: true,
-                collapseVar: 6,
+                collapseVar: 9,
                 state: 'dashboard.terminalchart',
                 icon: ''
             }, {
                 name: '内容统计',
                 auth: true,
-                collapseVar: 6,
+                collapseVar: 9,
                 state: 'dashboard.materialchart',
                 icon: ''
             },
             {
                 name: '商户账目',
                 auth: $rootScope.perms(92),
-                collapseVar: 6,
+                collapseVar: 9,
                 state: 'dashboard.income',
                 icon: ''
             },
             {
                 name: '授权码账目',
-                auth: $rootScope.perms(92),
-                collapseVar: 6,
+                auth: $rootScope.perms(93),
+                collapseVar: 9,
                 state: 'dashboard.authIncome',
                 icon: ''
             }
@@ -197,7 +197,7 @@ let controller = ($rootScope, $scope, $state, baseService) => {
             },
             {
                 name: '终端日期变动',
-                auth: $rootScope.perms(72),
+                auth: $rootScope.perms(73),
                 collapseVar: 7,
                 state: 'dashboard.terminalcharge',
                 icon: ''

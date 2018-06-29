@@ -2,18 +2,22 @@
 	<div class="content-wrap">
 		<div class="clearfix">
 			<div class="selectWrap fl">
-					<km-select options="sendStatusOptions" selected="sp.status" val="val" name="name" change="initPage"></km-select>
-				<km-select options="cmdCodeOptions" selected="sp.cmdCode" val="val" name="name" change="initPage"></km-select>
+				<km-select options="maturityAdjustOptions" selected="sp.type" val="val" name="name" change="initPage"></km-select>
 			</div>
 			<div class="fr">
 				<div class="input-group serchWrap">
-					<input type="text" class="form-control" ng-keyup="myKeyup($event,initPage)" ng-model="sp.search" placeholder="终端编号/终端名称">
+					<input type="text" class="form-control" ng-model="sp.searchTerminal" ng-keyup="myKeyup($event,initPage)" placeholder="终端编号/终端名称/版本号">
 					<span class="input-group-btn" ng-click="initPage()">
 						<button type="button" class="btn btn-primary">
 							<i type="button" class="fa fa-search">
 							</i>
 						</button>
 					</span>
+				</div>
+			</div>
+			<div class="fr" style="width: 120px;margin-right:5px;">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-keyup="myKeyup($event,initPage)" ng-model="sp.searchDomain" placeholder="企业代码">
 				</div>
 			</div>
 		</div>
@@ -34,24 +38,22 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-						<tr ng-repeat="row in displayed">
-							<td ng-click="details(row)">{{row.terNo}}</td>
-							<td class="ellipsisTd">{{row.terName}}</td>
-							<td>{{row.userAccount}}</td>
-							<td>{{row.cmdCode}}</td>
-							<td>{{getRootDicName('terminal_cmd', row.cmdCode)}}</td>
-							<td>
-								<span class="txtGrey" ng-if="row.status == 0">待下发</span>
-								<span class="txtGreen" ng-if="row.status == 1">成功</span>
-								<span class="txtRed" ng-if="row.status != 0 && row.status != 1">失败</span>
-							</td>
-							<td>{{row.sendTime | formateTime}}</td>
-							<td>{{row.sendTime | formateTime}}</td>
-							<td>{{row.sendTime | formateTime}}</td>
-						</tr>
-					</tbody>
-					<tbody me-include="/static/tpl/table.html"></tbody>
-					<tfoot ng-show="!isLoading" me-include="/static/tpl/table_footer.html"></tfoot>
+					<tr ng-repeat="row in displayed">
+						<td ng-click="details(row)">{{row.terminalNo}}</td>
+						<td class="ellipsisTd">{{row.terminalName}}</td>
+						<td>{{row.domain}}</td>
+						<td>{{row.billingDate | formateDate}} 至 {{row.dueDate | formateDate}}</td>
+						<td>{{row.billingDateNew | formateDate}} 至 {{row.dueDateNew | formateDate}}</td>
+						<td>
+							{{row.type | maturityAdjustTxt}}
+						</td>
+						<td>{{row.reason}}</td>
+						<td>{{row.creator}}</td>
+						<td>{{row.createTime | formateTime}}</td>
+					</tr>
+				</tbody>
+				<tbody me-include="/static/tpl/table.html"></tbody>
+				<tfoot ng-show="!isLoading" me-include="/static/tpl/table_footer.html"></tfoot>
 			</table>
 		</div>
 	</div>

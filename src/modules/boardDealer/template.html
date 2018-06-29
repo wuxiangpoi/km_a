@@ -1,6 +1,6 @@
 <div class="page-wrap animated fadeInRight">
-	<div class="level2">
-		<div  ng-if="perms(22)">
+	<div class="level2" bindonce>
+		<div bo-if="perms(612)">
 			<button type="button" ng-click="save()" class="btn btn-primary addRole">
 				<i class="iconfont icon-tianjia-"></i>
 				添加板卡商
@@ -37,14 +37,14 @@
 		
 						<tbody ng-show="!isLoading">
 							<tr ng-repeat="row in displayed" bindonce>
-								<td bo-text="row.domain"></td>
-								<td bo-text="row.domain"></td>
-								<td bo-text="row.domain"></td>
-								<td class="ellipsisTd" bo-text="row.domainName"></td>
-								<td bo-text=""></td>
-								<td bo-text="row.terminals"></td>
+								<td bo-text="row.key"></td>
+								<td bo-text="row.name"></td>
+								<td bo-text="row.contact"></td>
+								<td bo-text="row.email"></td>
+								<td bo-text="row.creator"></td>
+								<td bo-text="row.createTime | formateTime"></td>
 								<td>
-									<button class="btn btn-primary tableBtn" ng-click="save(row)">编辑
+									<button bo-if="perms(612)" class="btn btn-primary tableBtn" ng-click="save(row)">编辑
 									</button>
 								</td>
 							</tr>

@@ -4,10 +4,10 @@
         <div class="form-group clearfix">
             <label class="col-sm-3 control-label">调整类型：</label>
             <div class="col-sm-9">
-                <select class="form-control" required name="" ng-model="">
+                <select class="form-control" required name="type" ng-model="type">
                     <option ng-repeat="adjust in maturityAdjustOptions" value="{{adjust.val}}">{{adjust.name}}</option>
                 </select>
-                <div class="help-block" ng-messages="modalForm.payType.$error" ng-if="isShowMessage">
+                <div class="help-block" ng-messages="modalForm.type.$error" ng-if="isShowMessage">
                     <p ng-message="required">请选择日期调整类型</p>
                 </div>
             </div>
@@ -17,14 +17,14 @@
             <label class="col-sm-3 control-label">选择日期：</label>
             <div class="col-sm-9">
                 <div class="dateTimeWrap">
-                    <input name="contractStart" required id="contractStart" type="text" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd"
-                        data-model-date-format="yyyy-MM-dd" ng-model="data.contractStart" placeholder="选择日期" data-autoclose="1"
+                    <input name="date" required id="date" type="text" class="form-control" data-date-type="string" data-date-format="yyyy-MM-dd"
+                        data-model-date-format="yyyy-MM-dd" ng-model="date" placeholder="选择日期" data-autoclose="1"
                         bs-datepicker>
-                    <label for="contractStart" class="timeLabel">{{data.contractStart?data.contractStart:'选择日期'}}
+                    <label for="date" class="timeLabel">{{date?date:'选择日期'}}
                         <i class="fa fa-calendar"></i>
                     </label>
                 </div>
-                <div class="help-block" ng-messages="modalForm.contractStart.$error" ng-if="isShowMessage">
+                <div class="help-block" ng-messages="modalForm.date.$error" ng-if="isShowMessage">
                     <p ng-message="required">请选择日期</p>
                 </div>
             </div>
@@ -33,8 +33,8 @@
 
             <label class="col-sm-3 control-label">调整原因</label>
             <div class="col-sm-9">
-                <input type="text" required class="form-control" name="name" ng-model="" />
-                <div class="help-block" ng-messages="modalForm.name.$error" ng-if="isShowMessage">
+                <input type="text" required class="form-control" name="reason" ng-model="reason" />
+                <div class="help-block" ng-messages="modalForm.reason.$error" ng-if="isShowMessage">
                     <p ng-message="required">请输入调整原因</p>
                 </div>
             </div>

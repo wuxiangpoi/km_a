@@ -1,0 +1,19 @@
+<div class="modal-header" me-include="/static/tpl/modal_header.html"></div>
+<div class="modal-body">
+    <form name="modalForm" novalidate>
+    
+        <div class="form-group clearfix">
+            <label class="col-sm-3 control-label">增加数量</label>
+            <div class="col-sm-9">
+                <input type="text" required class="form-control" ng-pattern="/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/" name="quantity" ng-model="data.quantity" />
+                <div class="help-block"  ng-messages="modalForm.quantity.$error" ng-if="isShowMessage">
+                    <p ng-message="required">请输入数量</p>
+                    <p ng-message="pattern">请输入正确数字</p>
+                </div>
+            </div>
+        </div>
+       
+    </form>
+</div>
+        
+<div class="modal-footer" me-include="/static/tpl/modal_footer.html"></div> 

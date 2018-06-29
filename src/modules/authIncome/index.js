@@ -8,6 +8,14 @@ const authIncomeController = ($scope, baseService, modalService) => {
     $scope.sp.year = now.getFullYear();
     $scope.sp.month = baseService.formateDay(now.getMonth());
     $scope.dateSel = $scope.sp.year + '-' + $scope.sp.month;
+    $scope.$watch('dateSel',(n,o) => {
+        if(n != o){
+            $scope.sp.year = n.split('-')[0].toString();
+            $scope.sp.month = n.split('-')[1].toString();
+            $scope.initPage();
+        }
+        
+    })
     $scope.chargeStatusOptions = [{
             val: '',
             name: '收费状态'
@@ -25,7 +33,7 @@ const authIncomeController = ($scope, baseService, modalService) => {
 		if (baseService.isRealNum(page)) {
 			$scope.tableState.pagination.start = page * $scope.sp.length;
 		}
-		baseService.initTable($scope, tableState, baseService.api.domain + 'getDomainPageList');
+		baseService.initTable($scope, tableState, baseService.api.chargeLicenseStat + 'getChargeLicenseStatPageList');
 	}
 	$scope.initPage = function () {
 		$scope.callServer($scope.tableState, 0)

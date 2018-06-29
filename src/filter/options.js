@@ -24,6 +24,20 @@ export let tempResolution = [{
     val: '768*1024',
     name: '768*1024'
 }]
+export let terminalExpiredMonthOptions = [
+    {
+        val: 12,
+        name: '一年'
+    }]
+export let domainUseOptions = [
+{
+    val: 0,
+    name: '试用'
+},
+{
+    val: 1,
+    name: '正式'
+}]
 export let maturityAdjustOptions = [{
     val: '',
     name: '日期调整类型'
@@ -34,7 +48,7 @@ export let maturityAdjustOptions = [{
 },
 {
     val: 1,
-    name: '到期日'
+    name: '终端到期日'
 }]
 export let payTypeOptions = [{
     val: '',
@@ -76,6 +90,11 @@ export let terminalStatusOptions = [{
     {
         val: 3,
         name: '异常'
+    }
+    ,
+    {
+        val: 4,
+        name: '到期'
     }
 ]
 export let opOptions = [{

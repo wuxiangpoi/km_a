@@ -1,6 +1,6 @@
 <div class="page-wrap animated fadeInRight">
-	<div class="level2">
-		<div  ng-if="perms(22)">
+	<div class="level2" bindonce>
+		<div  bo-if="perms(622)">
 			<button type="button" ng-click="save()" class="btn btn-primary addRole">
 				<i class="iconfont icon-tianjia-"></i>
 				添加授权码
@@ -41,19 +41,25 @@
 
 				<tbody ng-show="!isLoading">
 					<tr ng-repeat="row in displayed" bindonce>
-						<td bo-text="row.domain"></td>
-						<td bo-text="row.domain"></td>
-						<td bo-text="row.domain"></td>
-						<td bo-text="row.domain"></td>
-						<td bo-text="row.domain"></td>
-						<td bo-text="row.domain"></td>
-						<td bo-text="row.domain"></td>
-						<td class="ellipsisTd" bo-text="row.domainName"></td>
-						<td bo-text=""></td>
-						<td bo-text="row.terminals"></td>
+						<td class="ellipsisTd" bo-text="row.no"></td>
+						<td bo-text="row.vendorKey"></td>
+						<td bo-text="row.vendorName"></td>
+						<td bo-text="'￥' + row.price"></td>
+						<td bo-text="row.months | monthsToYear"></td>
+						<td bo-text="row.quantity"></td>
+						<td bo-text="row.quantityUsed"></td>
+						<td bo-class="{'txtRed':row.exceed == 0,'txtGreen':row.exceed == 1}" bo-text="row.exceed == 1?'开启':'关闭'"></td>
+						<td bo-text="row.createTime | formateTime"></td>
+						<td bo-text="row.creator"></td>
 						<td>
-							<button class="btn btn-primary tableBtn" ng-click="save(row)">详情
+							<button class="btn btn-primary tableBtn" ng-click="toDetails(row.no)">详情
 							</button>
+							<button bo-if="perms(624)" class="btn btn-primary tableBtn btnGreen" ng-click="exportExcel(row)">导出授权文件
+							</button>
+							<button bo-if="perms(626)" class="btn btn-primary tableBtn" ng-click="addQu(row)">增加数量
+							</button>
+							<button bo-if="row.exceed == 1 && perms(625)" class="btn btn-primary tableBtn btnRed" ng-click="changeExceed(row)">关闭超限</button>
+							<button bo-if="row.exceed != 1 && perms(625)" class="btn btn-primary tableBtn" ng-click="changeExceed(row)">开启超限</button>
 						</td>
 					</tr>
 				</tbody>

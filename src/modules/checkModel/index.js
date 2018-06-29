@@ -29,7 +29,7 @@ const checkModelController = ($rootScope, $scope, baseService, $sce, programServ
 				data.nUrl = baseService.dmbdOSSImageUrlResizeFilter(data.path, 400);
 				data.nstatus = $filter('materialStatusTxt')(data.status, 0);
 				data.detailType = detailType;
-				modalService.confirmDialog(750, '详情', data, '/static/tpl/material_detail.html', function (vm, type) {
+				modalService.confirmDialog(750, '详情', data, '/static/tpl/material_detail.html', function (vm, ngDialog, type) {
 					var status = '';
 					if (type == 1) {
 						status = 1;
@@ -60,7 +60,7 @@ const checkModelController = ($rootScope, $scope, baseService, $sce, programServ
 			}, function (data) {
 				data.nstatus = $filter('programStatusTxt')(data.status, 0);
 				data.detailType = detailType;
-				modalService.confirmDialog(750, '详情', data, '/static/tpl/program_details.html', function (vm,type) {
+				modalService.confirmDialog(750, '详情', data, '/static/tpl/program_details.html', function (vm, ngDialog, type) {
 					var status = '';
 					if (type == 1) {
 						status = 1;

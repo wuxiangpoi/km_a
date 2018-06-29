@@ -4,17 +4,24 @@
         <div class="form-group clearfix">
             <label class="col-sm-3 control-label">板卡商：</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" required ng-pattern="/^[a-zA-Z0-9_-]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/"
-                    name="email" ng-model="data.email" />
+                <select class="form-control" name="vendorId" required ng-model="data.vendorId">
+                    <option value="">请选择板卡商</option>
+                    <option ng-repeat="r in vendors" ng-selected="data.id==r.id" value="{{r.id}}">{{r.name}}</option>
+                </select>
+                <div class="help-block" ng-messages="modalForm.vendorId.$error" ng-if="isShowMessage">
+                    <p ng-message="required">请输入板卡商</p>
+                </div>
             </div>
         </div>
 
         <div class="form-group clearfix">
             <label class="col-sm-3 control-label">授权数量：</label>
             <div class="col-sm-9">
-                <input type="text" required class="form-control" name="contact" ng-model="data.contact" />
-                <div class="help-block" ng-messages="modalForm.contact.$error" ng-if="isShowMessage">
-                    <p ng-message="required">请输入联系人姓名</p>
+                <input type="text" required ng-pattern="/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/" class="form-control" name="quantity" ng-model="data.quantity"
+                />
+                <div class="help-block" ng-messages="modalForm.quantity.$error" ng-if="isShowMessage">
+                    <p ng-message="pattern">请输入正确数字</p>
+                    <p ng-message="required">请输入授权数量</p>
                 </div>
             </div>
         </div>
@@ -25,22 +32,23 @@
                     <input type="text" required ng-pattern="/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/" class="form-control" name="price" ng-model="data.price"
                     />
                     <div class="help-block" ng-messages="modalForm.price.$error" ng-if="isShowMessage">
-                        <p ng-message="required">请输入单屏价格</p>
-                        <p ng-message="pattern">请输入正确单屏价格</p>
+                        <p ng-message="required">请输入单价</p>
+                        <p ng-message="pattern">请输入正确单价</p>
                     </div>
                 </div>
                 <div class="col-sm-4 pdr0 lh34">元/授权码</div>
 
             </div>
-            <div ng-if="data.id" class="col-sm-9 lh34">
-                {{data.price}} 元/年
-            </div>
         </div>
         <div class="form-group clearfix">
             <label class="col-sm-3 control-label">授权时间：</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" required ng-pattern="/^[a-zA-Z0-9_-]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/"
-                    name="email" ng-model="data.email" />
+                <select class="form-control" required name="months" ng-model="data.months">
+                    <option ng-selected="ex.val == data.months" ng-repeat="ex in terminalExpiredMonthOptions" value="{{ex.val}}">{{ex.name}}</option>
+                </select>
+                <div class="help-block" ng-messages="modalForm.months.$error" ng-if="isShowMessage">
+                    <p ng-message="required">请选择授权时间</p>
+                </div>
             </div>
         </div>
 

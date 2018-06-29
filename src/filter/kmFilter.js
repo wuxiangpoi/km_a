@@ -1,7 +1,12 @@
-import {terminalStatusOptions,scheduleStatusOptions,opOptions} from './options';
+import {terminalStatusOptions,scheduleStatusOptions,opOptions,maturityAdjustOptions} from './options';
 import {citiesNo} from '../services/cityService'
 
 export default app => {
+    app.filter('monthsToYear', [function () {
+        return function (months) {
+            return parseInt(months/12) + '年';
+        };
+    }]);
     app.filter('to_trusted', ['$sce', function ($sce) {
         return function (text) {
             return $sce.trustAsHtml(text);
@@ -87,6 +92,17 @@ export default app => {
             for (var i = 0; i < opOptions.length; i++) {
                 if (opOptions[i].val == status) {
                     statusTxt = opOptions[i].name;
+                }
+            }
+            return statusTxt;
+        };
+    });
+    app.filter('maturityAdjustTxt', function () {
+        return function (status) {
+            var statusTxt = '';
+            for (var i = 0; i < maturityAdjustOptions.length; i++) {
+                if (maturityAdjustOptions[i].val == status) {
+                    statusTxt = maturityAdjustOptions[i].name;
                 }
             }
             return statusTxt;

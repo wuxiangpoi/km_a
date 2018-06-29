@@ -305,10 +305,22 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 		})
 	}
 	$scope.terminalcharge = () => {
-		modalService.confirmDialog(540, '发布通知', {}, '/static/tpl/terminal_charge.html', function (vm, ngDialog) {
+		modalService.confirmDialog(540, '调整终端日期', {}, '/static/tpl/terminal_charge.html', function (vm, ngDialog) {
 			vm.isShowMessage = false;
 			if (vm.modalForm.$valid) {
-				
+				baseService.saveForm(vm,baseService.api.terminal + 'setTerminalBillingDueDate', {
+					tids: $scope.ids.join(','),
+					type: vm.type,
+					date: vm.date.split('-').join(''),
+					reason: vm.reason
+				}, function (res) {
+					ngDialog.close();
+					if(res){
+						$scope.initPage();
+						modalService.alert('调整成功', 'success');
+					}
+					
+				})
 
 			} else {
 				vm.isShowMessage = true;

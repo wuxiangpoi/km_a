@@ -1,12 +1,15 @@
 import style from './style.less';
 import {
 	domainStatusOptions,
-	payTypeOptions
+	payTypeOptions,
+	domainUseOptions,
+	terminalExpiredMonthOptions
 } from '../../filter/options.js'
 
 const domainController = ($scope, baseService, FileUploader,modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
+	$scope.dateSel = '合同到期时间';
 	$scope.tableState = {};
 	$scope.domainStatusOptions = domainStatusOptions;
 	$scope.uploader = new FileUploader();
@@ -21,8 +24,7 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 	}
 	$scope.$watch('dateSel',(n,o) => {
         if(n != o){
-            $scope.sp.year = n.split('-')[0].toString();
-            $scope.sp.month = n.split('-')[1].toString();
+			$scope.sp.expiredMonth = n.split('-').join('');
             $scope.initPage();
         }
         
@@ -30,6 +32,7 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 	$scope.save = (item) => {
 		let materialCheck = ['1', '0'];
 		let programCheck = ['1', '2', '0'];
+		let payType = '';
 		if (item) {
 			if (item.materialCheck == '') {
 				materialCheck = ['', ''];
@@ -58,6 +61,7 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 		let postData = {
 			id: item ? item.id : '',
 			phone: item ? item.phone : '',
+			type: item ? item.type.toString() : '0',			
 			name: item ? item.name : '',
 			email: item ? item.email : '',
 			key: item ? item.key : '',
@@ -67,6 +71,7 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 			contractStart: item ? baseService.formateDate(item.contractStart) : '',
 			contractEnd: item ? baseService.formateDate(item.contractEnd) : '',
 			contact: item ? item.contact : '',
+			terminalExpiredMonth: item ? item.terminalExpiredMonth.toString() : '12',
 			materialCheck: item ? materialCheck : ['1', ''],
 			programCheck: item ? programCheck : ['1', '', '0'],
 			ledShow: item ? item.ledShow : 0
@@ -76,6 +81,7 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 				let onData = {
 					id: postData.id,
 					phone: postData.phone,
+					type: postData.type,
 					name: postData.name,
 					email: postData.email,
 					key: postData.key,
@@ -85,6 +91,7 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 					contractStart: postData.contractStart.split('-').join(''),
 					contractEnd: postData.contractEnd.split('-').join(''),
 					contact: postData.contact,
+					terminalExpiredMonth: postData.terminalExpiredMonth,
 					materialCheck: postData.materialCheck.join(','),
 					programCheck: postData.programCheck.join(','),
 					// programCmdCheck: item ? item.programCmdCheck.split(',') : [''],
@@ -105,7 +112,10 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 			}
 
 		}, function (vm) {
+			vm.type = item ? item.type.toString() : '0';
 			vm.payTypeOptions = payTypeOptions;
+			vm.domainUseOptions = domainUseOptions;
+			vm.terminalExpiredMonthOptions = terminalExpiredMonthOptions;
 			vm.updateSelection = function ($event, value, chkName, pos) {
 				var checkbox = $event.target;
 				var checked = checkbox.checked;

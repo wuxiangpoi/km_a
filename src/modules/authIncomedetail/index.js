@@ -3,20 +3,20 @@ const authIncomedetailController = ($scope, baseService, $stateParams,modalServi
     $scope.displayed = [];
     $scope.sp = {};
     $scope.tableState = {};
-    $scope.domainInfo = {};
+    $scope.licenseInfo = {};
     if ($stateParams.id) {
-        $scope.sp.domain = $stateParams.id;
+        $scope.sp.licenseNo = $stateParams.id;
     }
-    baseService.postData(baseService.api.apiUrl + '/api/domain/getDomainByKey', {
-        key: $scope.sp.domain
-    }, (res) => {
-        $scope.domainInfo = res;
+    baseService.getJson(baseService.api.boardLicenseKey + 'getBoardLicenseKeyByNo',{
+        licenseNo: $stateParams.id
+    },res => {
+        $scope.licenseInfo = res;
     })
     $scope.callServer = function (tableState, page) {
         if (baseService.isRealNum(page)) {
             $scope.tableState.pagination.start = page * $scope.sp.length;
         }
-        baseService.initTable($scope, tableState, baseService.api.chargeStat + 'getChargeStatPageList');
+        baseService.initTable($scope, tableState, baseService.api.boardLicenseKey + 'getBoardLicenseKeyUsedItemsPage');
     }
     $scope.initPage = function () {
         $scope.callServer($scope.tableState, 0)
