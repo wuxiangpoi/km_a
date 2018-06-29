@@ -32,10 +32,9 @@
 						</td>
 						<td bo-text="row.createTime | formateTime"></td>
 						<td>
-							<div>
-								<button bo-if="row.status != 0" class="btn btn-primary tableBtn" ng-click="details(row,0)">详情</button>
-								<button bo-if="row.status == 0" class="btn btn-primary tableBtn" ng-click="details(row,1)">审核</button>
-								<!-- <button ng-if="row.status == 0" class="btn btn-primary tableBtn" ng-click="changeStatus(row,$index,5)">不通过</button> -->
+							<div bo-if="row.status == 0">
+								<button bo-if="row.status == 0" class="btn btn-primary tableBtn" ng-click="details(row,1)">审核通过</button>
+								<button bo-if="row.status == 0" class="btn btn-primary tableBtn" ng-click="details(row,2)">审核不通过</button>
 							</div>
 						</td>
 					</tr>

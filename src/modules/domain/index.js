@@ -6,7 +6,7 @@ import {
 	terminalExpiredMonthOptions
 } from '../../filter/options.js'
 
-const domainController = ($scope, baseService, FileUploader,modalService) => {
+const domainController = ($scope, baseService, FileUploader, modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
 	$scope.dateSel = '合同到期时间';
@@ -22,13 +22,13 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 	$scope.initPage = function () {
 		$scope.callServer($scope.tableState, 0)
 	}
-	$scope.$watch('dateSel',(n,o) => {
-        if(n != o){
+	$scope.$watch('dateSel', (n, o) => {
+		if (n != o) {
 			$scope.sp.expiredMonth = n.split('-').join('');
-            $scope.initPage();
-        }
-        
-    })
+			$scope.initPage();
+		}
+
+	})
 	$scope.save = (item) => {
 		let materialCheck = ['1', '0'];
 		let programCheck = ['1', '2', '0'];
@@ -61,7 +61,7 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 		let postData = {
 			id: item ? item.id : '',
 			phone: item ? item.phone : '',
-			type: item ? item.type.toString() : '0',			
+			type: item ? item.type.toString() : '0',
 			name: item ? item.name : '',
 			email: item ? item.email : '',
 			key: item ? item.key : '',
@@ -99,13 +99,13 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 				}
 				let url = item ? 'modifyDomain' : 'addDomain';
 				onData.key = postData.key.toLowerCase();
-				baseService.saveForm(vm,baseService.api.domain + url, onData, (res) => {
-					if(res){
+				baseService.saveForm(vm, baseService.api.domain + url, onData, (res) => {
+					if (res) {
 						vm.closeThisDialog();
 						modalService.alert(item ? '编辑成功' : '添加成功', 'success');
 						$scope.callServer($scope.tableState, 0);
 					}
-					
+
 				})
 			} else {
 				vm.isShowMessage = true;
@@ -120,15 +120,15 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 				var checkbox = $event.target;
 				var checked = checkbox.checked;
 				if (checked) {
-					if(chkName == 'ledShow'){
+					if (chkName == 'ledShow') {
 						vm.data.ledShow = 1
-					}else{
+					} else {
 						vm.data[chkName][pos] = value;
 					}
 				} else {
-					if(chkName == 'ledShow'){
+					if (chkName == 'ledShow') {
 						vm.data.ledShow = 0
-					}else{
+					} else {
 						vm.data[chkName][pos] = '';
 					}
 				}
@@ -217,7 +217,7 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 			id: item.id
 		}, function (res) {
 			item.isPosting = false;
-			if(res){
+			if (res) {
 				modalService.alert("发送成功", 'success');
 			}
 		})
@@ -227,22 +227,22 @@ const domainController = ($scope, baseService, FileUploader,modalService) => {
 			'企业：' + item.name + '?',
 			(vm) => {
 				let me = this;
-				baseService.saveForm(vm,baseService.api.domain + 'setDomainStatus', {
+				baseService.saveForm(vm, baseService.api.domain + 'setDomainStatus', {
 					did: item.id,
 					status: item.status == 1 ? 0 : 1
 				}, (res) => {
-					if(res){
+					if (res) {
 						vm.closeThisDialog();
 						modalService.alert('操作成功', 'success');
 						$scope.callServer($scope.tableState, 0);
 					}
-					
+
 				})
 			})
 	}
 }
 
-domainController.$inject = ['$scope', 'baseService', 'FileUploader','modalService'];
+domainController.$inject = ['$scope', 'baseService', 'FileUploader', 'modalService'];
 
 export default angular => {
 	return angular.module('domainModule', []).controller('domainController', domainController);
