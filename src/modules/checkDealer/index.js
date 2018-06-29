@@ -31,8 +31,8 @@ const checkDealerController = ($rootScope, $scope, baseService, $sce, programSer
 		}
 	];
 	$scope.details = function (item, type) {
-		modalService.confirm('审核', '您确定' + (item.type == 1 ? '通过' : '不通过') +
-			'商户：' + item.name + '?',
+		modalService.confirm('审核', '您确定' + (type == 1 ? '通过' : '不通过') +
+			'商户：' + item.domainName + '?',
 			(vm) => {
 				var status = '';
 				if (type == 1) {

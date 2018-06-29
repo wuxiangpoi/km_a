@@ -33,8 +33,8 @@
 						<td bo-text="row.createTime | formateTime"></td>
 						<td>
 							<div bo-if="row.status == 0">
-								<button bo-if="row.status == 0" class="btn btn-primary tableBtn" ng-click="details(row,1)">审核通过</button>
-								<button bo-if="row.status == 0" class="btn btn-primary tableBtn" ng-click="details(row,2)">审核不通过</button>
+								<button class="btn btn-primary tableBtn" ng-click="details(row,1)">审核通过</button>
+								<button class="btn btn-primary tableBtn btnRed" ng-click="details(row,2)">审核不通过</button>
 							</div>
 						</td>
 					</tr>
