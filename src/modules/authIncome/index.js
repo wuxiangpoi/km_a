@@ -3,7 +3,8 @@ import style from './style.less';
 const authIncomeController = ($scope, baseService, modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
-	$scope.tableState = {};
+    $scope.tableState = {};
+    $scope.domainInfo = {};
 	var now = new Date();
     $scope.sp.year = now.getFullYear();
     $scope.sp.month = baseService.formateDay(now.getMonth());
@@ -33,7 +34,9 @@ const authIncomeController = ($scope, baseService, modalService) => {
 		if (baseService.isRealNum(page)) {
 			$scope.tableState.pagination.start = page * $scope.sp.length;
 		}
-		baseService.initTable($scope, tableState, baseService.api.chargeLicenseStat + 'getChargeLicenseStatPageList');
+		baseService.initTable($scope, tableState, baseService.api.chargeLicenseStat + 'getChargeLicenseStatPageList',(res)=>{
+            $scope.domainInfo = res.extra;
+        });
 	}
 	$scope.initPage = function () {
 		$scope.callServer($scope.tableState, 0)

@@ -4,6 +4,7 @@ const incomeController = ($scope, baseService) => {
     $scope.displayed = [];
     $scope.sp = {};
     $scope.tableState = {};
+    $scope.domainInfo = {};
     var now = new Date();
     $scope.sp.year = now.getFullYear();
     $scope.sp.month = baseService.formateDay(now.getMonth());
@@ -26,7 +27,9 @@ const incomeController = ($scope, baseService) => {
         if (baseService.isRealNum(page)) {
             $scope.tableState.pagination.start = page * $scope.sp.length;
         }
-        baseService.initTable($scope, tableState, baseService.api.chargeStat + 'getChargeStatPageList');
+        baseService.initTable($scope, tableState, baseService.api.chargeStat + 'getChargeStatPageList',(res)=>{
+            $scope.domainInfo = res.extra;
+        });
     }
     $scope.initPage = () => {
         $scope.callServer($scope.tableState, 0)

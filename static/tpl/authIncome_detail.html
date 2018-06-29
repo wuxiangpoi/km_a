@@ -13,16 +13,17 @@
                 </tr>
             </thead>
             <tbody ng-show="!isLoading">
-                <tr ng-repeat="row in displayed">
-                    <td class="ellipsisTd" ng-click="details(row)">{{row.name}}</td>
-                    <td>{{row.os== 1 ? "android" : "windows"}}</td>
-                    <td>{{row.size | dmbdResourceSizeFilter}}</td>
-                            <td>{{row.remark}}</td>
+                    <tr ng-repeat="row in displayed">
                             <td>{{row.createTime | formateTime}}</td>
+                            <td>{{row.billingDate | formateDate}}</td>
+                            <td>{{row.dueDate | formateDate}}</td>
+                            <td>{{row.no}}</td>
+                            <td>{{row.name}}</td>
                             <td>
-                                <button class="btn btn-primary tableBtn" ng-click="upDate(row)">升级</button>                            </td>
-    
-                </tr>
+                                {{row.licenseNo?row.licenseNo:'-'}}
+                            </td>
+        
+                        </tr>
             </tbody>
             <tbody me-include="/static/tpl/table.html"></tbody>
 				<tfoot ng-show="!isLoading" me-include="/static/tpl/table_footer.html"></tfoot>
