@@ -20,6 +20,8 @@
 						<th>时间</th>
 						<th>终端数</th>
 						<th>收费状态</th>
+						<th>应收金额（元）</th>
+						<th>实收金额(元)</th>
 						<th>操作账号</th>
 						<th>确认收费时间</th>
 						<th>操作</th>
@@ -34,6 +36,8 @@
 							<span ng-if="row.status == 1">已收费</span>
 							<span class="txtRed" ng-if="row.status == 0">待收费</span>
 						</td>
+						<td>{{'￥' + row.amountDue}}</td>
+						<td>{{row.amountReceived?'￥' + row.amountReceived:'-'}}</td>
 						<td>{{row.chargeOperator?row.chargeOperator:'-'}}</td>
 						<td>
 							<span ng-if="row.chargeTime">{{row.chargeTime | formateTime}}</span>

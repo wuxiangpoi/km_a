@@ -35,8 +35,10 @@
 					<tr>
 						<th>企业代码</th>
 						<th>企业名称</th>
-						<th>收费状态</th>
 						<th>终端数</th>
+						<th>收费状态</th>
+						<th>应收金额（元）</th>
+						<th>实收金额(元)</th>
 						<th>操作</th>
 					</tr>
 				</thead>
@@ -47,8 +49,11 @@
 						<td class="ellipsisTd" bo-text="row.domainName"></td>
 						<td bo-text="row.terminals"></td>
 						<td bo-class="{'txtGreen':row.status == 1,'txtRed':row.status == 0}" bo-text="row.status==1?'已收费':'待收费'"></td>
-						<td bo-text="row.amountDue"></td>
-						<td bo-text="row.terminals"></td>
+						<td>{{'￥' + row.amountDue}}</td>
+						<td>
+							<div style="line-height: 18px">{{row.amountReceived?'￥' + row.amountReceived:'-'}}</div>
+							<div class="ellipsTXt" bo-title="row.remark" style="line-height: 18px;font-size: 12px;max-width: 140px;" bo-if="row.remark">{{row.remark}}</div>
+						</td>
 						<td>
 							<button class="btn btn-primary tableBtn" ng-click="toDetails(row.domain)">详情
 							</button>
