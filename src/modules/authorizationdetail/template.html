@@ -15,7 +15,7 @@
 				</thead>
 
 				<tbody ng-show="!isLoading">
-					<tr ng-repeat="row in displayed">
+					<tr ng-repeat="row in displayed" bindonce>
 						<td class="ellipsisTd">{{row.name}}</td>
 						<td>{{row.key}}</td>
 						<td>{{row.key}}</td>
