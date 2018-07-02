@@ -4,9 +4,10 @@
         <div ng-if="!data.id" class="form-group clearfix">
             <label class="col-sm-3 control-label">板卡商代码：</label>
             <div class="col-sm-9">
-                <input type="text" autofocus required class="form-control" name="key" ng-model="data.key" />
+                <input type="text" placeholder="只能输入大写字母" autofocus required ng-pattern="/^[A-Z]+$/" class="form-control" name="key" ng-model="data.key" />
                 <div class="help-block" ng-messages="modalForm.key.$error" ng-if="isShowMessage">
                     <p ng-message="required">请输入板卡商代码</p>
+                    <p ng-message="pattern">只能输入大写字母</p>
                 </div>
             </div>
         </div>
@@ -14,7 +15,7 @@
             <label class="col-sm-3 control-label">板卡商名称：</label>
             <div class="col-sm-9">
                 <input type="text" required class="form-control" name="name" ng-model="data.name" />
-                <div class="help-block" ng-messages="modalForm.key.$error" ng-if="isShowMessage">
+                <div class="help-block" ng-messages="modalForm.name.$error" ng-if="isShowMessage">
                     <p ng-message="required">请输入板卡商名称</p>
                 </div>
             </div>

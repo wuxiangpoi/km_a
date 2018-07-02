@@ -32,7 +32,6 @@ const boardDealerController = ($scope, baseService,modalService) => {
 					email: postData.email,
 					key: postData.key
 				}
-				onData.key = postData.key.toLowerCase();
 				baseService.saveForm(vm,baseService.api.boardVendor + 'saveBoardVendor', onData, (res) => {
 					if(res){
 						vm.closeThisDialog();
