@@ -76,7 +76,7 @@ const authorizationController = ($scope, baseService, modalService) => {
 			})
 	}
 	$scope.toDetails = (id) => {
-        baseService.goToState('dashboard.authIncomedetail', {
+        baseService.goToState('dashboard.authorizationdetail', {
             id: id
         });
     }
