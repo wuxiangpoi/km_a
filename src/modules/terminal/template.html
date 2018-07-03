@@ -112,8 +112,8 @@
 							<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
 						</td>
 						<td class="tdClick" ng-click="details(row)" bo-text="row.no"></td>
-						<td bo-text="row.no">{{row.name}}</td>
-						<td bo-if="!stateParamsId" bo-text="row.no">{{row.domain + '('+ row.domainName +')'}}</td>
+						<td bo-text="row.name"></td>
+						<td bo-if="!stateParamsId" bo-text="row.domain + '('+ row.domainName +')'"></td>
 						<td bo-text="row.status | terminalStatusTxt" bo-class="{'txtGreen':row.status == 1,'txtRed':row.status == 3,'txtGrey':row.status == 2 || row.status == 4}"></td>
 						<td bo-text="row.resolution"></td>
 						<td bo-text="row.city_no | getCityName"></td>
