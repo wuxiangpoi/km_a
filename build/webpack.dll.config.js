@@ -11,16 +11,12 @@ module.exports = {
             './bower_components/jquery.cookie/jquery.cookie.js'
         ],
         angularVendor: [
-            'angular',
-            'angular-ui-router',
-            './bower_components/angular-animate/angular-animate.min.js',
             './src/libs/bindonce.js',
             './src/libs/localService.js',
             './bower_components/oclazyload/dist/ocLazyLoad',
             './bower_components/angular-ui-sortable/sortable.js',
             './bower_components/angular-strap/dist/angular-strap.min.js',
             './bower_components/angular-strap/dist/angular-strap.tpl.min.js',
-            './bower_components/ng-dialog/js/ngDialog.js',
             './bower_components/angular-toastr/dist/angular-toastr.tpls.min.js',
             './bower_components/angular-file-upload/dist/angular-file-upload.min.js',
             './bower_components/angular-messages/angular-messages.min.js',
