@@ -11,6 +11,7 @@ module.exports = {
             './bower_components/jquery.cookie/jquery.cookie.js'
         ],
         angularVendor: [
+            './bower_components/angular-animate/angular-animate.min.js',
             './src/libs/bindonce.js',
             './src/libs/localService.js',
             './bower_components/oclazyload/dist/ocLazyLoad',
