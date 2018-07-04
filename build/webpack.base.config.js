@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
@@ -92,6 +93,14 @@ module.exports = {
                 NODE_TEMP: +(new Date())
             }
         }),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require('../static/dll/vendor-manifest.json')
+        }),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require('../static/dll/angularVendor-manifest.json')
+        }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
@@ -105,6 +114,15 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../src/index.html'),
             favicon: path.resolve(__dirname, '../src/favicon.ico')
+        }),
+        new HtmlWebpackIncludeAssetsPlugin({
+            assets: [
+                '../static/js/chart/echarts.min.js',
+                '../static/dll/vendor.b18d79c083eb8d3a03de.dll.js',
+                '../static/dll/angularVendor.b18d79c083eb8d3a03de.dll.js'
+            ],
+            append: false,
+            hash: false
         }),
         new ExtractTextPlugin({
             filename: 'styles.[chunkhash].css',
