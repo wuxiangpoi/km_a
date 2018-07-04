@@ -52,7 +52,7 @@ const authorizationController = ($scope, baseService, modalService) => {
 		})
 	}
 	$scope.exportExcel = function (item) {
-		modalService.confirm('导出表格', '确定将当前授权文件?', function (vm) {
+		modalService.confirm('导出', '确定当前授权文件?', function (vm) {
 			vm.closeThisDialog();
 			window.open(baseService.api.boardLicenseKey + 'exportBoardLicenseKeyFile?id=' +
 				item.id);
@@ -80,11 +80,11 @@ const authorizationController = ($scope, baseService, modalService) => {
             id: id
         });
     }
-	$scope.addQu = (id) => {
+	$scope.addQu = (item) => {
 		modalService.confirmDialog(540, '增加授权码数量', {}, '/static/tpl/add_quantity.html', (vm) => {
 			if (vm.modalForm.$valid) {
 				baseService.saveForm(vm, baseService.api.boardLicenseKey + 'increaseQuantity', {
-					id: id,
+					id: item.id,
 					quantity: parseInt(vm.data.quantity)
 				}, (res) => {
 					if (res) {

@@ -12,6 +12,20 @@ const domainController = ($scope, baseService, FileUploader, modalService) => {
 	$scope.dateSel = '合同到期时间';
 	$scope.tableState = {};
 	$scope.domainStatusOptions = domainStatusOptions;
+	$scope.domainTypeOptions = [
+		{
+			val: '',
+			name: '账号类型'
+		},
+		{
+			val: 1,
+			name: '正式'
+		},
+		{
+			val: 0,
+			name: '试用'
+		}
+	]
 	$scope.uploader = new FileUploader();
 	$scope.callServer = function (tableState, page) {
 		if (baseService.isRealNum(page)) {

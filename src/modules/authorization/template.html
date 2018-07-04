@@ -11,7 +11,7 @@
 			<div class="clearfix">
 					<div class="fr">
 						<div class="input-group serchWrap">
-							<input type="text" class="form-control" ng-model="sp.search" ng-keyup="myKeyup($event,initPage)" placeholder="板卡商代码/板卡商名称">
+							<input type="text" class="form-control" ng-model="sp.search" ng-keyup="myKeyup($event,initPage)" placeholder="授权码编码">
 							<span class="input-group-btn" ng-click="initPage()">
 								<button type="button" class="btn btn-primary">
 									<i type="button" class="fa fa-search">
@@ -33,7 +33,7 @@
 						<th>授权数量</th>
 						<th>已使用数量</th>
 						<th>超限开关</th>
-						<th>创建时间</th>
+						<!-- <th>创建时间</th> -->
 						<th>操作账号</th>
 						<th>操作</th>
 					</tr>
@@ -49,7 +49,7 @@
 						<td bo-text="row.quantity"></td>
 						<td bo-text="row.quantityUsed"></td>
 						<td bo-class="{'txtRed':row.exceed == 0,'txtGreen':row.exceed == 1}" bo-text="row.exceed == 1?'开启':'关闭'"></td>
-						<td bo-text="row.createTime | formateTime"></td>
+						<!-- <td bo-text="row.createTime | formateTime"></td> -->
 						<td bo-text="row.creator"></td>
 						<td>
 							<button class="btn btn-primary tableBtn" ng-click="toDetails(row.no)">详情

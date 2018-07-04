@@ -8,7 +8,7 @@
 			<div class="domainInfoWrap">
 					<div>授权编号：{{domainInfo.no}}</div>
 					<div>板卡商名称：{{domainInfo.vendorName}}</div>
-					<div>授权时间：{{domainInfo.createTime | formateTime}}</div>
+					<div>授权时间：{{domainInfo.months | monthsToYear}}</div>
 					<div>授权数量：{{domainInfo.quantity}}</div>
 					<div>已使用数量：{{domainInfo.quantityUsed}}</div>
 				</div>

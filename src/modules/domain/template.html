@@ -11,6 +11,7 @@
 		<div class="clearfix">
 			<div class="selectWrap fl">
 				<km-select options="domainStatusOptions" selected="sp.status" val="val" name="name" change="initPage"></km-select>
+				<km-select options="domainTypeOptions" selected="sp.type" val="val" name="name" change="initPage"></km-select>
 				<div class="dateTimeSelectWrap" style="width:120px;">
 					<input type="text" id="dateSel" class="form-control" data-animation="am-flip-x" data-date-type="string" data-date-format="yyyy-MM"
 					    data-model-date-format="yyyy-MM" ng-model="dateSel" placeholder="合同到期时间" data-start-view="1" data-min-view="1" data-autoclose="1" bs-datepicker>
