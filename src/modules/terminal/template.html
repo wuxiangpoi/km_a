@@ -75,7 +75,7 @@
 					<div class="dateTimeSelectWrap" style="width:120px;">
 						<input type="text" id="dateSel" class="form-control" data-animation="am-flip-x" data-date-type="string" data-date-format="yyyy-MM"
 							data-model-date-format="yyyy-MM" ng-model="dateSel" placeholder="终端注册时间" data-has-clear="true" data-start-view="1" data-min-view="1" data-autoclose="1" bs-datepicker>
-						<label for="dateSel" class="timeLabel">{{dateSel == ''?'终端注册时间':dateSel}}
+						<label for="dateSel" class="timeLabel">{{dateSel == null?'终端注册时间':dateSel}}
 							<span class="caret"></span>
 						</label>
 					</div>

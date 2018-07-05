@@ -11,7 +11,7 @@ import {
 const terminalController = ($scope, $rootScope, $stateParams, baseService, sentencesService, chartService, programService, modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
-	$scope.dateSel = '';
+	$scope.dateSel = null;
 	if ($stateParams.domain) {
 		$scope.stateParamsId = $stateParams.domain;
 		$scope.sp.domain = $stateParams.domain;
@@ -39,7 +39,7 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 				$scope.sp.registMonth = n.split('-').join('');
 			}else{
 				$scope.sp.registMonth = '';
-				$scope.sp.dateSel = '';
+				$scope.sp.dateSel = null;
 			}
 			$scope.initPage();
 		}

@@ -9,7 +9,7 @@ import {
 const domainController = ($scope, baseService, FileUploader, modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
-	$scope.dateSel = '';
+	$scope.dateSel = null;
 	$scope.tableState = {};
 	$scope.domainStatusOptions = domainStatusOptions;
 	$scope.domainTypeOptions = [
@@ -42,7 +42,7 @@ const domainController = ($scope, baseService, FileUploader, modalService) => {
 				$scope.sp.expiredMonth = n.split('-').join('');
 			}else{
 				$scope.sp.expiredMonth = '';
-				$scope.sp.dateSel = '';
+				$scope.sp.dateSel = null;
 			}
 			$scope.initPage();
 		}
