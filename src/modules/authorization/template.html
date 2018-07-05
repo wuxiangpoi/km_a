@@ -26,7 +26,7 @@
 				<thead>
 					<tr>
 						<th>授权编号</th>
-						<th>板卡商代码</th>
+						<!-- <th>板卡商代码</th> -->
 						<th>板卡商名称</th>
 						<th>单价（元）</th>
 						<th>授权时间</th>
@@ -42,7 +42,7 @@
 				<tbody ng-show="!isLoading">
 					<tr ng-repeat="row in displayed" bindonce>
 						<td class="ellipsisTd" bo-text="row.no"></td>
-						<td bo-text="row.vendorKey"></td>
+						<!-- <td bo-text="row.vendorKey"></td> -->
 						<td bo-text="row.vendorName"></td>
 						<td bo-text="'￥' + row.price"></td>
 						<td bo-text="row.months | monthsToYear"></td>

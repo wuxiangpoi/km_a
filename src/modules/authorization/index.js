@@ -52,7 +52,7 @@ const authorizationController = ($scope, baseService, modalService) => {
 		})
 	}
 	$scope.exportExcel = function (item) {
-		modalService.confirm('导出', '确定当前授权文件?', function (vm) {
+		modalService.confirm('导出', '确定导出当前授权文件?', function (vm) {
 			vm.closeThisDialog();
 			window.open(baseService.api.boardLicenseKey + 'exportBoardLicenseKeyFile?id=' +
 				item.id);
