@@ -9,7 +9,7 @@ import {
 const domainController = ($scope, baseService, FileUploader, modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
-	$scope.dateSel = '合同到期时间';
+	$scope.dateSel = '';
 	$scope.tableState = {};
 	$scope.domainStatusOptions = domainStatusOptions;
 	$scope.domainTypeOptions = [
@@ -38,7 +38,12 @@ const domainController = ($scope, baseService, FileUploader, modalService) => {
 	}
 	$scope.$watch('dateSel', (n, o) => {
 		if (n != o) {
-			$scope.sp.expiredMonth = n.split('-').join('');
+			if(n != null){
+				$scope.sp.expiredMonth = n.split('-').join('');
+			}else{
+				$scope.sp.expiredMonth = '';
+				$scope.sp.dateSel = '';
+			}
 			$scope.initPage();
 		}
 

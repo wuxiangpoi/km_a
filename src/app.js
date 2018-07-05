@@ -137,6 +137,8 @@ app.run(['$rootScope', '$state', '$location', '$stateParams', 'ngDialog', 'baseS
         angular.extend($datepickerProvider.defaults, {
             iconLeft: 'fa fa-angle-left',
             iconRight: 'fa fa-angle-right'
+            // html: true,
+            // template: '/static/tpl/datepickerTpl.html'
         });
         angular.extend($timepickerProvider.defaults, {
             iconUp: 'fa fa-angle-up',

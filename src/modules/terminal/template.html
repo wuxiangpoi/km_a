@@ -66,12 +66,19 @@
 	<div class="content-wrap">
 
 		<div class="table-wrapper">
-			<div class="clearfix" style="min-width: 810px;">
+			<div class="clearfix" style="min-width: 920px;">
 				<div class="selectWrap fl">
 					<city-picker province="sp.provinceCode" city="sp.city_no" district="sp.districtCode" change="initPage"></city-picker>
 					<km-select options="opOptions" selected="sp.op" val="val" name="name" change="initPage"></km-select>
 					<km-select options="terminalStatusOptions" selected="sp.status" val="val" name="name" change="initPage"></km-select>
 					<km-select options="hasProgramOptions" selected="sp.hasProgram" val="val" name="name" change="initPage"></km-select>
+					<div class="dateTimeSelectWrap" style="width:120px;">
+						<input type="text" id="dateSel" class="form-control" data-animation="am-flip-x" data-date-type="string" data-date-format="yyyy-MM"
+							data-model-date-format="yyyy-MM" ng-model="dateSel" placeholder="终端注册时间" data-has-clear="true" data-start-view="1" data-min-view="1" data-autoclose="1" bs-datepicker>
+						<label for="dateSel" class="timeLabel">{{dateSel == ''?'终端注册时间':dateSel}}
+							<span class="caret"></span>
+						</label>
+					</div>
 				</div>
 				<div class="fr">
 					<div class="input-group serchWrap">
@@ -90,7 +97,7 @@
 					</div>
 				</div>
 			</div>
-			<table  style="min-width: 810px;" class="table table-striped table-hover dataTable" st-pipe="callServer" st-table="displayed">
+			<table  style="min-width: 920px;" class="table table-striped table-hover dataTable" st-pipe="callServer" st-table="displayed">
 				<thead>
 					<tr>
 						<th>

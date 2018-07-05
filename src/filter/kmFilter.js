@@ -18,6 +18,11 @@ export default app => {
             return $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
         }
     }]);
+    app.filter('formateTimeYYMMDD', ['$filter',function ($filter) {
+        return function (date) {
+            return $filter('date')(date, 'yyyy-MM-dd');
+        }
+    }]);
     app.filter('formateDate', function () {
         return function (date) {
             if (date) {

@@ -11,6 +11,7 @@ import {
 const terminalController = ($scope, $rootScope, $stateParams, baseService, sentencesService, chartService, programService, modalService) => {
 	$scope.displayed = [];
 	$scope.sp = {};
+	$scope.dateSel = '';
 	if ($stateParams.domain) {
 		$scope.stateParamsId = $stateParams.domain;
 		$scope.sp.domain = $stateParams.domain;
@@ -32,6 +33,18 @@ const terminalController = ($scope, $rootScope, $stateParams, baseService, sente
 	$scope.opOptions = opOptions;
 	$scope.terminalStatusOptions = terminalStatusOptions;
 	$scope.hasProgramOptions = hasProgramOptions;
+	$scope.$watch('dateSel', (n, o) => {
+		if (n != o) {
+			if(n != null){
+				$scope.sp.registMonth = n.split('-').join('');
+			}else{
+				$scope.sp.registMonth = '';
+				$scope.sp.dateSel = '';
+			}
+			$scope.initPage();
+		}
+
+	})
 	$scope.checkAll = function ($event) {
 		$scope.ids = [];
 		$scope.idsNormal = [];
