@@ -4,14 +4,16 @@ import {
 export default app => {
     app.directive('emapChart', ['$window', 'baseService', '$rootScope', ($window, baseService, $rootScope) => {
         let controller = ($scope, element, attrs) => {
-            if($rootScope.userData){
+            if ($rootScope.userData) {
                 $scope.hasDomains = $rootScope.userData.hasDomains;
             }
             $scope.initPage = function () {
-                var bmap = new BMap.Map("allmap",{enableMapClick:false});
+                var bmap = new BMap.Map("allmap", {
+                    enableMapClick: false
+                });
                 var point = new BMap.Point(113.649644, 34.75661);
                 var top_left_navigation = new BMap.NavigationControl(); //左上角，添加默认缩放平移控件
-                if($rootScope.userData){
+                if ($rootScope.userData) {
                     bmap.addControl(top_left_navigation);
                 }
                 bmap.centerAndZoom(point, 5);
@@ -19,7 +21,7 @@ export default app => {
                 var spanSma = this._span = document.createElement("span");
                 var resMark = [];
 
-                
+
                 bmap.setMapStyle({
                     style: 'midnight'
                 });
@@ -100,13 +102,13 @@ export default app => {
 
                             function addClickHandler(content, marker, oPoint) {
                                 marker.addEventListener("click", function () {
-                                    openInfo(content,oPoint)
+                                    openInfo(content, oPoint)
                                 });
                             }
 
                             function openInfo(content, oPoint) {
                                 var point = new BMap.Point(oPoint.split(',')[0], oPoint.split(',')[1]);
-                                var infoWindow = new BMap.InfoWindow(content,{
+                                var infoWindow = new BMap.InfoWindow(content, {
                                     width: 250, // 信息窗口宽度
                                     title: "终端信息",
                                     padding: 5
@@ -116,9 +118,9 @@ export default app => {
                             var content = [];
                             for (var j = 0; j < oData[oPoint].length; j++) {
                                 var ter = oData[oPoint][j];
-                                
+
                                 content.push("<h5 style='margin:5px 0;'>地址：" + oData[oPoint][0].addr + "</h5>");
-                                
+
                                 content.push('<div class="infoWindow" style="border-top:1px solid #ddd;font-size:12px;line-height:18px;padding-top:5px;">')
                                 content.push('<div class="info-line"></div>编号：' + ter.no);
                                 content.push("<div>名称：" + ter.name + "</div>");
@@ -135,9 +137,9 @@ export default app => {
                                     content.push("<div>状态：异常</div>");
                                 }
                                 content.push('</div>')
-                                
+
                             }
-                            addClickHandler(content.join(''), spanSma,oPoint);
+                            addClickHandler(content.join(''), spanSma, oPoint);
                             return spanSma;
                         }
 
@@ -269,30 +271,32 @@ export default app => {
                     let mapInfo = [];
 
                     for (let i in mapJson) {
-                        let x = citiesNo[i].p.split(',')[0];
-                        let y = citiesNo[i].p.split(',')[1].split('|')[0];
-                        let scal = citiesNo[i].p.split(',')[1].split('|')[1];
-                        var point = new BMap.Point(x, y);
-                        function getRandom(min, max){
-                            var r = Math.random() * (max - min);
-                            var re = Math.round(r + min);
-                            re = Math.max(Math.min(re, max), min)
-                             
-                            return re;
+                        if (citiesNo[i]) {
+                            let x = citiesNo[i].p.split(',')[0];
+                            let y = citiesNo[i].p.split(',')[1].split('|')[0];
+                            let scal = citiesNo[i].p.split(',')[1].split('|')[1];
+                            var point = new BMap.Point(x, y);
+
+                            function getRandom(min, max) {
+                                var r = Math.random() * (max - min);
+                                var re = Math.round(r + min);
+                                re = Math.max(Math.min(re, max), min)
+
+                                return re;
+                            }
+                            var marker = new BMap.Marker(point);
+                            if (citiesNo[i].n != '黄冈') {
+                                let len = attrs['isreal'] ? mapJson[i].length : mapJson[i].length + getRandom(50, 200);
+                                mapInfo.push({
+                                    name: citiesNo[i].n,
+                                    value: len
+                                })
+                                let myCompOverlay = new ComplexCustomOverlay(point, len, citiesNo[i].n, scal, mapJson[i], resCon);
+                                bmap.addOverlay(myCompOverlay);
+                            }
                         }
-                        var marker = new BMap.Marker(point);
-                        if(citiesNo[i].n != '黄冈'){
-                            let len = attrs['isreal']?mapJson[i].length:mapJson[i].length + getRandom(50,200);
-                            mapInfo.push({
-                                name: citiesNo[i].n,
-                                value: len
-                            })
-                            let myCompOverlay = new ComplexCustomOverlay(point, len, citiesNo[i].n, scal, mapJson[i], resCon);
-                            bmap.addOverlay(myCompOverlay);
-                        }
-                        
                     }
-                    $scope.$emit('emitMapData',mapInfo);
+                    $scope.$emit('emitMapData', mapInfo);
                 });
 
 

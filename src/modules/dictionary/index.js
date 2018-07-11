@@ -31,7 +31,7 @@ const dictionaryController = ($scope, baseService, modalService) => {
 				type: vm.type
 			}
 			if (vm.type == 1) {
-				postData.value = postData.data.value;
+				postData.value = vm.data.value;
 			}
 			if (vm.dictionaryForm.$valid) {
 				baseService.saveForm(vm, baseService.api.dictionary + 'addDictionary', postData, function (res) {
