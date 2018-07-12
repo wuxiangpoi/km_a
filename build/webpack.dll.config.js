@@ -8,7 +8,8 @@ module.exports = {
         vendor: [
             'jquery',
             './bower_components/jquery-ui/jquery-ui.js',
-            './bower_components/jquery.cookie/jquery.cookie.js'
+            './bower_components/jquery.cookie/jquery.cookie.js',
+            './src/libs/jquery.media.js'
         ],
         angularVendor: [
             './bower_components/angular-animate/angular-animate.min.js',

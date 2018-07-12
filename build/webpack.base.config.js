@@ -30,7 +30,8 @@ module.exports = {
             './bower_components/jquery-ui/jquery-ui.js',
             './bower_components/layer/dist/layer.js',
             './bower_components/jquery.cookie/jquery.cookie.js',
-            './src/libs/bootstrap/dist/js/bootstrap.min.js'
+            './src/libs/bootstrap/dist/js/bootstrap.min.js',
+            './src/libs/jquery.media.js'
         ]
     },
     output: {

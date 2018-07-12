@@ -14,7 +14,15 @@
             <source ng-src="{{data.path | play_url}}">
         </video>
         <div km-audio ng-if="data.type==2" audiodata="{{data}}"></div>
+        <div ng-if="data.type == 3" style="width:100%;height: 100%;padding-top: 15px;">
+            <a href="{{data.path}}" style="color: #fff!important;" class="btn btn-primary">下载</a>
+            <div style="text-align: center;margin-top: 100px;">
+                <i style="font-size: 64px;" class="iconfont icon-hudongbao"></i>
+                <p style="margin: 24px 0;" class="txtGrey">互动包，下载预览</p>
+            </div>
 
+        </div>
+        <div km-pdf ng-if="data.type==4" pdfdata="{{data}}"></div>
     </div>
     <div class="col-sm-4 modalDetail">
         <div class="row">

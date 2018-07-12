@@ -11,6 +11,7 @@ import upload from './upload'
 import zTree from './zTree.js'
 import imageView from './imageView'
 import kmAudio from './kmAudio'
+import kmPdf from './kmPdf'
 
 import dmbdPager from './pager/dmbdPager';
 import imageViewer2 from './imageViewer/imageViewer2';
@@ -31,6 +32,7 @@ const directives = [headerBar,
     zTree,
     imageView,
     kmAudio,
+    kmPdf,
     dmbdPager,
     imageViewer2,
     videoViewer2,
