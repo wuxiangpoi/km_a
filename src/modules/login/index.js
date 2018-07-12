@@ -7,7 +7,8 @@ const loginController = ($scope, $rootScope, baseService, userService) => {
     $scope.isRemembered = true;
     $scope.isShowMessage = false;
     if ($.cookie('user_cookie') && $.cookie('user_cookie').length != 4) {
-        var cookiesData = JSON.parse(CryptoJS.AES.decrypt($.cookie('user_cookie').toString(),config.secret).toString(CryptoJS.enc.Utf8));
+        let cookie = $.cookie('user_cookie').toString().indexOf('account') != -1 ? $.cookie('user_cookie').toString() : CryptoJS.AES.decrypt($.cookie('user_cookie').toString(), config.secret).toString(CryptoJS.enc.Utf8);
+        let cookiesData = JSON.parse(cookie);
         $scope.account = cookiesData.account;
         $scope.password = cookiesData.password;
     }
@@ -27,7 +28,7 @@ const loginController = ($scope, $rootScope, baseService, userService) => {
                             domain: $scope.domain,
                             account: $scope.account,
                             password: $scope.password
-                        }),config.secret), {
+                        }), config.secret), {
                             expires: 30
                         });
                     } else {
